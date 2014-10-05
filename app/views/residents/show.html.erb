@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @resident.name %>
+</p>
+
+<p>
+  <strong>House:</strong>
+  <%= link_to @resident.house.name, @resident.house %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @resident.notes %>
+</p>
+
+<%= link_to 'Edit', edit_resident_path(@resident) %> |
+<%= link_to 'Back', residents_path %>

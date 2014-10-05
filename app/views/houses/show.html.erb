@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @house.name %>
+</p>
+
+<p>
+  <strong>Residents:</strong>
+  <% @house.residents.each do |r| %>
+  	<li><%= link_to r.name, r %></li>
+  <% end %>
+</p>
+
+<p>
+  <strong>Volunteers:</strong>
+  <% @house.volunteers.each do |v| %>
+  	<li><%= link_to v.name, v %></li>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_house_path(@house) %> |
+<%= link_to 'Back', houses_path %>
