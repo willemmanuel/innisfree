@@ -19,7 +19,12 @@
       <tr>
         <td><%= appointment.resident.name %></td>
         <td><%= appointment.physician.name %></td>
-        <td><%= appointment.volunteer.name %></td>
+        <% if appointment.volunteer.nil? %>
+          <td>No volunteer assigned</td>
+        <% else %>
+          <td><%= appointment.volunteer.name %></td>
+        <% end %>
+
         <td><%= appointment.date %></td>
         <td><%= appointment.time %></td>
         <td><%= appointment.for %></td>
