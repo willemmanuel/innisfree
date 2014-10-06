@@ -12,7 +12,11 @@
 
 <p>
   <strong>Volunteer:</strong>
-  <%= @appointment.volunteer.name %>
+  <% if @appointment.volunteer.nil? %>
+    No volunteer assigned
+  <% else %>
+    <%= @appointment.volunteer.name %>
+  <% end %>
 </p>
 
 <p>
