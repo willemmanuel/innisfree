@@ -2,4 +2,8 @@
         <h1>Hello, world!</h1>
         <p>This app has the basic CRUD operations needed for the Innisfree project. </p>
         <p><a href="#" class="btn btn-primary btn-large">Learn more »</a></p>
+        <li><%= @residents.count.to_s + " residents." %></li>
+        <li><%= @houses.count.to_s + " houses." %></li>
+        <li><%= @volunteers.count.to_s + " volunteers." %></li>
+        <li><%= @appointments.count.to_s + " appointments." %></li>
 </div>

@@ -7,7 +7,7 @@
 
 <p>
   <strong>Address:</strong>
-  <%= @physician.address %>
+  <%= link_to @physician.address, map_link(@physician.address) %>
 </p>
 
 <p>

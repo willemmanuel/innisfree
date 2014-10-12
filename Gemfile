@@ -29,6 +29,8 @@ gem 'spring',        group: :development
 # bootstrap!
 gem 'bootstrap-sass'
 
+gem 'devise'
+
 gem 'fullcalendar-rails'
 
 # Use ActiveModel has_secure_password

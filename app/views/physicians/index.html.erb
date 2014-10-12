@@ -14,7 +14,7 @@
     <% @physicians.each do |physician| %>
       <tr>
         <td><%= physician.name %></td>
-        <td><%= physician.address %></td>
+        <td><%= link_to physician.address, map_link(physician.address) %></td>
         <td><%= physician.phone %></td>
         <td><%= link_to 'Show', physician %></td>
         <td><%= link_to 'Edit', edit_physician_path(physician) %></td>
