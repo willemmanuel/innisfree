@@ -1,24 +1,31 @@
 <h1>Listing houses</h1>
 
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+<% @houses.each do |house| %>
+<div class="col-md-4">
+<div class="panel panel-default">
+  <div class="panel-heading"><strong><%= link_to house.name, house %></strong> <small>(<%= link_to 'Edit', edit_house_path(house) %>, <%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %>)</small>
+  </div>
+  <div class="panel-body">
+    Residents<br>
+    <ul>
+      <% house.residents.each do |resident| %>
+        <li> <%= link_to resident.name, resident %></li>
+      <% end %>
+    </ul>
+    <br>
+    Volunteers<br>
+    <ul>
+      <% house.volunteers.each do |volunteer| %>
+        <li> <%= link_to volunteer.name, volunteer %></li>
+      <% end %>
+    </ul>
+</div>
+</div>
+</div>
+<% end %>
+</div>
 
-  <tbody>
-    <% @houses.each do |house| %>
-      <tr>
-        <td><%= house.name %></td>
-        <td><%= link_to 'Show', house %></td>
-        <td><%= link_to 'Edit', edit_house_path(house) %></td>
-        <td><%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <br>
 

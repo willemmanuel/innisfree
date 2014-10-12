@@ -9,7 +9,9 @@
       </button>
       <a href="../" class="navbar-brand">Innisfree</a>
     </div>
+
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <% if user_signed_in? %>
       <ul class="nav navbar-nav">
         <li>
           <%= link_to "Residents", residents_path %>
@@ -27,6 +29,7 @@
           <%= link_to "Appointments", appointments_path %>
         </li>
       </ul>
+      <% end %>
         <ul class="nav navbar-nav pull-right">
           <% if user_signed_in? %>
             <p class="navbar-text">Hello <strong><%= current_user.email %></strong></p>
