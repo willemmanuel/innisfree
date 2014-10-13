@@ -7,7 +7,7 @@
 default: &default
   adapter: mysql2
   username: innisfree
-  password: 1nn1sfree!
+  password: 
   pool: 5
   timeout: 5000
 
@@ -26,4 +26,4 @@ production:
   <<: *default
   database: slp_innisfree
   username: innisfree
-  password: 1nn1sfree!
+  password: 
