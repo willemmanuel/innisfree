@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(version: 20141012191530) do
     t.datetime "updated_at"
   end
 
-  add_index "appointments", ["physician_id"], name: "index_appointments_on_physician_id", using: :btree
-  add_index "appointments", ["resident_id"], name: "index_appointments_on_resident_id", using: :btree
-  add_index "appointments", ["volunteer_id"], name: "index_appointments_on_volunteer_id", using: :btree
+  add_index "appointments", ["physician_id"], name: "index_appointments_on_physician_id"
+  add_index "appointments", ["resident_id"], name: "index_appointments_on_resident_id"
+  add_index "appointments", ["volunteer_id"], name: "index_appointments_on_volunteer_id"
 
   create_table "houses", force: true do |t|
     t.string   "name"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20141012191530) do
     t.datetime "updated_at"
   end
 
-  add_index "residents", ["house_id"], name: "index_residents_on_house_id", using: :btree
+  add_index "residents", ["house_id"], name: "index_residents_on_house_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 20141012191530) do
     t.boolean  "admin",                  default: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "volunteers", force: true do |t|
     t.string   "name"
@@ -80,6 +80,6 @@ ActiveRecord::Schema.define(version: 20141012191530) do
     t.datetime "updated_at"
   end
 
-  add_index "volunteers", ["house_id"], name: "index_volunteers_on_house_id", using: :btree
+  add_index "volunteers", ["house_id"], name: "index_volunteers_on_house_id"
 
 end
