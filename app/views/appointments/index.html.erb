@@ -17,40 +17,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @appointments.each do |appointment| %>
-      <tr>
-        <td><%= link_to appointment.resident.name, appointment.resident %></td>
-        <td><%= link_to appointment.physician.name, appointment.physician %>   
-          <small><%= link_to '(map)', map_link(appointment.physician.address) %></small></td>
-        <% if appointment.volunteer.nil? %>
-          <td>No volunteer assigned</td>
-        <% else %>
-          <td><%= link_to appointment.volunteer.name, appointment.volunteer %></td>
-        <% end %>
-
-        <td><%= appointment.date %></td>
-        <td><%= appointment.time %></td>
-        <td><%= appointment.notes %></td>
-        <td><%= link_to 'X', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<h2>Past</h2>
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Resident</th>
-      <th>Physician</th>
-      <th>Volunteer</th>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Notes</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @appointments.each do |appointment| %>
+    <% @upcoming_appointments.each do |appointment| %>
       <tr>
         <td><%= link_to appointment.resident.name, appointment.resident %></td>
         <td><%= link_to appointment.physician.name, appointment.physician %>   

@@ -1,0 +1,21 @@
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @car.name %>
+</p>
+
+<p>
+  <strong>Volunteer:</strong>
+  <%= @car.volunteer %>
+</p>
+
+<p>
+  <strong>For:</strong>
+  <%= @car.for %>
+</p>
+
+<%= link_to 'Edit', edit_car_path(@car) %> |
+<%= link_to 'Destroy', @car, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', cars_path %>

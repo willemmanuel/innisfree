@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :cars
+
   devise_for :users
   resources :appointments
 
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :houses
 
-  root 'test#hello'
+  root 'appointments#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

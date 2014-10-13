@@ -1,0 +1,49 @@
+<div class="row">
+<div class="col-md-6">
+<h2>Available</h2>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>For</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><h5><%= link_to car.name, car %></h5></td>
+        <td><input placeholder="Reason for checkout" class="input input-normal"></td>
+        <td><%= link_to 'Check Out', '#', class: "btn btn-success" %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<div class="col-md-6">
+<h2>Checked Out</h2>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Volunteer</th>
+      <th>For</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><h5><%= link_to car.name, car %></h5></td>
+        <td><%= car.volunteer %></td>
+        <td><%= car.for %></td>
+        <td><%= link_to 'Check In', '#', class: "btn btn-success" %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+<br>
+
+<%= link_to 'New Car', new_car_path %>
