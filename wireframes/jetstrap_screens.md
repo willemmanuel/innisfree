@@ -7,6 +7,7 @@
 * I'm also not set on the position of the drop-downs, but wasn't sure where to put them either.
 
 [Volunteer main page & appointments](http://jetstrap.io/share/dc89b15e0b)
+* Same as staff main page, but with different nav bar and defaults to single house view instead of all houses
 
 [Single appointment](http://jetstrap.io/share/1842c7273e)
 * Map is handy to take up blank space, adds some value
