@@ -7,7 +7,15 @@
 * I'm also not set on the position of the drop-downs, but wasn't sure where to put them either.
 
 [Single appointment](http://jetstrap.io/share/1842c7273e)
+* Map is handy to take up blank space, adds some value
+* Order of values may need to be edited
 
 [Coworkers](http://jetstrap.io/share/e456365807)
 
 [Volunteers](http://jetstrap.io/share/b59b5ab6c6)
+
+[Add page](http://jetstrap.io/share/ed0bed5884)
+*Sample add coworker page. It's nothing fancier than the site, really
+
+[Reports](http://jetstrap.io/share/ecb98a9270)
+* Date picker doesn't work, idc. See [here] (http://tarruda.github.io/bootstrap-datetimepicker/) for a better one that requires JS
