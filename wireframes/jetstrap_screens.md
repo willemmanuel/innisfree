@@ -15,7 +15,7 @@
 [Volunteers](http://jetstrap.io/share/b59b5ab6c6)
 
 [Add page](http://jetstrap.io/share/ed0bed5884)
-*Sample add coworker page. It's nothing fancier than the site, really
+* Sample add coworker page. It's nothing fancier than the site, really
 
 [Reports](http://jetstrap.io/share/ecb98a9270)
 * Date picker doesn't work, idc. See [here] (http://tarruda.github.io/bootstrap-datetimepicker/) for a better one that requires JS
