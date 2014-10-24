@@ -5,8 +5,8 @@ class AppointmentsController < ApplicationController
   # GET /appointments.json
   def index
     @appointments = Appointment.all
-    @past_appointments = Appointment.where('date <= ?', Date.today)
-    @upcoming_appointments = Appointment.where('date > ?', Date.today)
+    @past_appointments = Appointment.where('date < ?', Date.today)
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today)
     # @upcoming_appointments = Appointment.where('date > ?', Date.today).paginate(page: params[:upcoming_page], per_page: 10)
   end
 

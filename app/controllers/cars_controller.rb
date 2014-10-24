@@ -1,12 +1,11 @@
 class CarsController < ApplicationController
-  before_action :set_car, only: [:show, :edit, :update, :destroy]
+  before_action :set_car, only: [:show, :edit, :update, :destroy, :toggle]
 
   # GET /cars
   # GET /cars.json 
   def index
-    @cars = Car.all
-    @checked_in = Car.where('volunteer_id NULL')
-    @checked_out = Car.where('volunteer_id NOT NULL')
+    @checked_in = Car.where('volunteer_id IS NULL')
+    @checked_out = Car.where('volunteer_id IS NOT NULL')
   end
 
   # GET /cars/1
@@ -63,6 +62,16 @@ class CarsController < ApplicationController
     end
   end
 
+  def toggle
+    if @car.volunteer.nil?
+      @car.volunteer = Volunteer.first
+    else
+      @car.volunteer = nil
+    end
+    @car.save
+    redirect_to :back, notice: 'Car status toggled'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_car
@@ -71,6 +80,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:name, :volunteer_id, :for)
+      params.require(:car).permit(:name, :volunteer_id, :for, :reason)
     end
 end

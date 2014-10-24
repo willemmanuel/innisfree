@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :cars
+  put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
 
   devise_for :users
   resources :appointments

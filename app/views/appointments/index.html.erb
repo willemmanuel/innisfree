@@ -28,8 +28,8 @@
           <td><%= link_to appointment.volunteer.name, appointment.volunteer %></td>
         <% end %>
 
-        <td><%= appointment.date %></td>
-        <td><%= appointment.time %></td>
+        <td><%= appointment.date.strftime("%a %b %e") %></td>
+        <td><%= appointment.time.in_time_zone('EST').strftime("%I:%M %p") %></td>
         <td><%= appointment.notes %></td>
         <td><%= link_to 'X', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
