@@ -13,6 +13,9 @@
 * Map is handy to take up blank space, adds some value
 * Order of values may need to be edited
 
+[Add appointment](http://jetstrap.io/share/7d3ac723ac)
+* Time and date pickers are wrong, will fix that when it becomes real code
+
 [Coworkers](http://jetstrap.io/share/e456365807)
 
 [Volunteers](http://jetstrap.io/share/b59b5ab6c6)
