@@ -1,0 +1,7 @@
+<%= form_tag do %>
+  <div class = "field">
+  <%= collection_select :house, :house_id, House.order(:name), :id, :name, include_blank: true %></div>
+  <div class = "field">
+  <%= collection_select :resident, :resident_id, Resident.order(:name), :id, :name, include_blank: true %> </div>
+<% end %>
+

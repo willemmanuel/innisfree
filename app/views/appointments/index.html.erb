@@ -4,6 +4,7 @@
   <%= link_to "CSV", appointments_path(format: "csv") %>
 </p>
 <div class="row">
+<%= render 'filter' %>
 <div id="fullCalendar" class="col-md-8">
 </div>
 <div class="col-md-4">
