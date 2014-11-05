@@ -5,6 +5,10 @@ class ResidentsController < ApplicationController
   # GET /residents.json
   def index
     @residents = Resident.all
+    respond_to do |format|
+      format.html
+      format.csv { render text: @residents.to_csv }
+    end
   end
 
   # GET /residents/1
