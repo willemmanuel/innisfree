@@ -5,6 +5,10 @@ class HousesController < ApplicationController
   # GET /houses.json
   def index
     @houses = House.all
+    respond_to do |format|
+      format.html
+      format.csv { render text: @houses.to_csv }
+    end
   end
 
   # GET /houses/1
