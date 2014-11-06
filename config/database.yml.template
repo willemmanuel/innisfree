@@ -12,10 +12,10 @@ default: &default
   timeout: 5000
 
 development:
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-  database: db/test.sqlite3
+  <<: *default
+  database: slp_innisfree
+  username: innisfree
+  password:3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,7 +27,7 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: slp_innisfree
-  username: innisfree
-  password: 
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+  database: db/test.sqlite3 

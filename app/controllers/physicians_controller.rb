@@ -5,6 +5,10 @@ class PhysiciansController < ApplicationController
   # GET /physicians.json
   def index
     @physicians = Physician.all
+    respond_to do |format|
+      format.html
+      format.csv { render text: @physicians.to_csv }
+    end
   end
 
   # GET /physicians/1

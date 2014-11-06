@@ -1,5 +1,8 @@
 <h1>Listing houses</h1>
-
+<p>
+  Download:
+  <%= link_to "CSV", houses_path(format: "csv") %>
+</p>
 <div class="row">
 <% @houses.each do |house| %>
 <div class="col-md-4">

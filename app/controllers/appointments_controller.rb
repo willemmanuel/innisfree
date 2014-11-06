@@ -8,6 +8,11 @@ class AppointmentsController < ApplicationController
     @past_appointments = Appointment.where('date < ?', Date.today)
     @upcoming_appointments = Appointment.where('date >= ?', Date.today)
     # @upcoming_appointments = Appointment.where('date > ?', Date.today).paginate(page: params[:upcoming_page], per_page: 10)
+    respond_to do |format|
+      format.html
+      format.json
+      format.csv { render text:@appointments.to_csv }
+    end
   end
 
   # GET /appointments/1

@@ -5,6 +5,10 @@ class VolunteersController < ApplicationController
   # GET /volunteers.json
   def index
     @volunteers = Volunteer.all
+    respond_to do |format|
+      format.html
+      format.csv { render text: @volunteers.to_csv }
+    end
   end
 
   # GET /volunteers/1
