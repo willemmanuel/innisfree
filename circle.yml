@@ -1,0 +1,7 @@
+machine:
+  ruby:
+    version: 2.1.2
+
+dependencies:
+  pre:
+    - "/bin/rm -rf /home/ubuntu/innisfree/vendor/bundle/ruby/2.1.0/specifications
