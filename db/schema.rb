@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141013004752) do
+ActiveRecord::Schema.define(version: 20141106172218) do
 
   create_table "appointments", force: true do |t|
     t.integer  "resident_id"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 20141013004752) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
+    t.integer  "volunteer_id"
+    t.boolean  "approved"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

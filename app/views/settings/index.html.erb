@@ -1,0 +1,36 @@
+<h1>User privileges</h1>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Approved?</th>
+      <th>Admin?</th>
+      <th>Volunteer?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+
+        <% if user.approved %>
+        	<td><%= link_to "Y", approve_user_path(user), method: :put, class: "btn btn-success", style: "width: 40px;" %></td>
+        <% else %>
+			<td><%= link_to "N", approve_user_path(user), method: :put, class: "btn btn-warning", style: "width: 40px;" %></td>
+        <% end %> 
+
+        <% if user.admin %>
+        	<td><%= link_to "Y", admin_user_path(user), method: :put, class: "btn btn-success", style: "width: 40px;" %></td>
+        <% else %>
+			<td><%= link_to "N", admin_user_path(user), method: :put, class: "btn btn-warning", style: "width: 40px;" %></td>
+        <% end %>
+
+        <% if user.volunteer.nil? %>
+        	<td>No volunteer linked</td>
+        <% else %>
+			<td><%= link_to user.volunteer.name, user.volunteer %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
