@@ -7,11 +7,11 @@ class User < ActiveRecord::Base
   belongs_to :volunteer
 
   def active_for_authentication? 
-    super && approved? 
+    super && self.approved
   end 
 
   def inactive_message 
-    if !approved? 
+    if !self.approved 
       :not_approved 
     else 
       super # Use whatever other message 
