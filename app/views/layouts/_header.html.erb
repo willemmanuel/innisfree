@@ -36,6 +36,9 @@
         <ul class="nav navbar-nav pull-right">
           <% if user_signed_in? %>
             <p class="navbar-text">Hello <strong><%= current_user.email %></strong></p>
+            <% if current_user.admin %>
+              <li><%= link_to "Admin", settings_path %></li>
+            <% end %>
             <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> </li>
             <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
           <% else %>
