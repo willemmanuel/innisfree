@@ -22,12 +22,8 @@ Rails.application.routes.draw do
 
   resources :houses
   
-
   root 'appointments#index'
   
-
-  #connect ':controller/:action.:format'
-
   get 'admin' => 'settings#index', as: :settings
 
   # The priority is based upon order of creation: first created -> highest priority.

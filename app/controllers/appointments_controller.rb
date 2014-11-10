@@ -19,6 +19,7 @@ class AppointmentsController < ApplicationController
       respond_to do |format|
         format.html
         format.json
+        format.js
         format.csv { render text:@appointments.to_csv }
       end
     elsif session.has_key?(:house_id) and session[:house_id] != '' 
@@ -28,9 +29,9 @@ class AppointmentsController < ApplicationController
       respond_to do |format|
         format.html
         format.json
+        format.js
         format.csv { render text:@appointments.to_csv }
       end
-
     else 
       @appointments = Appointment.all
       logger.debug "no params"
@@ -39,6 +40,7 @@ class AppointmentsController < ApplicationController
       respond_to do |format|
         format.html
         format.json
+        format.js
         format.csv { render text:@appointments.to_csv }
       end
     end
@@ -47,7 +49,11 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def update_residents
-    @residents = Resident.where("house_id = ?", params[:house_id])
+    if (params[:house_id] != '')
+      @residents = Resident.where("house_id = ?", params[:house_id])
+    else
+      @residents = Resident.all
+    end
     respond_to do |format|
    	format.html
 	format.js
