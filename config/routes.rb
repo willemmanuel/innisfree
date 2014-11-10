@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :appointments do
    collection do 
      get 'update_residents', to: 'appointments#update_residents'
+     get 'update_appointments', to: 'appointments#update_appointments'
    end
   end
 
