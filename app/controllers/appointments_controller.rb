@@ -4,22 +4,33 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
-    if not @appointments.nil?
-    appointment_count = @appointments.count
-    logger.debug "in the update_appointments method with a non-nil @appointments. Appointments has length " + appointment_count.to_s
-
-    end
-
-    logger.debug "in the index method"
     @residents = Resident.all
     @houses = House.all
-    if @appointments.nil?
-    @appointments = Appointment.all
+    if params.has_key?(:res_id)
+    session[:res_id] = params[:res_id]
     end
-    appointment_count = @appointments.count
-    logger.debug "in the update_appointments method. Appointments has length " + appointment_count.to_s
+    if params.has_key?(:house_id)
+    session[:house_id] = params[:house_id]
+    end
+
+      logger.debug "in the index method"
+=begin
+ if session.has_key?(:res_id) and session.has_key?(:house_id) and session[:house_id] != '' and session[:res_id] != ''
+      @appointments = Appointment.where('resident_id = ? and house_id = ?', session[:res_id], session[:house_id])
+      logger.debug "both params"
     @past_appointments = Appointment.where('date < ?', Date.today)
     @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+  #  respond_to do |format|
+  # 	format.html
+#	format.json
+ #   end
+=end
+    if session.has_key?(:res_id) and session[:res_id] != '' 
+      @appointments = Appointment.where('resident_id = ?', session[:res_id])
+      logger.debug "res id " + session[:res_id].to_s
+    @past_appointments = Appointment.where('date < ?', Date.today)
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+<<<<<<< HEAD
 <<<<<<< HEAD
     # @upcoming_appointments = Appointment.where('date > ?', Date.today).paginate(page: params[:upcoming_page], per_page: 10)
     respond_to do |format|
@@ -29,6 +40,35 @@ class AppointmentsController < ApplicationController
     end
 =======
 >>>>>>> a8907a4... Want to be able to find this again....
+=======
+#    respond_to do |format|
+#   	format.html
+	#format.json {render :index }
+#    end
+     # render json: @appointments and return
+=begin
+    elsif session.has_key?(:house_id) and session[:
+      @appointments = Appointment.where('house_id = ?', session[:house_id])
+      logger.debug "house id"
+      @past_appointments = Appointment.where('date < ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+    #  respond_to do |format|
+  # 	format.html
+#	format.json
+ #     end
+=end
+    else 
+     @appointments = Appointment.all
+      logger.debug "no params"
+      @past_appointments = Appointment.where('date < ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+    end
+
+#    appointment_count = @appointments.count
+#    logger.debug "in the update_appointments method. Appointments has length " + appointment_count.to_s
+
+    #redirect_to :head, :params => {:res_id => params[:res_id], :house_id => params[:house_id]}
+>>>>>>> b4a69c2... IT FUCKING WORKS
   end
 
   # GET /appointments
@@ -46,15 +86,16 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def update_appointments
-    @appointments = Appointment.where("resident_id = ?", params[:resident_id])
-    appointment_count = Appointment.where("resident_id = ?", params[:resident_id]).count
+    @appointments = Appointment.where("resident_id = ?", params[:res_id])
+    appointment_count = Appointment.where("resident_id = ?", params[:res_id]).count
     logger.debug "in the update_appointments method. Appointments has length " + appointment_count.to_s
-    respond_to do |format|
-        logger.debug 'responding to format'
-   	format.html
-	format.js
-        format.json { render :update_appointments, status: :ok }
-    end
+#    respond_to do |format|
+ #       logger.debug 'responding to format'
+ #  	format.html
+#	format.js
+ #       format.json { render :update_appointments, status: :ok }
+  #  end
+    redirect_to :appointments, :params => {:res_id => params[:res_id], :house_id => params[:house_id]}
   end
 
   # GET /appointments/1
@@ -119,6 +160,6 @@ class AppointmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
-      params.require(:appointment).permit(:resident_id, :physician_id, :volunteer_id, :date, :time, :for, :notes)
+      params.require(:appointment).permit(:resident_id, :physician_id, :volunteer_id, :date, :time, :for, :notes, :res_id, :house_id)
     end
 end

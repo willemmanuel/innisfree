@@ -10,6 +10,7 @@ Rails.application.routes.draw do
    collection do 
      get 'update_residents', to: 'appointments#update_residents'
      get 'update_appointments', to: 'appointments#update_appointments'
+     get 'index', to: 'appointments#index'
    end
   end
 
