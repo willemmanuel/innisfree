@@ -6,10 +6,21 @@ $(document).on 'change', '.house_select', (evt) ->
     data: {
       house_id: $(".house_select option:selected").val()
     }
+    success: (data, textStatus, jqCHR) ->
+    error: (jqXHR, textStatus, errorThrown) ->
+   	console.log("AJAC Error")
+  $.ajax 'appointments',
+    type: 'GET'
+    dataType: 'script'
+    data: {
+      res_id: ''
+      house_id: $('.house_select option:selected').val()
+    }
     error: (jqXHR, textStatus, errorThrown) ->
    	console.log("AJAC Error")
     success: (data, textStatus, jqCHR) ->
-   	console.log("Dynamic house select OK!")
+   	console.log("Dynamic resident select OK!")
+
 
 $(document).on 'change', '.residents_select', (evt) ->
   $.ajax 'appointments',
@@ -23,7 +34,6 @@ $(document).on 'change', '.residents_select', (evt) ->
    	console.log("AJAC Error")
     success: (data, textStatus, jqCHR) ->
    	console.log("Dynamic resident select OK!")
- $("#fullCalendar").fullCalendar ( 'refetchEvents' )
 
 $(document).on 'ready page:load', ->
   $("#fullCalendar").fullCalendar {

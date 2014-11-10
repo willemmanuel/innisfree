@@ -14,22 +14,12 @@ class AppointmentsController < ApplicationController
     end
 
       logger.debug "in the index method"
-=begin
- if session.has_key?(:res_id) and session.has_key?(:house_id) and session[:house_id] != '' and session[:res_id] != ''
-      @appointments = Appointment.where('resident_id = ? and house_id = ?', session[:res_id], session[:house_id])
-      logger.debug "both params"
-    @past_appointments = Appointment.where('date < ?', Date.today)
-    @upcoming_appointments = Appointment.where('date >= ?', Date.today)
-  #  respond_to do |format|
-  # 	format.html
-#	format.json
- #   end
-=end
-    if session.has_key?(:res_id) and session[:res_id] != '' 
+   if session.has_key?(:res_id) and session[:res_id] != '' 
       @appointments = Appointment.where('resident_id = ?', session[:res_id])
       logger.debug "res id " + session[:res_id].to_s
     @past_appointments = Appointment.where('date < ?', Date.today)
     @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     # @upcoming_appointments = Appointment.where('date > ?', Date.today).paginate(page: params[:upcoming_page], per_page: 10)
@@ -57,6 +47,14 @@ class AppointmentsController < ApplicationController
 #	format.json
  #     end
 =end
+=======
+    elsif session.has_key?(:house_id) and session[:house_id] != '' 
+      @appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id])
+      #logger.debug "res id " + session[:res_id].to_s
+    @past_appointments = Appointment.where('date < ?', Date.today)
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+
+>>>>>>> 164b8e5... House filtering also works
     else 
      @appointments = Appointment.all
       logger.debug "no params"
