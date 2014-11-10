@@ -14,66 +14,34 @@ class AppointmentsController < ApplicationController
     end
     if session.has_key?(:res_id) and session[:res_id] != '' 
       @appointments = Appointment.where('resident_id = ?', session[:res_id])
-      logger.debug "res id " + session[:res_id].to_s
-<<<<<<< HEAD
-    @past_appointments = Appointment.where('date < ?', Date.today)
-    @upcoming_appointments = Appointment.where('date >= ?', Date.today)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    # @upcoming_appointments = Appointment.where('date > ?', Date.today).paginate(page: params[:upcoming_page], per_page: 10)
-    respond_to do |format|
-      format.html
-      format.json
-      format.csv { render text:@appointments.to_csv }
-    end
-=======
->>>>>>> a8907a4... Want to be able to find this again....
-=======
-#    respond_to do |format|
-#   	format.html
-	#format.json {render :index }
-#    end
-     # render json: @appointments and return
-=begin
-    elsif session.has_key?(:house_id) and session[:
-      @appointments = Appointment.where('house_id = ?', session[:house_id])
-      logger.debug "house id"
       @past_appointments = Appointment.where('date < ?', Date.today)
       @upcoming_appointments = Appointment.where('date >= ?', Date.today)
-    #  respond_to do |format|
-  # 	format.html
-#	format.json
- #     end
-=end
-=======
+      respond_to do |format|
+        format.html
+        format.json
+        format.csv { render text:@appointments.to_csv }
+      end
     elsif session.has_key?(:house_id) and session[:house_id] != '' 
       @appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id])
-      #logger.debug "res id " + session[:res_id].to_s
-    @past_appointments = Appointment.where('date < ?', Date.today)
-    @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+      @past_appointments = Appointment.where('date < ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+      respond_to do |format|
+        format.html
+        format.json
+        format.csv { render text:@appointments.to_csv }
+      end
 
->>>>>>> 164b8e5... House filtering also works
-=======
-      @past_appointments = Appointment.where('date < ?', Date.today)
-      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
-    elsif session.has_key?(:house_id) and session[:house_id] != '' 
-      @appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id])
-      @past_appointments = Appointment.where('date < ?', Date.today)
-      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
->>>>>>> efbaf8a... Added some cleanup and made updating a little cleaner
     else 
       @appointments = Appointment.all
       logger.debug "no params"
       @past_appointments = Appointment.where('date < ?', Date.today)
       @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+      respond_to do |format|
+        format.html
+        format.json
+        format.csv { render text:@appointments.to_csv }
+      end
     end
-
-#    appointment_count = @appointments.count
-#    logger.debug "in the update_appointments method. Appointments has length " + appointment_count.to_s
-
-    #redirect_to :head, :params => {:res_id => params[:res_id], :house_id => params[:house_id]}
->>>>>>> b4a69c2... IT FUCKING WORKS
   end
 
   # GET /appointments
@@ -85,25 +53,7 @@ class AppointmentsController < ApplicationController
 	format.js
     end
   end
-
-<<<<<<< HEAD
-  # GET /appointments
-  # GET /appointments.json
-  def update_appointments
-    @appointments = Appointment.where("resident_id = ?", params[:res_id])
-    appointment_count = Appointment.where("resident_id = ?", params[:res_id]).count
-    logger.debug "in the update_appointments method. Appointments has length " + appointment_count.to_s
-#    respond_to do |format|
- #       logger.debug 'responding to format'
- #  	format.html
-#	format.js
- #       format.json { render :update_appointments, status: :ok }
-  #  end
-    redirect_to :appointments, :params => {:res_id => params[:res_id], :house_id => params[:house_id]}
-  end
-
-=======
->>>>>>> efbaf8a... Added some cleanup and made updating a little cleaner
+  
   # GET /appointments/1
   # GET /appointments/1.json
   def show

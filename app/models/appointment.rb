@@ -18,7 +18,6 @@ class Appointment < ActiveRecord::Base
   belongs_to :resident
   belongs_to :physician
   belongs_to :volunteer
-<<<<<<< HEAD
   
   def self.to_csv
     CSV.generate do |csv|
@@ -28,7 +27,4 @@ class Appointment < ActiveRecord::Base
       end
     end
   end
-=======
-  belongs_to :house
->>>>>>> a527fd8... Need to clean this up but dynamic drop down boxes.  Next step: dynamic calendar.w
 end
