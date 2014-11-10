@@ -1,0 +1,19 @@
+console.log("helllooooo");
+//var appointments = new Array();
+//var rb_appointments = <%= @appointments %>;
+//var count = <%= @appointments.count %>
+/*for (i = 0 ; i < count; i++)
+{
+  var e = rb_appointments.getItem(i);
+  event = new Object();
+  event.start = DateTime.new(e.date.year, e.date.month, e.date.day, e.time.hour, e.time.min, e.time.sec, e.time.zone);
+  event.title = e.resident.name + "-" + e.physician.name;
+  appointments.push(event);
+}*/
+//$('#fullCalendar').fullCalendar ( 'removeEvents' )
+//console.log(<%= @appointments.count %>)
+//$('#fullCalendar').fullCalendar ( 'removeEventSource',  'appointments.json' )
+//var appointments = <%= @appointments %>
+//console.log(<%= @appointments.count %>)
+//$('#fullCalendar').fullCalendar ( 'addEventSource',  <%= @appointments_json %>)
+$('#fullCalendar').fullCalendar ( 'refetchEvents' )
