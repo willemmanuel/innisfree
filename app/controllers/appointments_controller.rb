@@ -7,16 +7,15 @@ class AppointmentsController < ApplicationController
     @residents = Resident.all
     @houses = House.all
     if params.has_key?(:res_id)
-    session[:res_id] = params[:res_id]
+      session[:res_id] = params[:res_id]
     end
     if params.has_key?(:house_id)
-    session[:house_id] = params[:house_id]
+      session[:house_id] = params[:house_id]
     end
-
-      logger.debug "in the index method"
-   if session.has_key?(:res_id) and session[:res_id] != '' 
+    if session.has_key?(:res_id) and session[:res_id] != '' 
       @appointments = Appointment.where('resident_id = ?', session[:res_id])
       logger.debug "res id " + session[:res_id].to_s
+<<<<<<< HEAD
     @past_appointments = Appointment.where('date < ?', Date.today)
     @upcoming_appointments = Appointment.where('date >= ?', Date.today)
 <<<<<<< HEAD
@@ -55,8 +54,16 @@ class AppointmentsController < ApplicationController
     @upcoming_appointments = Appointment.where('date >= ?', Date.today)
 
 >>>>>>> 164b8e5... House filtering also works
+=======
+      @past_appointments = Appointment.where('date < ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+    elsif session.has_key?(:house_id) and session[:house_id] != '' 
+      @appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id])
+      @past_appointments = Appointment.where('date < ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+>>>>>>> efbaf8a... Added some cleanup and made updating a little cleaner
     else 
-     @appointments = Appointment.all
+      @appointments = Appointment.all
       logger.debug "no params"
       @past_appointments = Appointment.where('date < ?', Date.today)
       @upcoming_appointments = Appointment.where('date >= ?', Date.today)
@@ -73,14 +80,13 @@ class AppointmentsController < ApplicationController
   # GET /appointments.json
   def update_residents
     @residents = Resident.where("house_id = ?", params[:house_id])
-    #residents_count = Resident.where("house_id = ?", params[:house_id]).count
-    #logger.debug "in the update_residents method. Residents has length " + residents_count.to_s
     respond_to do |format|
    	format.html
 	format.js
     end
   end
 
+<<<<<<< HEAD
   # GET /appointments
   # GET /appointments.json
   def update_appointments
@@ -96,6 +102,8 @@ class AppointmentsController < ApplicationController
     redirect_to :appointments, :params => {:res_id => params[:res_id], :house_id => params[:house_id]}
   end
 
+=======
+>>>>>>> efbaf8a... Added some cleanup and made updating a little cleaner
   # GET /appointments/1
   # GET /appointments/1.json
   def show
