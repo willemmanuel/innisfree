@@ -6,14 +6,9 @@ Rails.application.routes.draw do
   put 'settings/approve/:id' => 'settings#toggle_user_approval', as: :approve_user
 
   devise_for :users
-  resources :appointments do
-   collection do 
-     get 'update_residents', to: 'appointments#update_residents'
-     get 'update_appointments', to: 'appointments#update_appointments'
-     get 'index', to: 'appointments#index'
-   end
-  end
 
+  resources :appointments
+  
   resources :physicians
 
   resources :residents
