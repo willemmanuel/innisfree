@@ -4,6 +4,10 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
+    logger.debug "in the index method"
+    @residents = Resident.all
+    @houses = House.all
+    #@appointments = (Appointment.joins('JOIN residents ON appointments.resident_id=residents.id')).joins('JOIN houses ON residents.house_id=houses.id').where("residents.house_id = ?", :house_id)
     @appointments = Appointment.all
     @past_appointments = Appointment.where('date < ?', Date.today)
     @upcoming_appointments = Appointment.where('date >= ?', Date.today)
@@ -13,6 +17,24 @@ class AppointmentsController < ApplicationController
       format.json
       format.csv { render text:@appointments.to_csv }
     end
+  end
+
+  # GET /appointments
+  # GET /appointments.json
+  def update_residents
+ #   house = House.find(params[:house_id])
+ #   @residents = house.residents.map{|a| [a.name, a.id]}.insert(0, "Co-worker")
+    @residents = Resident.where("house_id = ?", params[:house_id])
+    #residents_count = Resident.where("house_id = ?", params[:house_id]).count
+    #logger.debug "in the update_residents method. Residents has length " + residents_count.to_s
+    respond_to do |format|
+   	format.html
+	format.js
+    end
+    #render :update do |page|
+    #  page.replace_html 'residents', :partial => 'residents', :object => residents
+    #end 
+#   head :ok
   end
 
   # GET /appointments/1

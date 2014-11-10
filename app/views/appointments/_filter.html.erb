@@ -1,7 +1,9 @@
-<%= form_tag do %>
+<% javascript 'dynamic_residents' %>
+
+<%= form_tag("index", method: "get") do %>
   <div class = "field">
-  <%= collection_select :house, :house_id, House.order(:name), :id, :name, include_blank: true %></div>
-  <div class = "field">
-  <%= collection_select :resident, :resident_id, Resident.order(:name), :id, :name, include_blank: true %> </div>
+  <%= label :house_id, 'House' %>
+  <%= collection_select nil, :house_id,  @houses, :id, :name, {:include_blank => true }, {:class => 'house_select'}%></div>
+  <div id = "residents"><%= render :partial => 'residents', :object   => @residents %></div>
 <% end %>
 

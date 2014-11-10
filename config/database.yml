@@ -30,4 +30,4 @@ production:
   <<: *default
   database: slp_innisfree
   username: innisfree
-  password: 
+  password: 1nn1sfree!
