@@ -7,7 +7,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :appointments
+  resources :appointments do
+    collection do
+      get 'update_residents', to: 'appointments#update_residents'
+    end
+  end
   
   resources :physicians
 

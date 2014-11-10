@@ -7,6 +7,7 @@ $(document).on 'change', '.house_select', (evt) ->
       house_id: $(".house_select option:selected").val()
     }
     success: (data, textStatus, jqCHR) ->
+   	console.log("Dynamic resident select OK!")
     error: (jqXHR, textStatus, errorThrown) ->
    	console.log("AJAC Error")
   $.ajax 'appointments',
