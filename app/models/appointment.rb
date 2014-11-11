@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  resident_id  :integer
 #  physician_id :integer
-#  volunteer_id :integer
+#  user_id      :integer
 #  date         :date
 #  time         :time
 #  for          :string(255)
@@ -17,7 +17,7 @@
 class Appointment < ActiveRecord::Base
   belongs_to :resident
   belongs_to :physician
-  belongs_to :volunteer
+  belongs_to :user
   
   def self.to_csv
     CSV.generate do |csv|

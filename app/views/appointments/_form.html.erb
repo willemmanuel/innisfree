@@ -22,9 +22,9 @@
     <%= f.select(:physician_id, physicians) %>
   </div>
   <div class="field">
-    <%= f.label :volunteer_id %><br>
-    <% volunteers = Volunteer.all.map { |v| [v.name, v.id] } %>
-    <%= f.select(:volunteer_id, volunteers) %>
+    <%= f.label :user_id %><br>
+    <% users = User.all.map { |v| [v.name, v.id] } %>
+    <%= f.select(:user_id, users) %>
   </div>
   <div class="field">
     <%= f.label :date %><br>

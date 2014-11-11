@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111195224) do
+ActiveRecord::Schema.define(version: 20141111205315) do
 
   create_table "appointments", force: true do |t|
     t.integer  "resident_id"
     t.integer  "physician_id"
-    t.integer  "volunteer_id"
+    t.integer  "user_id"
     t.date     "date"
     t.time     "time"
     t.string   "for"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20141111195224) do
 
   add_index "appointments", ["physician_id"], name: "index_appointments_on_physician_id"
   add_index "appointments", ["resident_id"], name: "index_appointments_on_resident_id"
-  add_index "appointments", ["volunteer_id"], name: "index_appointments_on_volunteer_id"
+  add_index "appointments", ["user_id"], name: "index_appointments_on_user_id"
 
   create_table "cars", force: true do |t|
     t.string   "name"
@@ -86,15 +86,5 @@ ActiveRecord::Schema.define(version: 20141111195224) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-  create_table "volunteers", force: true do |t|
-    t.string   "name"
-    t.string   "phone"
-    t.integer  "house_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "volunteers", ["house_id"], name: "index_volunteers_on_house_id"
 
 end

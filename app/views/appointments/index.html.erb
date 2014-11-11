@@ -28,10 +28,10 @@
         <td><%= link_to appointment.resident.name, appointment.resident %></td>
         <td><%= link_to appointment.physician.name, appointment.physician %>   
           <small><%= link_to '(map)', map_link(appointment.physician.address) %></small></td>
-        <% if appointment.volunteer.nil? %>
+        <% if appointment.user.nil? %>
           <td>No volunteer assigned</td>
         <% else %>
-          <td><%= link_to appointment.volunteer.name, appointment.volunteer %></td>
+          <td><%= link_to appointment.user.name, appointment.user %></td>
         <% end %>
 
         <td><%= appointment.date.strftime("%a %b %e") %></td>
