@@ -4,7 +4,6 @@ class SettingsController < ApplicationController
 
 	def index
 		@users = User.all
-		@volunteers = Volunteer.all
 	end
 
 	def toggle_user_permission

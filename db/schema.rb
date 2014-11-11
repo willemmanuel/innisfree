@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106172218) do
+ActiveRecord::Schema.define(version: 20141111195224) do
 
   create_table "appointments", force: true do |t|
     t.integer  "resident_id"
@@ -31,13 +31,13 @@ ActiveRecord::Schema.define(version: 20141106172218) do
 
   create_table "cars", force: true do |t|
     t.string   "name"
-    t.integer  "volunteer_id"
+    t.integer  "user_id"
     t.string   "for"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "cars", ["volunteer_id"], name: "index_cars_on_volunteer_id"
+  add_index "cars", ["user_id"], name: "index_cars_on_user_id"
 
   create_table "houses", force: true do |t|
     t.string   "name"
@@ -79,6 +79,9 @@ ActiveRecord::Schema.define(version: 20141106172218) do
     t.boolean  "admin",                  default: false
     t.integer  "volunteer_id"
     t.boolean  "approved"
+    t.string   "phone"
+    t.integer  "house_id"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

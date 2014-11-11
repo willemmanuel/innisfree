@@ -9,7 +9,7 @@
 #
 
 class House < ActiveRecord::Base
-	has_many :volunteers
+	has_many :users
 	has_many :residents
 	
 	def self.to_csv

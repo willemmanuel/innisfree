@@ -4,16 +4,16 @@ Rails.application.routes.draw do
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user
   put 'settings/approve/:id' => 'settings#toggle_user_approval', as: :approve_user
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
   resources :appointments
 
   resources :physicians
 
   resources :residents
 
-  resources :volunteers
-
   resources :houses
+
+  resources :users
 
   root 'appointments#index'
 

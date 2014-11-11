@@ -14,7 +14,7 @@
 
 <p>
   <strong>Volunteers:</strong>
-  <% @house.volunteers.each do |v| %>
+  <% @house.users.each do |v| %>
   	<li><%= link_to v.name, v %></li>
   <% end %>
 </p>

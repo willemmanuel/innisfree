@@ -1,4 +1,4 @@
-<h1>Listing houses</h1>
+<h1>Innisfree Houses</h1>
 <p>
   Download:
   <%= link_to "CSV", houses_path(format: "csv") %>
@@ -19,7 +19,7 @@
     <br>
     Volunteers<br>
     <ul>
-      <% house.volunteers.each do |volunteer| %>
+      <% house.users.each do |volunteer| %>
         <li> <%= link_to volunteer.name, volunteer %></li>
       <% end %>
     </ul>
@@ -33,5 +33,4 @@
 <br>
 
 <%= link_to 'New House', new_house_path %> <br>
-<%= link_to 'New Volunteer', new_volunteer_path %> <br>
 <%= link_to 'New Resident', new_resident_path %>

@@ -13,8 +13,14 @@
     <% @checked_in.each do |car| %>
       <tr>
         <td><h5><%= link_to car.name, car %></h5></td>
-        <td><input placeholder="Reason for checkout" class="input input-normal"></td>
-        <td><%= link_to 'Check Out', toggle_car_path(car), method: :put, class: "btn btn-success" %>
+        <td>
+          <%= form_tag(toggle_car_path(car), method: :put) do %>
+            <%= text_field_tag(:for) %>
+          </td>
+          <td>
+            <%= submit_tag("Check out", class: "btn btn-success") %>
+          </td>
+          <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -35,7 +41,7 @@
     <% @checked_out.each do |car| %>
       <tr>
         <td><h5><%= link_to car.name, car %></h5></td>
-        <td><%= car.volunteer.name %></td>
+        <td><%= link_to car.user.name, car.user %></td>
         <td><%= car.for %></td>
         <td><%= link_to 'Check In', toggle_car_path(car), method: :put, class: "btn btn-success" %>
       </tr>

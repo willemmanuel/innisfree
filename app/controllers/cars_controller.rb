@@ -4,8 +4,8 @@ class CarsController < ApplicationController
   # GET /cars
   # GET /cars.json 
   def index
-    @checked_in = Car.where('volunteer_id IS NULL')
-    @checked_out = Car.where('volunteer_id IS NOT NULL')
+    @checked_in = Car.where('user_id IS NULL')
+    @checked_out = Car.where('user_id IS NOT NULL')
   end
 
   # GET /cars/1
@@ -29,7 +29,7 @@ class CarsController < ApplicationController
 
     respond_to do |format|
       if @car.save
-        format.html { redirect_to @car, notice: 'Car was successfully created.' }
+        format.html { redirect_to cars_path, notice: 'Car was successfully created.' }
         format.json { render :show, status: :created, location: @car }
       else
         format.html { render :new }
@@ -63,10 +63,12 @@ class CarsController < ApplicationController
   end
 
   def toggle
-    if @car.volunteer.nil?
-      @car.volunteer = Volunteer.first
+    if @car.user.nil?
+      @car.user = current_user
+      @car.for = params[:for]
     else
-      @car.volunteer = nil
+      @car.user = nil
+      @car.for = nil
     end
     @car.save
     redirect_to :back, notice: 'Car status toggled'
@@ -80,6 +82,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:name, :volunteer_id, :for, :reason)
+      params.require(:car).permit(:name, :user_id, :for)
     end
 end

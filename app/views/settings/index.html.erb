@@ -5,7 +5,7 @@
       <th>Email</th>
       <th>Approved?</th>
       <th>Admin?</th>
-      <th>Volunteer?</th>
+      <th>House?</th>
     </tr>
   </thead>
   <tbody>
@@ -25,10 +25,10 @@
 			<td><%= link_to "N", admin_user_path(user), method: :put, class: "btn btn-warning", style: "width: 40px;" %></td>
         <% end %>
 
-        <% if user.volunteer.nil? %>
-        	<td>No volunteer linked</td>
+        <% if user.house.nil? %>
+        	<td>No house linked</td>
         <% else %>
-			<td><%= link_to user.volunteer.name, user.volunteer %></td>
+			<td><%= link_to user.house.name, user.house %></td>
         <% end %>
       </tr>
     <% end %>
