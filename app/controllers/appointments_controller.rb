@@ -4,17 +4,62 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
-    @appointments = Appointment.all
-    @past_appointments = Appointment.where('date < ?', Date.today)
-    @upcoming_appointments = Appointment.where('date >= ?', Date.today)
-    # @upcoming_appointments = Appointment.where('date > ?', Date.today).paginate(page: params[:upcoming_page], per_page: 10)
-    respond_to do |format|
-      format.html
-      format.json
-      format.csv { render text:@appointments.to_csv }
+    @residents = Resident.all
+    @houses = House.all
+    if params.has_key?(:res_id)
+      session[:res_id] = params[:res_id]
+    end
+    if params.has_key?(:house_id)
+      session[:house_id] = params[:house_id]
+    end
+    if session.has_key?(:res_id) and session[:res_id] != '' 
+      @appointments = Appointment.where('resident_id = ?', session[:res_id])
+      @past_appointments = Appointment.where('date < ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+      respond_to do |format|
+        format.html
+        format.json
+        format.js
+        format.csv { render text:@appointments.to_csv }
+      end
+    elsif session.has_key?(:house_id) and session[:house_id] != '' 
+      @appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id])
+      @past_appointments = Appointment.where('date < ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+      respond_to do |format|
+        format.html
+        format.json
+        format.js
+        format.csv { render text:@appointments.to_csv }
+      end
+    else 
+      @appointments = Appointment.all
+      logger.debug "no params"
+      @past_appointments = Appointment.where('date < ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+      respond_to do |format|
+        format.html
+        format.json
+        format.js
+        format.csv { render text:@appointments.to_csv }
+      end
     end
   end
 
+  # GET /appointments
+  # GET /appointments.json
+  def update_residents
+    if (params[:house_id] != '')
+      @residents = Resident.where("house_id = ?", params[:house_id])
+    else
+      @residents = Resident.all
+    end
+    respond_to do |format|
+   	format.html
+	format.js
+    end
+  end
+  
   # GET /appointments/1
   # GET /appointments/1.json
   def show
@@ -77,6 +122,6 @@ class AppointmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
-      params.require(:appointment).permit(:resident_id, :physician_id, :volunteer_id, :date, :time, :for, :notes)
+      params.require(:appointment).permit(:resident_id, :physician_id, :volunteer_id, :date, :time, :for, :notes, :res_id, :house_id)
     end
 end

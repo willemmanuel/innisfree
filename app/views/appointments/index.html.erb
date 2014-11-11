@@ -3,7 +3,9 @@
   Download:
   <%= link_to "CSV", appointments_path(format: "csv") %>
 </p>
+<%= render 'filter' %>
 <div class="row">
+<div id="textDiv" class = "col-md-8"> </div>
 <div id="fullCalendar" class="col-md-8">
 </div>
 <div class="col-md-4">

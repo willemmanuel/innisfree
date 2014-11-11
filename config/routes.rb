@@ -1,12 +1,17 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do 
+  
   resources :cars
   put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user
   put 'settings/approve/:id' => 'settings#toggle_user_approval', as: :approve_user
 
   devise_for :users, controllers: { registrations: "users/registrations" }
-  resources :appointments
-
+  resources :appointments do
+    collection do
+      get 'update_residents', to: 'appointments#update_residents'
+    end
+  end
+  
   resources :physicians
 
   resources :residents
@@ -16,7 +21,7 @@ Rails.application.routes.draw do
   resources :users
 
   root 'appointments#index'
-
+  
   get 'admin' => 'settings#index', as: :settings
 
   # The priority is based upon order of creation: first created -> highest priority.

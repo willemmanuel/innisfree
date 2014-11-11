@@ -1,0 +1,7 @@
+<%= form_tag("index", method: "get") do %>
+  <div class = "field">
+  <%= collection_select nil, :house_id,  @houses, :id, :name, {:prompt => 'Select a House' }, {:class => 'house_select'}%></div> 
+  <div class = 'field'><%= collection_select(nil, :resident_id, @residents, :id, :name, 
+	{:prompt => "Select a co-worker"}, {:class => 'residents_select'}) %></div>
+<% end %>
+
