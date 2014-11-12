@@ -4,6 +4,17 @@ class SettingsController < ApplicationController
 
 	def index
 		@users = User.all
+		@houses = House.all
+	end
+
+	def create_user
+		@user = User.new(user_params)
+		@user.approved = true
+		if @user.save
+        	redirect_to :back, notice: 'User was successfully created.' 
+      	else
+        	redirect_to :back, alert: 'There were errors present.' 
+      end
 	end
 
 	def toggle_user_permission
@@ -31,6 +42,6 @@ class SettingsController < ApplicationController
     end
 
     def user_params
-      params.permit(:settings).permit(:id)
+      params.permit(:name, :email, :phone, :password, :password_confirmation, :house_id)
     end
 end
