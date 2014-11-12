@@ -15,6 +15,9 @@
 #
 
 class Appointment < ActiveRecord::Base
+
+  has_paper_trail
+
   belongs_to :resident
   belongs_to :physician
   belongs_to :user
