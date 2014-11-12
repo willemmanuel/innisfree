@@ -14,10 +14,10 @@
 
 one:
   name: MyString
-  volunteer_id: 
+  user_id: 
   for: MyString
 
 two:
   name: MyString
-  volunteer_id: 
+  user_id: 
   for: MyString
