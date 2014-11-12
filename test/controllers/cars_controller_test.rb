@@ -3,12 +3,8 @@ require 'test_helper'
 class CarsControllerTest < ActionController::TestCase
   setup do
     @car = cars(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:cars)
+    @user = FactoryGirl.create(:user)
+    sign_in(@user)
   end
 
   test "should get new" do
@@ -18,15 +14,10 @@ class CarsControllerTest < ActionController::TestCase
 
   test "should create car" do
     assert_difference('Car.count') do
-      post :create, car: { for: @car.for, name: @car.name, volunteer_id: @car.volunteer_id }
+      post :create, car: { for: @car.for, name: @car.name, user_id: @car.user_id }
     end
 
-    assert_redirected_to car_path(assigns(:car))
-  end
-
-  test "should show car" do
-    get :show, id: @car
-    assert_response :success
+    assert_redirected_to cars_path
   end
 
   test "should get edit" do
@@ -35,7 +26,7 @@ class CarsControllerTest < ActionController::TestCase
   end
 
   test "should update car" do
-    patch :update, id: @car, car: { for: @car.for, name: @car.name, volunteer_id: @car.volunteer_id }
+    patch :update, id: @car, car: { for: @car.for, name: @car.name, user_id: @car.user_id }
     assert_redirected_to car_path(assigns(:car))
   end
 

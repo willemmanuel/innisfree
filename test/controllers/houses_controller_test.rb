@@ -3,6 +3,8 @@ require 'test_helper'
 class HousesControllerTest < ActionController::TestCase
   setup do
     @house = houses(:one)
+    @user = FactoryGirl.create(:user)
+    sign_in(@user)
   end
 
   test "should get index" do

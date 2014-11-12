@@ -1,16 +1,6 @@
 class ResidentsController < ApplicationController
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
 
-  # GET /residents
-  # GET /residents.json
-  def index
-    @residents = Resident.all
-    respond_to do |format|
-      format.html
-      format.csv { render text: @residents.to_csv }
-    end
-  end
-
   # GET /residents/1
   # GET /residents/1.json
   def show

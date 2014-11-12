@@ -3,12 +3,8 @@ require 'test_helper'
 class ResidentsControllerTest < ActionController::TestCase
   setup do
     @resident = residents(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:residents)
+    @user = FactoryGirl.create(:user)
+    sign_in(@user)
   end
 
   test "should get new" do
@@ -22,11 +18,6 @@ class ResidentsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to resident_path(assigns(:resident))
-  end
-
-  test "should show resident" do
-    get :show, id: @resident
-    assert_response :success
   end
 
   test "should get edit" do

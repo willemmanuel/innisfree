@@ -3,6 +3,8 @@ require 'test_helper'
 class PhysiciansControllerTest < ActionController::TestCase
   setup do
     @physician = physicians(:one)
+    @user = FactoryGirl.create(:user)
+    sign_in(@user)
   end
 
   test "should get index" do

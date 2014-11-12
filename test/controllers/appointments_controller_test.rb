@@ -3,6 +3,8 @@ require 'test_helper'
 class AppointmentsControllerTest < ActionController::TestCase
   setup do
     @appointment = appointments(:one)
+    @user = FactoryGirl.create(:user)
+    sign_in(@user)
   end
 
   test "should get index" do
@@ -22,11 +24,6 @@ class AppointmentsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to appointment_path(assigns(:appointment))
-  end
-
-  test "should show appointment" do
-    get :show, id: @appointment
-    assert_response :success
   end
 
   test "should get edit" do
