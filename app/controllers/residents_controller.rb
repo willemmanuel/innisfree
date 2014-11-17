@@ -1,5 +1,7 @@
 class ResidentsController < ApplicationController
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin, only: [:new, :create, :destroy]
+  before_action :check_house, only: [:edit, :update]
 
   # GET /residents/1
   # GET /residents/1.json
@@ -56,6 +58,16 @@ class ResidentsController < ApplicationController
   end
 
   private
+    # Check to see if the user is an admin (staff)
+    def check_admin
+      redirect_to houses_path, alert: "You do not have admin privileges" unless current_user.admin
+    end
+
+    # Check to see if the user is in the same house as resident or an admin
+    def check_house
+      redirect_to houses_path, alert: "You are not in this resident's house and do not have admin privileges" unless current_user.admin or current_user.house_id == @resident.house_id
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_resident
       @resident = Resident.find(params[:id])

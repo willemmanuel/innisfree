@@ -1,5 +1,6 @@
 class HousesController < ApplicationController
   before_action :set_house, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin, except: [:index, :show]
 
   # GET /houses
   # GET /houses.json
@@ -66,6 +67,11 @@ class HousesController < ApplicationController
   end
 
   private
+    # Check to see if the user is an admin (staff)
+    def check_admin
+      redirect_to houses_path, alert: "You do not have admin privileges" unless current_user.admin
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_house
       @house = House.find(params[:id])

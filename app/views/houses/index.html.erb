@@ -32,5 +32,7 @@
 
 <br>
 
-<%= link_to 'New House', new_house_path %> <br>
-<%= link_to 'New Resident', new_resident_path %>
+<% if current_user.admin %>
+    <%= link_to 'New House', new_house_path %> <br>
+    <%= link_to 'New Resident', new_resident_path %>
+<% end %>
