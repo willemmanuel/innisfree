@@ -7,7 +7,10 @@
 <% @houses.each do |house| %>
 <div class="col-md-4">
 <div class="panel panel-default">
-  <div class="panel-heading"><strong><%= link_to house.name, house %></strong> <small>(<%= link_to 'Edit', edit_house_path(house) %>, <%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %>)</small>
+  <div class="panel-heading"><strong><%= link_to house.name, house %></strong>
+    <% if current_user.admin %>
+        <small>(<%= link_to 'Edit', edit_house_path(house) %>, <%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %>)</small>
+        <% end %>
   </div>
   <div class="panel-body">
     Residents<br>
