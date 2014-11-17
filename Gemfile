@@ -31,7 +31,8 @@ gem 'bootstrap-sass'
 gem 'devise'
 
 gem 'fullcalendar-rails'
-gem 'bootstrap-will_paginate'
+gem 'will_paginate-bootstrap'
+gem 'will_paginate', '~> 3.0.5'
 
 #for tracking appointment edits
 gem 'paper_trail', '~> 3.0.6'

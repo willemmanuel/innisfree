@@ -15,7 +15,7 @@ class AppointmentsController < ApplicationController
     if session.has_key?(:res_id) and session[:res_id] != '' 
       @appointments = Appointment.where('resident_id = ?', session[:res_id])
       @past_appointments = Appointment.where('date < ?', Date.today)
-      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
       respond_to do |format|
         format.html
         format.json
@@ -25,7 +25,7 @@ class AppointmentsController < ApplicationController
     elsif session.has_key?(:house_id) and session[:house_id] != '' 
       @appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id])
       @past_appointments = Appointment.where('date < ?', Date.today)
-      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
       respond_to do |format|
         format.html
         format.json
@@ -36,7 +36,7 @@ class AppointmentsController < ApplicationController
       @appointments = Appointment.all
       logger.debug "no params"
       @past_appointments = Appointment.where('date < ?', Date.today)
-      @upcoming_appointments = Appointment.where('date >= ?', Date.today)
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
       respond_to do |format|
         format.html
         format.json
