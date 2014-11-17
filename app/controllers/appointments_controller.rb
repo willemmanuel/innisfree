@@ -13,6 +13,7 @@ class AppointmentsController < ApplicationController
       session[:house_id] = params[:house_id]
     end
     if session.has_key?(:res_id) and session[:res_id] != '' 
+      logger.debug "res id"
       @appointments = Appointment.where('resident_id = ?', session[:res_id])
       @past_appointments = Appointment.where('date < ?', Date.today)
       @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
@@ -23,7 +24,9 @@ class AppointmentsController < ApplicationController
         format.csv { render text:@appointments.to_csv }
       end
     elsif session.has_key?(:house_id) and session[:house_id] != '' 
+      logger.debug "house id"
       @appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id])
+      logger.debug @appointments.count.to_s
       @past_appointments = Appointment.where('date < ?', Date.today)
       @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
       respond_to do |format|
@@ -112,6 +115,14 @@ class AppointmentsController < ApplicationController
       format.html { redirect_to appointments_url, notice: 'Appointment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def appointments
+    @appointments
+  end
+
+  def residents
+    @residents
   end
 
   private
