@@ -6,20 +6,20 @@ class AppointmentsControllerTest < ActionController::TestCase
     @user = FactoryGirl.create(:user)
     FactoryGirl.create(:resident, house_id: 1, id: 2)
     FactoryGirl.create(:resident, house_id: 2, id: 3)
-    FactoryGirl.create(:appointment, resident_id: 2)
-    FactoryGirl.create(:appointment, resident_id: 3)
+    FactoryGirl.create(:appointment, resident_id: 2, date: 2014-10-05, time: '2014-10-05 12:06:26')
+    FactoryGirl.create(:appointment, resident_id: 3, date: 2014-10-05, time: '2014-10-05 12:06:26')
     sign_in(@user)
   end
 
   test "should get index" do
-    skip
+    
     get :index
     assert_response :success
     assert_not_nil assigns(:appointments)
   end
 
   test "should create appointment" do
-    skip
+    
     assert_difference('Appointment.count', 1) do
       post :create, appointment: { date: @appointment.date, for: @appointment.for, notes: @appointment.notes, physician_id: @appointment.physician_id, resident_id: @appointment.resident_id, time: @appointment.time, user_id: @appointment.user_id }
     end
@@ -28,13 +28,13 @@ class AppointmentsControllerTest < ActionController::TestCase
   end
 
   test "should update appointment" do
-    skip
+    
     patch :update, id: @appointment, appointment: { date: @appointment.date, for: @appointment.for, notes: @appointment.notes, physician_id: @appointment.physician_id, resident_id: @appointment.resident_id, time: @appointment.time, user_id: @appointment.user_id }
     assert_redirected_to appointment_path(assigns(:appointment))
   end
 
   test "should destroy appointment" do
-    skip
+    
     assert_difference('Appointment.count', -1) do
       delete :destroy, id: @appointment
     end
@@ -43,7 +43,7 @@ class AppointmentsControllerTest < ActionController::TestCase
   end
 
   test "filtering on house" do
-    skip
+    
     get :index
     old_count = (@controller.appointments).length
     get :index, {house_id: 1, res_id: ''}
@@ -52,7 +52,7 @@ class AppointmentsControllerTest < ActionController::TestCase
   end
 
   test "filtering on resident" do
-    skip
+    
     get :index
     old_count = (@controller.appointments).length
     get :index, {house_id: 1, res_id: 2}
@@ -61,7 +61,7 @@ class AppointmentsControllerTest < ActionController::TestCase
   end
 
   test "filtering residents on house" do
-    skip
+    
     xhr :get, :update_residents, {:house_id => 2, :format => 'js'}
     assert (@controller.residents).length == 1
     xhr :get, :update_residents, {:house_id => '', :format => 'js'}
