@@ -6,8 +6,8 @@ class AppointmentsControllerTest < ActionController::TestCase
     @user = FactoryGirl.create(:user)
     FactoryGirl.create(:resident, house_id: 1, id: 2)
     FactoryGirl.create(:resident, house_id: 2, id: 3)
-    FactoryGirl.create(:appointment, resident_id: 2, date: 2014-10-05, time: '2014-10-05 12:06:26')
-    FactoryGirl.create(:appointment, resident_id: 3, date: 2014-10-05, time: '2014-10-05 12:06:26')
+    FactoryGirl.create(:appointment, resident_id: 2)
+    FactoryGirl.create(:appointment, resident_id: 3)
     sign_in(@user)
   end
 
