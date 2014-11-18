@@ -48,14 +48,10 @@ class HousesControllerTest < ActionController::TestCase
     assert_redirected_to houses_path
   end
 
+=begin
   test "should remove house association" do
-    @house2 = FactoryGirl.create(:house, name: "Rivendell", id:4)
-    @user2 = FactoryGirl.create(:user, house_id: @house2.id, name: "Pippin", email: "me@me.com")
-    delete :destroy, id: @house
-    assert_nothing_raised{patch :update, id: @user2}
-    #assert_equal(@house2, nil)
-    #assert_nothing_thrown(patch :update, id: @user2)
-    #assert_nil(@user2.house_id)
+
   end
+=end
 
 end
