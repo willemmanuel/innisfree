@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class AppointmentsControllerTest < ActionController::TestCase
-=begin
   setup do
     @appointment = appointments(:one)
     @user = FactoryGirl.create(:user)
@@ -68,5 +67,4 @@ class AppointmentsControllerTest < ActionController::TestCase
     xhr :get, :update_residents, {:house_id => '', :format => 'js'}
     assert (@controller.residents).length == (Resident.all).length
   end
-=end
 end
