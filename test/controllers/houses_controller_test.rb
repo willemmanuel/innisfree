@@ -2,8 +2,8 @@ require 'test_helper'
 
 class HousesControllerTest < ActionController::TestCase
   setup do
-    @house = houses(:one)
-    @user = FactoryGirl.create(:user)
+    @house = FactoryGirl.create(:house, name: "The Shire", id:3)
+    @user = FactoryGirl.create(:user, name: "Samwise")
     sign_in(@user)
   end
 
@@ -45,7 +45,13 @@ class HousesControllerTest < ActionController::TestCase
     assert_difference('House.count', -1) do
       delete :destroy, id: @house
     end
-
     assert_redirected_to houses_path
   end
+
+=begin
+  test "should remove house association" do
+
+  end
+=end
+
 end
