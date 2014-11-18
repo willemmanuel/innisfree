@@ -1,2 +1,25 @@
 <h3><%= @user.name %></h3>
-<li><b>Phone:</b><%= @user.phone %></li>
+<% if @user.house != nil %>
+    <li><b>House: </b><%= @user.house.name %></li>
+<% end %>
+<% if @user.email != "" %>
+    <li><b>Email: </b><%= @user.email %></li>
+<% end %>
+<% if @user.phone != "" %>
+    <li><b>Phone: </b><%= number_to_phone(@user.phone) %></li>
+<% end %>
+<% if @user.admin %>
+    <li><b>Role: </b><%= "Staff" %></li>
+<% else %>
+    <li><b>Role: </b><%= "Volunteer" %></li>
+<% end %>
+<% if @user.last_sign_in_at %>
+    <li><b>Last Sign-In: </b><%= @user.last_sign_in_at.strftime("%x") + " at " + @user.last_sign_in_at.strftime("%r")%></li>
+<% else %>
+    <li><b>Last Sign-In: </b><%= "Never" %>
+<% end %>
+<li><b>User Created: </b><%= @user.created_at.strftime("%x") + " at " +  @user.created_at.strftime("%r")%></li>
+<br>
+<% if current_user.id == @user.id || current_user.admin%>
+    <%= link_to "Edit profile", edit_user_registration_path %></li>
+<% end %>

@@ -11,7 +11,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: House1
+  created_at: 2014-11-11 1:23:23
+  updated_at: 2014-11-16 1:23:23
 
 two:
   name: MyString
+  created_at: 2014-11-12
+  updated_at: 2014-11-14
