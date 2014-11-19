@@ -13,6 +13,7 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # Add trailing slash for better functionality in server
   config.action_controller.default_url_options = { :trailing_slash => true }
 
   # Don't care if the mailer can't send.
