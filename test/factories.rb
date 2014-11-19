@@ -1,15 +1,15 @@
 FactoryGirl.define do
 
   factory :user do
-    name "Test User"
-    email "test@example.com"
-    password "please123"
+    name 'Test User'
+    email 'test@example.com'
+    password 'please123'
     approved true
     admin true
   end
 
   factory :car do
-    name "Civic"
+    name 'Civic'
   end
 
   factory :appointment do
@@ -20,11 +20,11 @@ FactoryGirl.define do
   end
 
   factory :house do
-    name "Test"
+    name 'Test'
   end
 
   factory :resident do
-    name "John Doe"
+    name 'John Doe'
     house_id 1
   end
 

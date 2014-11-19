@@ -2,8 +2,10 @@ require 'test_helper'
 
 class ResidentsControllerTest < ActionController::TestCase
   setup do
-    @resident = residents(:one)
+    @resident = FactoryGirl.create(:resident)
     @user = FactoryGirl.create(:user)
+    @volunteer1 = FactoryGirl.create(:user, email: 'volunteer1@test.com', admin: false, house_id: 1)
+    @volunteer2 = FactoryGirl.create(:user, email: 'volunteer2@test.com', admin: false, house_id: 2)
     sign_in(@user)
   end
 
@@ -20,14 +22,52 @@ class ResidentsControllerTest < ActionController::TestCase
     assert_redirected_to resident_path(assigns(:resident))
   end
 
+  test "volunteer should not create resident" do
+    sign_in(@volunteer1)
+
+    assert_no_difference('Resident.count') do
+      post :create, resident: { house_id: @resident.house_id, name: @resident.name, notes: @resident.notes }
+    end
+
+    assert_redirected_to houses_path
+  end
+
   test "should get edit" do
     get :edit, id: @resident
     assert_response :success
   end
 
+  test "volunteer should get edit" do
+    sign_in(@volunteer1)
+
+    get :edit, id: @resident
+    assert_response :success
+  end
+
+  test "wrong house volunteer should not get edit" do
+    sign_in(@volunteer2)
+
+    get :edit, id: @resident
+    assert_redirected_to houses_path
+  end
+
   test "should update resident" do
     patch :update, id: @resident, resident: { house_id: @resident.house_id, name: @resident.name, notes: @resident.notes }
     assert_redirected_to resident_path(assigns(:resident))
+  end
+
+  test "volunteer should update resident" do
+    sign_in(@volunteer1)
+
+    patch :update, id: @resident, resident: { house_id: @resident.house_id, name: @resident.name, notes: @resident.notes }
+    assert_redirected_to resident_path(assigns(:resident))
+  end
+
+  test "wrong house volunteer should not update resident" do
+    sign_in(@volunteer2)
+
+    patch :update, id: @resident, resident: { house_id: @resident.house_id, name: @resident.name, notes: @resident.notes }
+    assert_redirected_to houses_path
   end
 
   test "should destroy resident" do
@@ -36,5 +76,15 @@ class ResidentsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to residents_path
+  end
+
+  test "volunteer should not destroy resident" do
+    sign_in(@volunteer1)
+
+    assert_no_difference('Resident.count') do
+      delete :destroy, id: @resident
+    end
+
+    assert_redirected_to houses_path
   end
 end
