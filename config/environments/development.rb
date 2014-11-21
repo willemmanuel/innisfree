@@ -14,7 +14,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Add trailing slash for better functionality in server
-  config.action_controller.default_url_options = { :trailing_slash => true }
+  # config.action_controller.default_url_options = { :trailing_slash => true }
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
