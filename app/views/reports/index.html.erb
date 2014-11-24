@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
+
+  <script>
+  $(function() {
+    $( "#datepicker2" ).datepicker();
+  });
+  </script>
+</head>
+
+<body>
+ <h1>Reports Generation</h1>
+ <p> Houses: </p>
+ <div class = "field">
+ <%= collection_select nil, :house_id,  @houses, :id, :name, {:prompt => 'All' }, {:class => 'house_select'}%></div>
+ <BR>
+ <p> Co-workers: </p>
+ <div class = 'field'>
+ <%= collection_select nil, :resident_id, @residents, :id, :name, {:prompt => "All"}, {:class => 'residents_select'}%></div>
+ <BR>
+ <p> Doctors: </p>
+ <div class = "field">
+ <%= collection_select nil, :physician_id, @physicians, :id, :name, {:prompt => "All"}, {:class => 'physicians_select'}%></div>
+ <BR>
+ <p>From: &nbsp;<input type="text" id="datepicker"> &nbsp;&nbsp;&nbsp; To: &nbsp; <input type="text" id="datepicker2"></p>
+<p>  Format: &nbsp; <input type="radio" name="format" value="CSV" checked>CSV &nbsp;&nbsp;
+<input type="radio" name="format" value="PDF">PDF
+</p>
+<button type="button">Generate Report</button>
+</body>
+</html>

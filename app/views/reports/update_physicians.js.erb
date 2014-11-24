@@ -1,0 +1,5 @@
+$('.physicians_select').empty();
+$('.physicians_select').append ( $('<option>Select a doctor</option>') );
+<% @physicians.each do |physician| %>
+  $('.physicians_select').append($('<option value="<%= physician.id %>"><%= physician.name %></option>'));
+<% end %>

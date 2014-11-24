@@ -20,6 +20,12 @@ Rails.application.routes.draw do
   resources :houses
 
   resources :users
+  
+  resources :reports do
+    collection do
+      get 'update_physicians', to: 'reports#update_physicians'
+    end
+  end
 
   root 'appointments#index'
   
