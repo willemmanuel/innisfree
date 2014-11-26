@@ -17,9 +17,9 @@
     <%= f.select(:resident_id, residents) %>
   </div>
   <div class="field">
-    <%= f.label :physician_id %><br>
-    <% physicians = Physician.all.map { |p| [p.name, p.id] } %>
-    <%= f.select(:physician_id, physicians) %>
+    <%= f.label :doctor_id %><br>
+    <% doctors = Doctor.all.map { |p| [p.name, p.id] } %>
+    <%= f.select(:doctor_id, doctors) %>
   </div>
   <div class="field">
     <%= f.label :user_id %><br>

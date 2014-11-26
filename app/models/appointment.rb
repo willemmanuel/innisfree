@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  resident_id  :integer
-#  physician_id :integer
+#  doctor_id :integer
 #  user_id      :integer
 #  date         :date
 #  time         :time
@@ -19,7 +19,7 @@ class Appointment < ActiveRecord::Base
   has_paper_trail
 
   belongs_to :resident
-  belongs_to :physician
+  belongs_to :doctor
   belongs_to :user
   
   def self.to_csv

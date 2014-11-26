@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  resident_id  :integer
-#  physician_id :integer
+#  doctor_id :integer
 #  user_id      :integer
 #  date         :date
 #  time         :time

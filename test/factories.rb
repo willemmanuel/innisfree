@@ -14,7 +14,7 @@ FactoryGirl.define do
 
   factory :appointment do
     resident_id 1
-    physician_id 1
+    doctor_id 1
     date Date.new(2014, 10, 5)
     time '2014-10-05 12:06:26'
   end
@@ -28,8 +28,8 @@ FactoryGirl.define do
     house_id 1
   end
 
-  factory :physician do
-    name 'Physician #1'
+  factory :doctor do
+    name 'Doctor #1'
     address '123 University Drive'
     phone '123456'
   end

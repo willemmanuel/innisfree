@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111235607) do
+ActiveRecord::Schema.define(version: 20141126033049) do
 
   create_table "appointments", force: true do |t|
     t.integer  "resident_id"
-    t.integer  "physician_id"
+    t.integer  "doctor_id"
     t.integer  "user_id"
     t.date     "date"
     t.time     "time"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20141111235607) do
     t.datetime "updated_at"
   end
 
-  add_index "appointments", ["physician_id"], name: "index_appointments_on_physician_id"
+  add_index "appointments", ["doctor_id"], name: "index_appointments_on_doctor_id"
   add_index "appointments", ["resident_id"], name: "index_appointments_on_resident_id"
   add_index "appointments", ["user_id"], name: "index_appointments_on_user_id"
 
@@ -39,16 +39,23 @@ ActiveRecord::Schema.define(version: 20141111235607) do
 
   add_index "cars", ["user_id"], name: "index_cars_on_user_id"
 
+  create_table "doctors", force: true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "houses", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "physicians", force: true do |t|
-    t.string   "name"
-    t.string   "address"
-    t.string   "phone"
+  create_table "posts", force: true do |t|
+    t.string   "title"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -97,15 +104,5 @@ ActiveRecord::Schema.define(version: 20141111235607) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
-
-  create_table "volunteers", force: true do |t|
-    t.string   "name"
-    t.string   "phone"
-    t.integer  "house_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "volunteers", ["house_id"], name: "index_volunteers_on_house_id"
 
 end

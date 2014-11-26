@@ -31,7 +31,7 @@
  <BR>
  <p> Doctors: </p>
  <div class = "field">
- <%= collection_select nil, :physician_id, @physicians, :id, :name, {:prompt => "All"}, {:class => 'physicians_select'}%></div>
+ <%= collection_select nil, :doctor_id, @doctors, :id, :name, {:prompt => "All"}, {:class => 'doctors_select'}%></div>
  <BR>
  <p>From: &nbsp;<input type="text" id="datepicker"> &nbsp;&nbsp;&nbsp; To: &nbsp; <input type="text" id="datepicker2"></p>
 <p>  Format: &nbsp; <input type="radio" name="format" value="CSV" checked>CSV &nbsp;&nbsp;

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :physicians
+  resources :doctors
 
   resources :residents, except: [:index]
 
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   
   resources :reports do
     collection do
-      get 'update_physicians', to: 'reports#update_physicians'
+      get 'update_doctors', to: 'reports#update_doctors'
     end
   end
 
