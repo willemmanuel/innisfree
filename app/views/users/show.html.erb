@@ -21,5 +21,13 @@
 <li><b>User Created: </b><%= @user.created_at.strftime("%x") + " at " +  @user.created_at.strftime("%r")%></li>
 <br>
 <% if current_user.id == @user.id || current_user.admin%>
-    <%= link_to "Edit profile", edit_user_registration_path %></li>
+
+    <% if current_user.id == @user.id %>
+        <%= link_to "Edit profile", edit_user_path(@user) %></li>
+    <% else %>
+        <%= link_to "Edit user", edit_user_path(@user) %></li>
+    <% end %>
+    <br>
+    <%= link_to 'Delete user', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+
 <% end %>

@@ -11,7 +11,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-  	@houses = House.all
+
+    @houses = House.all
     super
   end
 

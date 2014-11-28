@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
   has_many :cars
   has_many :appointments
 
+  attr_accessor :current_password
+
   def active_for_authentication? 
     super && self.approved
   end 

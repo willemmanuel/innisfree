@@ -1,0 +1,55 @@
+<%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.label :phone %> <br>
+      <%= f.text_field :phone %>
+    </div>
+
+    <div>
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true %>
+    </div>
+
+    <div>
+      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+
+    <% if current_user.id == @user.id %>
+        <div>
+          <%= f.label :current_password %> <i>(we need your current password to confirm password changes)</i><br />
+          <%= f.password_field :current_password, autocomplete: "off" %>
+        </div>
+    <% end %>
+
+    <div>
+      <%= f.label :house_id %> <br>
+      <%= f.select :house_id, options_for_select(@houses.map{ |h| [h.name, h.id]}, :selected=>@user.house_id ) %>
+    </div>
+
+    <br>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
