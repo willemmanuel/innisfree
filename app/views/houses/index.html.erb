@@ -13,7 +13,7 @@
         <% end %>
   </div>
   <div class="panel-body">
-    Residents<br>
+    Coworkers<br>
     <ul>
       <% house.residents.each do |resident| %>
         <li> <%= link_to resident.name, resident %></li>
@@ -37,5 +37,5 @@
 
 <% if current_user.admin %>
     <%= link_to 'New House', new_house_path %> <br>
-    <%= link_to 'New Resident', new_resident_path %>
+    <%= link_to 'New Coworker', new_resident_path %>
 <% end %>
