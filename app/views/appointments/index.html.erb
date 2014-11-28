@@ -5,12 +5,9 @@
 </p>
 <%= render 'filter' %>
 <div class="row">
-<div id="textDiv" class = "col-md-8"> </div>
-<div id="fullCalendar" class="col-md-8">
-</div>
 <div class="col-md-4">
   <h2>Upcoming</h2>
-<table class="table table-striped table-hover">
+<table class="table-responsive table-striped table-hover">
   <thead>
     <tr>
       <th>Coworker</th>
@@ -46,7 +43,10 @@
 <%= will_paginate @upcoming_appointments, renderer: BootstrapPagination::Rails %>
 </center>
 </div>
+<div id="textDiv" class = "col-md-8"> </div>
+<div id="fullCalendar" class="col-md-8">
+</div>
 </div>
 
-<%= link_to 'New Appointment', new_appointment_path %>
+<h4><%= link_to 'New Appointment', new_appointment_path %></h4>
 <hr>
