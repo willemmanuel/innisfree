@@ -1,6 +1,9 @@
-json.array!(@appointments) do |appointment|
-  json.extract! appointment, :id, :resident_id, :doctor_id, :user_id
-  json.title appointment.resident.name + " - " + appointment.doctor.name
-  json.start DateTime.new(appointment.date.year, appointment.date.month, appointment.date.day, appointment.time.hour, appointment.time.min, appointment.time.sec, appointment.time.zone)
-  json.url appointment_url(appointment)
+json.array!(@appointments_counts) do |appointment|
+  if appointment[1] == 1
+    json.title appointment[1].to_s + " appointment"
+  else
+    json.title appointment[1].to_s + " appointments"
+  end
+  json.start DateTime.new(appointment[0].year, appointment[0].month, appointment[0].day)
+  json.allDay true
 end

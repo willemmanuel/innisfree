@@ -16,10 +16,13 @@ class AppointmentsController < ApplicationController
     end
     if session.has_key?(:res_id) and session[:res_id] != '' 
       @appointments = Appointment.where('resident_id = ?', session[:res_id])
+      @appointments_counts = @appointments.group("date").count
     elsif session.has_key?(:house_id) and session[:house_id] != '' 
       @appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id])
-    else 
+      @appointments_counts = @appointments.group("date").count
+    else
       @appointments = Appointment.all
+      @appointments_counts = @appointments.group('date').count
     end
     respond_to do |format|
       format.html
