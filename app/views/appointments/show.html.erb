@@ -1,3 +1,4 @@
+<div class="col-md-6">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -46,3 +47,35 @@
 <% @appointment.versions.reverse.each do |v| %>
   <li><%= User.where(id: v.whodunnit.to_i).first.name %> <%= v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
 <% end %>
+</div>
+<div class="col-md-6">
+    <div id="map-canvas"></div>
+    <style>
+      #map-canvas {
+        width: 500px;
+        height: 500px;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+        'address': "<%=@appointment.doctor.address%>"
+        }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var mapCanvas = document.getElementById('map-canvas');
+          var mapOptions = {
+            center: results[0].geometry.location,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          var map = new google.maps.Map(mapCanvas, mapOptions);
+          var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            title: "Test"
+          });
+          google.maps.event.addDomListener(window, 'load', initialize);
+        }});
+    </script>
+</div>

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user
   put 'settings/approve/:id' => 'settings#toggle_user_approval', as: :approve_user
   post 'settings/create_user' => 'settings#create_user', as: :create_user
+  get 'appointments/upcoming' => 'appointments#upcoming'
 
   devise_for :users, controllers: { registrations: "users/registrations" }
   resources :appointments do

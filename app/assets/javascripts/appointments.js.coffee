@@ -6,10 +6,6 @@ $(document).on 'change', '.house_select', (evt) ->
     data: {
       house_id: $(".house_select option:selected").val()
     }
-    success: (data, textStatus, jqCHR) ->
-   	console.log("Dynamic resident select OK!")
-    error: (jqXHR, textStatus, errorThrown) ->
-   	console.log("AJAC Error")
   $.ajax 'appointments',
     type: 'GET'
     dataType: 'script'
@@ -17,11 +13,14 @@ $(document).on 'change', '.house_select', (evt) ->
       res_id: ''
       house_id: $('.house_select option:selected').val()
     }
-    error: (jqXHR, textStatus, errorThrown) ->
-   	console.log("AJAC Error")
+  $.ajax 'appointments/upcoming',
+    type: 'GET', 
+    data: {
+      res_id: ''
+      house_id: $('.house_select option:selected').val()
+    }
     success: (data, textStatus, jqCHR) ->
-   	console.log("Dynamic resident select OK!")
-
+      $("#upcoming").html(data); 
 
 $(document).on 'change', '.residents_select', (evt) ->
   $.ajax 'appointments',
@@ -31,10 +30,14 @@ $(document).on 'change', '.residents_select', (evt) ->
       res_id: $(".residents_select option:selected").val()
       house_id: $('.house_select option:selected').val()
     }
-    error: (jqXHR, textStatus, errorThrown) ->
-   	console.log("AJAC Error")
+  $.ajax 'appointments/upcoming',
+    type: 'GET', 
+    data: {
+      res_id: $(".residents_select option:selected").val()
+      house_id: $('.house_select option:selected').val()
+    }
     success: (data, textStatus, jqCHR) ->
-   	console.log("Dynamic resident select OK!")
+      $("#upcoming").html(data); 
 
 $(document).on 'ready page:load', ->
   $.ajax 'appointments',
@@ -44,10 +47,6 @@ $(document).on 'ready page:load', ->
       res_id: $(".residents_select option:selected").val()
       house_id: $('.house_select option:selected').val()
     }
-    error: (jqXHR, textStatus, errorThrown) ->
-   	console.log("AJAC Error")
-    success: (data, textStatus, jqCHR) ->
-   	console.log("Dynamic resident select OK!")
 
   $("#fullCalendar").fullCalendar {
   	events: 'appointments.json'
