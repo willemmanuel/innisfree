@@ -4,14 +4,14 @@
   <%= link_to "CSV", appointments_path(format: "csv") %>
 </p>
 <%= render 'filter' %>
+<h4><%= link_to 'New Appointment', new_appointment_path %></h4>
 <div class="row">
   <div id="upcoming">
   <%= render 'upcoming' %>
   </div>
-<div id="textDiv" class = "col-md-8"> </div>
-<div id="fullCalendar" class="col-md-8">
+<div id="textDiv" class = "col-md-8 col-md-pull-4"> </div>
+<div id="fullCalendar" class="col-md-8 col-md-pull-4">
 </div>
 </div>
 
-<h4><%= link_to 'New Appointment', new_appointment_path %></h4>
 <hr>
