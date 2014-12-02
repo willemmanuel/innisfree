@@ -8,6 +8,7 @@
       <th>Volunteer </th>
       <th>Date </th>
       <th>Time </th>
+      <th>Type </th>
       <th>Notes </th>
       <th></th>
     </tr>
@@ -26,8 +27,12 @@
 
         <td><%= appointment.date.to_formatted_s(:long_ordinal) %></td>
         <td><%= appointment.time.in_time_zone('EST').strftime("%I:%M %p") %></td>
+        <td><%= appointment.for %></td>
         <td><%= appointment.notes %></td>
-        <td><%= link_to 'X', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Edit', edit_appointment_path(appointment)  %>
+          <%= link_to 'Delete', appointment, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
