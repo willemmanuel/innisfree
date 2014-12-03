@@ -48,6 +48,21 @@ $(document).on 'ready page:load', ->
       house_id: $('.house_select option:selected').val()
     }
 
-  $("#fullCalendar").fullCalendar {
-  	events: 'appointments.json'
-  }
+  $('#fullCalendar').fullCalendar({
+    events: 'appointments.json',
+    eventClick: (calEvent, jsEvent, view) ->
+        console.log(calEvent)
+        console.log(jsEvent)
+        $.ajax 'appointments/appointments_for_day',
+          type: 'GET', 
+          data: {
+            date: calEvent.start.toJSON()
+          }
+          success: (data, textStatus, jqCHR) ->
+            $("#modalBody").html(data); 
+
+        $('#modalTitle').html('Appointments on ' + calEvent.start.toDateString());
+        $('#modalBody').html(calEvent.description);
+        $('#eventUrl').attr('href',calEvent.url);
+        $('#fullCalModal').modal();
+});

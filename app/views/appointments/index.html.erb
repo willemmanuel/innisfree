@@ -6,12 +6,30 @@
 <%= render 'filter' %>
 <h4><%= link_to 'New Appointment', new_appointment_path %></h4>
 <div class="row">
+  <div class="col-md-4 col-md-push-8">
+  <h2>Upcoming</h2>
   <div id="upcoming">
   <%= render 'upcoming' %>
   </div>
+</div>
 <div id="textDiv" class = "col-md-8 col-md-pull-4"> </div>
 <div id="fullCalendar" class="col-md-8 col-md-pull-4">
 </div>
+</div>
+  
+<div id="fullCalModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                <h4 id="modalTitle" class="modal-title"></h4>
+            </div>
+            <div id="modalBody" class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <hr>

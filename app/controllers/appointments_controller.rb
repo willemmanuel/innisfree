@@ -46,6 +46,24 @@ class AppointmentsController < ApplicationController
     else
       @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
     end
+    @paginate = true
+    render "appointments/_upcoming", :layout => false
+  end
+
+  def appointments_for_day
+    if params.has_key?(:date)
+      session[:date] = params[:date]
+    end
+    if params.has_key?(:res_id)
+      session[:res_id] = params[:res_id]
+    end
+    if params.has_key?(:house_id)
+      session[:house_id] = params[:house_id]
+    end
+    if session.has_key?(:date) and session[:date] != ''
+      @upcoming_appointments = Appointment.where('date = ?', Time.parse(session[:date]).to_date)
+    end
+    @paginate = false
     render "appointments/_upcoming", :layout => false
   end
 
@@ -58,8 +76,8 @@ class AppointmentsController < ApplicationController
       @residents = Resident.all
     end
     respond_to do |format|
-   	format.html
-	format.js
+     	format.html
+      format.js
     end
   end
   
@@ -133,6 +151,6 @@ class AppointmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
-      params.require(:appointment).permit(:resident_id, :doctor_id, :user_id, :date, :time, :for, :notes, :res_id, :house_id)
+      params.require(:appointment).permit(:resident_id, :doctor_id, :user_id, :date, :time, :for, :notes, :res_id, :house_id, :date)
     end
 end
