@@ -6,6 +6,7 @@ class ResidentsController < ApplicationController
   # GET /residents/1
   # GET /residents/1.json
   def show
+    @upcoming_appointments = Appointment.where('resident_id = ?', @resident.id)
   end
 
   # GET /residents/new
@@ -21,7 +22,6 @@ class ResidentsController < ApplicationController
   # POST /residents.json
   def create
     @resident = Resident.new(resident_params)
-
     respond_to do |format|
       if @resident.save
         format.html { redirect_to @resident, notice: 'Resident was successfully created.' }

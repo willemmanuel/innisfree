@@ -28,8 +28,7 @@
         <td><%= appointment.for %></td>
         <td><%= appointment.notes %></td>
         <td>
-          <%= link_to 'Edit', edit_appointment_path(appointment)  %>
-          <%= link_to 'Delete', appointment, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Details', appointment  %>
         </td>
       </tr>
     <% end %>
