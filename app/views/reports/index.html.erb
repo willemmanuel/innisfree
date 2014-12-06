@@ -2,10 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>jQuery UI Datepicker - Default functionality</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
 </head>
 
 <body>
@@ -28,15 +24,13 @@
 </p>
 <button type="button">Generate Report</button>
 </body>
- <script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-  });
-  </script>
-
-  <script>
-  $(function() {
-    $( "#datepicker2" ).datepicker();
-  });
-  </script>
 </html>
+
+<script type="text/javascript">
+jQuery(function($){
+	$(document).ready(function() {
+	$( "#datepicker" ).datepicker();
+	$( "#datepicker2" ).datepicker();
+	});
+});
+</script>
