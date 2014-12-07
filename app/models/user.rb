@@ -36,15 +36,11 @@ class User < ActiveRecord::Base
   attr_accessor :current_password
 
   def active_for_authentication? 
-    super && self.approved
+    super
   end 
 
   def inactive_message 
-    if !self.approved 
-      :not_approved 
-    else 
-      super # Use whatever other message 
-    end 
+    super # Use whatever other message 
   end
   
 end

@@ -5,7 +5,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Approved?</th>
-      <th>Admin?</th>
+      <th>Staff?</th>
       <th>House</th>
       <th></th>
     </tr>
@@ -15,12 +15,6 @@
       <tr>
         <td><%= link_to user.name, user %></td>
         <td><%= mail_to user.email %></td>
-
-        <% if user.approved %>
-        	<td><%= link_to "Y", approve_user_path(user), method: :put, class: "btn btn-success", style: "width: 40px;" %></td>
-        <% else %>
-			<td><%= link_to "N", approve_user_path(user), method: :put, class: "btn btn-warning", style: "width: 40px;" %></td>
-        <% end %> 
 
         <% if user.admin %>
         	<td><%= link_to "Y", admin_user_path(user), method: :put, class: "btn btn-success", style: "width: 40px;" %></td>
