@@ -2,16 +2,16 @@
 #
 # Table name: appointments
 #
-#  id           :integer          not null, primary key
-#  resident_id  :integer
-#  doctor_id :integer
-#  user_id      :integer
-#  date         :date
-#  time         :time
-#  for          :string(255)
-#  notes        :text
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id          :integer          not null, primary key
+#  resident_id :integer
+#  doctor_id   :integer
+#  user_id     :integer
+#  date        :date
+#  time        :time
+#  for         :string(255)
+#  notes       :text
+#  created_at  :datetime
+#  updated_at  :datetime
 #
 
 class Appointment < ActiveRecord::Base

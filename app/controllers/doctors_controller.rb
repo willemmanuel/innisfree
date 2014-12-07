@@ -73,6 +73,6 @@ class DoctorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def doctor_params
-      params.require(:doctor).permit(:name, :address, :phone)
+      params.require(:doctor).permit(:name, :address, :phone, :doctor_type)
     end
 end

@@ -4,7 +4,14 @@
   <strong>Name:</strong>
   <%= @doctor.name %>
 </p>
-
+<p>
+  <strong>Type:</strong>
+  <%= @doctor.doctor_type %>
+</p>
+<p>
+  <strong>Phone:</strong>
+  <%= @doctor.phone %>
+</p>
 <p>
   <strong>Address:</strong>
   <%= link_to @doctor.address, map_link(@doctor.address) %>

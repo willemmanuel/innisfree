@@ -2,12 +2,13 @@
 #
 # Table name: doctors
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  address    :string(255)
-#  phone      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  address     :string(255)
+#  phone       :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  doctor_type :string(255)
 #
 
 include ActionView::Helpers::NumberHelper

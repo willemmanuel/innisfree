@@ -7,6 +7,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Type</th>
       <th>Address</th>
       <th>Phone</th>
       <th colspan="3"></th>
@@ -17,6 +18,7 @@
     <% @doctors.each do |doctor| %>
       <tr>
         <td><%= doctor.name %></td>
+        <td><%= doctor.doctor_type %></td>
         <td><%= link_to doctor.address, map_link(doctor.address) %></td>
         <td><%= doctor.phone %></td>
         <td><%= link_to 'Show', doctor %></td>
