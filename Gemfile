@@ -32,6 +32,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # bootstrap!
 gem 'bootstrap-sass'
 
+# for chosen-js
+gem 'chosen-rails'
+
 gem 'devise'
 
 gem 'fullcalendar-rails'

@@ -14,17 +14,17 @@
   <div class="field">
     <%= f.label :resident_id %><br>
     <% residents = Resident.all.map { |r| [r.name, r.id] } %>
-    <%= f.select(:resident_id, residents) %>
+    <%= f.select(:resident_id, residents, { }, { :class => 'chosen-select' }) %>
   </div>
   <div class="field">
     <%= f.label :doctor_id %><br>
     <% doctors = Doctor.all.map { |p| [p.name, p.id] } %>
-    <%= f.select(:doctor_id, doctors) %>
+    <%= f.select(:doctor_id, doctors, { }, { :class => 'chosen-select' }) %>
   </div>
   <div class="field">
     <%= f.label :user_id %><br>
     <% users = User.all.map { |v| [v.name, v.id] } %>
-    <%= f.select(:user_id, users) %>
+    <%= f.select(:user_id, users, { include_blank: true }, { :class => 'chosen-select' }) %>
   </div>
   <div class="field">
     <%= f.label :date %><br>
