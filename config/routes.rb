@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'settings/create_user' => 'settings#create_user', as: :create_user
   get 'appointments/upcoming' => 'appointments#upcoming'
   get 'appointments/appointments_for_day' => 'appointments#appointments_for_day'
+  get 'emailtest' => 'notification_mailer#test_email', as: :test_email
 
   devise_for :users, controllers: { registrations: "users/registrations" }
   resources :appointments do
