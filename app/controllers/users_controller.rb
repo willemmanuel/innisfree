@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	before_action :set_user, only: [:show, :edit, :update, :destroy]
+	before_action :set_user, only: [:show, :edit, :update, :destroy, :test_email]
 
   # GET /houses
   # GET /houses.json
@@ -8,11 +8,15 @@ class UsersController < ApplicationController
     @user = current_user.id
     @users = User.all
     respond_to do |format|
-      format.html
+      format.html 
       format.csv { render text: @users.to_csv }
     end
   end
 
+  def test_email
+    NotificationMailer.test_email(@user).deliver
+    redirect_to :root, notice: "Email sent"
+  end
 
 	def show
     @houses = House.all
