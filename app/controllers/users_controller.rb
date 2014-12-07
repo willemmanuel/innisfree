@@ -13,11 +13,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def test_email
-    NotificationMailer.test_email(@user).deliver
-    redirect_to :root, notice: "Email sent"
-  end
-
 	def show
     @houses = House.all
   end

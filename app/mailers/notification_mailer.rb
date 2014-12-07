@@ -1,8 +1,10 @@
 class NotificationMailer < ActionMailer::Base
   default from: "noreply@pegasus.cs.virginia.edu"
 
-  def test_email(user)
-    mail(to: user.email, subject: 'Test Email From Pegasus')
+  def appointment_digest(user)
+  	@user = user
+  	@appointments = Appointment.where('date = ?', Date.today)
+    mail(to: user.email, subject: 'Today\'s Innisfree Appointments')
   end
 
 end

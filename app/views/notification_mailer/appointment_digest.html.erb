@@ -1,0 +1,38 @@
+<h2>Today's Coworker Appointments</h2>
+<h4>Hello <%= @user.name %>, there are <%= @appointments.count %> appointments today. </h4><br>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Coworker </th>
+      <th>Doctor </th>
+      <th>Volunteer </th>
+      <th>Date </th>
+      <th>Time </th>
+      <th>Type </th>
+      <th>Notes </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @appointments.order([:date, :time]).each do |appointment| %>
+      <tr>
+        <td><%= link_to appointment.resident.name, appointment.resident %></td>
+        <td><%= link_to appointment.doctor.name, appointment.doctor %>   
+          <small><%= link_to '(map)', map_link(appointment.doctor.address) %></small></td>
+        <% if appointment.user.nil? %>
+          <td>No volunteer assigned</td>
+        <% else %>
+          <td><%= link_to appointment.user.name, appointment.user %></td>
+        <% end %>
+
+        <td><%= appointment.date.to_formatted_s(:long_ordinal) %></td>
+        <td><%= appointment.time.strftime("%I:%M %p") %></td>
+        <td><%= appointment.for %></td>
+        <td><%= appointment.notes %></td>
+        <td>
+          <%= link_to 'Details', appointment  %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

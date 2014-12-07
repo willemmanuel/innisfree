@@ -1,7 +1,7 @@
 scheduler = Rufus::Scheduler.start_new
 
-scheduler.every("1m") do
+# Send the digest every day at noon
+scheduler.cron("0 6 * * *") do
    u = User.where(email: "wre9fz@virginia.edu").first
-   NotificationMailer.test_email(u).deliver
-   puts "-=-=-= sent email -=-=-=-"
-end	
+   NotificationMailer.appointment_digest(u).deliver
+end
