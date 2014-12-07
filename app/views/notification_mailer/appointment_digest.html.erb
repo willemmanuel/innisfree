@@ -1,6 +1,7 @@
 <h2>Today's Coworker Appointments</h2>
 <h4>Hello <%= @user.name %>, there are <%= @appointments.count %> appointments today. </h4><br>
-<table class="table table-striped table-hover">
+<% if @appointments.count > 0 %>
+<table>
   <thead>
     <tr>
       <th>Coworker </th>
@@ -36,3 +37,4 @@
     <% end %>
   </tbody>
 </table>
+<% end %>

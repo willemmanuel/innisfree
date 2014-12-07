@@ -7,4 +7,8 @@ class NotificationMailer < ActionMailer::Base
     mail(to: user.email, subject: 'Today\'s Innisfree Appointments')
   end
 
+  def appointment_reminder(appointment)
+  	@appointment = appointment
+  	mail(to: @appointment.user.email, subject: 'Upcoming appointment today')
+  end
 end
