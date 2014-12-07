@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @upcoming_appointments.each do |appointment| %>
+    <% @upcoming_appointments.order([:date, :time]).each do |appointment| %>
       <tr>
         <td><%= link_to appointment.resident.name, appointment.resident %></td>
         <td><%= link_to appointment.doctor.name, appointment.doctor %>   
@@ -24,7 +24,7 @@
         <% end %>
 
         <td><%= appointment.date.to_formatted_s(:long_ordinal) %></td>
-        <td><%= appointment.time.in_time_zone('EST').strftime("%I:%M %p") %></td>
+        <td><%= appointment.time.strftime("%I:%M %p") %></td>
         <td><%= appointment.for %></td>
         <td><%= appointment.notes %></td>
         <td>
