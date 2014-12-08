@@ -42,5 +42,14 @@ class User < ActiveRecord::Base
   def inactive_message 
     super # Use whatever other message 
   end
-  
+
+  def name
+    name = read_attribute(:name)
+    if name.nil? or name.length == 0 
+      return read_attribute(:email)
+    else
+      return read_attribute(:name)
+    end
+  end
+   
 end

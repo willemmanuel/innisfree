@@ -4,6 +4,7 @@ class UsersControllerTest < ActionController::TestCase
   setup do
     @user_attr = FactoryGirl.attributes_for(:user)
     @user = User.create!(@user_attr)
+    @no_name_user = FactoryGirl.create(:user, name: "", email:"example@example.com")
   end
 
   test "create user" do
@@ -33,4 +34,7 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
 
+  test "user with no name" do
+    assert(@no_name_user.name == "example@example.com")  
+  end
 end
