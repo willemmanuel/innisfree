@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
- get "/innisfree/" => redirect("/appointments")
+ #get "/innisfree/" => redirect("/appointments")
 
   resources :cars
   put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
