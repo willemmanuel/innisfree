@@ -10,6 +10,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html 
       format.csv { render text: @users.to_csv }
+      format.pdf do
+        pdf = ReportPdf.new(@users)
+        send_data pdf.render, filename: 'Report-'+ Time.now.strftime("%d/%m/%Y") +'.pdf', type: 'application/pdf'
+      end
     end
   end
 

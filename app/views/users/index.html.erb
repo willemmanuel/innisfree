@@ -43,3 +43,7 @@
 <% if current_user.admin %>
     <%= link_to 'New User', new_user_path %>
 <% end %>
+
+<br>
+<br>
+<%= link_to "Generate PDF", users_path(@page, :format => "pdf") %>

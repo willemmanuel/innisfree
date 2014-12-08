@@ -58,3 +58,9 @@ gem 'factory_girl_rails'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# For testing PDF generation
+
+gem 'prawn'
+gem 'prawnto'
+gem 'prawn-table'
+
