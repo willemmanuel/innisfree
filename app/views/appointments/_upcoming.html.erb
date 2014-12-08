@@ -24,7 +24,7 @@
         <% end %>
 
         <td><%= appointment.date.to_formatted_s(:long_ordinal) %></td>
-        <td><%= appointment.time.strftime("%I:%M %p") %></td>
+        <td><%= appointment.time.strftime("%l:%M %p") %></td>
         <td><%= appointment.for %></td>
         <td><%= appointment.notes %></td>
         <td>

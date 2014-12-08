@@ -21,12 +21,14 @@
 
 <p>
   <strong>Date:</strong>
+
   <%= @appointment.date.to_formatted_s(:long_ordinal) %>
 </p>
 
 <p>
   <strong>Time:</strong>
-  <%= @appointment.time.to_formatted_s(:time) %>
+  <%= @appointment.time.strftime("%l:%M %p") %>
+
 </p>
 
 <p>

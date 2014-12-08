@@ -1,5 +1,8 @@
-Rails.application.routes.draw do 
-  
+Rails.application.routes.draw do
+
+
+ get "/innisfree/" => redirect("/appointments")
+
   resources :cars
   put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user
@@ -8,13 +11,16 @@ Rails.application.routes.draw do
   get 'appointments/upcoming' => 'appointments#upcoming'
   get 'appointments/appointments_for_day' => 'appointments#appointments_for_day'
 
+
   devise_for :users, controllers: { registrations: "users/registrations" }
   resources :appointments do
     collection do
       get 'update_residents', to: 'appointments#update_residents'
     end
   end
-  
+
+
+
   resources :doctors
 
   resources :residents, except: [:index]

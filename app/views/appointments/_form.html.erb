@@ -32,7 +32,7 @@
   </div>
   <div class="field">
     <%= f.label :time %><br>
-    <%= f.time_select :time %>
+    <%= f.time_select :time, {:ampm => true, :minute_step=>5}%>
   </div>
   <div class="field">
     <%= f.label :for %><br>
