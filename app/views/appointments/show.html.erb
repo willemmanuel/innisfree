@@ -47,11 +47,17 @@
 <h3>Revisions to this Appointment</h3>
 <% @appointment.versions.reverse.each do |v| %>
 
-  <% if User.where(id: v.whodunnit.to_i).first.name != "" %>
-    <li><%= User.where(id: v.whodunnit.to_i).first.name %> <%= v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
-  <% else %>
-    <li><%= User.where(id: v.whodunnit.to_i).first.email %> <%= v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
-  <% end %>
+   <% if User.where(id: v.whodunnit.to_i).first != nil %>
+
+      <% if User.where(id: v.whodunnit.to_i).first.name != "" %>
+        <li><%= User.where(id: v.whodunnit.to_i).first.name %> <%= v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
+      <% else %>
+        <li><%= User.where(id: v.whodunnit.to_i).first.email %> <%= v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
+      <% end %>
+
+   <% else %>
+      <li><%= "A deleted user " + v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
+   <% end %>
 
 <% end %>
 </div>
