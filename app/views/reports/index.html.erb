@@ -4,27 +4,19 @@
   <meta charset="utf-8">
 </head>
 
+    <div class="container">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+
 <body>
  <h1>Reports Generation</h1>
- <p> Houses: </p>
- <div class = "field">
- <%= collection_select nil, :house_id,  @houses, :id, :name, {:prompt => 'All' }, {:class => 'house_select'}%></div>
- <BR>
- <p> Coworkers: </p>
- <div class = 'field'>
- <%= collection_select nil, :resident_id, @residents, :id, :name, {:prompt => "All"}, {:class => 'residents_select'}%></div>
- <BR>
- <p> Doctors: </p>
- <div class = "field">
- <%= collection_select nil, :doctor_id, @doctors, :id, :name, {:prompt => "All"}, {:class => 'doctors_select'}%></div>
- <BR>
- <p>From: &nbsp;<input type="text" id="datepicker"> &nbsp;&nbsp;&nbsp; To: &nbsp; <input type="text" id="datepicker2"></p>
-<p>  Format: &nbsp; <input type="radio" name="format" value="CSV" checked>CSV &nbsp;&nbsp;
-<input type="radio" name="format" value="PDF">PDF
-</p>
-<button type="button">Generate Report</button>
 </body>
 </html>
+
+<%= render 'form' %>
 
 <script type="text/javascript">
 jQuery(function($){

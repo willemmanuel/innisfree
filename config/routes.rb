@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'settings/create_user' => 'settings#create_user', as: :create_user
   get 'appointments/upcoming' => 'appointments#upcoming'
   get 'appointments/appointments_for_day' => 'appointments#appointments_for_day'
+  get 'reports/generate' => 'reports#generate'
 
 
   devise_for :users, controllers: { registrations: "users/registrations" }

@@ -1,44 +1,43 @@
 class ReportsController < ApplicationController
     # GET /appointments
     # GET /appointments.json
+ 
     def index
       @residents = Resident.all
       @houses = House.all
       @doctors = Doctor.all
-      if params.has_key?(:res_id)
-        session[:res_id] = params[:res_id]
-      end
-      if params.has_key?(:house_id)
-        session[:house_id] = params[:house_id]
-      end
-      if params.has_key?(:doctor_id)
-        session[:doctor_id] = params[:doctor_id]
-      end
-      if session.has_key?(:res_id) and session[:res_id] != ''
-        @appointments = Appointment.joins('LEFT OUTER JOIN doctors ON doctor_id = doctors.id').where('resident_id = ?', session[:res_id])
-        respond_to do |format|
-          format.html
-          format.json
-          format.js
-          format.csv { render text:@appointments.to_csv }
-        end
-      elsif session.has_key?(:house_id) and session[:house_id] != ''
-        @appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id])
-        respond_to do |format|
-          format.html
-          format.json
-          format.js
-          format.csv { render text:@appointments.to_csv }
-        end
-      else
-        @appointments = Appointment.all
-        logger.debug "no params"
-        respond_to do |format|
-          format.html
-          format.json
-          format.js
-          format.csv { render text:@appointments.to_csv }
-        end
-      end
     end
+    
+    def generate
+      @appointments = Appointment.all
+      if params[:doctor_id] != ''
+        @appointments = @appointments.where('doctor_id = ?', params[:doctor_id])
+      end
+
+      if params[:resident_id] != ''
+        @appointments = @appointments.where('resident_id = ?', params[:resident_id])
+      elsif params[:house_id] != ''
+        @appointments = @appointments.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', params[:house_id])
+      end
+
+      if params[:date] != ''
+        @appointments = @appointments.where('date >= ?', Date.strptime(params[:date], "%m/%d/%Y"))
+      end
+      if params[:date2] != ''
+        @appointments = @appointments.where('date <= ?', Date.strptime(params[:date2], "%m/%d/%Y"))
+      end
+      flash[:success] = "Report generated successfully"
+      redirect_to Report#index
+    end
+
+   def create
+   end
+
+
+  private
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def report_params
+      params.require(:report).permit(:resident_id, :doctor_id, :date,:house_id, :date2)
+    end
+
 end
