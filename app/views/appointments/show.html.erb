@@ -1,94 +1,95 @@
 <p id="notice"><%= notice %></p>
 <div class="col-md-6">
-<p>
-  <strong>Resident:</strong>
-  <%= @appointment.resident.name %>
-</p>
+  <p>
+    <strong>Resident:</strong>
+    <%= @appointment.resident.name %>
+  </p>
 
-<p>
-  <strong>Doctor:</strong>
-  <%= @appointment.doctor.name %>
-</p>
+  <p>
+    <strong>Doctor:</strong>
+    <%= @appointment.doctor.name %>
+  </p>
 
-<p>
-  <strong>Volunteer:</strong>
-  <% if @appointment.user.nil? %>
-    No volunteer assigned
-  <% else %>
-    <%= @appointment.user.name %>
-  <% end %>
-</p>
+  <p>
+    <strong>Volunteer:</strong>
+    <% if @appointment.user.nil? %>
+        No volunteer assigned
+    <% else %>
+        <%= @appointment.user.name %>
+    <% end %>
+  </p>
 
-<p>
-  <strong>Date:</strong>
+  <p>
+    <strong>Date:</strong>
 
-  <%= @appointment.date.to_formatted_s(:long_ordinal) %>
-</p>
+    <%= @appointment.date.to_formatted_s(:long_ordinal) %>
+  </p>
 
-<p>
-  <strong>Time:</strong>
-  <%= @appointment.time.strftime("%l:%M %p") %>
+  <p>
+    <strong>Time:</strong>
+    <%= @appointment.time.strftime("%l:%M %p") %>
 
-</p>
+  </p>
 
-<p>
-  <strong>For:</strong>
-  <%= @appointment.for %>
-</p>
+  <p>
+    <strong>For:</strong>
+    <%= @appointment.for %>
+  </p>
 
-<p>
-  <strong>Notes:</strong>
-  <%= @appointment.notes %>
-</p>
+  <p>
+    <strong>Notes:</strong>
+    <%= @appointment.notes %>
+  </p>
 
-<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
-<%= link_to 'Back', appointments_path %>
+  <%= link_to 'Delete', @appointment, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Edit', edit_appointment_path(@appointment) %> |
+  <%= link_to 'Back', appointments_path %>
 
-<h3>Revisions to this Appointment</h3>
-<% @appointment.versions.reverse.each do |v| %>
+  <h3>Revisions to this Appointment</h3>
+  <% @appointment.versions.reverse.each do |v| %>
 
-   <% if User.where(id: v.whodunnit.to_i).first != nil %>
+      <% if User.where(id: v.whodunnit.to_i).first != nil %>
 
-      <% if User.where(id: v.whodunnit.to_i).first.name != "" %>
-        <li><%= User.where(id: v.whodunnit.to_i).first.name %> <%= v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
+          <% if User.where(id: v.whodunnit.to_i).first.name != "" %>
+              <li><%= User.where(id: v.whodunnit.to_i).first.name %> <%= v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
+          <% else %>
+              <li><%= User.where(id: v.whodunnit.to_i).first.email %> <%= v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
+          <% end %>
+
       <% else %>
-        <li><%= User.where(id: v.whodunnit.to_i).first.email %> <%= v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
+          <li><%= "A deleted user " + v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
       <% end %>
 
-   <% else %>
-      <li><%= "A deleted user " + v.event %>d the appointment <%= time_ago_in_words(v.created_at) %> ago.</li>
-   <% end %>
-
-<% end %>
+  <% end %>
 </div>
 <div class="col-md-6">
-    <div id="map-canvas"></div>
-    <style>
+  <div id="map-canvas"></div>
+  <style>
       #map-canvas {
-        width: 500px;
-        height: 500px;
+          width: 500px;
+          height: 500px;
       }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script>
-        geocoder = new google.maps.Geocoder();
-        geocoder.geocode({
-        'address': "<%=@appointment.doctor.address%>"
-        }, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          var mapCanvas = document.getElementById('map-canvas');
-          var mapOptions = {
-            center: results[0].geometry.location,
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          var map = new google.maps.Map(mapCanvas, mapOptions);
-          var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location,
-            title: "Test"
-          });
-          google.maps.event.addDomListener(window, 'load', initialize);
-        }});
-    </script>
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script>
+      geocoder = new google.maps.Geocoder();
+      geocoder.geocode({
+          'address': "<%=@appointment.doctor.address%>"
+      }, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+              var mapCanvas = document.getElementById('map-canvas');
+              var mapOptions = {
+                  center: results[0].geometry.location,
+                  zoom: 16,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+              var map = new google.maps.Map(mapCanvas, mapOptions);
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location,
+                  title: "Test"
+              });
+              google.maps.event.addDomListener(window, 'load', initialize);
+          }});
+  </script>
 </div>
