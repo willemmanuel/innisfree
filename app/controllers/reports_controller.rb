@@ -1,13 +1,14 @@
+
 class ReportsController < ApplicationController
     # GET /appointments
     # GET /appointments.json
- 
+
     def index
       @residents = Resident.all
       @houses = House.all
       @doctors = Doctor.all
     end
-    
+
     def generate
       @appointments = Appointment.all
       if params[:doctor_id] != ''
@@ -33,8 +34,7 @@ class ReportsController < ApplicationController
         printTable(pdf, @appointments)
         send_data pdf.render, filename: 'Report-'+ Time.now.strftime("%m/%d/%Y") +'.pdf', type: 'application/pdf'
       else
-        flash[:success] = "Report generated successfully"
-        redirect_to Report#index
+        Gen_CSV(@appointments)
       end
     end
 
@@ -82,4 +82,24 @@ class ReportsController < ApplicationController
                 :position => :center, :row_colors => ['DDDDDD', 'FFFFFF'])
     end
 
+    def Gen_CSV(appointments)
+      csv_string = CSV.generate do |csv|
+        cols = ["Date", "Time", "Co-worker", "Doctor"]
+        csv << cols
+        app = appointments.map
+        app = app.sort_by {|u| [u.date, u.time]}
+        app.each do |appointment|
+          csv << [appointment.date.to_formatted_s(:long_ordinal),
+            appointment.time.strftime("%l:%M %p"),
+            if not Resident.where('id = ?', appointment.resident_id).blank?
+              Resident.where('id = ?', appointment.resident_id).first.name
+            end,
+            if not Doctor.where('id = ?', appointment.doctor_id).blank?
+              Doctor.where('id = ?', appointment.doctor_id).first.name
+            end]
+        end
+      end
+      filename = "Report-#{Time.now.to_date.to_s}.csv"
+      send_data(csv_string, :type => 'text/csv; charset=utf-8; header=present', :filename => filename)
+    end
 end
