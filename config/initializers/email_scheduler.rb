@@ -1,6 +1,6 @@
 scheduler = Rufus::Scheduler.start_new
 
-scheduler.cron("0 6 * * *") do
+scheduler.cron("00 06 * * *") do
    # email all the admins a full schedule for the day
    admins = User.where(admin: true)
    admins.each do |admin|
