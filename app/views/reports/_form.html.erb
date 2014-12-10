@@ -1,15 +1,15 @@
 <%= form_tag("reports/generate", method: "get")  %>
  <p> Houses: </p>
  <div class = "field">
- <%= collection_select nil, :house_id,  @houses, :id, :name, {:prompt => 'All' }, {:class => 'house_select'}%></div>
+ <%= collection_select nil, :house_id,  @houses, :id, :name, {:prompt => 'All' }, {:class => 'chosen-select'}%></div>
  <BR>
  <p> Coworkers: </p>
  <div class = 'field'>
- <%= collection_select nil, :resident_id, @residents, :id, :name, {:prompt => "All"}, {:class => 'residents_select'}%></div>
+ <%= collection_select nil, :resident_id, @residents, :id, :name, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
  <BR>
  <p> Doctors: </p>
  <div class = "field">
- <%= collection_select nil, :doctor_id, @doctors, :id, :name, {:prompt => "All"}, {:class => 'doctors_select'}%></div>
+ <%= collection_select nil, :doctor_id, @doctors, :id, :name, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
  <BR>
  <p>From: &nbsp;<input type="text" id="datepicker" name='date'> &nbsp;&nbsp;&nbsp; To: &nbsp; <input type="text" id="datepicker2" name='date2'></p>
 <p>  Format: &nbsp; <input type="radio" name="format" value="CSV" checked>CSV &nbsp;&nbsp;
