@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   get 'reports/generate' => 'reports#generate'
   get 'users/send_reminders' => 'users#send_reminders', as: :send_reminders
 
-
   devise_for :users, controllers: { registrations: "users/registrations" }
   resources :appointments do
     collection do

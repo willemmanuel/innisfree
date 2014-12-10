@@ -19,6 +19,11 @@
     <li><b>Last Sign-In: </b><%= "Never" %>
 <% end %>
 <li><b>User Created: </b><%= @user.created_at.strftime("%x") + " at " +  @user.created_at.strftime("%r")%></li>
+<% if @user.email_pref %>
+    <li><b>Email preference: </b>Receiving email reminders / digests</li>
+<% else %>
+    <li><b>Email preference: </b>Not receiving Innisfree emails</li>
+<% end %>
 <br>
 <% if current_user.id == @user.id || current_user.admin%>
 

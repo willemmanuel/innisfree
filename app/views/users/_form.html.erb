@@ -47,6 +47,10 @@
       <%= f.select :house_id, options_for_select(@houses.map{ |h| [h.name, h.id]}, :selected=>@user.house_id ) %>
     </div>
 
+    <div>
+      <%= f.label :email_pref, "Check to receive email reminders and digests" %> <br>
+      <%= f.check_box :email_pref %>
+    </div>
     <br>
 
     <div class="actions">
