@@ -17,6 +17,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def send_reminders
+   # email all the admins a full schedule for the day
+   admins = User.where(admin: true)
+   admins.each do |admin|
+      NotificationMailer.appointment_digest(admin).deliver
+   end
+   # email all volunteers a reminder
+   todays_appointments = Appointment.where('date = ?', Date.today)
+   todays_appointments.each do |appointment|
+      if !appointment.user.nil?
+         NotificationMailer.appointment_reminder(appointment).deliver
+      end
+   end
+   redirect_to :root, notice: "Emails sent"
+  end
+
 	def show
     @houses = House.all
   end
