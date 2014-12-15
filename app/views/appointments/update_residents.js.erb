@@ -1,5 +1,5 @@
 $('.residents_select').empty();
-$('.residents_select').append ( $('<option value = "">Select a Coworker</option>') );
+$('.residents_select').append ( $('<option value = "">All Residents</option>') );
 <% @residents.each do |res| %>
   $('.residents_select').append($('<option value="<%= res.id %>"><%= res.name %></option>'));
 <% end %>

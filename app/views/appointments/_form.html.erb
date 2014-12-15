@@ -1,48 +1,56 @@
 <%= form_for(@appointment) do |f| %>
-  <% if @appointment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+    <% if @appointment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
 
-      <ul>
-      <% @appointment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+            <% @appointment.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :resident_id %><br>
+      <% if current_user.admin %>
+          <% residents = Resident.all.map { |r| [r.name, r.id] } %>
+      <% else %>
+          <% residents = Resident.all.select{ |r| r.house_id == current_user.house_id }.map { |r| [r.name, r.id] } %>
       <% end %>
-      </ul>
+      <%= f.select(:resident_id, residents, { }, { :class => 'chosen-select' }) %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :resident_id %><br>
-    <% residents = Resident.all.map { |r| [r.name, r.id] } %>
-    <%= f.select(:resident_id, residents, { }, { :class => 'chosen-select' }) %>
-  </div>
-  <div class="field">
-    <%= f.label :doctor_id %><br>
-    <% doctors = Doctor.all.map { |p| [p.name, p.id] } %>
-    <%= f.select(:doctor_id, doctors, { }, { :class => 'chosen-select' }) %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <% users = User.all.map { |v| [v.name, v.id] } %>
-    <%= f.select(:user_id, users, { include_blank: true }, { :class => 'chosen-select' }) %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.date_select :date %>
-  </div>
-  <div class="field">
-    <%= f.label :time %><br>
-    <%= f.time_select :time, {:ampm => true, :minute_step=>5}%>
-  </div>
-  <div class="field">
-    <%= f.label :for %><br>
-    <%= f.text_field :for %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :doctor_id %><br>
+      <% doctors = Doctor.all.map { |p| [p.name, p.id] } %>
+      <%= f.select(:doctor_id, doctors, { }, { :class => 'chosen-select' }) %>
+    </div>
+    <div class="field">
+      <%= f.label :user_id %><br>
+      <% if current_user.admin %>
+          <% users = User.all.map { |v| [v.name, v.id] } %>
+      <% else %>
+          <% users = User.all.select{ |u| u.house_id == current_user.house_id }.map { |v| [v.name, v.id] } %>
+      <% end %>
+      <%= f.select(:user_id, users, { include_blank: true }, { :class => 'chosen-select' }) %>
+    </div>
+    <div class="field">
+      <%= f.label :date %><br>
+      <%= f.date_select :date %>
+    </div>
+    <div class="field">
+      <%= f.label :time %><br>
+      <%= f.time_select :time, {:ampm => true, :minute_step=>5}%>
+    </div>
+    <div class="field">
+      <%= f.label :for %><br>
+      <%= f.text_field :for %>
+    </div>
+    <div class="field">
+      <%= f.label :notes %><br>
+      <%= f.text_area :notes %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>
