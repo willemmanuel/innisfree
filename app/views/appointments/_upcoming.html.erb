@@ -35,5 +35,7 @@
   </tbody>
 </table>
 <center>
-  <%= will_paginate @upcoming_appointments, renderer: BootstrapPagination::Rails %>
+  <% if @paginate %>
+    <%= will_paginate @upcoming_appointments, renderer: BootstrapPagination::Rails %>
+  <% end %>
 </center>

@@ -1,6 +1,8 @@
-FactoryGirl.define do  factory :recurring_reminder do
+FactoryGirl.define do  
+
+  factory :recurring_reminder do
     appointment_id ""
-notification_date "2015-02-09"
+    notification_date "2015-02-09"
   end
 
 
@@ -33,6 +35,7 @@ notification_date "2015-02-09"
   end
 
   factory :doctor do
+    id 1
     name 'Doctor #1'
     address '123 University Drive'
     phone '123456'
