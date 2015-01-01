@@ -10,7 +10,7 @@ class AppointmentsController < ApplicationController
     @residents = Resident.all
     @houses = House.all
     @past_appointments = Appointment.where('date < ?', Date.today)
-    @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate( :page => params[:page], :per_page => 10)
     if params.has_key?(:res_id)
       session[:res_id] = params[:res_id]
     end
