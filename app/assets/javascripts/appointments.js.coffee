@@ -41,10 +41,10 @@ $(document).on 'change', '.residents_select', (evt) ->
 
 $(document).on 'ready page:load', ->
   calView = 'month'
-  calView = 'listMonth' if $(window).width() < 950 #arbitrarily chosen
+  calView = 'listMonth' if $(window).innerWidth() < 981 #for iPhone
   
   console.log(calView)
-  console.log($(window).width())
+  console.log($(window).innerWidth())
   
   $.ajax 'appointments',
     type: 'GET'
@@ -84,6 +84,6 @@ $ ->
 
 $(window).resize ->
   calView = 'month'
-  calView = 'listMonth' if $(window).width() < 950
+  calView = 'listMonth' if $(window).innerWidth() < 981 #based on iPhone
   
   $('#fullCalendar').fullCalendar( 'changeView', calView);
