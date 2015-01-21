@@ -42,7 +42,10 @@ $(document).on 'change', '.residents_select', (evt) ->
 $(document).on 'ready page:load', ->
   calView = 'month'
   calView = 'listMonth' if $(window).width() < 950 #arbitrarily chosen
-    
+  
+  console.log(calView)
+  console.log($(window).width())
+  
   $.ajax 'appointments',
     type: 'GET'
     dataType: 'script'
