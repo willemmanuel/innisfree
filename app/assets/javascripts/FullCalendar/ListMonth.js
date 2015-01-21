@@ -1709,5 +1709,5 @@ ListView.duration = { months: 1 };
 
 FC.views.listMonth = {
 	type: 'list',
-	duration: { weeks: 44441 }
+	duration: { weeks: 4 }
 };
