@@ -3,7 +3,7 @@
  <div class = "field">
  <%= collection_select nil, :house_id,  @houses, :id, :name, {:prompt => 'All' }, {:class => 'chosen-select'}%></div>
  <BR>
- <p> Coworkers: </p>
+ <p> Residents: </p>
  <div class = 'field'>
  <%= collection_select nil, :resident_id, @residents, :id, :name, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
  <BR>

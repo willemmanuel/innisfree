@@ -40,6 +40,12 @@ $(document).on 'change', '.residents_select', (evt) ->
       $("#upcoming").html(data); 
 
 $(document).on 'ready page:load', ->
+  calView = 'month'
+  calView = 'listMonth' if $(window).innerWidth() < 981 #for iPhone
+  
+  console.log(calView)
+  console.log($(window).innerWidth())
+  
   $.ajax 'appointments',
     type: 'GET'
     dataType: 'script'
@@ -49,6 +55,8 @@ $(document).on 'ready page:load', ->
     }
 
   $('#fullCalendar').fullCalendar({
+    
+    defaultView: calView,
     events: 'appointments.json',
     eventClick: (calEvent, jsEvent, view) ->
         console.log(calEvent)
@@ -61,10 +69,11 @@ $(document).on 'ready page:load', ->
           success: (data, textStatus, jqCHR) ->
             $("#modalBody").html(data); 
 
-        $('#modalTitle').html('Appointments on ' + calEvent.start.toDateString());
+        $('#modalTitle').html('Appointments on ' + calEvent.start.format("ddd, MMM Do YYYY"););
         $('#modalBody').html(calEvent.description);
         $('#eventUrl').attr('href',calEvent.url);
-        $('#fullCalModal').modal();
+        $('#fullCalModal').appendTo("body").modal('show');
+        $('.modal-backdrop').css({"z-index":"0"}); # hacky, but it works for now
 });
 $ ->
   # enable chosen js
@@ -72,3 +81,9 @@ $ ->
     allow_single_deselect: true
     no_results_text: 'No results matched'
     width: '200px'
+
+$(window).resize ->
+  calView = 'month'
+  calView = 'listMonth' if $(window).innerWidth() < 981 #based on iPhone
+  
+  $('#fullCalendar').fullCalendar( 'changeView', calView);

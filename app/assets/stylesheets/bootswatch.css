@@ -3763,12 +3763,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-bottom: 21px;
   border: 1px solid transparent;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar {
     border-radius: 0;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-header {
     float: left;
   }
@@ -3784,7 +3784,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-collapse.in {
   overflow-y: auto;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-collapse {
     width: auto;
     border-top: 0;
@@ -3823,7 +3823,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-right: -15px;
   margin-left: -15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .container > .navbar-header,
   .container-fluid > .navbar-header,
   .container > .navbar-collapse,
@@ -3836,7 +3836,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   z-index: 1000;
   border-width: 0 0 1px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-static-top {
     border-radius: 0;
   }
@@ -3850,7 +3850,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-fixed-top,
   .navbar-fixed-bottom {
     border-radius: 0;
@@ -3876,7 +3876,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand:focus {
   text-decoration: none;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
     margin-left: -15px;
@@ -3906,7 +3906,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-toggle {
     display: none;
   }
@@ -3941,7 +3941,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     background-image: none;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-nav {
     float: left;
     margin: 0;
@@ -3957,7 +3957,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-right: -15px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-left {
     float: left !important;
   }
@@ -3976,7 +3976,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-top: 3px;
   margin-bottom: 3px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-form .form-group {
     display: inline-block;
     margin-bottom: 0;
