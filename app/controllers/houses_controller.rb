@@ -5,7 +5,9 @@ class HousesController < ApplicationController
   # GET /houses
   # GET /houses.json
   def index
-    @houses = House.all
+    houses = House.all.map
+    houses = houses.sort_by{|u| [u.name]}
+    @houses = houses
     respond_to do |format|
       format.html
       format.csv { render text: @houses.to_csv }
@@ -61,7 +63,7 @@ class HousesController < ApplicationController
   def destroy
     @house.destroy
     respond_to do |format|
-      format.html { redirect_to houses_url, notice: 'House was successfully destroyed.' }
+      format.html { redirect_to houses_url, notice: 'House was successfully deleted.' }
       format.json { head :no_content }
     end
   end
