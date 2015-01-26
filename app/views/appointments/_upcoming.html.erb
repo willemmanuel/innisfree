@@ -28,7 +28,7 @@
         <td><%= appointment.for %></td>
         <td><%= appointment.notes %></td>
         <td>
-          <%= link_to 'Details', appointment  %>
+          <%= link_to 'Details', appointment ,'data-no-turbolink' => true %>
         </td>
       </tr>
     <% end %>
