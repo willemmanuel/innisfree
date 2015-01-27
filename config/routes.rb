@@ -4,6 +4,9 @@ Rails.application.routes.draw do
  #get "/innisfree/" => redirect("/appointments")
 
   resources :cars
+  get 'reservation/new' => 'cars#new_reservation', as: :new_reservation
+  post 'reservation' => 'cars#save_reservation', as: :save_reservation
+  get 'reservations' => 'cars#get_reservations'
   put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user
   put 'settings/approve/:id' => 'settings#toggle_user_approval', as: :approve_user

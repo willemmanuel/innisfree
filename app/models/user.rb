@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
 
   belongs_to :house
   has_many :cars
+  has_many :reservations
   has_many :appointments
 
   def self.send_reminders

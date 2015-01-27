@@ -1,0 +1,26 @@
+<h3>New Reservation</h3>
+<%= form_tag(save_reservation_path, method: 'post') do %>
+  <% if @reservation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this from being saved:</h2>
+
+      <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= label_tag 'Start time' %>
+    <%= datetime_local_field_tag 'reservation_start'%><br>
+    <%= label_tag 'End time' %>
+    <%= datetime_local_field_tag 'reservation_end'%><br>
+    <%= label_tag 'Car' %>
+    <%= select_tag 'car', options_from_collection_for_select(@cars, 'id', 'name') %>
+  </div>
+  <div class="actions">
+    <%= submit_tag("Create Reservation", class: "btn btn-success") %><br>
+  </div>
+<% end %>

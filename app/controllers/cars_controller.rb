@@ -8,6 +8,36 @@ class CarsController < ApplicationController
     @checked_out = Car.where('user_id IS NOT NULL')
   end
 
+  def get_reservations
+    @reservations = Reservation.all
+    respond_to do |format|
+      format.html
+      format.json
+      format.js
+    end
+  end
+
+  def save_reservation
+    puts params
+    if params[:reservation_start] > params[:reservation_end]
+      redirect_to new_reservation_path, notice: "Reservation start must be after end"
+    end
+    @reservation = Reservation.new
+    @reservation.start = params[:reservation_start]
+    @reservation.end = params[:reservation_end]
+    @reservation.car_id = params[:car]
+    if @reservation.save
+      redirect_to action: "index", notice: "Reservation created"
+    else
+      redirect_to new_reservation_path
+    end
+  end
+
+  def new_reservation
+    @reservation = Reservation.new
+    @cars = Car.all
+  end
+
   # GET /cars/1
   # GET /cars/1.json
   def show
@@ -83,5 +113,9 @@ class CarsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
       params.require(:car).permit(:name, :user_id, :for)
+    end
+
+    def reservation_params
+      params.require(:reservation).permit(:start, :end, :car)
     end
 end
