@@ -1,0 +1,6 @@
+console.log("hellllllllllllllloooooooooooooo");
+<% AptType.all.each do |typ| %>
+  $('#select_type_chosen').append($('<option value="<%= typ.apt_type %>"><%= typ.apt_type %></option>'));
+<% end %>
+$('#select_type_chosen').trigger("liszt:updated");
+$('#newEventModal').modal('hide')
