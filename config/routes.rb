@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :appointments do
     collection do
       get 'update_residents', to: 'appointments#update_residents'
+      get 'add_apt_type', to: 'appointments#add_apt_type'
     end
   end
 

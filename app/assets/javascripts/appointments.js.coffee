@@ -22,6 +22,17 @@ $(document).on 'change', '.house_select', (evt) ->
     success: (data, textStatus, jqCHR) ->
       $("#upcoming").html(data); 
 
+$(document).on 'click', '#add_type', (evt) ->
+ $.ajax 'add_apt_type',
+   type: 'GET',
+   dataType: 'script'
+   data: {
+     apt_type: $('#new_apt_type').val()
+   }
+
+$(document).on 'click', '#new_apt_type_button', (evt) ->
+  $('#newEventModal').modal();
+
 $(document).on 'change', '.residents_select', (evt) ->
   $.ajax 'appointments',
     type: 'GET'

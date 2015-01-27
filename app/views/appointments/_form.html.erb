@@ -43,9 +43,25 @@
       <%= f.time_select :time, {:ampm => true, :minute_step=>5}%>
     </div>
     <div class="field">
-      <%= f.label :for %><br>
-      <%= f.text_field :for %>
+      <%= f.label :apt_type %><br>
+      <% types = @types.map {|t| [t.apt_type, t.apt_type]} %>
+      <%= f.select(:apt_type, types, { }, { :class => 'chosen-select', :id => 'select_type' }) %>
     </div>
+    <% if current_user.admin %>
+      <button id="new_apt_type_button" type="button" class="button">New Appointment Type</button>
+    <% end %>
+
+   <div id="newEventModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+           <label for="new_apt_type">Type to Add:</label><br>
+           <input type="text" id="new_apt_type">
+           <br>
+           <button id="add_type" type="button" class="btn btn-default">Save</button>
+        </div>
+    </div>
+</div>
+
     <div class="field">
       <%= f.label :notes %><br>
       <%= f.text_area :notes %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126015001) do
+ActiveRecord::Schema.define(version: 20150126173611) do
 
   create_table "appointments", force: true do |t|
     t.integer  "resident_id"
@@ -19,15 +19,21 @@ ActiveRecord::Schema.define(version: 20150126015001) do
     t.integer  "user_id"
     t.date     "date"
     t.time     "time"
-    t.string   "for"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "apt_type"
   end
 
   add_index "appointments", ["doctor_id"], name: "index_appointments_on_doctor_id"
   add_index "appointments", ["resident_id"], name: "index_appointments_on_resident_id"
   add_index "appointments", ["user_id"], name: "index_appointments_on_user_id"
+
+  create_table "apt_types", force: true do |t|
+    t.string   "apt_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "cars", force: true do |t|
     t.string   "name"
@@ -116,5 +122,15 @@ ActiveRecord::Schema.define(version: 20150126015001) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+
+  create_table "volunteers", force: true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.integer  "house_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "volunteers", ["house_id"], name: "index_volunteers_on_house_id"
 
 end

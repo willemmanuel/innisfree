@@ -88,11 +88,26 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/new
   def new
+    @types = AptType.all
     @appointment = Appointment.new
+  end
+
+  def add_apt_type
+    if AptType.where('apt_type = ?', params[:apt_type]).empty? and params[:apt_type] != ''
+      @type = AptType.new
+      @type.update_attribute(:apt_type, params[:apt_type])
+      @type.save
+    end
+    @types = AptType.all
+    respond_to do |format|
+     	format.html
+      format.js
+    end
   end
 
   # GET /appointments/1/edit
   def edit
+    @types = AptType.all
   end
 
   # POST /appointments
@@ -151,6 +166,6 @@ class AppointmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
-      params.require(:appointment).permit(:resident_id, :doctor_id, :user_id, :date, :time, :for, :notes, :res_id, :house_id, :date)
+      params.require(:appointment).permit(:resident_id, :doctor_id, :user_id, :date, :time, :apt_type, :notes, :res_id, :house_id, :date, :apt_type)
     end
 end
