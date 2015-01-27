@@ -22,7 +22,7 @@ class AppointmentsControllerTest < ActionController::TestCase
   test "should create appointment" do
     
     assert_difference('Appointment.count', 1) do
-      post :create, appointment: { date: @appointment.date, for: @appointment.for, notes: @appointment.notes, doctor_id: @appointment.doctor_id, resident_id: @appointment.resident_id, time: @appointment.time, user_id: @appointment.user_id }
+      post :create, appointment: { date: @appointment.date, apt_type: @appointment.apt_type, notes: @appointment.notes, doctor_id: @appointment.doctor_id, resident_id: @appointment.resident_id, time: @appointment.time, user_id: @appointment.user_id }
     end
 
     assert_redirected_to appointment_path(assigns(:appointment))
@@ -30,7 +30,7 @@ class AppointmentsControllerTest < ActionController::TestCase
 
   test "should update appointment" do
     
-    patch :update, id: @appointment, appointment: { date: @appointment.date, for: @appointment.for, notes: @appointment.notes, doctor_id: @appointment.doctor_id, resident_id: @appointment.resident_id, time: @appointment.time, user_id: @appointment.user_id }
+    patch :update, id: @appointment, appointment: { date: @appointment.date, apt_type: @appointment.apt_type, notes: @appointment.notes, doctor_id: @appointment.doctor_id, resident_id: @appointment.resident_id, time: @appointment.time, user_id: @appointment.user_id }
     assert_redirected_to appointment_path(assigns(:appointment))
   end
 

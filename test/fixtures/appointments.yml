@@ -8,7 +8,7 @@
 #  user_id     :integer
 #  date        :date
 #  time        :time
-#  for         :string(255)
+#  apt_type    :string(255)
 #  notes       :text
 #  created_at  :datetime
 #  updated_at  :datetime
@@ -22,7 +22,7 @@ one:
   user_id: 1
   date: 2014-10-05
   time: 2014-10-05 12:06:26
-  for: MyString
+  apt_type: MyString
   notes: MyText
 
 two:
@@ -31,5 +31,5 @@ two:
   user_id: 2
   date: 2014-10-05
   time: 2014-10-05 12:06:26
-  for: MyString
+  apt_type: MyString
   notes: MyText

@@ -8,7 +8,7 @@
 #  user_id     :integer
 #  date        :date
 #  time        :time
-#  for         :string(255)
+#  apt_type    :string(255)
 #  notes       :text
 #  created_at  :datetime
 #  updated_at  :datetime
