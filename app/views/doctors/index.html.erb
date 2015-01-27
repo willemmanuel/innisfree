@@ -21,9 +21,9 @@
         <td><%= doctor.doctor_type %></td>
         <td><%= link_to doctor.address, map_link(doctor.address) %></td>
         <td><%= doctor.phone %></td>
-        <td><%= link_to 'Show', doctor %></td>
+        <td><%= link_to 'See Detail', doctor %></td>
         <td><%= link_to 'Edit', edit_doctor_path(doctor) %></td>
-        <td><%= link_to 'Destroy', doctor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', doctor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

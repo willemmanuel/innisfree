@@ -1,42 +1,90 @@
 <h1>Innisfree Houses</h1>
-<p>
-  Download:
-  <%= link_to "CSV", houses_path(format: "csv") %>
-</p>
-<div class="row">
-<% @houses.each do |house| %>
-<div class="col-md-4">
-<div class="panel panel-default">
-  <div class="panel-heading"><strong><%= link_to house.name, house %></strong>
-    <% if current_user.admin %>
-        <small>(<%= link_to 'Edit', edit_house_path(house) %>, <%= link_to 'Destroy', house, method: :delete, data: { confirm: 'Are you sure?' } %>)</small>
-        <% end %>
-  </div>
-  <div class="panel-body">
-    Phone: <%= house.phone %> <br>
-    Residents<br>
-    <ul>
-      <% house.residents.each do |resident| %>
-        <li> <%= link_to resident.name, resident %></li>
-      <% end %>
-    </ul>
-    <br>
-    Volunteers<br>
-    <ul>
-      <% house.users.each do |volunteer| %>
-        <li> <%= link_to volunteer.name, volunteer %></li>
-      <% end %>
-    </ul>
-</div>
-</div>
-</div>
+
+<% if current_user.admin %>
+    <%= button_to 'New House', new_house_path, method: :get %>
+    <%= button_to 'New Resident', new_resident_path, method: :get %>
 <% end %>
+<br>
+<div class="row">
+  <% @houses.each do |house| %>
+      <% if house.name == "Office Staff" || house.name == "Workstation Heads" %>
+          <div class="col-md-4">
+          <div class="panel panel-default">
+
+              <div class="panel-heading"><strong><%= link_to house.name, house %></strong>
+                <% if current_user.admin %>
+                    <small>(<%= link_to 'Edit', edit_house_path(house) %>, <%= link_to 'Delete', house, method: :delete, data: { confirm: 'Are you sure?' } %>)</small>
+                <% end %>
+              </div>
+              <div class="panel-body">
+                <% if house.phone != "" %>
+                    <strong>Phone:</strong> <%= house.phone %> <br><br>
+                <% end %>
+                <% if not house.residents.empty? %>
+                    <strong>Residents:</strong><br>
+                    <ul>
+                      <% house.residents.sort_by {|u| u.name}.each do |resident| %>
+                          <li> <%= link_to resident.name, resident %></li>
+                      <% end %>
+                    </ul>
+                <% end %>
+
+                <% if not house.users.empty? %>
+                    <strong>Volunteers:</strong><br>
+                    <ul>
+                      <% house.users.sort_by {|u| u.name}.each do |volunteer| %>
+                          <li> <%= link_to volunteer.name, volunteer %></li>
+                      <% end %>
+                    </ul>
+                <% end %>
+              </div>
+
+          </div>
+          </div>
+      <% end %>
+  <% end %>
+  <% @houses.each do |house| %>
+      <% if house.name != "Office Staff" && house.name != "Workstation Heads" %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+
+          <div class="panel-heading"><strong><%= link_to house.name, house %></strong>
+            <% if current_user.admin %>
+                <small>(<%= link_to 'Edit', edit_house_path(house) %>, <%= link_to 'Delete', house, method: :delete, data: { confirm: 'Are you sure?' } %>)</small>
+            <% end %>
+          </div>
+          <div class="panel-body">
+            <strong>Phone:</strong> <%= house.phone %> <br><br>
+            <% if not house.residents.empty? %>
+                <strong>Residents:</strong><br>
+                <ul>
+                  <% house.residents.sort_by {|u| u.name}.each do |resident| %>
+                      <li> <%= link_to resident.name, resident %></li>
+                  <% end %>
+                </ul>
+            <% end %>
+
+            <% if not house.users.empty? %>
+            <strong>Volunteers:</strong><br>
+            <ul>
+              <% house.users.sort_by {|u| u.name}.each do |volunteer| %>
+                  <li> <%= link_to volunteer.name, volunteer %></li>
+              <% end %>
+            </ul>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+      <% end %>
+  <% end %>
 </div>
 
 
 <br>
 
-<% if current_user.admin %>
-    <%= link_to 'New House', new_house_path %> <br>
-    <%= link_to 'New Resident', new_resident_path %>
-<% end %>
+
+<p>
+  Download:
+  <%= link_to "CSV", houses_path(format: "csv") %>
+</p>
