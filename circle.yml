@@ -5,5 +5,4 @@ machine:
 dependencies:
   pre:
     - "/bin/rm -rf /home/ubuntu/innisfree/vendor/bundle/ruby/2.1.0/specifications"
-    - "bundle update sass-rails"
 
