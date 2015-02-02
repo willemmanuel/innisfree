@@ -42,10 +42,12 @@
         </div>
     <% end %>
 
-    <div>
-      <%= f.label :house_id %> <br>
-      <%= f.select :house_id, options_for_select(@houses.map{ |h| [h.name, h.id]}, :selected=>@user.house_id ) %>
-    </div>
+    <% if current_user.house.name != 'Workstation Heads' %>
+        <div>
+          <%= f.label :house_id %> <br>
+          <%= f.select :house_id, options_for_select(@houses.map{ |h| [h.name, h.id]}, :selected=>@user.house_id ) %>
+        </div>
+    <% end %>
 
     <div>
       <%= f.label :email_pref, "Check to receive email reminders and digests" %> <br>

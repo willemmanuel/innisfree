@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  before_action :check_workstation_head, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /appointments
   # GET /appointments.json
@@ -14,10 +15,10 @@ class AppointmentsController < ApplicationController
     if params.has_key?(:house_id)
       session[:house_id] = params[:house_id]
     end
-    if session.has_key?(:res_id) and session[:res_id] != '' 
+    if session.has_key?(:res_id) and session[:res_id] != ''
       @appointments = Appointment.where('resident_id = ?', session[:res_id])
       @appointments_counts = @appointments.group("date").count
-    elsif session.has_key?(:house_id) and session[:house_id] != '' 
+    elsif session.has_key?(:house_id) and session[:house_id] != ''
       @appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id])
       @appointments_counts = @appointments.group("date").count
     else
@@ -27,7 +28,7 @@ class AppointmentsController < ApplicationController
     respond_to do |format|
       format.html
       format.json
-      format.js 
+      format.js
       format.csv { render text:@appointments.to_csv }
     end
   end
@@ -39,9 +40,9 @@ class AppointmentsController < ApplicationController
     if params.has_key?(:house_id)
       session[:house_id] = params[:house_id]
     end
-    if session.has_key?(:res_id) and session[:res_id] != '' 
+    if session.has_key?(:res_id) and session[:res_id] != ''
       @upcoming_appointments = Appointment.where('resident_id = ?', session[:res_id]).where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
-    elsif session.has_key?(:house_id) and session[:house_id] != '' 
+    elsif session.has_key?(:house_id) and session[:house_id] != ''
       @upcoming_appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id]).where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
     else
       @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
@@ -76,11 +77,11 @@ class AppointmentsController < ApplicationController
       @residents = Resident.all
     end
     respond_to do |format|
-     	format.html
+      format.html
       format.js
     end
   end
-  
+
   # GET /appointments/1
   # GET /appointments/1.json
   def show
@@ -100,7 +101,7 @@ class AppointmentsController < ApplicationController
     end
     @types = AptType.all
     respond_to do |format|
-     	format.html
+      format.html
       format.js
     end
   end
@@ -159,13 +160,18 @@ class AppointmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_appointment
-      @appointment = Appointment.find(params[:id])
-    end
+  # Check to see if the user is a workstation head
+  def check_workstation_head
+    redirect_to appointments_path, alert: "Workstation heads may not modify appointments" unless current_user.house.name != 'Workstation Heads'
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def appointment_params
-      params.require(:appointment).permit(:resident_id, :doctor_id, :user_id, :date, :time, :apt_type, :notes, :res_id, :house_id, :date, :apt_type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_appointment
+    @appointment = Appointment.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def appointment_params
+    params.require(:appointment).permit(:resident_id, :doctor_id, :user_id, :date, :time, :apt_type, :notes, :res_id, :house_id, :date, :apt_type)
+  end
 end

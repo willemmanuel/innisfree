@@ -40,9 +40,11 @@
     <strong>Notes:</strong>
     <%= @appointment.notes %>
   </p>
+  <% if current_user.house.name != 'Workstation Heads' %>
+      <%= link_to 'Delete', @appointment, method: :delete, data: { confirm: 'Are you sure?' } %> |
+      <%= link_to 'Edit', edit_appointment_path(@appointment) %> |
+  <% end %>
 
-  <%= link_to 'Delete', @appointment, method: :delete, data: { confirm: 'Are you sure?' } %> |
-  <%= link_to 'Edit', edit_appointment_path(@appointment) %> |
   <%= link_to 'Back', appointments_path %>
 
   <h3>Revisions to this Appointment</h3>

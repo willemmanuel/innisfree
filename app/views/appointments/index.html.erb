@@ -4,32 +4,36 @@
   <%= link_to "CSV", appointments_path(format: "csv") %>
 </p>
 <%= render 'filter' %>
-<h4><%= button_to 'New Appointment', new_appointment_path, method: :get %></h4>
+<% if current_user.house.name != 'Workstation Heads' %>
+    <h4><%= button_to 'New Appointment', new_appointment_path, method: :get %></h4>
+<% end %>
+
+<br>
 <div class="row">
   <div class="col-lg-4 col-lg-push-8">
-  <h2>Upcoming</h2>
-  <div id="upcoming">
-  <%= render 'upcoming' %>
+    <h2>Upcoming</h2>
+    <div id="upcoming">
+      <%= render 'upcoming' %>
+    </div>
+  </div>
+  <div id="textDiv" class = "col-lg-8 col-lg-pull-4"> </div>
+  <div id="fullCalendar" class="col-lg-8 col-lg-pull-4">
   </div>
 </div>
-<div id="textDiv" class = "col-lg-8 col-lg-pull-4"> </div>
-<div id="fullCalendar" class="col-lg-8 col-lg-pull-4">
-</div>
-</div>
-  
+
 <div id="addTypeModal" class="modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                <h4 id="modalTitle" class="modal-title"></h4>
-            </div>
-            <div id="modalBody" class="modal-body"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+        <h4 id="modalTitle" class="modal-title"></h4>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 
 <hr>
