@@ -162,7 +162,7 @@ class AppointmentsController < ApplicationController
   private
   # Check to see if the user is a workstation head
   def check_workstation_head
-    redirect_to appointments_path, alert: "Workstation heads may not modify appointments" unless current_user.house.name != 'Workstation Heads'
+    redirect_to appointments_path, alert: "Workstation heads may not modify appointments" unless current_user.admin || current_user.house.name != 'Workstation Heads'
   end
 
   # Use callbacks to share common setup or constraints between actions.

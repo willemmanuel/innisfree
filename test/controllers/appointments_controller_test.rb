@@ -3,7 +3,7 @@ require 'test_helper'
 class AppointmentsControllerTest < ActionController::TestCase
   setup do
     @appointment = appointments(:one)
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user, admin: true)
     FactoryGirl.create(:resident, house_id: 1, id: 2)
     FactoryGirl.create(:resident, house_id: 2, id: 3)
     FactoryGirl.create(:appointment, resident_id: 2, date: Date.new(2014, 10, 7))

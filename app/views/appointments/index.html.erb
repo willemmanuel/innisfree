@@ -4,7 +4,7 @@
   <%= link_to "CSV", appointments_path(format: "csv") %>
 </p>
 <%= render 'filter' %>
-<% if current_user.house.name != 'Workstation Heads' %>
+<% if current_user.admin || current_user.house.name != 'Workstation Heads' %>
     <h4><%= button_to 'New Appointment', new_appointment_path, method: :get %></h4>
 <% end %>
 
