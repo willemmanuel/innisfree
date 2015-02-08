@@ -1,8 +1,11 @@
 <h1>Innisfree Houses</h1>
 
 <% if current_user.admin %>
-    <%= button_to 'New House', new_house_path, method: :get %>
+    <p>
+      <%= button_to 'New House', new_house_path, method: :get %>
+    </p> <p>
     <%= button_to 'New Resident', new_resident_path, method: :get %>
+    </p>
 <% end %>
 <br>
 <div class="row">
@@ -80,11 +83,8 @@
   <% end %>
 </div>
 
-
 <br>
 
-
 <p>
-  Download:
-  <%= link_to "CSV", houses_path(format: "csv") %>
+  <%= link_to "Download as CSV", houses_path(format: "csv") %>
 </p>

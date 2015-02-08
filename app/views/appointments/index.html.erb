@@ -1,8 +1,5 @@
 <h1>Resident Appointments</h1>
-<p>
-  Download:
-  <%= link_to "CSV", appointments_path(format: "csv") %>
-</p>
+
 <%= render 'filter' %>
 <% if current_user.admin || current_user.house.name != 'Workstation Heads' %>
     <h4><%= button_to 'New Appointment', new_appointment_path, method: :get %></h4>
@@ -20,6 +17,9 @@
   <div id="fullCalendar" class="col-lg-8 col-lg-pull-4">
   </div>
 </div>
+<p>
+  <%= link_to "Download as CSV", appointments_path(format: "csv") %>
+</p>
 
 <div id="addTypeModal" class="modal">
   <div class="modal-dialog">

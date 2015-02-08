@@ -2,5 +2,5 @@
 # Uses production mode to connect to sqlite3 db as pegasus needs dev env.
 
 bundle install --path vendor/bundle
-rake db:migrate
+bundle exec rake db:migrate
 rails server
