@@ -21,3 +21,6 @@
 
 # Ignore .idea direcory (for those of us using RubyStorm)
 /.idea
+
+# Ignore the app/views/posts directory as it's unused and doesn't need to be tracked
+/app/views/posts
