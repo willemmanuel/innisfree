@@ -57,7 +57,9 @@
             <% end %>
           </div>
           <div class="panel-body">
-            <strong>Phone:</strong> <%= house.phone %> <br><br>
+            <% if house.phone != "" %>
+                <strong>Phone:</strong> <%= house.phone %> <br><br>
+            <% end %>
             <% if not house.residents.empty? %>
                 <strong>Residents:</strong><br>
                 <ul>
@@ -86,5 +88,8 @@
 <br>
 
 <p>
+  <% if current_user.admin %>
+    <%= link_to "Manage Residents", residents_path %> |
+   <% end %>
   <%= link_to "Download as CSV", houses_path(format: "csv") %>
 </p>

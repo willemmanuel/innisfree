@@ -78,8 +78,8 @@ class ResidentsControllerTest < ActionController::TestCase
     assert_redirected_to residents_path
   end
 
-  test "volunteer should not destroy resident" do
-    sign_in(@volunteer1)
+  test "volunteer should not destroy resident if not in the same house" do
+    sign_in(@volunteer2)
 
     assert_no_difference('Resident.count') do
       delete :destroy, id: @resident
