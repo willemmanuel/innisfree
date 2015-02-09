@@ -18,12 +18,23 @@
       <% else %>
           <% residents = Resident.all.select{ |r| r.house_id == current_user.house_id }.map { |r| [r.name, r.id] } %>
       <% end %>
-      <%= f.select(:resident_id, residents, { }, { :class => 'chosen-select' }) %>
+      <% logger.debug "residentS: " %>
+      <% logger.debug residents[0] %>
+      <% if params.has_key?(:resident_id) %>
+          <%= f.select(:resident_id, options_from_collection_for_select(residents, "last", "first", params[:resident_id].to_i), { :class => 'chosen-select' }) %>
+      <% else %>
+          <%= f.select(:resident_id, residents, { }, { :class => 'chosen-select' }) %>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :doctor_id %><br>
       <% doctors = Doctor.all.map { |p| [p.name, p.id] } %>
-      <%= f.select(:doctor_id, doctors, { }, { :class => 'chosen-select' }) %>
+      <% if params.has_key?(:doctor_id) %>
+          <%= f.select(:doctor_id, options_from_collection_for_select(doctors, "last", "first", params[:doctor_id].to_i), { :class => 'chosen-select' }) %>
+      <% else %>
+          <%= f.select(:doctor_id, doctors, { }, { :class => 'chosen-select' }) %>
+      <% end %>
+
     </div>
     <div class="field">
       <%= f.label :user_id %><br>
@@ -45,7 +56,11 @@
     <div class="field">
       <%= f.label :apt_type %><br>
       <% types = @types.map {|t| [t.apt_type, t.apt_type]} %>
-      <%= f.select(:apt_type, types, { }, { :class => 'chosen-select', :id => 'select_type' }) %>
+      <% if params.has_key?(:doctor_id) %>
+          <%= f.select(:apt_type, options_from_collection_for_select(types, "last", "first", params[:apt_type]), { :class => 'chosen-select', :id => 'select_type' }) %>
+      <% else %>
+          <%= f.select(:apt_type, types, { }, { :class => 'chosen-select', :id => 'select_type' }) %>
+      <% end %>
     </div>
     <% if current_user.admin %>
       <button id="new_apt_type_button" type="button" class="button">New Appointment Type</button>
