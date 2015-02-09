@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :doctors
 
-  resources :residents, except: [:index]
+  resources :residents #, except: [:index]
 
   resources :houses
 
