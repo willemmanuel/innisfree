@@ -11,7 +11,7 @@
 #
 
 class Resident < ActiveRecord::Base
-  belongs_to :house, dependent: :destroy
+  belongs_to :house#, dependent: :destroy
   
   def self.to_csv
     CSV.generate do |csv|
