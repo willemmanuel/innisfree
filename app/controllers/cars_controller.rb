@@ -4,8 +4,6 @@ class CarsController < ApplicationController
   # GET /cars
   # GET /cars.json 
   def index
-    @checked_in = Car.where('user_id IS NULL')
-    @checked_out = Car.where('user_id IS NOT NULL')
   end
 
   def get_reservations
@@ -17,20 +15,33 @@ class CarsController < ApplicationController
     end
   end
 
-  def save_reservation
-    puts params
+  def get_availability
     if params[:reservation_start] > params[:reservation_end]
       redirect_to new_reservation_path, notice: "Reservation start must be after end"
     end
+    @cars = Array.new
+    Car.all.each do |car|
+      flag = true
+      car.reservations.each do |reservation|
+        puts reservation.class
+        puts params[:reservation_end].class
+        if (reservation.start > params[:reservation_start] && reservation.end < params[:reservation_end]) || (reservation.start < params[:reservation_start] && reservation.end > params[:reservation_end])
+          flag = false
+          break
+        end
+      end
+      if flag 
+        @cars << car
+      end
+    end
+    if @cars.empty?
+      redirect_to new_reservation_path, notice: "No cars available at that time"
+    end
+    puts "-----"
+    puts @cars
     @reservation = Reservation.new
     @reservation.start = params[:reservation_start]
     @reservation.end = params[:reservation_end]
-    @reservation.car_id = params[:car]
-    if @reservation.save
-      redirect_to action: "index", notice: "Reservation created"
-    else
-      redirect_to new_reservation_path
-    end
   end
 
   def new_reservation
@@ -52,11 +63,26 @@ class CarsController < ApplicationController
   def edit
   end
 
+  def save_reservation
+    puts params
+    if params[:reservation_start] > params[:reservation_end]
+      redirect_to new_reservation_path, notice: "Reservation start must be after end"
+    end
+    @reservation = Reservation.new
+    @reservation.start = params[:reservation_start]
+    @reservation.end = params[:reservation_end]
+    @reservation.car_id = params[:car]
+    if @reservation.save
+      redirect_to action: "index", notice: "Reservation created"
+    else
+      redirect_to new_reservation_path, notice: "There was an issue creating your reservation"
+    end
+  end
+
   # POST /cars
   # POST /cars.json
   def create
     @car = Car.new(car_params)
-
     respond_to do |format|
       if @car.save
         format.html { redirect_to cars_path, notice: 'Car was successfully created.' }

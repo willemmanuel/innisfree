@@ -123,14 +123,4 @@ ActiveRecord::Schema.define(version: 20150126173611) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
 
-  create_table "volunteers", force: true do |t|
-    t.string   "name"
-    t.string   "phone"
-    t.integer  "house_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "volunteers", ["house_id"], name: "index_volunteers_on_house_id"
-
 end

@@ -21,6 +21,7 @@
 #  phone                  :string(255)
 #  house_id               :integer
 #  name                   :string(255)
+#  email_pref             :boolean          default(FALSE)
 #
 
 require 'test_helper'

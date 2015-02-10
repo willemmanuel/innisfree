@@ -8,10 +8,10 @@
 #  user_id     :integer
 #  date        :date
 #  time        :time
-#  apt_type         :string(255)
 #  notes       :text
 #  created_at  :datetime
 #  updated_at  :datetime
+#  apt_type    :string(255)
 #
 
 class Appointment < ActiveRecord::Base

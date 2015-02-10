@@ -1,8 +1,11 @@
 # == Schema Information
 #
-# Table name: Apt_Type
+# Table name: apt_types
 #
-# apt_type :string
+#  id         :integer          not null, primary key
+#  apt_type   :string(255)
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 class AptType < ActiveRecord::Base
