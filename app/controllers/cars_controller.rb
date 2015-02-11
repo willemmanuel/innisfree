@@ -16,16 +16,16 @@ class CarsController < ApplicationController
   end
 
   def get_availability
-    if params[:reservation_start] > params[:reservation_end]
-      redirect_to new_reservation_path, notice: "Reservation start must be after end"
+    parsed_start = Time.zone.parse(params[:reservation_start])
+    parsed_end = Time.zone.parse(params[:reservation_end])
+    if parsed_start > parsed_end || parsed_start < Time.now
+      redirect_to new_reservation_path, notice: "Invalid reservation times"
     end
     @cars = Array.new
     Car.all.each do |car|
       flag = true
       car.reservations.each do |reservation|
-        puts reservation.class
-        puts params[:reservation_end].class
-        if (reservation.start > params[:reservation_start] && reservation.end < params[:reservation_end]) || (reservation.start < params[:reservation_start] && reservation.end > params[:reservation_end])
+        if (parsed_start < reservation.start && parsed_end > reservation.start) || (reservation.start < parsed_start && reservation.end > parsed_start) || (reservation.start == parsed_start && reservation.end == parsed_end)
           flag = false
           break
         end
@@ -35,10 +35,8 @@ class CarsController < ApplicationController
       end
     end
     if @cars.empty?
-      redirect_to new_reservation_path, notice: "No cars available at that time"
+      redirect_to new_reservation_path, method: :post, notice: "No cars available at that time"
     end
-    puts "-----"
-    puts @cars
     @reservation = Reservation.new
     @reservation.start = params[:reservation_start]
     @reservation.end = params[:reservation_end]
@@ -64,14 +62,11 @@ class CarsController < ApplicationController
   end
 
   def save_reservation
-    puts params
-    if params[:reservation_start] > params[:reservation_end]
-      redirect_to new_reservation_path, notice: "Reservation start must be after end"
-    end
     @reservation = Reservation.new
     @reservation.start = params[:reservation_start]
     @reservation.end = params[:reservation_end]
     @reservation.car_id = params[:car]
+    @reservation.user = current_user
     if @reservation.save
       redirect_to action: "index", notice: "Reservation created"
     else
