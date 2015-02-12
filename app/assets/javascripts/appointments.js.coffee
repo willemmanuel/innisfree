@@ -66,7 +66,14 @@ $(document).on 'ready page:load', ->
     }
 
   $('#fullCalendar').fullCalendar({
-    
+    header: { left: 'title', right: "listWeek,#{calView} prev,next"},
+    views: {
+        listWeek: {
+            type: 'listMonth',
+            duration: { weeks: 1 },
+            buttonText: 'week'
+        }
+    }
     defaultView: calView,
     events: 'appointments.json',
     eventClick: (calEvent, jsEvent, view) ->
