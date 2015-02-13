@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :houses
 
   resources :users
-  
+  post 'users/new' => 'users#new'  
   resources :reports do
     collection do
       get 'update_doctors', to: 'reports#update_doctors'
