@@ -2,9 +2,9 @@
 
 <% if current_user.admin %>
     <p>
-      <%= button_to 'New House', new_house_path, method: :get %>
+      <%= button_to 'New House', new_house_path, method: :get, class: "mobile-size" %>
     </p> <p>
-    <%= button_to 'New Resident', new_resident_path, method: :get %>
+    <%= button_to 'New Resident', new_resident_path, method: :get, class: "mobile-size" %>
     </p>
 <% end %>
 <br>

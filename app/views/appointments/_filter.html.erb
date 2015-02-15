@@ -1,10 +1,10 @@
 <%= form_tag("index", method: "get") do %>
     <div class = "field">
-      <%= collection_select nil, :house_id,  @houses, :id, :name, {:include_blank => 'All Houses', :selected => current_user.house_id}, {:class => 'house_select'} %>
+      <%= collection_select nil, :house_id,  @houses, :id, :name, {:include_blank => 'All Houses', :selected => current_user.house_id}, {:class => 'house_select mobile-size'} %>
     </div>
     <div class = 'field'>
       <%= collection_select nil, :resident_id, @residents, :id, :name,
-                                               {:include_blank => 'All Residents'}, {:class => 'residents_select'} %>
+                                               {:include_blank => 'All Residents'}, {:class => 'residents_select mobile-size'} %>
     </div>
 <% end %>
 

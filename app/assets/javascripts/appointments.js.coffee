@@ -54,9 +54,6 @@ $(document).on 'ready page:load', ->
   calView = 'month'
   calView = 'listMonth' if $(window).innerWidth() < 981 #for iPhone
   
-  console.log(calView)
-  console.log($(window).innerWidth())
-  
   $.ajax 'appointments',
     type: 'GET'
     dataType: 'script'

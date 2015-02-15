@@ -2,7 +2,7 @@
 
 <%= render 'filter' %>
 <% if current_user.admin || current_user.house.name != 'Workstation Heads' %>
-    <h4><%= button_to 'New Appointment', new_appointment_path, method: :get %></h4>
+    <h4><%= button_to 'New Appointment', new_appointment_path, method: :get, class: "mobile-size" %></h4>
 <% end %>
 
 <br>

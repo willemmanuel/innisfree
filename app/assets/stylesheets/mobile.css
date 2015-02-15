@@ -1,0 +1,26 @@
+@media all and (max-width: 951px) {
+	body{
+		font-size: 200%!important;
+	}
+	
+	.mobile-size{
+		padding: 12px 18px;
+		font-size: 20px;
+	}
+	
+	label{
+		font-size: 125%;
+	}
+	
+	.navbar{
+		font-size: 120%;
+	}
+	
+	.navbar-brand{
+		font-size: 125%;
+	}
+	
+	.navbar-toggle{
+		font-size: 125%;
+	}
+}
