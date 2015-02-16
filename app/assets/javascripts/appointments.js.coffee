@@ -33,6 +33,18 @@ $(document).on 'click', '#add_type', (evt) ->
 $(document).on 'click', '#new_apt_type_button', (evt) ->
   $('#newEventModal').modal();
 
+
+$(document).on 'click', '#recurring_button', (evt) ->
+  $('#newFollowupModal').modal();
+
+$(document).on 'click', '#set_recurring_reminder', (evt) ->
+ $.ajax 'set_recurring_reminder',
+   type: 'GET',
+   dataType: 'script'
+   data: {
+     reminder_date: $('#reminder-date').val()
+   }
+
 $(document).on 'change', '.residents_select', (evt) ->
   $.ajax 'appointments',
     type: 'GET'

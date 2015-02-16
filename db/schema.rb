@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126173611) do
+ActiveRecord::Schema.define(version: 20150209221158) do
 
   create_table "appointments", force: true do |t|
     t.integer  "resident_id"
@@ -64,6 +64,13 @@ ActiveRecord::Schema.define(version: 20150126173611) do
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recurring_reminders", force: true do |t|
+    t.integer  "appointment_id"
+    t.date     "notification_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

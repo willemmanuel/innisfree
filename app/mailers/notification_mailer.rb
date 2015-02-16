@@ -11,4 +11,10 @@ class NotificationMailer < ActionMailer::Base
   	@appointment = appointment
   	mail(to: @appointment.user.email, subject: 'Upcoming appointment today')
   end
+
+  def recurring_appointment_reminder(appointment)
+  	@appointment = appointment
+  	mail(to: @appointment.user.email, subject: 'Schedule Follow-up Appointment')
+  end
+
 end

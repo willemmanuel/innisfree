@@ -11,6 +11,11 @@
  <div class = "field">
  <%= collection_select nil, :doctor_id, @doctors, :id, :name, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
  <BR>
+ <p> Appointment type: </p>
+ <div class = 'field'>
+ <%= collection_select nil, :apt_type, @appointment_types, :apt_type, :apt_type, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
+ <BR>
+
  <p>From: &nbsp;<input type="text" id="datepicker" name='date'> &nbsp;&nbsp;&nbsp; To: &nbsp; <input type="text" id="datepicker2" name='date2'></p>
 <p>  Format: &nbsp; <input type="radio" name="format" value="CSV" checked>CSV &nbsp;&nbsp;
 <input type="radio" name="format" value="PDF">PDF

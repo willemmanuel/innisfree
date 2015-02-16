@@ -1,0 +1,6 @@
+<h4>Schedule Follow-up Appointment</h4>
+Hello <%= @appointment.user.name %>, 
+
+This is a reminder to schedule a follow-up appointment for <b><%= @appointment.resident.name %></b> with <b><%= @appointment.doctor.name %></b>. The office is located <%= link_to 'here', map_link(@appointment.doctor.address) %>.
+
+Thanks and have a great day!

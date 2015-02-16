@@ -35,6 +35,16 @@ class User < ActiveRecord::Base
   has_many :reservations
   has_many :appointments
 
+  def self.sent_recurring_reminders
+    todays_reminders = RecurringReminder.where('notification_date = ?', Date.today)
+    todays_reminders.each do |reminder|  
+      appointment = Appointment.where('id = ?', reminder.appointment_id)
+      if !appointment.user.nil? && appointment.user.email_pref
+         NotificationMailer.appointment_reminder(appointment).deliver
+      end
+    end
+  end
+
   def self.send_reminders
    # email all the admins a full schedule for the day
    admins = User.where(admin: true).where(email_pref: true)

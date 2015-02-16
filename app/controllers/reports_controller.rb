@@ -7,6 +7,7 @@ class ReportsController < ApplicationController
       @residents = Resident.all
       @houses = House.all
       @doctors = Doctor.all
+      @appointment_types = AptType.all
     end
 
     def generate
@@ -26,6 +27,9 @@ class ReportsController < ApplicationController
       end
       if params[:date2] != ''
         @appointments = @appointments.where('date <= ?', Date.strptime(params[:date2], "%m/%d/%Y"))
+      end
+      if params[:apt_type] != ''
+        @appointments = @appointments.where('apt_type = ?', params[:apt_type])
       end
       if params[:format] == 'PDF'
         pdf = Prawn::Document.new(:page_layout => :landscape)
@@ -49,7 +53,7 @@ class ReportsController < ApplicationController
     end
 
     def printTable(pdf, appointments)
-      table_data = [["<b>Date</b>", "<b>Time<b>","<b>Resident<b>", "<b>House<b>", "<b>Volunteer<b>", "<b>Doctor<b>", ]]
+      table_data = [["<b>Date</b>", "<b>Time<b>","<b>Resident<b>", "<b>House<b>", "<b>Volunteer<b>", "<b>Doctor<b>", "<b>Apt. Type<b>" ]]
       test = appointments.map
       test = test.sort_by {|u| [u.date, u.time]}
       #test = test.sort_by {|u| u.time}
@@ -73,18 +77,19 @@ class ReportsController < ApplicationController
                  end,
                  if not Doctor.where('id = ?', appointment.doctor_id).blank?
                    Doctor.where('id = ?', appointment.doctor_id).first.name
-                 end
+                 end,
+                 appointment.apt_type
 
              ]]
       end
       pdf.table(table_data, :header => true, :cell_style => { :inline_format => true }, \
-                :column_widths => {0 => 140, 1 => 70, 2 => 125, 3 => 125, 4 => 125, 5 => 125}, \
+                :column_widths => {0 => 140, 1 => 70, 2 => 100, 3 => 100, 4 => 100, 5 => 100, 6 => 100}, \
                 :position => :center, :row_colors => ['DDDDDD', 'FFFFFF'])
     end
 
     def Gen_CSV(appointments)
       csv_string = CSV.generate do |csv|
-        cols = ["Date", "Time", "Co-worker", "Doctor"]
+        cols = ["Date", "Time", "Co-worker", "Doctor", "Apt. Type"]
         csv << cols
         app = appointments.map
         app = app.sort_by {|u| [u.date, u.time]}
@@ -96,7 +101,9 @@ class ReportsController < ApplicationController
             end,
             if not Doctor.where('id = ?', appointment.doctor_id).blank?
               Doctor.where('id = ?', appointment.doctor_id).first.name
-            end]
+            end,
+            appointment.apt_type
+            ]
         end
       end
       filename = "Report-#{Time.now.to_date.to_s}.csv"

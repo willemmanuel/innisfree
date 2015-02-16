@@ -87,6 +87,13 @@ class AppointmentsController < ApplicationController
   def show
   end
 
+  # GET /appointments
+  def set_recurring_reminder
+   @reminder = RecurringReminder.new
+   @reminder.date = params[:reminder_date]
+   @reminder.appointment_id = @appointment.id
+  end
+
   # GET /appointments/new
   def new
     @types = AptType.all

@@ -1,4 +1,8 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :recurring_reminder do
+    appointment_id ""
+notification_date "2015-02-09"
+  end
+
 
   factory :user do
     name 'Test User'
