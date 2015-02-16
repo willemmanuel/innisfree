@@ -14,7 +14,8 @@ class NotificationMailer < ActionMailer::Base
 
   def recurring_appointment_reminder(appointment)
   	@appointment = appointment
-  	mail(to: @appointment.user.email, subject: 'Schedule Follow-up Appointment')
+        user = User.where('id = ?', @appointment.user_id)[0];
+  	mail(to: user.email, subject: 'Schedule Follow-up Appointment')
   end
 
 end
