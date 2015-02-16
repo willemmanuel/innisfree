@@ -1,16 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-   <div id="newFollowupModal" class="modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-           <label for="reminder_date">When to Remind:</label><br>
-           <input type="text" id="reminder_date">
-           <br>
-           <button id="set_recurring_reminder" type="button" class="btn btn-default">Set</button>
-        </div>
-    </div>
-  </div>
-
 <div class="col-md-6">
   <p>
     <strong>Resident:</strong>
@@ -60,6 +49,18 @@
 
   <%= link_to 'Back', appointments_path %>
  
+   <div id="newFollowupModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div id="followupModalBody" class="modal-body">
+           <label for="reminder_date">When to Remind:</label><br>
+           <p><input type="date" id="reminder_date" name='date' class='hasDatePicker'> </p>
+           <br>
+           <button id="set_recurring_reminder" type="button" class="btn btn-default">Set</button>
+        </div>
+        </div>
+    </div>
+  </div>
 
   <button id="recurring_button" type="button" class="button">Set Reminder to Schedule Follow-up Appointment</button>
 

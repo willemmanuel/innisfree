@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     collection do
       get 'update_residents', to: 'appointments#update_residents'
       get 'add_apt_type', to: 'appointments#add_apt_type'
+      get 'set_recurring_reminder', to: 'appointments#set_recurring_reminder'
     end
   end
 

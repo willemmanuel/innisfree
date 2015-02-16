@@ -58,6 +58,14 @@ class User < ActiveRecord::Base
          NotificationMailer.appointment_reminder(appointment).deliver
       end
    end
+   todays_reminders = RecurringReminder.where('notification_date = ?', Date.today)
+   todays_reminders.each do |recur|
+     original_apt = Appointment.where('id = ?', recur.appointment_id)
+     user = User.where('id = ?', original_apt[0].user_id)[0]
+     if !user.nil? && user.email_pref
+       NotificationMailer.recurring_appointment_reminder(original_apt).deliver
+     end 
+   end
   end
 
   attr_accessor :current_password

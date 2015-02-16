@@ -32,17 +32,20 @@ $(document).on 'click', '#add_type', (evt) ->
 
 $(document).on 'click', '#new_apt_type_button', (evt) ->
   $('#newEventModal').modal();
+  $('.modal-backdrop').css({"z-index":"0"}); # hacky, but it works for now
 
 
 $(document).on 'click', '#recurring_button', (evt) ->
-  $('#newFollowupModal').modal();
+  $('#newFollowupModal').modal('show');
+  $('.modal-backdrop').css({"z-index":"0"}); # hacky, but it works for now
 
 $(document).on 'click', '#set_recurring_reminder', (evt) ->
  $.ajax 'set_recurring_reminder',
    type: 'GET',
    dataType: 'script'
    data: {
-     reminder_date: $('#reminder-date').val()
+     reminder_date: $('#reminder_date').val()
+     appointment_id: (document.URL).substr((document.URL).lastIndexOf("/")+1)
    }
 
 $(document).on 'change', '.residents_select', (evt) ->

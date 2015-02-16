@@ -89,9 +89,12 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments
   def set_recurring_reminder
-   @reminder = RecurringReminder.new
-   @reminder.date = params[:reminder_date]
-   @reminder.appointment_id = @appointment.id
+   if params.has_key?(:reminder_date) and params.has_key?(:appointment_id)
+     @reminder = RecurringReminder.new
+     @reminder.notification_date = params[:reminder_date]
+     @reminder.appointment_id = params[:appointment_id]
+     @reminder.save
+   end
   end
 
   # GET /appointments/new
