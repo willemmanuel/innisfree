@@ -90,6 +90,6 @@
 <p>
   <% if current_user.admin %>
     <%= link_to "Manage Residents", residents_path %> |
+    <%= link_to "Download as CSV", houses_path(format: "csv") %>
    <% end %>
-  <%= link_to "Download as CSV", houses_path(format: "csv") %>
 </p>

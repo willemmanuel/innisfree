@@ -30,6 +30,8 @@
     </table>
 
     <br>
+    <% if current_user.admin %>
     <p>
       <%= link_to "Download as CSV", residents_path(format: "csv") %>
     </p>
+    <% end %>

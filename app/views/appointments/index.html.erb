@@ -31,9 +31,11 @@
   </div>
 </div>
 
+<% if current_user.admin %>
 <p>
   <%= link_to "Download as CSV", appointments_path(format: "csv") %>
 </p>
+<% end %>
 
 <div id="addTypeModal" class="modal">
   <div class="modal-dialog">

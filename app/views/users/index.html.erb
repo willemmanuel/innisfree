@@ -48,7 +48,9 @@
 
 <br>
 <br>
+<% if current_user.admin %>
 <p>
   <%= link_to "Download as CSV", users_path(format: "csv") %>
 </p>
+<% end %>
 <%#= link_to "Generate PDF", users_path(@page, :format => "pdf") %>
