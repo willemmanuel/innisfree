@@ -16,10 +16,10 @@
           <tr>
             <td><%= link_to resident.name, resident%></td>
             <% if resident.house != nil %>
-            <td><%= link_to resident.house.name, resident.house%></td>
-                <% else %>
-            <td><%= 'No House'%></td>
-                <% end %>
+                <td><%= link_to resident.house.name, resident.house%></td>
+            <% else %>
+                <td><%= 'No House'%></td>
+            <% end %>
             <td><%= resident.notes %></td>
             <td><%= link_to 'See Detail', resident %></td>
             <td><%= link_to 'Edit', edit_resident_path(resident) %></td>

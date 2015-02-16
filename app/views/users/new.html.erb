@@ -5,6 +5,6 @@
     <%= text_field_tag :phone, nil, placeholder: "Phone" %><br>
     <%= select_tag :house_id, options_for_select( @houses.map{ |h| [h.name, h.id] }), include_blank: true %><br>
     <%= password_field_tag :password, nil, placeholder: "Password" %><br>
-    <%= password_field_tag :password_confirmation, nil, placeholder: "Confirm password" %><br>
-    <%= submit_tag("Create User", class: "btn btn-success") %><br>
+    <%= password_field_tag :password_confirmation, nil, placeholder: "Confirm password" %><br><br>
+    <%= submit_tag("Create User", class: "btn btn-success") %><br><br>
 <% end %>

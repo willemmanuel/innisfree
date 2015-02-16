@@ -7,6 +7,7 @@
   <thead>
   <tr>
     <th>Name</th>
+    <th>House</th>
     <th>Email</th>
     <th>Phone</th>
     <th>Role</th>
@@ -20,6 +21,11 @@
   <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.name, user %></td>
+        <% if user.house != nil %>
+            <td><%= link_to user.house.name %></td>
+        <% else %>
+            <td><%= "No House" %></td>
+        <% end %>
         <td><%= mail_to user.email %></td>
         <td><%= number_to_phone(user.phone) %></td>
 

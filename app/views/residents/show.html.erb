@@ -11,6 +11,17 @@
 
 </p>
 
+
+  <p>
+    <strong>Phone Number:</strong>
+    <% if @resident.house != nil %>
+        <%= @resident.house.phone %>
+    <% else %>
+        <%= 'No House'%>
+    <% end %>
+
+  </p>
+
 <p>
   <strong>Notes:</strong>
   <%= @resident.notes %>

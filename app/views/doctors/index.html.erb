@@ -15,11 +15,10 @@
   <tbody>
     <% @doctors.each do |doctor| %>
       <tr>
-        <td><%= doctor.name %></td>
+        <td><%= link_to doctor.name %></td>
         <td><%= doctor.doctor_type %></td>
         <td><%= link_to doctor.address, map_link(doctor.address) %></td>
         <td><%= doctor.phone %></td>
-        <td><%= link_to 'See Detail', doctor %></td>
         <td><%= link_to 'Edit', edit_doctor_path(doctor) %></td>
         <td><%= link_to 'Delete', doctor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

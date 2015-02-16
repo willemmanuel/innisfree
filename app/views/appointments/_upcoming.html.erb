@@ -3,7 +3,7 @@
     <tr>
       <th>Resident </th>
       <th>Doctor </th>
-      <th>Volunteer </th>
+      <th>Assigned Volunteer </th>
       <th>Date </th>
       <th>Time </th>
       <th>Type </th>
@@ -18,7 +18,7 @@
         <td><%= link_to appointment.doctor.name, appointment.doctor %>   
           <small><%= link_to '(map)', map_link(appointment.doctor.address) %></small></td>
         <% if appointment.user.nil? %>
-          <td>No volunteer assigned</td>
+          <td></td>
         <% else %>
           <td><%= link_to appointment.user.name, appointment.user %></td>
         <% end %>

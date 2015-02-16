@@ -37,7 +37,7 @@
 
     </div>
     <div class="field">
-      <%= f.label :user_id %><br>
+      <%= f.label "Volunteer" %><br>
       <% if current_user.admin %>
           <% users = User.all.map { |v| [v.name, v.id] } %>
       <% else %>
@@ -54,7 +54,7 @@
       <%= f.time_select :time, {:ampm => true, :minute_step=>5}%>
     </div>
     <div class="field">
-      <%= f.label :apt_type %><br>
+      <%= f.label "Appointment Type" %><br>
       <% types = @types.map {|t| [t.apt_type, t.apt_type]} %>
       <% if params.has_key?(:doctor_id) %>
           <%= f.select(:apt_type, options_from_collection_for_select(types, "last", "first", params[:apt_type]), { :class => 'chosen-select', :id => 'select_type' }) %>
@@ -81,6 +81,9 @@
       <%= f.label :notes %><br>
       <%= f.text_area :notes %>
     </div>
+
+    <br>
+
     <div class="actions">
       <%= f.submit %>
     </div>
