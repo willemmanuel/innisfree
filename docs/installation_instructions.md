@@ -15,7 +15,9 @@ This is a work in progress. Currently we're working with Monika to get BlueHost 
   7. Edit .bash.rc file as described in first guide
   3. Create Rails app: ```rails new innisfree -d mysql```
   4. Unzip application code: ```unzip ~/innisfree.zip````
+    - Type ```A``` when prompted to overwrite all common files
   6. ```cd innisfree```
+  7. Uncomment line containing ```gem 'therubyracer'``` in Gemfile
   5. Install missing gems ```bundle install --path vendor/bundle```
   6. Create __app__ .htaccess file (e.g. ```~/rails/innisfree/public/.htaccess```) as described in first guide
     - Change the second to last line to ```SetEnv GEM_HOME /home2/voluntf8/ruby/gems```
