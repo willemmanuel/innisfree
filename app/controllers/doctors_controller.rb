@@ -1,10 +1,10 @@
 class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column, :sort_direction
   # GET /doctors
   # GET /doctors.json
   def index
-    @doctors = Doctor.all
+    @doctors = Doctor.order(sort_column + " " + sort_direction)
     respond_to do |format|
       format.html
       format.csv { render text: @doctors.to_csv }
@@ -74,5 +74,15 @@ class DoctorsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def doctor_params
       params.require(:doctor).permit(:name, :address, :phone, :doctor_type)
+    end
+      def sort_column
+      Doctor.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      Doctor.column_names.include?(params[:sort]) ? params[:sort] : "address"
+      Doctor.column_names.include?(params[:sort]) ? params[:sort] : "phone"
+      Doctor.column_names.include?(params[:sort]) ? params[:sort] : "doctor_type"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
