@@ -3,6 +3,8 @@
 ##Overview
 This is a work in progress. Currently we're working with Monika to get BlueHost credentials. Once we have the credentials, we will configure Rails on the server, upload our app and deploy it using this [guide](https://my.bluehost.com/cgi/help/rails) and this [guide](http://www.dotkam.com/2009/02/01/deploy-rails-application-on-bluehost/).
 
+
+Need to re-write to take advantage of BlueHost's tools for Rails apps
 ##Steps:
 1. Get BlueHost credentials
 2. Create subdomain (here named scheduling)
