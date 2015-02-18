@@ -101,6 +101,9 @@ class AppointmentsController < ApplicationController
   def new
     @types = AptType.all
     @appointment = Appointment.new
+
+    @residents = Resident.all
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
   end
 
   def add_apt_type

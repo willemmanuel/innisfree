@@ -4,3 +4,12 @@
 
 <br>
 <%= link_to 'Back to Appointments', appointments_path %>
+<br>
+
+<div class="row">
+  <h2>Upcoming</h2>
+  <%= render 'filter_new' %>
+  <div id="upcoming">
+    <%= render 'upcoming' %>
+  </div>
+</div>
