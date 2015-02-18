@@ -28,6 +28,7 @@ This is a work in progress. Currently we're working with Monika to get BlueHost 
   5. Install missing gems ```bundle install --path vendor/bundle```
   6. Create __app__ .htaccess file (e.g. ```~/rails_app/innisfree/public/.htaccess```) as described in first guide
     - Change the second to last line to ```SetEnv GEM_HOME /home2/voluntf8/ruby/gems```
+  5. Delete the subdomain directory: ```rm -rf ~/public_html/scheduling```
   5. Link subdomain and application directory as described in first guide
     - Create symbolic link from domain to app: ```ln -s ~/rails_app/innisfree/public ~/public_html/scheduling```
 4. Create config/database.yml from config/database.yml.template so production entry points to BlueHost SQL server:
