@@ -1,5 +1,8 @@
 
 class ReportsController < ApplicationController
+
+    before_filter :check_admin
+
     # GET /appointments
     # GET /appointments.json
 
@@ -47,6 +50,12 @@ class ReportsController < ApplicationController
 
 
   private
+
+
+    def check_admin
+      redirect_to root_path, alert: "You do not have admin privileges" unless current_user.admin
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
       params.require(:report).permit(:resident_id, :doctor_id, :date,:house_id, :date2)

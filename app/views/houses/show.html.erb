@@ -21,5 +21,14 @@
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_house_path(@house) %> |
-<%= link_to 'Back', houses_path %>
+<%= link_to 'Back to Houses', houses_path %>
+
+<% if current_user.admin %>
+    | <%= link_to 'Delete House', @house, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+<% if current_user.admin || current_user.house == @house %>
+    | <%= link_to 'Edit House', edit_house_path(@house) %>
+<% end %>
+<% if current_user.admin %>
+    | <%= link_to 'New House', new_house_path, method: :get, class: "mobile-size" %>
+<% end %>

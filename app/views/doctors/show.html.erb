@@ -22,5 +22,10 @@
   <%= @doctor.phone %>
 </p>
 
-<%= link_to 'Edit', edit_doctor_path(@doctor) %> |
-<%= link_to 'Back', doctors_path %>
+
+<%= link_to 'Back to Doctors', doctors_path %>
+<% if current_user.admin %>
+    | <%= link_to 'Delete Doctor', @doctor, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Edit Doctor', edit_doctor_path(@doctor) %> |
+    <%= link_to 'New Doctor', new_doctor_path, method: :get, class: "mobile-size" %>
+<% end %>

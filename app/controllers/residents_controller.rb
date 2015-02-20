@@ -1,7 +1,7 @@
 class ResidentsController < ApplicationController
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
-  before_action :check_admin, only: [:new, :create, :index]
-  before_action :check_house, only: [:edit, :update, :destroy]
+  before_action :check_admin, only: [:new, :create, :index, :destroy]
+  before_action :check_house, only: [:edit, :update]
 
 
   def index
@@ -71,6 +71,10 @@ class ResidentsController < ApplicationController
     def check_admin
       redirect_to houses_path unless current_user.admin
     end
+
+  def check_privileges
+    redirect_to houses_path, alert: "You do not have admin privileges" unless current_user.admin || current_user.house_id == @resident.house_id
+  end
 
     # Check to see if the user is in the same house as resident or an admin
     def check_house

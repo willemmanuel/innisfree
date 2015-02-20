@@ -1,6 +1,7 @@
 class HousesController < ApplicationController
   before_action :set_house, only: [:show, :edit, :update, :destroy]
-  before_action :check_admin, except: [:index, :show]
+  before_action :check_admin, except: [:index, :show, :edit, :update]
+  before_action :check_privileges, only: [:edit, :update]
 
   # GET /houses
   # GET /houses.json
@@ -70,6 +71,10 @@ class HousesController < ApplicationController
 
   private
     # Check to see if the user is an admin (staff)
+    def check_privileges
+      redirect_to houses_path, alert: "You do not have admin privileges" unless current_user.admin || current_user.house == @house
+    end
+
     def check_admin
       redirect_to houses_path, alert: "You do not have admin privileges" unless current_user.admin
     end

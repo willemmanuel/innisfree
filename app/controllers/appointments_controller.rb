@@ -1,6 +1,8 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
   before_action :check_workstation_head, only: [:new, :edit, :create, :update, :destroy]
+  before_action :check_admin, only: [:destroy]
+  before_action :check_house, only: [:edit, :update]
 
   # GET /appointments
   # GET /appointments.json
@@ -187,4 +189,14 @@ class AppointmentsController < ApplicationController
   def appointment_params
     params.require(:appointment).permit(:resident_id, :doctor_id, :user_id, :date, :time, :apt_type, :notes, :res_id, :house_id, :date, :apt_type)
   end
+
+  # Check to see if the user is an admin (staff)
+  def check_house
+    redirect_to appointments_path, alert: "You do not have admin privileges" unless current_user.admin || current_user.house == @appointment.resident.house
+  end
+
+  def check_admin
+    redirect_to appointments_path, alert: "You do not have admin privileges" unless current_user.admin
+  end
+
 end

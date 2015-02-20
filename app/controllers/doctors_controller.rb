@@ -1,4 +1,5 @@
 class DoctorsController < ApplicationController
+  before_filter :check_admin, only: [:edit, :update, :destroy, :new, :create]
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   # GET /doctors
@@ -85,4 +86,9 @@ class DoctorsController < ApplicationController
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
+
+  def check_admin
+    redirect_to root_path, alert: "You do not have admin privileges" unless current_user.admin
+  end
+
 end

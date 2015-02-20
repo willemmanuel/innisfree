@@ -1,4 +1,5 @@
 class CarsController < ApplicationController
+  before_filter :check_admin, only: [:edit, :update, :destroy, :new, :create]
   before_action :set_car, only: [:show, :edit, :update, :destroy, :toggle]
 
   # GET /cars
@@ -139,4 +140,9 @@ class CarsController < ApplicationController
     def reservation_params
       params.require(:reservation).permit(:start, :end, :car)
     end
+
+    def check_admin
+      redirect_to root_path, alert: "You do not have admin privileges" unless current_user.admin
+    end
+
 end
