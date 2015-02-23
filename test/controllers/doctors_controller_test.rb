@@ -41,12 +41,11 @@ class DoctorsControllerTest < ActionController::TestCase
     assert_redirected_to doctor_path(assigns(:doctor))
   end
 
-  #test "should not create doctor with missing name" do
-  #  assert_difference('Doctor.count') do
-  #    post :create, doctor: { address: @doctor.address, phone: @doctor.phone }
-  #  end
-  #    assert_response :redirect
-  #end
+  test "should not create doctor with missing name" do
+    assert_no_difference('Doctor.count') do
+    post :create, doctor: { address: @doctor.address, phone: @doctor.phone }
+    end
+  end
 
   test "should not create doctor with missing phone" do
     assert_difference('Doctor.count') do
@@ -59,7 +58,7 @@ class DoctorsControllerTest < ActionController::TestCase
     assert_difference('Doctor.count') do
       post :create, doctor: { name: @doctor.name, phone: @doctor.phone }
     end
-      assert_response :redirect
+     assert_response :redirect
   end
 
   test "should not create doctor with name only" do
@@ -69,12 +68,11 @@ class DoctorsControllerTest < ActionController::TestCase
       assert_response :redirect
   end
 
-  #test "should not create doctor with address only" do
-  #  assert_difference('Doctor.count') do
-  #    post :create, doctor: { address: @doctor.address }
-  #  end
-  #    assert_response :redirect
-  #end
+  test "should not create doctor with address only" do
+    assert_no_difference('Doctor.count') do
+      post :create, doctor: { address: @doctor.address }
+    end
+  end
 
   test "should destroy doctor" do
     assert_difference('Doctor.count', -1) do
