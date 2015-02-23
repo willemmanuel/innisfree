@@ -19,7 +19,7 @@ class ResidentsControllerTest < ActionController::TestCase
       post :create, resident: { house_id: @resident.house_id, name: @resident.name, notes: @resident.notes }
     end
 
-    assert_redirected_to resident_path(assigns(:resident))
+    assert_redirected_to new_resident_path
   end
 
   test "volunteer should not create resident" do
