@@ -1,0 +1,13 @@
+<h3>Car Reservation</h3>
+  <div class="field">
+  	<%= label_tag 'Car' %><br>
+  	<%= @reservation.car.name %><br>
+  	<%= label_tag 'Reserved by' %><br>
+  	<%= @reservation.user.name %><br>
+    <%= label_tag 'Start time' %><br>
+    <%= @reservation.start.strftime("%I:%M %p on %a %b %d %Y") %><br>
+    <%= hidden_field_tag 'reservation_start', :value => @reservation.start%>
+    <%= label_tag 'End time' %><br>
+    <%= @reservation.end.strftime("%I:%M %p on %a %b %d %Y") %><br><br>
+  </div>
+  <%= link_to "Back", cars_path %> | <%= link_to "Delete Reservation", destroy_reservation_path(@reservation),  method: :delete, data: { confirm: 'Are you sure?' } %>

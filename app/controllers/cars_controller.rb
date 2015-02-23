@@ -1,6 +1,7 @@
 class CarsController < ApplicationController
   before_filter :check_admin, only: [:edit, :update, :destroy, :new, :create]
   before_action :set_car, only: [:show, :edit, :update, :destroy, :toggle]
+  before_action :set_reservation, only: [:show_reservation, :destroy_reservation]
 
   # GET /cars
   # GET /cars.json 
@@ -14,6 +15,9 @@ class CarsController < ApplicationController
       format.json
       format.js
     end
+  end
+
+  def show_reservation
   end
 
   def get_availability
@@ -75,6 +79,11 @@ class CarsController < ApplicationController
     end
   end
 
+  def destroy_reservation
+    @reservation.destroy
+    redirect_to cars_url, notice: 'Reservation was deleted.' 
+  end
+
   # POST /cars
   # POST /cars.json
   def create
@@ -130,6 +139,10 @@ class CarsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_car
       @car = Car.find(params[:id])
+    end
+
+    def set_reservation
+      @reservation = Reservation.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'reservation/availability' => 'cars#get_availability', as: :get_availability
   post 'reservation' => 'cars#save_reservation', as: :save_reservation
   get 'reservations' => 'cars#get_reservations'
+  get 'reservations/:id' => 'cars#show_reservation', as: :show_reservation
+  delete 'reservations/:id' => 'cars#destroy_reservation', as: :destroy_reservation
   put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user
   put 'settings/approve/:id' => 'settings#toggle_user_approval', as: :approve_user
