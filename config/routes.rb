@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-
- #get "/innisfree/" => redirect("/appointments")
-
-  resources :cars
+  # sorry these are messy routes ¯\_(ツ)_/¯ this block all for reservations
   get 'reservation/new' => 'cars#new_reservation', as: :new_reservation
   post 'reservation/new' => 'cars#new_reservation'
   post 'reservation/availability' => 'cars#get_availability', as: :get_availability
@@ -11,6 +8,9 @@ Rails.application.routes.draw do
   get 'reservations' => 'cars#get_reservations'
   get 'reservations/:id' => 'cars#show_reservation', as: :show_reservation
   delete 'reservations/:id' => 'cars#destroy_reservation', as: :destroy_reservation
+  # 
+
+  resources :cars
   put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user
   put 'settings/approve/:id' => 'settings#toggle_user_approval', as: :approve_user
