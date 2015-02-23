@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= @doctor.name %></h1>
+
 <p>
   <strong>Name:</strong>
   <%= @doctor.name %>
@@ -22,7 +24,7 @@
   <%= @doctor.phone %>
 </p>
 
-
+<br>
 <%= link_to 'Back to Doctors', doctors_path %>
 <% if current_user.admin %>
     | <%= link_to 'Delete Doctor', @doctor, method: :delete, data: { confirm: 'Are you sure?' } %> |

@@ -1,10 +1,11 @@
-<h1>Editing user</h1>
+<h1>Editing User</h1>
 
 <%= render 'form' %>
 
 <br>
 <%= link_to 'Show User', @user %> |
-<%= link_to 'Back to Users', users_path %>
+<%= link_to 'View Users', users_path %>
 <% if current_user.admin %>
-    | <%= link_to 'Back to Admin', settings_path %>
+    | <%= link_to 'View Admin', settings_path %>
+    | <%= link_to 'Delete User', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>

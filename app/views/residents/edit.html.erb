@@ -1,6 +1,10 @@
-<h1>Editing resident</h1>
+<h1>Editing Resident</h1>
 
 <%= render 'form' %>
 <br>
-<%= link_to 'Show', @resident %> |
-<%= link_to 'Back', houses_path %>
+<%= link_to 'Show Resident', @resident %> |
+<%= link_to 'Back to Houses List', houses_path %>
+<% if current_user.admin%>
+    | <%= link_to 'Delete Resident', @resident, method: :delete, data: { confirm: 'Are you sure?' } %>
+    | <%= link_to 'View Residents', residents_path %>
+<% end %>

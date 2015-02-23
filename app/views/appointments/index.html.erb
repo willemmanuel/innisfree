@@ -1,7 +1,12 @@
 <h1>Resident Appointments</h1>
 
 <%= render 'filter' %>
-<% if current_user.admin || current_user.house.name != 'Workstation Heads' %>
+
+<%if not current_user.house == nil %>
+    <% if current_user.admin || current_user.house.name != 'Workstation Heads' %>
+        <h4><%= button_to 'New Appointment', new_appointment_path, method: :get, class: "mobile-size" %></h4>
+    <% end %>
+<% else %>
     <h4><%= button_to 'New Appointment', new_appointment_path, method: :get, class: "mobile-size" %></h4>
 <% end %>
 

@@ -1,7 +1,10 @@
-<h1>Editing doctor</h1>
+<h1>Editing Doctor</h1>
 
 <%= render 'form' %>
 
 <br>
 <%= link_to 'Show Doctor', @doctor %> |
-<%= link_to 'Back to Doctor', doctors_path %>
+<%= link_to 'Back to Doctors List', doctors_path %>
+<% if current_user.admin%>
+    | <%= link_to 'Delete Doctor', @doctor, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

@@ -11,15 +11,15 @@ class SettingsController < ApplicationController
 		@user = User.new(user_params)
 		@user.approved = true
 		if @user.save
-        	redirect_to :back, notice: 'User was successfully created.' 
+          redirect_to :back, notice: 'User (' + @user.name + ') was successfully created.'
       	else
-        	redirect_to :back, alert: 'There were errors present.' 
+        	redirect_to :back, alert: 'There were errors present.'
       end
 	end
 
 	def toggle_user_permission
 		@user.toggle!(:admin)
-		redirect_to :back, notice: "User toggled"
+		redirect_to :back, notice: "User (' + @user.name + ') toggled"
 	end
 
 	def toggle_user_approval
@@ -28,7 +28,7 @@ class SettingsController < ApplicationController
 			@user.admin = false
 			@user.save
 		end
-		redirect_to :back, notice: "User toggled"
+		redirect_to :back, notice: "User (' + @user.name + ') toggled"
 	end
 
 	private
