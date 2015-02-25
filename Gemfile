@@ -70,3 +70,4 @@ gem 'prawn'
 gem 'prawnto'
 gem 'prawn-table'
 
+gem 'simplecov', :require => false, :group => :test
