@@ -10,6 +10,6 @@
   <h2>Upcoming</h2>
   <%= render 'filter_new' %>
   <div id="upcoming">
-    <%= render 'upcoming' %>
+    <%= render :partial => "upcoming", locals: {:paginate => true} %>
   </div>
 </div>

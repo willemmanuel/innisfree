@@ -43,7 +43,7 @@
 <div class="col-md-6">
 <h2>Appointments</h2>
 <% if !@upcoming_appointments.nil? %>
-	<%= render 'appointments/upcoming' %>
+	<%= render :partial => "appointments/upcoming", locals: {:paginate => false} %>
 <% else %>
 	<h4>No resident appointments</h4>
 <% end %>

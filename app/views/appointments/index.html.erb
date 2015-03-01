@@ -14,7 +14,7 @@
 <div class="row">
     <h2>Upcoming</h2>
     <div id="upcoming">
-      <%= render 'upcoming' %>
+      <%= render :partial => "upcoming", locals: {:paginate => true} %>
     </div>
 </div>
 <div class="row">
