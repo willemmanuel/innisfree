@@ -31,7 +31,35 @@ class ReportPdf < Prawn::Document
   def product_rows
     [['Name', 'Email', 'Phone', 'House']] +
         @users.map do |data|
-          [data.name, data.email, data.phone, House.where('id = ?', data.house_id).first.name]
+
+          if data.name != nil
+            @name = data.name
+          else
+            @name = ""
+          end
+
+          if data.phone != nil
+            @phone = data.phone
+          else
+            @phone = ""
+          end
+
+          if data.email != nil
+            @email = data.email
+          else
+            @email = ""
+          end
+
+          if data.house_id != nil
+            @house = House.where('id = ?', data.house_id).first.name
+          else
+            @house = ""
+          end
+
+          [@name,
+           @email,
+           @phone,
+           @house]
         end
   end
 

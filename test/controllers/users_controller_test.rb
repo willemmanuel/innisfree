@@ -50,8 +50,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get pdf with prawnto" do
-    #User.should_receive(:prawn)
-    #get :index, :format => :pdf
+    get :index, :format => :pdf
   end
 
   test "should get new" do
@@ -60,7 +59,6 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get new with a notice" do
-    @user.save
     get :new
     assert_response :success
   end
