@@ -1,7 +1,7 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  before_action :set_appointment, only: [:show, :edit, :update, :destroy, :send_house_reminder]
   before_action :check_workstation_head, only: [:new, :edit, :create, :update, :destroy]
-  before_action :check_admin, only: [:destroy]
+  before_action :check_admin, only: [:destroy, :send_house_reminder]
   before_action :check_house, only: [:edit, :update]
 
   # GET /appointments
@@ -176,6 +176,17 @@ class AppointmentsController < ApplicationController
 
   def residents
     @residents
+  end
+
+  def send_house_reminder
+    users = User.where(house: @appointment.resident.house)
+    users.each do |user|
+      NotificationMailer.house_reminder(@appointment, user).deliver
+    end
+    if !@appointment.user.nil?
+      NotificationMailer.house_reminder(@appointment, @appointment.user).deliver
+    end
+    redirect_to @appointment, notice: "Emails sent"
   end
 
   private

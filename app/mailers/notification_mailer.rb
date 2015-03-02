@@ -24,4 +24,9 @@ class NotificationMailer < ActionMailer::Base
     mail(to: @user.email, subject: 'New Appointment Scheduled')
   end
 
+  def house_reminder(appointment, user)
+    @appointment = appointment
+    @user = user
+    mail(to: @user.email, subject: 'Appointment Reminder')
+  end
 end

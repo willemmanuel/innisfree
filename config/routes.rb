@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'appointments/appointments_for_day' => 'appointments#appointments_for_day'
   get 'reports/generate' => 'reports#generate'
   get 'users/send_reminders' => 'users#send_reminders', as: :send_reminders
+  post 'appointments/:id/send_house_reminder' => 'appointments#send_house_reminder', as: :send_house_reminder
 
   devise_for :users, controllers: { registrations: "users/registrations" }
   resources :appointments do
