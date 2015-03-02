@@ -22,6 +22,7 @@
 #  house_id               :integer
 #  name                   :string(255)
 #  email_pref             :boolean          default(FALSE)
+#  medical_coordinator    :boolean          default(FALSE)
 #
 
 require 'test_helper'

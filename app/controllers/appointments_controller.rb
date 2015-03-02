@@ -133,6 +133,10 @@ class AppointmentsController < ApplicationController
 
     respond_to do |format|
       if @appointment.save
+        coordinators = User.where(medical_coordinator: true).where(email_pref: true)
+        coordinators.each do |coordinator|
+          NotificationMailer.new_appointment_notification(@appointment, coordinator).deliver
+        end
         format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
         format.json { render :show, status: :created, location: @appointment }
       else
