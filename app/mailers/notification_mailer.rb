@@ -18,4 +18,10 @@ class NotificationMailer < ActionMailer::Base
   	mail(to: user.email, subject: 'Schedule Follow-up Appointment')
   end
 
+  def new_appointment_notification(appointment)
+    @appointment = appointment
+        @user = User.where('id = ?', @appointment.user_id)[0];
+    mail(to: @user.email, subject: 'New Appointment Scheduled')
+  end
+
 end
