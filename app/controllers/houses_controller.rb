@@ -73,11 +73,11 @@ class HousesController < ApplicationController
   private
     # Check to see if the user is an admin (staff)
     def check_privileges
-      redirect_to houses_path, alert: "You do not have admin privileges" unless current_user.admin || current_user.house == @house
+      redirect_to houses_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.house == @house
     end
 
     def check_admin
-      redirect_to houses_path, alert: "You do not have admin privileges" unless current_user.admin
+      redirect_to houses_path, alert: "You do not have admin privileges." unless current_user.admin
     end
 
     # Use callbacks to share common setup or constraints between actions.

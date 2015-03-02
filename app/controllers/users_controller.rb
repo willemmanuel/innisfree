@@ -99,7 +99,7 @@ class UsersController < ApplicationController
   end
 
   def check_admin
-    redirect_to root_path, alert: "You do not have admin privileges" unless current_user.admin
+    redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
   end
 
 end

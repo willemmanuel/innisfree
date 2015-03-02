@@ -74,7 +74,7 @@ class ResidentsController < ApplicationController
     end
 
   def check_privileges
-    redirect_to houses_path, alert: "You do not have admin privileges" unless current_user.admin || current_user.house_id == @resident.house_id
+    redirect_to houses_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.house_id == @resident.house_id
   end
 
     # Check to see if the user is in the same house as resident or an admin

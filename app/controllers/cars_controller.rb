@@ -90,7 +90,7 @@ class CarsController < ApplicationController
     @car = Car.new(car_params)
     respond_to do |format|
       if @car.save
-        format.html { redirect_to cars_path, notice: 'Car was successfully created.' }
+        format.html { redirect_to cars_path, notice: 'Car (' + @car.name + ') was successfully created.' }
         format.json { render :show, status: :created, location: @car }
       else
         format.html { render :new }
@@ -104,7 +104,7 @@ class CarsController < ApplicationController
   def update
     respond_to do |format|
       if @car.update(car_params)
-        format.html { redirect_to @car, notice: 'Car was successfully updated.' }
+        format.html { redirect_to @car, notice: 'Car (' + @car.name + ') was successfully updated.' }
         format.json { render :show, status: :ok, location: @car }
       else
         format.html { render :edit }
@@ -118,7 +118,7 @@ class CarsController < ApplicationController
   def destroy
     @car.destroy
     respond_to do |format|
-      format.html { redirect_to cars_url, notice: 'Car was successfully destroyed.' }
+      format.html { redirect_to cars_url, notice: 'Car (' + @car.name + ') was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -155,7 +155,7 @@ class CarsController < ApplicationController
     end
 
     def check_admin
-      redirect_to root_path, alert: "You do not have admin privileges" unless current_user.admin
+      redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
     end
 
 end

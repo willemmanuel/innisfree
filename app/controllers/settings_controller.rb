@@ -19,7 +19,7 @@ class SettingsController < ApplicationController
 
 	def toggle_user_permission
 		@user.toggle!(:admin)
-		redirect_to :back, notice: "User (' + @user.name + ') toggled"
+		redirect_to :back, notice: "User (" + @user.name + ") admin status changed."
 	end
 
 	def toggle_user_approval
@@ -28,13 +28,13 @@ class SettingsController < ApplicationController
 			@user.admin = false
 			@user.save
 		end
-		redirect_to :back, notice: "User (' + @user.name + ') toggled"
+		redirect_to :back, notice: "User (" + @user.name + ") approval staus changed."
 	end
 
 	private
 
 	def check_admin
-		redirect_to root_path, alert: "You do not have admin privileges" unless current_user.admin
+		redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
 	end
 
     def set_user

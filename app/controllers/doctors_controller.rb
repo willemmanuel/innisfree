@@ -62,7 +62,7 @@ class DoctorsController < ApplicationController
   def destroy
     @doctor.destroy
     respond_to do |format|
-      format.html { redirect_to doctors_url, notice: 'Doctor (' + @doctor.name + ') was successfully destroyed.' }
+      format.html { redirect_to doctors_url, notice: 'Doctor (' + @doctor.name + ') was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -93,7 +93,7 @@ class DoctorsController < ApplicationController
     end
 
   def check_admin
-    redirect_to root_path, alert: "You do not have admin privileges" unless current_user.admin
+    redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
   end
 
 end

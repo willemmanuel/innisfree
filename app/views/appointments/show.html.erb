@@ -1,22 +1,20 @@
-<p id="notice"><%= notice %></p>
-
 <div class="col-md-6">
   <p>
     <strong>Resident:</strong>
-    <%= @appointment.resident.name %>
+    <%= link_to @appointment.resident.name, @appointment.resident %>
   </p>
 
   <p>
     <strong>Doctor:</strong>
-    <%= @appointment.doctor.name %>
+    <%= link_to @appointment.doctor.name, @appointment.doctor %>
   </p>
 
   <p>
     <strong>Volunteer:</strong>
     <% if @appointment.user.nil? %>
-        No volunteer assigned
+        No Volunteer Assigned
     <% else %>
-        <%= @appointment.user.name %>
+        <%= link_to @appointment.user.name, @appointment.user%>
     <% end %>
   </p>
 
@@ -119,7 +117,10 @@
               google.maps.event.addDomListener(window, 'load', initialize);
           }});
   </script>
+  <br>
+  <%= link_to 'Go To Map', map_link(@appointment.doctor.address) %>
 </div>
+
 </div>
 
 

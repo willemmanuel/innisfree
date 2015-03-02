@@ -161,7 +161,7 @@ class AppointmentsController < ApplicationController
   def destroy
     @appointment.destroy
     respond_to do |format|
-      format.html { redirect_to appointments_url, notice: 'Appointment was successfully destroyed.' }
+      format.html { redirect_to appointments_url, notice: 'Appointment was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -177,7 +177,7 @@ class AppointmentsController < ApplicationController
   private
   # Check to see if the user is a workstation head
   def check_workstation_head
-    redirect_to appointments_path, alert: "Workstation heads may not modify appointments" unless current_user.admin || current_user.house.name != 'Workstation Heads'
+    redirect_to appointments_path, alert: "Workstation heads may not modify appointments." unless current_user.admin || current_user.house.name != 'Workstation Heads'
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -192,11 +192,11 @@ class AppointmentsController < ApplicationController
 
   # Check to see if the user is an admin (staff)
   def check_house
-    redirect_to appointments_path, alert: "You do not have admin privileges" unless current_user.admin || current_user.house == @appointment.resident.house
+    redirect_to appointments_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.house == @appointment.resident.house
   end
 
   def check_admin
-    redirect_to appointments_path, alert: "You do not have admin privileges" unless current_user.admin
+    redirect_to appointments_path, alert: "You do not have admin privileges." unless current_user.admin
   end
 
 end
