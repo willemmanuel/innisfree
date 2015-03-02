@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :cars
   put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user
+  put 'settings/email/:id' => 'settings#toggle_user_email_preference', as: :email_preference_user
+  put 'settings/medicalcoordinator/:id' => 'settings#toggle_user_medical_coordinator', as: :medical_coordinator_user
   put 'settings/approve/:id' => 'settings#toggle_user_approval', as: :approve_user
   post 'settings/create_user' => 'settings#create_user', as: :create_user
   get 'appointments/upcoming' => 'appointments#upcoming'

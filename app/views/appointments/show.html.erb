@@ -49,6 +49,7 @@
 
   <%= link_to 'Copy Appointment', new_appointment_path({:doctor_id => @appointment.doctor.id, :resident_id => @appointment.resident.id, :apt_type => @appointment.apt_type}) %> |
   <%= link_to 'Back to Appointments', appointments_path %><br><br>
+  <%= button_to 'New Appointment', new_appointment_path, method: :get %><br>
  
    <div id="newFollowupModal" class="modal">
     <div class="modal-dialog">

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def send_reminders
    User.send_reminders
-   redirect_to :root, notice: "Emails sent"
+   redirect_to :back, notice: "Email reminders sent."
   end
 
 	def show

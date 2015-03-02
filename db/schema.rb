@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209221158) do
+ActiveRecord::Schema.define(version: 20150302034919) do
 
   create_table "appointments", force: true do |t|
     t.integer  "resident_id"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20150209221158) do
     t.integer  "house_id"
     t.string   "name"
     t.boolean  "email_pref",             default: false
+    t.boolean  "medical_coordinator",    default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

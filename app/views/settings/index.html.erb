@@ -9,7 +9,8 @@
       <th>House</th>
       <th>Email</th>
       <th>Admin?</th>
-
+      <th>Emails?</th>
+      <th>Coordinator?</th>
       <th></th>
       <th></th>
     </tr>
@@ -33,7 +34,17 @@
 			<td><%= link_to "N", admin_user_path(user), method: :put, class: "btn btn-warning", style: "width: 40px;" %></td>
         <% end %>
 
+        <% if user.email_pref %>
+            <td><%= link_to "Y", email_preference_user_path(user), method: :put, class: "btn btn-success", style: "width: 40px;" %></td>
+        <% else %>
+            <td><%= link_to "N", email_preference_user_path(user), method: :put, class: "btn btn-warning", style: "width: 40px;" %></td>
+        <% end %>
 
+        <% if user.medical_coordinator %>
+            <td><%= link_to "Y", medical_coordinator_user_path(user), method: :put, class: "btn btn-success", style: "width: 40px;" %></td>
+        <% else %>
+            <td><%= link_to "N", medical_coordinator_user_path(user), method: :put, class: "btn btn-warning", style: "width: 40px;" %></td>
+        <% end %>
 
         <td><%= link_to "Edit", edit_user_path(user) %></td>
         <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
