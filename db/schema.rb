@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 20150302034919) do
     t.integer  "house_id"
     t.string   "name"
     t.boolean  "email_pref",             default: false
-    t.boolean  "medical_coodinator",    default: false
+    t.boolean  "medical_coordinator",    default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
