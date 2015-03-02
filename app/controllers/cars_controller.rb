@@ -71,6 +71,7 @@ class CarsController < ApplicationController
     @reservation.start = params[:reservation_start]
     @reservation.end = params[:reservation_end]
     @reservation.car_id = params[:car]
+    @reservation.note = params[:note]
     @reservation.user = current_user
     if @reservation.save
       redirect_to action: "index", notice: "Reservation created"
@@ -151,7 +152,7 @@ class CarsController < ApplicationController
     end
 
     def reservation_params
-      params.require(:reservation).permit(:start, :end, :car)
+      params.require(:reservation).permit(:start, :end, :car, :note)
     end
 
     def check_admin

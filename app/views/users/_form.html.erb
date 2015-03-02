@@ -43,10 +43,9 @@
     <% end %>
 
     <% if current_user.admin || current_user.house.name != 'Workstation Heads' %>
-        <div>
-          <%= f.label :house_id %> <br>
-          <%= f.select :house_id, options_for_select(@houses.map{ |h| [h.name, h.id]}, :selected=>@user.house_id ), include_blank: true  %>
-        </div>
+          <%= f.label :house_id %><br>
+          <% houses = House.all.map { |house| [house.name, house.id] } %>
+          <%= f.select(:house_id, houses, { include_blank: false }, { :class => 'chosen-select' }) %>
     <% end %>
 
     <div>

@@ -18,7 +18,7 @@
   <div class="field">
     <%= f.label :house_id %><br>
     <% houses = House.all.map { |house| [house.name, house.id] } %>
-    <%= f.select(:house_id, houses, include_blank: true ) %>
+    <%= f.select(:house_id, houses, { include_blank: false }, { :class => 'chosen-select' }) %>
   </div>
   <div class="field">
     <%= f.label :notes %><br>
