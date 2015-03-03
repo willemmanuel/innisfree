@@ -22,6 +22,7 @@
 #  house_id               :integer
 #  name                   :string(255)
 #  email_pref             :boolean          default(FALSE)
+#  medical_coordinator    :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
@@ -60,8 +61,8 @@ class User < ActiveRecord::Base
    end
    todays_reminders = RecurringReminder.where('notification_date = ?', Date.today)
    todays_reminders.each do |recur|
-     original_apt = Appointment.where('id = ?', recur.appointment_id)
-     user = User.where('id = ?', original_apt[0].user_id)[0]
+     original_apt = Appointment.where('id = ?', recur.appointment_id)[0]
+     user = User.where('id = ?', original_apt.user_id)[0]
      if !user.nil? && user.email_pref
        NotificationMailer.appointment_recurring(original_apt).deliver
      end 

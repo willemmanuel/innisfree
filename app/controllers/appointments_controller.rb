@@ -1,6 +1,8 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  before_action :set_appointment, only: [:show, :edit, :update, :destroy, :send_house_reminder]
   before_action :check_workstation_head, only: [:new, :edit, :create, :update, :destroy]
+  before_action :check_admin, only: [:destroy, :send_house_reminder]
+  before_action :check_house, only: [:edit, :update]
 
   # GET /appointments
   # GET /appointments.json
@@ -8,7 +10,7 @@ class AppointmentsController < ApplicationController
     @residents = Resident.all
     @houses = House.all
     @past_appointments = Appointment.where('date < ?', Date.today)
-    @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate( :page => params[:page], :per_page => 10)
     if params.has_key?(:res_id)
       session[:res_id] = params[:res_id]
     end
@@ -101,6 +103,9 @@ class AppointmentsController < ApplicationController
   def new
     @types = AptType.all
     @appointment = Appointment.new
+
+    @residents = Resident.all
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
   end
 
   def add_apt_type
@@ -128,6 +133,10 @@ class AppointmentsController < ApplicationController
 
     respond_to do |format|
       if @appointment.save
+        coordinators = User.where(medical_coordinator: true).where(email_pref: true)
+        coordinators.each do |coordinator|
+          NotificationMailer.new_appointment_notification(@appointment, coordinator).deliver
+        end
         format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
         format.json { render :show, status: :created, location: @appointment }
       else
@@ -156,7 +165,7 @@ class AppointmentsController < ApplicationController
   def destroy
     @appointment.destroy
     respond_to do |format|
-      format.html { redirect_to appointments_url, notice: 'Appointment was successfully destroyed.' }
+      format.html { redirect_to appointments_url, notice: 'Appointment was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -169,10 +178,21 @@ class AppointmentsController < ApplicationController
     @residents
   end
 
+  def send_house_reminder
+    users = User.where(house: @appointment.resident.house)
+    users.each do |user|
+      NotificationMailer.house_reminder(@appointment, user).deliver
+    end
+    if !@appointment.user.nil?
+      NotificationMailer.house_reminder(@appointment, @appointment.user).deliver
+    end
+    redirect_to @appointment, notice: "Emails sent"
+  end
+
   private
   # Check to see if the user is a workstation head
   def check_workstation_head
-    redirect_to appointments_path, alert: "Workstation heads may not modify appointments" unless current_user.admin || current_user.house.name != 'Workstation Heads'
+    redirect_to appointments_path, alert: "Workstation heads may not modify appointments." unless current_user.admin || current_user.house.name != 'Workstation Heads'
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -184,4 +204,14 @@ class AppointmentsController < ApplicationController
   def appointment_params
     params.require(:appointment).permit(:resident_id, :doctor_id, :user_id, :date, :time, :apt_type, :notes, :res_id, :house_id, :date, :apt_type)
   end
+
+  # Check to see if the user is an admin (staff)
+  def check_house
+    redirect_to appointments_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.house == @appointment.resident.house
+  end
+
+  def check_admin
+    redirect_to appointments_path, alert: "You do not have admin privileges." unless current_user.admin
+  end
+
 end

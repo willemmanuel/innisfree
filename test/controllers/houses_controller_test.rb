@@ -23,7 +23,7 @@ class HousesControllerTest < ActionController::TestCase
       post :create, house: { name: @house.name }
     end
 
-    assert_redirected_to house_path(assigns(:house))
+    assert_redirected_to new_house_path
   end
 
   test "should show house" do

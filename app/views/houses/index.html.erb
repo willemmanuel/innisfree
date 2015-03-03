@@ -17,6 +17,8 @@
               <div class="panel-heading"><strong><%= link_to house.name, house %></strong>
                 <% if current_user.admin %>
                     <small>(<%= link_to 'Edit', edit_house_path(house) %>, <%= link_to 'Delete', house, method: :delete, data: { confirm: 'Are you sure?' } %>)</small>
+                <% elsif current_user.house == house %>
+                    <small>(<%= link_to 'Edit', edit_house_path(house) %>)</small>
                 <% end %>
               </div>
               <div class="panel-body">

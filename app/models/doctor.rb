@@ -14,7 +14,9 @@
 include ActionView::Helpers::NumberHelper
 
 class Doctor < ActiveRecord::Base
-	has_many :appointments, dependent: :destroy
+	has_many :appointments
+
+  validates :name, presence: true
 	
 	def self.to_csv
 	  CSV.generate do |csv|

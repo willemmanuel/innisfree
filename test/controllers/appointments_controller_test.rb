@@ -4,11 +4,12 @@ class AppointmentsControllerTest < ActionController::TestCase
   setup do
     @appointment = appointments(:one)
     @user = FactoryGirl.create(:user, admin: true)
-    FactoryGirl.create(:resident, house_id: 1, id: 2)
-    FactoryGirl.create(:resident, house_id: 2, id: 3)
-    FactoryGirl.create(:appointment, resident_id: 2, date: Date.new(2014, 10, 7))
-    FactoryGirl.create(:appointment, resident_id: 3, date: Date.new(2014, 10, 8))
-    FactoryGirl.create(:appointment, resident_id: 2, date: Date.new(2014, 10, 9))
+    FactoryGirl.create(:doctor, id: 1, name: "doc", address: "123 Uni Drive", phone: "123-456-7890")
+    FactoryGirl.create(:resident, house_id: 1, id: 2, name: "Pocahontas")
+    FactoryGirl.create(:resident, house_id: 2, id: 3, name: "John Smith")
+    FactoryGirl.create(:appointment, resident_id: 2, date: Date.today, doctor_id: 1)
+    FactoryGirl.create(:appointment, resident_id: 3, date: Date.tomorrow, doctor_id: 1)
+    FactoryGirl.create(:appointment, resident_id: 2, date: Date.yesterday, doctor_id: 1)
     sign_in(@user)
   end
 
@@ -28,10 +29,24 @@ class AppointmentsControllerTest < ActionController::TestCase
     assert_redirected_to appointment_path(assigns(:appointment))
   end
 
+  test "should not create appointment" do
+    assert_difference('Appointment.count', 0) do
+      assert_raises( ActionController::ParameterMissing){
+        post :create, appointment: { }
+      }
+    end
+  end
+
   test "should update appointment" do
     
     patch :update, id: @appointment, appointment: { date: @appointment.date, apt_type: @appointment.apt_type, notes: @appointment.notes, doctor_id: @appointment.doctor_id, resident_id: @appointment.resident_id, time: @appointment.time, user_id: @appointment.user_id }
     assert_redirected_to appointment_path(assigns(:appointment))
+  end
+
+  test "should fail updating appointment" do
+    assert_raises(ActionController::ParameterMissing){
+      patch :update, id: @appointment, appointment: {}
+    }
   end
 
   test "should destroy appointment" do
@@ -67,5 +82,40 @@ class AppointmentsControllerTest < ActionController::TestCase
     assert (@controller.residents).length == 1
     xhr :get, :update_residents, {:house_id => '', :format => 'js'}
     assert (@controller.residents).length == (Resident.all).length
+  end
+
+  test "should add appointment type" do
+    assert_difference('AptType.count', 1) do
+      xhr :get, :add_apt_type, {:apt_type => 'type'}
+    end
+  end
+
+  test "should not add appointment type" do
+    assert_difference('AptType.count', 0) do
+      xhr :get, :add_apt_type, {:apt_type => ''}
+    end
+  end
+
+  test "should show new appointment page" do
+    get :new
+    assert_not_nil assigns(:residents)
+    assert_not_nil assigns(:appointment)
+    assert_not_nil assigns(:types)
+    assert_not_nil assigns(:upcoming_appointments)
+    assert_response :success
+  end
+
+  test "should create recurring reminder" do
+    assert_difference('RecurringReminder.count', 1) do
+      xhr :get, :set_recurring_reminder, {appointment_id: 1, reminder_date: Date.new(2015, 4, 7)}
+      assert_not_nil assigns(:reminder)
+      assert_response :success
+    end
+  end
+
+  test "should check appointments_for_day" do
+    get :appointments_for_day, {res_id: 2, date: Date.new(2014, 10, 7), house_id: 1}
+    assert_equal(false, assigns(:paginate))
+    assert_not_nil assigns(:upcoming_appointments)
   end
 end

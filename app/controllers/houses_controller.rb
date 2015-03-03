@@ -1,6 +1,8 @@
 class HousesController < ApplicationController
   before_action :set_house, only: [:show, :edit, :update, :destroy]
-  before_action :check_admin, except: [:index, :show]
+  before_action :check_admin, except: [:index, :show, :edit, :update]
+  before_action :check_privileges, only: [:edit, :update]
+  before_action :set_most_recent, ony: [:new]
 
   # GET /houses
   # GET /houses.json
@@ -35,7 +37,7 @@ class HousesController < ApplicationController
 
     respond_to do |format|
       if @house.save
-        format.html { redirect_to @house, notice: 'House was successfully created.' }
+        format.html { redirect_to new_house_path, notice: 'House (' + @house.name + ') was successfully created.' }
         format.json { render :show, status: :created, location: @house }
       else
         format.html { render :new }
@@ -49,7 +51,7 @@ class HousesController < ApplicationController
   def update
     respond_to do |format|
       if @house.update(house_params)
-        format.html { redirect_to @house, notice: 'House was successfully updated.' }
+        format.html { redirect_to @house, notice: 'House (' + @house.name + ') was successfully updated.' }
         format.json { render :show, status: :ok, location: @house }
       else
         format.html { render :edit }
@@ -63,21 +65,29 @@ class HousesController < ApplicationController
   def destroy
     @house.destroy
     respond_to do |format|
-      format.html { redirect_to houses_url, notice: 'House was successfully deleted.' }
+      format.html { redirect_to houses_url, notice: 'House (' + @house.name + ') was successfully deleted.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Check to see if the user is an admin (staff)
+    def check_privileges
+      redirect_to houses_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.house == @house
+    end
+
     def check_admin
-      redirect_to houses_path, alert: "You do not have admin privileges" unless current_user.admin
+      redirect_to houses_path, alert: "You do not have admin privileges." unless current_user.admin
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_house
       @house = House.find(params[:id])
     end
+
+  def set_most_recent
+    @recent = House.order("created_at").last
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def house_params

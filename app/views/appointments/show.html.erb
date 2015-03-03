@@ -1,22 +1,20 @@
-<p id="notice"><%= notice %></p>
-
 <div class="col-md-6">
   <p>
     <strong>Resident:</strong>
-    <%= @appointment.resident.name %>
+    <%= link_to @appointment.resident.name, @appointment.resident %>
   </p>
 
   <p>
     <strong>Doctor:</strong>
-    <%= @appointment.doctor.name %>
+    <%= link_to @appointment.doctor.name, @appointment.doctor %>
   </p>
 
   <p>
     <strong>Volunteer:</strong>
     <% if @appointment.user.nil? %>
-        No volunteer assigned
+        No Volunteer Assigned
     <% else %>
-        <%= @appointment.user.name %>
+        <%= link_to @appointment.user.name, @appointment.user%>
     <% end %>
   </p>
 
@@ -41,13 +39,17 @@
     <strong>Notes:</strong>
     <%= @appointment.notes %>
   </p>
-  <% if current_user.admin || current_user.house.name != 'Workstation Heads' %>
-      <%= link_to 'Delete', @appointment, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <% if current_user.admin || current_user.house == @appointment.resident.house %>
       <%= link_to 'Edit', edit_appointment_path(@appointment) %> |
-      <%= link_to 'Copy Appointment', new_appointment_path({:doctor_id => @appointment.doctor.id, :resident_id => @appointment.resident.id, :apt_type => @appointment.apt_type}) %> |
+  <% end %>
+  <% if current_user.admin %>
+      <%= link_to 'Delete', @appointment, method: :delete, data: { confirm: 'Are you sure?' } %> |
+
   <% end %>
 
-  <%= link_to 'Back', appointments_path %>
+  <%= link_to 'Copy Appointment', new_appointment_path({:doctor_id => @appointment.doctor.id, :resident_id => @appointment.resident.id, :apt_type => @appointment.apt_type}) %> |
+  <%= link_to 'Back to Appointments', appointments_path %><br><br>
+  <%= button_to 'New Appointment', new_appointment_path, method: :get %><br>
  
    <div id="newFollowupModal" class="modal">
     <div class="modal-dialog">
@@ -62,9 +64,8 @@
     </div>
   </div>
 
-  <button id="recurring_button" type="button" class="button">Set Reminder to Schedule Follow-up Appointment</button>
-
-     
+  <button id="recurring_button" type="button" class="button">Set Reminder to Schedule Follow-up Appointment</button><br><br>
+  <%= button_to "Send house reminder", send_house_reminder_path(@appointment) %>
 
   <h3>Revisions to this Appointment</h3>
 
@@ -116,7 +117,10 @@
               google.maps.event.addDomListener(window, 'load', initialize);
           }});
   </script>
+  <br>
+  <%= link_to 'Go To Map', map_link(@appointment.doctor.address) %>
 </div>
+
 </div>
 
 

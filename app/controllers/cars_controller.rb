@@ -1,5 +1,7 @@
 class CarsController < ApplicationController
+  before_filter :check_admin, only: [:edit, :update, :destroy, :new, :create]
   before_action :set_car, only: [:show, :edit, :update, :destroy, :toggle]
+  before_action :set_reservation, only: [:show_reservation, :destroy_reservation]
 
   # GET /cars
   # GET /cars.json 
@@ -13,6 +15,9 @@ class CarsController < ApplicationController
       format.json
       format.js
     end
+  end
+
+  def show_reservation
   end
 
   def get_availability
@@ -66,6 +71,7 @@ class CarsController < ApplicationController
     @reservation.start = params[:reservation_start]
     @reservation.end = params[:reservation_end]
     @reservation.car_id = params[:car]
+    @reservation.note = params[:note]
     @reservation.user = current_user
     if @reservation.save
       redirect_to action: "index", notice: "Reservation created"
@@ -74,13 +80,18 @@ class CarsController < ApplicationController
     end
   end
 
+  def destroy_reservation
+    @reservation.destroy
+    redirect_to cars_url, notice: 'Reservation was deleted.' 
+  end
+
   # POST /cars
   # POST /cars.json
   def create
     @car = Car.new(car_params)
     respond_to do |format|
       if @car.save
-        format.html { redirect_to cars_path, notice: 'Car was successfully created.' }
+        format.html { redirect_to cars_path, notice: 'Car (' + @car.name + ') was successfully created.' }
         format.json { render :show, status: :created, location: @car }
       else
         format.html { render :new }
@@ -94,7 +105,7 @@ class CarsController < ApplicationController
   def update
     respond_to do |format|
       if @car.update(car_params)
-        format.html { redirect_to @car, notice: 'Car was successfully updated.' }
+        format.html { redirect_to @car, notice: 'Car (' + @car.name + ') was successfully updated.' }
         format.json { render :show, status: :ok, location: @car }
       else
         format.html { render :edit }
@@ -108,7 +119,7 @@ class CarsController < ApplicationController
   def destroy
     @car.destroy
     respond_to do |format|
-      format.html { redirect_to cars_url, notice: 'Car was successfully destroyed.' }
+      format.html { redirect_to cars_url, notice: 'Car (' + @car.name + ') was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -131,12 +142,21 @@ class CarsController < ApplicationController
       @car = Car.find(params[:id])
     end
 
+    def set_reservation
+      @reservation = Reservation.find(params[:id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
       params.require(:car).permit(:name, :user_id, :for)
     end
 
     def reservation_params
-      params.require(:reservation).permit(:start, :end, :car)
+      params.require(:reservation).permit(:start, :end, :car, :note)
     end
+
+    def check_admin
+      redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
+    end
+
 end

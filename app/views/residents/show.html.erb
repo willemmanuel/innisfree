@@ -26,19 +26,24 @@
   <strong>Notes:</strong>
   <%= @resident.notes %>
 </p>
-
+<br>
 <% if current_user.admin or current_user.house_id == @resident.house_id %>
-    <%= link_to 'Edit', edit_resident_path(@resident) %> |
-    <%= link_to 'Delete', @resident, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Edit Resident', edit_resident_path(@resident) %>
+<% end %>
+<% if current_user.admin%>
+    | <%= link_to 'Delete Resident', @resident, method: :delete, data: { confirm: 'Are you sure?' } %> |
     <%= link_to 'View Residents', residents_path %> |
+    <%= link_to 'New Resident', new_resident_path %>
+      <br><br>
 <% end %>
 <%= link_to 'View Houses', houses_path %>
+
 </div>
 
 <div class="col-md-6">
 <h2>Appointments</h2>
 <% if !@upcoming_appointments.nil? %>
-	<%= render 'appointments/upcoming' %>
+	<%= render :partial => "appointments/upcoming", locals: {:paginate => false} %>
 <% else %>
 	<h4>No resident appointments</h4>
 <% end %>

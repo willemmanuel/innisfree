@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
+  before_filter :check_admin, only: [:edit, :update, :destroy, :new, :create]
 	before_action :set_user, only: [:show, :edit, :update, :destroy, :test_email]
+  before_action :set_most_recent, ony: [:new]
 
   # GET /houses
   # GET /houses.json
@@ -19,7 +21,7 @@ class UsersController < ApplicationController
 
   def send_reminders
    User.send_reminders
-   redirect_to :root, notice: "Emails sent"
+   redirect_to :back, notice: "Email reminders sent."
   end
 
 	def show
@@ -31,18 +33,12 @@ class UsersController < ApplicationController
     @houses = House.all
   end
 
-  # GET /houses/new
   def new
     @user = User.new
     @houses = House.all
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
     end
 
   end
@@ -64,7 +60,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if result
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'User (' + @user.name + ') was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -77,7 +73,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully deleted.' }
+      format.html { redirect_to users_url, notice: 'User (' + @user.name + ') was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -88,8 +84,16 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+  def set_most_recent
+    @recent = User.order("created_at").last
+  end
+
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :house_id, :phone, :email_pref)
+  end
+
+  def check_admin
+    redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
   end
 
 end

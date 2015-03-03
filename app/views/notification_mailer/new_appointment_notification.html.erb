@@ -1,0 +1,6 @@
+<h4>New Appointment Created</h4>
+Hello <%= @user.name %>, 
+
+This is a notification that a new appointment for <b><%= @appointment.resident.name %></b> with <b><%= @appointment.doctor.name %></b> was just created for <b><%= @appointment.time %> on <%= @appointment.time %>. </b>The office is located <%= link_to 'here', map_link(@appointment.doctor.address) %>.
+
+Thanks and have a great day!

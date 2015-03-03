@@ -1,0 +1,6 @@
+<%= form_tag("index", method: "get") do %>
+    <div class = 'field'>
+      <%= collection_select nil, :resident_id, @residents, :id, :name,
+                            {:include_blank => 'All Residents'}, {:class => 'residents_select mobile-size'} %>
+    </div>
+<% end %>

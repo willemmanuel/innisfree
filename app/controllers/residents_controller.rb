@@ -1,7 +1,8 @@
 class ResidentsController < ApplicationController
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
-  before_action :check_admin, only: [:new, :create, :index]
-  before_action :check_house, only: [:edit, :update, :destroy]
+  before_action :check_admin, only: [:new, :create, :index, :destroy]
+  before_action :check_house, only: [:edit, :update]
+  before_action :set_most_recent, ony: [:new]
 
 
   def index
@@ -33,7 +34,7 @@ class ResidentsController < ApplicationController
     @resident = Resident.new(resident_params)
     respond_to do |format|
       if @resident.save
-        format.html { redirect_to @resident, notice: 'Resident was successfully created.' }
+        format.html { redirect_to new_resident_path, notice: 'Resident (' + @resident.name + ') was successfully created.' }
         format.json { render :show, status: :created, location: @resident }
       else
         format.html { render :new }
@@ -47,7 +48,7 @@ class ResidentsController < ApplicationController
   def update
     respond_to do |format|
       if @resident.update(resident_params)
-        format.html { redirect_to @resident, notice: 'Resident was successfully updated.' }
+        format.html { redirect_to @resident, notice: 'Resident (' + @resident.name + ') was successfully updated.' }
         format.json { render :show, status: :ok, location: @resident }
       else
         format.html { render :edit }
@@ -61,7 +62,7 @@ class ResidentsController < ApplicationController
   def destroy
     @resident.destroy
     respond_to do |format|
-      format.html { redirect_to residents_url, notice: 'Resident was successfully deleted.' }
+      format.html { redirect_to residents_url, notice: 'Resident (' + @resident.name + ') was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -72,6 +73,10 @@ class ResidentsController < ApplicationController
       redirect_to houses_path unless current_user.admin
     end
 
+  def check_privileges
+    redirect_to houses_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.house_id == @resident.house_id
+  end
+
     # Check to see if the user is in the same house as resident or an admin
     def check_house
       redirect_to houses_path unless current_user.admin or current_user.house_id == @resident.house_id
@@ -81,6 +86,10 @@ class ResidentsController < ApplicationController
     def set_resident
       @resident = Resident.find(params[:id])
     end
+
+  def set_most_recent
+    @recent = Resident.order("created_at").last
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resident_params

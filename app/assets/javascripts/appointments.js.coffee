@@ -1,19 +1,19 @@
 ->
 $(document).on 'change', '.house_select', (evt) ->
-  $.ajax 'appointments/update_residents',
+  $.ajax '/appointments/update_residents',
     type: 'GET'
     dataType: 'script'
     data: {
       house_id: $(".house_select option:selected").val()
     }
-  $.ajax 'appointments',
+  $.ajax '/appointments',
     type: 'GET'
     dataType: 'script'
     data: {
       res_id: ''
       house_id: $('.house_select option:selected').val()
     }
-  $.ajax 'appointments/upcoming',
+  $.ajax '/appointments/upcoming',
     type: 'GET', 
     data: {
       res_id: ''
@@ -49,14 +49,14 @@ $(document).on 'click', '#set_recurring_reminder', (evt) ->
    }
 
 $(document).on 'change', '.residents_select', (evt) ->
-  $.ajax 'appointments',
+  $.ajax '/appointments',
     type: 'GET'
     dataType: 'script'
     data: {
       res_id: $(".residents_select option:selected").val()
       house_id: $('.house_select option:selected').val()
     }
-  $.ajax 'appointments/upcoming',
+  $.ajax '/appointments/upcoming',
     type: 'GET', 
     data: {
       res_id: $(".residents_select option:selected").val()
@@ -69,7 +69,7 @@ $(document).on 'ready page:load', ->
   calView = 'month'
   calView = 'listMonth' if $(window).innerWidth() < 981 #for iPhone
   
-  $.ajax 'appointments',
+  $.ajax '/appointments',
     type: 'GET'
     dataType: 'script'
     data: {

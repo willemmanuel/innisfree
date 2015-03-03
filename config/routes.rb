@@ -1,22 +1,27 @@
 Rails.application.routes.draw do
 
-
- #get "/innisfree/" => redirect("/appointments")
-
-  resources :cars
+  # sorry these are messy routes ¯\_(ツ)_/¯ this block all for reservations
   get 'reservation/new' => 'cars#new_reservation', as: :new_reservation
   post 'reservation/new' => 'cars#new_reservation'
   post 'reservation/availability' => 'cars#get_availability', as: :get_availability
   post 'reservation' => 'cars#save_reservation', as: :save_reservation
   get 'reservations' => 'cars#get_reservations'
+  get 'reservations/:id' => 'cars#show_reservation', as: :show_reservation
+  delete 'reservations/:id' => 'cars#destroy_reservation', as: :destroy_reservation
+  # 
+
+  resources :cars
   put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user
+  put 'settings/email/:id' => 'settings#toggle_user_email_preference', as: :email_preference_user
+  put 'settings/medicalcoordinator/:id' => 'settings#toggle_user_medical_coordinator', as: :medical_coordinator_user
   put 'settings/approve/:id' => 'settings#toggle_user_approval', as: :approve_user
   post 'settings/create_user' => 'settings#create_user', as: :create_user
   get 'appointments/upcoming' => 'appointments#upcoming'
   get 'appointments/appointments_for_day' => 'appointments#appointments_for_day'
   get 'reports/generate' => 'reports#generate'
   get 'users/send_reminders' => 'users#send_reminders', as: :send_reminders
+  post 'appointments/:id/send_house_reminder' => 'appointments#send_house_reminder', as: :send_house_reminder
 
   devise_for :users, controllers: { registrations: "users/registrations" }
   resources :appointments do

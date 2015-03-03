@@ -1,5 +1,8 @@
 
 class ReportsController < ApplicationController
+
+    before_filter :check_admin
+
     # GET /appointments
     # GET /appointments.json
 
@@ -47,13 +50,19 @@ class ReportsController < ApplicationController
 
 
   private
+
+
+    def check_admin
+      redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
       params.require(:report).permit(:resident_id, :doctor_id, :date,:house_id, :date2)
     end
 
     def printTable(pdf, appointments)
-      table_data = [["<b>Date</b>", "<b>Time<b>","<b>Resident<b>", "<b>House<b>", "<b>Volunteer<b>", "<b>Doctor<b>", "<b>Apt. Type<b>" ]]
+      table_data = [["<b>Date</b>", "<b>Time<b>","<b>Resident<b>", "<b>House<b>", "<b>Volunteer<b>", "<b>Doctor<b>", "<b>Type<b>" ]]
       test = appointments.map
       test = test.sort_by {|u| [u.date, u.time]}
       #test = test.sort_by {|u| u.time}
@@ -89,7 +98,7 @@ class ReportsController < ApplicationController
 
     def Gen_CSV(appointments)
       csv_string = CSV.generate do |csv|
-        cols = ["Date", "Time", "Co-worker", "Doctor", "Apt. Type"]
+        cols = ["Date", "Time", "Resident", "Volunteer", "Doctor", "Type", "Notes"]
         csv << cols
         app = appointments.map
         app = app.sort_by {|u| [u.date, u.time]}
@@ -99,10 +108,16 @@ class ReportsController < ApplicationController
             if not Resident.where('id = ?', appointment.resident_id).blank?
               Resident.where('id = ?', appointment.resident_id).first.name
             end,
+
+            if not User.where('id = ?', appointment.user_id).blank?
+              User.where('id = ?', appointment.user_id).first.name
+            end,
+
             if not Doctor.where('id = ?', appointment.doctor_id).blank?
               Doctor.where('id = ?', appointment.doctor_id).first.name
             end,
-            appointment.apt_type
+            appointment.apt_type,
+            appointment.notes
             ]
         end
       end
