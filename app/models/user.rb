@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
      original_apt = Appointment.where('id = ?', recur.appointment_id)
      user = User.where('id = ?', original_apt[0].user_id)[0]
      if !user.nil? && user.email_pref
-       NotificationMailer.recurring_appointment_reminder(original_apt).deliver
+       NotificationMailer.appointment_recurring(original_apt).deliver
      end 
    end
   end
