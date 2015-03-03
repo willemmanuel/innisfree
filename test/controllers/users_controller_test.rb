@@ -42,25 +42,6 @@ class UsersControllerTest < ActionController::TestCase
   test "user with no name" do
     assert(@no_name_user.name == "example@example.com")  
   end
-<<<<<<< HEAD
-=begin
-  test "send_recurring_reminders_test" do
-     c = NotificationMailer.deliveries.count
-     recur = RecurringReminder.new
-     app = Appointment.new
-     recur.notification_date = Date.today
-     recur.appointment_id = app.id
-     recur.save
-     u = User.new
-     u.email_pref = true
-     app.user=u.id    
-     app.date = Date.today
-     app.save
-     u.send_reminders 
-     assert(NotificationMailer.deliveries.count - c == 1)
-   end
-=end
-=======
 
   test "should get index" do
     get :index
@@ -119,7 +100,4 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to users_path
   end
 
-
-
->>>>>>> origin/master
 end
