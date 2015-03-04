@@ -18,6 +18,11 @@ class NotificationMailer < ActionMailer::Base
   	mail(to: @appointment.user.email, subject: 'Upcoming appointment today')
   end
 
+  def appointment_assignment_notification(appointment)
+    @appointment = appointment
+    mail(to: @appointment.user.email, subject: 'Appointment Assignment Notification')
+  end  
+
   def recurring_appointment_reminder(appointment)
   	@appointment = appointment
     user = User.where('id = ?', @appointment.user_id)[0];

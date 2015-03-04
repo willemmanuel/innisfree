@@ -130,13 +130,15 @@ class AppointmentsController < ApplicationController
   # POST /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
-
     respond_to do |format|
       if @appointment.save
         coordinators = User.where(medical_coordinator: true).where(email_pref: true)
         coordinators.each do |coordinator|
           NotificationMailer.new_appointment_notification(@appointment, coordinator).deliver
         end
+        if !@appointment.user.nil?
+          NotificationMailer.appointment_assignment_notification(@appointment).deliver
+        end 
         format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
         format.json { render :show, status: :created, location: @appointment }
       else
@@ -151,6 +153,9 @@ class AppointmentsController < ApplicationController
   def update
     respond_to do |format|
       if @appointment.update(appointment_params)
+        if !@appointment.user.nil?
+          NotificationMailer.appointment_assignment_notification(@appointment).deliver
+        end 
         format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
         format.json { render :show, status: :ok, location: @appointment }
       else
