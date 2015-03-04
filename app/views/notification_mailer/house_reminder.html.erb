@@ -1,6 +1,9 @@
 <h4>Appointment Reminder</h4>
 Hello <%= @user.name %>, 
 
-This is a notification that there is an upcoming appointment for <b><%= @appointment.resident.name %></b> with <b><%= @appointment.doctor.name %></b> for <b><%= @appointment.time %> on <%= @appointment.time %>. </b>The office is located <%= link_to 'here', map_link(@appointment.doctor.address) %>.
+This is a notification that there is an upcoming appointment for <b><%= @appointment.resident.name %></b> with <b><%= @appointment.doctor.name %></b> for <b><%= @appointment.time.strftime("%I:%M %p") %> on <%= @appointment.date.to_formatted_s(:long_ordinal) %>. </b>The office is located <%= link_to 'here', map_link(@appointment.doctor.address) %>.
 
 Thanks and have a great day!
+
+
+
