@@ -35,4 +35,15 @@ class UserTest < ActiveSupport::TestCase
    test "user_trivial_true2" do
      assert true
    end
+   
+   test "send_recurring_reminders_test" do
+     @res = FactoryGirl.create(:resident)
+     @u = FactoryGirl.create(:user, email_pref: true)
+     @doc = FactoryGirl.create(:doctor);
+     @app = FactoryGirl.create(:appointment, user_id: @u.id, date: Date.today, doctor_id: @doc.id, resident_id: @res.id)
+     @recur = FactoryGirl.create(:recurring_reminder, notification_date: Date.today, appointment_id: @app.id)
+     c = NotificationMailer.deliveries.count
+     User.send_reminders 
+     assert(NotificationMailer.deliveries.count > c)
+   end
 end
