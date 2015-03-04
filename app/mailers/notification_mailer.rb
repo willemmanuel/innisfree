@@ -7,6 +7,12 @@ class NotificationMailer < ActionMailer::Base
     mail(to: user.email, subject: 'Today\'s Innisfree Appointments')
   end
 
+  def weekly_digest(user)
+    @user = user
+    @appointments = Appointment.where('date >= ?', Date.tomorrow).where('date <= ?', Date.tomorrow+7)
+    mail(to: user.email, subject: 'This week\'s Innisfree Appointments')
+  end
+
   def appointment_reminder(appointment)
   	@appointment = appointment
   	mail(to: @appointment.user.email, subject: 'Upcoming appointment today')

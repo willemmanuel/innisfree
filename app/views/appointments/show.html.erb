@@ -65,7 +65,9 @@
   </div>
 
   <button id="recurring_button" type="button" class="button">Set Reminder to Schedule Follow-up Appointment</button><br><br>
-  <%= button_to "Send house reminder", send_house_reminder_path(@appointment) %>
+  <% if current_user.admin %>
+    <%= button_to "Send house reminder", send_house_reminder_path(@appointment) %>
+  <% end %>
 
   <h3>Revisions to this Appointment</h3>
 

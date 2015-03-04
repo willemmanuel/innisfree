@@ -69,6 +69,13 @@ class User < ActiveRecord::Base
    end
   end
 
+  def self.send_weekly_digest
+    coordinators = User.where(medical_coordinator: true).where(email_pref: true)
+    coordinators.each do |coordinator|
+      NotificationMailer.weekly_digest(coordinator).deliver
+    end
+  end
+
   attr_accessor :current_password
 
   def active_for_authentication? 
