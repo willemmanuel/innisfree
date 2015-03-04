@@ -38,9 +38,11 @@ class User < ActiveRecord::Base
 
   def self.send_reminders
    # email all the admins a full schedule for the day
-   admins = User.where(admin: true).where(email_pref: true)
-   admins.each do |admin|
+   if !Appointment.where('date = ?', Date.today).empty?
+    admins = User.where(admin: true).where(email_pref: true)
+    admins.each do |admin|
       NotificationMailer.appointment_digest(admin).deliver
+    end
    end
    # email all volunteers a reminder
    todays_appointments = Appointment.where('date = ?', Date.today)
@@ -60,9 +62,11 @@ class User < ActiveRecord::Base
   end
 
   def self.send_weekly_digest
-    coordinators = User.where(medical_coordinator: true).where(email_pref: true)
-    coordinators.each do |coordinator|
-      NotificationMailer.weekly_digest(coordinator).deliver
+    if !Appointment.where('date >= ?', Date.tomorrow).where('date <= ?', Date.tomorrow+7).empty?
+      coordinators = User.where(medical_coordinator: true).where(email_pref: true)
+      coordinators.each do |coordinator|
+        NotificationMailer.weekly_digest(coordinator).deliver
+      end
     end
   end
 
