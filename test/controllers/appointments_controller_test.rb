@@ -114,8 +114,31 @@ class AppointmentsControllerTest < ActionController::TestCase
   end
 
   test "should check appointments_for_day" do
-    get :appointments_for_day, {res_id: 2, date: Date.new(2014, 10, 7), house_id: 1}
+    get :appointments_for_day, {res_id: 2, date: Date.today, house_id: 1}
     assert_equal(false, assigns(:paginate))
+    assert_equal(1, assigns(:upcoming_appointments).count)
     assert_not_nil assigns(:upcoming_appointments)
   end
+
+  test "should check upcoming appointments given resident and house" do
+    get :upcoming, {res_id: 2, date: Date.tomorrow, house_id: 1}
+    assert_equal(true, assigns(:paginate))
+    assert_equal(1, assigns(:upcoming_appointments).count)
+    assert_not_nil assigns(:upcoming_appointments)
+  end
+
+  test "should check upcoming appointments without specifying resident" do
+    get :upcoming, {date: Date.tomorrow, house_id: 1}
+    assert_equal(true, assigns(:paginate))
+    assert_equal(1, assigns(:upcoming_appointments).count)
+    assert_not_nil assigns(:upcoming_appointments)
+  end
+
+  test "should check upcoming appointments without resident or house" do
+    get :upcoming, {date: Date.tomorrow}
+    assert_equal(true, assigns(:paginate))
+    assert_equal(2, assigns(:upcoming_appointments).count)
+    assert_not_nil assigns(:upcoming_appointments)
+  end
+
 end
