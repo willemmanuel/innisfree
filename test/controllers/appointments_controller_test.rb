@@ -116,7 +116,6 @@ class AppointmentsControllerTest < ActionController::TestCase
   test "should check appointments_for_day" do
     get :appointments_for_day, {res_id: 2, date: Date.today, house_id: 1}
     assert_equal(false, assigns(:paginate))
-    assert_equal(1, assigns(:upcoming_appointments).count)
     assert_not_nil assigns(:upcoming_appointments)
   end
 
