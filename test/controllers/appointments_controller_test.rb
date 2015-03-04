@@ -141,4 +141,9 @@ class AppointmentsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:upcoming_appointments)
   end
 
+  test "should check types variable has all types" do
+    get :edit, id: @appointment
+    assert_equal(AptType.all, assigns(:types))
+  end
+
 end
