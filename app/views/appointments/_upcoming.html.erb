@@ -16,8 +16,12 @@
     <% @upcoming_appointments.order([:date, :time]).each do |appointment| %>
       <tr>
         <td><%= link_to appointment.resident.name, appointment.resident %></td>
+	<% if appointment.doctor != nil %>
         <td><%= link_to appointment.doctor.name, appointment.doctor %>   
           <small><%= link_to '(map)', map_link(appointment.doctor.address) %></small></td>
+	<% else %>
+	<td>None </td>
+	<% end %>
         <% if appointment.user.nil? %>
           <td></td>
         <% else %>

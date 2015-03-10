@@ -6,7 +6,9 @@
 
   <p>
     <strong>Doctor:</strong>
-    <%= link_to @appointment.doctor.name, @appointment.doctor %>
+    <% if @appointment.doctor != nil %>	
+        <%= link_to @appointment.doctor.name, @appointment.doctor %>
+    <% else %> None <% end %>
   </p>
 
   <p>
@@ -47,7 +49,7 @@
 
   <% end %>
 
-  <%= link_to 'Copy Appointment', new_appointment_path({:doctor_id => @appointment.doctor.id, :resident_id => @appointment.resident.id, :apt_type => @appointment.apt_type}) %> |
+  <%#= link_to 'Copy Appointment', new_appointment_path({:doctor_id => @appointment.doctor.id, :resident_id => @appointment.resident.id, :apt_type => @appointment.apt_type}) %> |
   <%= link_to 'Back to Appointments', appointments_path %><br><br>
   <%= button_to 'New Appointment', new_appointment_path, method: :get %><br>
  
@@ -101,7 +103,7 @@
   <script>
       geocoder = new google.maps.Geocoder();
       geocoder.geocode({
-          'address': "<%=@appointment.doctor.address%>"
+          'address': "<%#=@appointment.doctor.address%>"
       }, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
               var mapCanvas = document.getElementById('map-canvas');
@@ -120,7 +122,7 @@
           }});
   </script>
   <br>
-  <%= link_to 'Go To Map', map_link(@appointment.doctor.address) %>
+  <%#= link_to 'Go To Map', map_link(@appointment.doctor.address) %>
 </div>
 
 </div>
