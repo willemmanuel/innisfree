@@ -1,6 +1,6 @@
 <h4>Appointment Assignment Notification</h4>
 Hello <%= @appointment.user.name %>, 
 
-This is a notification that you have been assigned to <b><%= @appointment.resident.name %>'s</b> appointment with <b><%= @appointment.doctor.name %></b>. It is at <b><%= @appointment.time.strftime("%I:%M %p") %> on <%= @appointment.date.to_formatted_s(:long_ordinal) %>.</b>The office is located <%= link_to 'here', map_link(@appointment.doctor.address) %>.
+This is a notification that you have been assigned to <b><%= @appointment.resident_id %>'s</b> appointment with <b><%= @appointment.doctor.name %></b>. It is at <b><%= @appointment.time.strftime("%I:%M %p") %> on <%= @appointment.date.to_formatted_s(:long_ordinal) %>.</b>The office is located <%= link_to 'here', map_link(@appointment.doctor.address) %>.
 
 Thanks and have a great day!
