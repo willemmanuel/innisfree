@@ -1,0 +1,8 @@
+<table>
+<% @types.each do |typ| %>
+  <tr>
+    <td><%= typ.apt_type %></td>
+    <td><%= link_to 'Remove', apt_type_path(typ), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+  </tr>
+<% end %> 
+</table>
