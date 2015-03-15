@@ -22,6 +22,10 @@ $(document).on 'change', '.house_select', (evt) ->
     success: (data, textStatus, jqCHR) ->
       $("#upcoming").html(data); 
 
+$(document).on 'click', '#new_apt_button', (evt) ->
+ $(document).location.href = (document.URL) + "/new?" + $(".residents_select option:selected").val()
+
+
 $(document).on 'click', '#add_type', (evt) ->
  $.ajax 'add_apt_type',
    type: 'GET',
