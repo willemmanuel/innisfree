@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'apt_types/destroy'
+
+  get 'apt_type/destroy'
+
   # sorry these are messy routes ¯\_(ツ)_/¯ this block all for reservations
   get 'reservation/new' => 'cars#new_reservation', as: :new_reservation
   post 'reservation/new' => 'cars#new_reservation'
