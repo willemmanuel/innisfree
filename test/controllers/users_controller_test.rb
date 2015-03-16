@@ -4,7 +4,7 @@ class UsersControllerTest < ActionController::TestCase
   setup do
     @user_attr = FactoryGirl.attributes_for(:user)
     @user = User.create!(@user_attr)
-    @no_name_user = FactoryGirl.create(:user, name: "", email:"example@example.com")
+    @no_name_user = FactoryGirl.create(email:"example@example.com")
     @main_user = FactoryGirl.create(:user, name: "Rick", email:"rickrick@rick.com", admin: true)
     @request.env['HTTP_REFERER'] = 'http://localhost:3000'
     sign_in(@main_user)

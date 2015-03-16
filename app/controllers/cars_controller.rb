@@ -25,8 +25,11 @@ class CarsController < ApplicationController
   end
 
   def get_availability
-    parsed_start = Time.zone.parse(params[:reservation_start])
-    parsed_end = Time.zone.parse(params[:reservation_end])
+    parsed_start = DateTime.parse("#{params[:date]} #{params[:reservation_start].values.join(":")}#{Time.zone.formatted_offset.to_s.tr(':','')}")
+    parsed_end = DateTime.parse("#{params[:date]} #{params[:reservation_end].values.join(":")}#{Time.zone.formatted_offset.to_s.tr(':','')}")
+    # I have no idea why DST is not taken into account. This should be fixed at some point
+    parsed_start = parsed_start - 1.hour if Time.now.dst?
+    parsed_end = parsed_end - 1.hour if Time.now.dst?
     if parsed_start > parsed_end || parsed_start < Time.now
       redirect_to new_reservation_path, notice: "Invalid reservation times"
     end
@@ -47,8 +50,8 @@ class CarsController < ApplicationController
       redirect_to new_reservation_path, method: :post, notice: "No cars available at that time"
     end
     @reservation = Reservation.new
-    @reservation.start = params[:reservation_start]
-    @reservation.end = params[:reservation_end]
+    @reservation.start = parsed_start
+    @reservation.end = parsed_end
   end
 
   def new_reservation
@@ -156,11 +159,15 @@ class CarsController < ApplicationController
     end
 
     def reservation_params
-      params.require(:reservation).permit(:start, :end, :car, :note)
+      params.require(:reservation).permit(:start, :end, :car, :note, :date)
     end
 
     def check_admin
       redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
+    end
+
+    def parse_calculator_time(hash)
+      Time.parse("#{hash['time1i']}-#{hash['time2i']}-#{hash['time3i']} #{hash['time4i']}:#{hash['time5i']}")
     end
 
 end
