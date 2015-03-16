@@ -1,11 +1,15 @@
 class CarsController < ApplicationController
-  before_filter :check_admin, only: [:edit, :update, :destroy, :new, :create]
+  before_filter :check_admin, only: [:edit, :update, :destroy, :new, :create, :manage]
   before_action :set_car, only: [:show, :edit, :update, :destroy, :toggle]
   before_action :set_reservation, only: [:show_reservation, :destroy_reservation]
 
   # GET /cars
   # GET /cars.json 
   def index
+  end
+
+  def manage
+    @cars = Car.all
   end
 
   def get_reservations

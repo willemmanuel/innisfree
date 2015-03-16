@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'reservations/:id' => 'cars#show_reservation', as: :show_reservation
   delete 'reservations/:id' => 'cars#destroy_reservation', as: :destroy_reservation
   # 
-
+  post 'cars/manage' => 'cars#manage', as: :manage_cars
   resources :cars
   put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user

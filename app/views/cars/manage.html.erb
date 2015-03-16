@@ -1,0 +1,27 @@
+<h1>Cars</h1>
+
+<% if current_user.admin %>
+    <%= button_to 'New Car', new_car_path, method: :get, class: "mobile-size" %>
+<% end %>
+<br>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><%= car.name %></td>
+        <td><%= link_to "Edit car", :controller => :cars, :action => :edit, :id => car.id %></td>
+        <td><%= link_to "Delete car", car, method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
