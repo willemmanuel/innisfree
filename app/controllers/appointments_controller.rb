@@ -103,7 +103,8 @@ class AppointmentsController < ApplicationController
   def new
     @types = AptType.all
     @appointment = Appointment.new
-
+    @appointment.date = Date.today
+    @appointment.time = Time.now
     @residents = Resident.all
     @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
   end
