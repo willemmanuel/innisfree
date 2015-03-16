@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   end
 
 
+  resources :apt_types
 
   resources :doctors
 
