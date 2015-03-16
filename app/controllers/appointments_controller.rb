@@ -119,6 +119,7 @@ class AppointmentsController < ApplicationController
       format.html
       format.js
     end
+
   end
 
   # GET /appointments/1/edit
