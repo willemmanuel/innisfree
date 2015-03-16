@@ -25,8 +25,8 @@ class CarsController < ApplicationController
   end
 
   def get_availability
-    parsed_start = DateTime.parse("#{params[:date]} #{params[:reservation_start].values.join(":")}#{Time.zone.formatted_offset.to_s.tr(':','')}")
-    parsed_end = DateTime.parse("#{params[:date]} #{params[:reservation_end].values.join(":")}#{Time.zone.formatted_offset.to_s.tr(':','')}")
+    parsed_start = Time.zone.parse("#{params[:date]} #{params[:reservation_start].values.join(":")}#{Time.zone.formatted_offset.to_s.tr(':','')}")
+    parsed_end = Time.zone.parse("#{params[:date]} #{params[:reservation_end].values.join(":")}#{Time.zone.formatted_offset.to_s.tr(':','')}")
     # I have no idea why DST is not taken into account. This should be fixed at some point
     parsed_start = parsed_start - 1.hour if Time.now.dst?
     parsed_end = parsed_end - 1.hour if Time.now.dst?
@@ -37,7 +37,12 @@ class CarsController < ApplicationController
     Car.all.each do |car|
       flag = true
       car.reservations.each do |reservation|
-        if (parsed_start < reservation.start && parsed_end > reservation.start) || (reservation.start < parsed_start && reservation.end > parsed_start) || (reservation.start == parsed_start && reservation.end == parsed_end)
+        puts "    looking at reservation "
+        puts reservation.start
+        puts reservation.end
+        puts reservation.start.class
+        puts (reservation.start == parsed_start && reservation.end == parsed_end)
+        if (parsed_start <= reservation.start && parsed_end > reservation.start) || (reservation.start <= parsed_start && reservation.end > parsed_start) || (reservation.start == parsed_start && reservation.end == parsed_end)
           flag = false
           break
         end
