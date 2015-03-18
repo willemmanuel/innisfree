@@ -21,6 +21,13 @@ For each of the components in the MVC, every part of the code will be covered in
 	1. Unauthorized users cannot access said functionality
 	2. Authorized users can access said functionality
 - Unit tests will also be created to make sure that related method calls (e.g. from before\_action and before\_filter) will activate if the coded condition is true, and act as expected.
+- We have assigned members of the team to create unit tests on different sections of the site to complete the coverage percentage requirements:
+  - Domenic: Users Controller
+  - Xavier: Residents Controller
+  - Robert: Appointments Controller
+  - Will: Cars Controller
+  - Zoe: Doctors Helper, Doctors Model, Houses Model
+  - Bethany: Users Model
 
 ####Models
  - appointment.rb
@@ -67,6 +74,9 @@ Security testing will be largely carried out through the unit tests, which will 
 Security testing will include making sure that users without access to a specific page or feature cannot navigate to that page as the appropriate links will be hidden to them. Trying to manually navigate there through URLs will return users to the main page and display an error, as with trying to navigate to any non-existent part of the website.
 ###V. Installation Instructions Test
 To test the installation instructions, we will follow them to deploy our application to BlueHost. Once deployed, we will run all of the rake tests to ensure it is correctly deployed. Once that's done, we'll try to access the URL, just to make sure all the webserver loaded correctly and all the resources loaded correctly.
+
+###VI. Compatibility Testing
+We will execute the requirements test on the most recent version of the major web browsers (Firefox, Chrome, IE, and Safari). If -- and only if -- the requirements test passes on all of those browsers, then the compability test will be considered to have passed.
 
 ##Who Will Write Tests?
 The entire development team will contribute to writing the tests. During our testing phases, we will split up the test writing based on components of the MVC, and each person will be responsible for complete code coverage and test writing for that section. For example, one person might write all the unit and requirements tests for the residents model, controller, and view, while another person is in charge of the tests for appointments.
