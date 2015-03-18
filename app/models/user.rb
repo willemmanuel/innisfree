@@ -81,12 +81,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    name = read_attribute(:name)
-    if name.nil? or name.length == 0 
-      return read_attribute(:email)
-    else
-      return read_attribute(:name)
-    end
+    super || email
   end
    
 end

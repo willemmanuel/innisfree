@@ -1,13 +1,12 @@
-<h3>Car Reservations</h3>
-<p>
-  <%= button_to 'New Reservation', new_reservation_path, class: "mobile-size" %>
-</p>
+<div class="row">
+<div class="col-md-12">
+<h3>Car Reservations<small><% if current_user.admin %>
+	<%= link_to '(Manage Cars)', manage_cars_path, method: :post %>
+<% end %></small></h3>
 
-<% if current_user.admin %>
-    <p>
-      <%= button_to 'New Car', new_car_path, method: :get, class: "mobile-size" %>
-    </p>
-<% end %>
+<%= button_to 'New Reservation', new_reservation_path, class: "btn btn-primary" %><br>
 
 <div id="reservationCalendar">
+</div>
+</div>
 </div>
