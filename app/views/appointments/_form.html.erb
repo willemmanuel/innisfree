@@ -22,6 +22,9 @@
       <% logger.debug residents[0] %>
       <% if params.has_key?(:resident_id) %>
           <%= f.select(:resident_id, options_from_collection_for_select(residents, "last", "first", params[:resident_id].to_i), { include_blank: true }, { :class => 'chosen-select' }) %>
+      <% elsif session.has_key?(:res_id) %>
+          <%= f.select(:resident_id, options_from_collection_for_select(residents, "last", "first", session[:res_id].to_i), { include_blank: true }, { :class => 'chosen-select' }) %>
+
       <% else %>
           <%= f.select(:resident_id, residents, { include_blank: true }, { :class => 'chosen-select' }) %>
       <% end %>

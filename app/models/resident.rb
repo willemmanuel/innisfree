@@ -21,4 +21,9 @@ class Resident < ActiveRecord::Base
       end
     end
   end
+
+  def name 
+  	super || "No name"
+  end
+  
 end

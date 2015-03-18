@@ -10,12 +10,13 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
+    <%= label_tag 'Reservation Date' %>
+    <%= date_field_tag 'date', Date.today %><br>  <br>
     <%= label_tag 'Start time' %>
-    <%= datetime_local_field_tag 'reservation_start'%><br>
+    <%= time_select 'reservation_start', Time.now, {:ampm => true, :minute_step=>15, :ignore_date=>true} %><br> <br>
     <%= label_tag 'End time' %>
-    <%= datetime_local_field_tag 'reservation_end'%><br>
+    <%= time_select 'reservation_end', Time.now, {:ampm => true, :minute_step=>15, :ignore_date=>true} %><br> <br>
   </div>
   <br>
   <div class="actions">

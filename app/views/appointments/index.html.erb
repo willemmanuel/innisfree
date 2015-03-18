@@ -1,24 +1,28 @@
-<h1>Resident Appointments</h1>
+<h2>Resident Appointments</h2> 
 
 <%= render 'filter' %>
 
 <%if not current_user.house == nil %>
     <% if current_user.admin || current_user.house.name != 'Workstation Heads' %>
-        <h4><%= button_to 'New Appointment', new_appointment_path, method: :get, class: "mobile-size", id: "new_apt_button" %></h4>
+        <h4><%= button_to 'New Appointment', new_appointment_path, method: :get, class: "btn btn-primary", id: "new_apt_button" %></h4>
     <% end %>
 <% else %>
-    <h4><%= button_to 'New Appointment', new_appointment_path, method: :get, class: "mobile-size", id: "new_apt_button" %></h4>
+    <h4><%= button_to 'New Appointment', new_appointment_path, method: :get, class: "btn btn-primary", id: "new_apt_button" %></h4>
 <% end %>
 
 <br>
 <div class="row">
+  <div class="col-md-12">
     <h2>Upcoming</h2>
     <div id="upcoming">
       <%= render :partial => "upcoming", locals: {:paginate => true, :upcoming_appointments => @upcoming_appointments} %>
     </div>
+  </div>
 </div>
 <div class="row">
+  <div class="col-md-12">
   <div id="fullCalendar"></div>
+</div>
 </div>
 
 <div id="fullCalModal" class="modal">

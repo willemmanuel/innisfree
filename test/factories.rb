@@ -5,7 +5,6 @@ FactoryGirl.define do
     notification_date "2015-02-09"
   end
 
-
   factory :user do
     name 'Test User'
     email 'test@example.com'
