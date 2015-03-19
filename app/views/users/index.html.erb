@@ -7,11 +7,11 @@
 <table class="table table-striped table-hover">
   <thead>
   <tr>
-    <th>Name</th>
-    <th>House</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Role</th>
+    <th><%= sortable "name" %></th>
+    <th><%= sortable "house_id" %></th>
+    <th><%= sortable "email" %></th>
+    <th><%= sortable "phone" %></th>
+    <th><%= link_to "Role", :sort => "NOT(admin)" %></th>
     <% if current_user.admin %>
         <th colspan="3"></th>
     <% end %>

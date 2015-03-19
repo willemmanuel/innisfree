@@ -3,14 +3,15 @@ class UsersController < ApplicationController
   before_filter :check_admin, only: [:edit, :update, :destroy, :new, :create]
 	before_action :set_user, only: [:show, :edit, :update, :destroy, :test_email]
   before_action :set_most_recent, ony: [:new]
+  helper_method :sort_column, :sort_direction
 
   # GET /houses
   # GET /houses.json
   def index
     @user = current_user.id
-    @users = User.all
+    @users = User.order(sort_column + " " + sort_direction)
     respond_to do |format|
-      format.html 
+      format.html
       format.csv { render text: @users.to_csv }
       format.pdf do
         pdf = ReportPdf.new(@users)
@@ -89,7 +90,20 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :house_id, :phone, :email_pref)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :house_id, :phone, :email_pref, :admin)
+  end
+
+  def sort_column
+    @houses = 
+    User.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    User.column_names.include?(params[:sort]) ? params[:sort] : "email"
+    User.column_names.include?(params[:sort]) ? params[:sort] : "phone"
+    User.column_names.include?(params[:sort]) ? params[:sort] : "house_id"
+    User.column_names.include?(params[:sort]) ? params[:sort] : "NOT(admin)"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   def check_admin

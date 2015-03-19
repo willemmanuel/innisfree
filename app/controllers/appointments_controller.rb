@@ -3,6 +3,7 @@ class AppointmentsController < ApplicationController
   before_action :check_workstation_head, only: [:new, :edit, :create, :update, :destroy]
   before_action :check_admin, only: [:destroy, :send_house_reminder]
   before_action :check_house, only: [:edit, :update]
+  helper_method :sort_column, :sort_direction
 
   # GET /appointments
   # GET /appointments.json
@@ -140,7 +141,7 @@ class AppointmentsController < ApplicationController
         end
         if !@appointment.user.nil?
           NotificationMailer.appointment_assignment_notification(@appointment).deliver
-        end 
+        end
         format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
         format.json { render :show, status: :created, location: @appointment }
       else
@@ -157,7 +158,7 @@ class AppointmentsController < ApplicationController
       if @appointment.update(appointment_params)
         if !@appointment.user.nil?
           NotificationMailer.appointment_assignment_notification(@appointment).deliver
-        end 
+        end
         format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
         format.json { render :show, status: :ok, location: @appointment }
       else
@@ -212,6 +213,19 @@ class AppointmentsController < ApplicationController
     params.require(:appointment).permit(:resident_id, :doctor_id, :user_id, :date, :time, :apt_type, :notes, :res_id, :house_id, :date, :apt_type,  :cancel)
   end
 
+    def sort_column
+    Appointment.column_names.include?(params[:sort]) ? params[:sort] : "resident_id"
+    Appointment.column_names.include?(params[:sort]) ? params[:sort] : "doctor_id"
+    Appointment.column_names.include?(params[:sort]) ? params[:sort] : "user_id"
+    Appointment.column_names.include?(params[:sort]) ? params[:sort] : "date"
+    Appointment.column_names.include?(params[:sort]) ? params[:sort] : "time"
+    Appointment.column_names.include?(params[:sort]) ? params[:sort] : "apt_type"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+  
   # Check to see if the user is an admin (staff)
   def check_house
     redirect_to appointments_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.house == @appointment.resident.house
