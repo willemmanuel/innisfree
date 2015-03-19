@@ -6,11 +6,4 @@ dependencies:
   pre:
     - "/bin/rm -rf /home/ubuntu/innisfree/vendor/bundle/ruby/2.1.0/specifications"
     - "bundle update sass-rails"
- 
-
-## Customize database setup
-database:
-  override:
-    # replace CircleCI's generated database.yml
-    - cp config/database.yml.ci config/database.yml
-    - bundle exec rake db:migrate RAILS_ENV=test
+    - "bundle exec rake db:migrate RAILS_ENV=test"
