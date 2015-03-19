@@ -6,4 +6,4 @@ dependencies:
   pre:
     - "/bin/rm -rf /home/ubuntu/innisfree/vendor/bundle/ruby/2.1.0/specifications"
     - "bundle update sass-rails"
-
+    - "bin/rake db:migrate RAILS_ENV=test"

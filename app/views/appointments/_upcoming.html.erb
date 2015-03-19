@@ -14,10 +14,10 @@
   </thead>
   <tbody>
     <% @upcoming_appointments.order([:date, :time]).each do |appointment| %>
-      <tr>
+      <% if appointment.cancel != true %>
         <td><%= link_to appointment.resident.name, appointment.resident %></td>
 	<% if appointment.doctor != nil %>
-        <td><%= link_to appointment.doctor.name, appointment.doctor %>   
+        <td><%= link_to appointment.doctor.name, appointment.doctor %>
           <small><%= link_to '(map)', map_link(appointment.doctor.address) %></small></td>
 	<% else %>
 	<td>None </td>
@@ -27,7 +27,6 @@
         <% else %>
           <td><%= link_to appointment.user.name, appointment.user %></td>
         <% end %>
-
         <td><%= appointment.date.to_formatted_s(:long_ordinal) %></td>
         <td><%= appointment.time.strftime("%l:%M %p") %></td>
         <td><%= appointment.apt_type %></td>
@@ -35,6 +34,23 @@
         <td>
           <%= link_to 'Details', appointment ,'data-no-turbolink' => true %>
         </td>
+      <%else %>
+        <td><strike><%= appointment.resident.name%></strike></td>
+        <td><strike><%= appointment.doctor.name %></strike></td>
+        <% if appointment.user.nil? %>
+          <td></td>
+        <% else %>
+          <td><strike><%= appointment.user.name %></strike></td>
+        <% end %>
+
+        <td><strike><%= appointment.date.to_formatted_s(:long_ordinal) %></strike></td>
+        <td><strike><%= appointment.time.strftime("%l:%M %p") %></strike></td>
+        <td><strike><%= appointment.apt_type %></strike></td>
+        <td><strike><%= appointment.notes %></strike></td>
+        <td>
+          <%= link_to 'Details', appointment ,'data-no-turbolink' => true %>
+        </td>
+      <%end%>
       </tr>
     <% end %>
   </tbody>

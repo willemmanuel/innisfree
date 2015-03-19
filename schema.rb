@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20141005160625) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "cancel"
   end
 
   add_index "appointments", ["physician_id"], name: "index_appointments_on_physician_id"

@@ -67,6 +67,7 @@ class ReportsController < ApplicationController
       test = test.sort_by {|u| [u.date, u.time]}
       #test = test.sort_by {|u| u.time}
       test.each do |appointment|
+        if appointment.cancel != true
         table_data +=
             [[
 
@@ -90,6 +91,7 @@ class ReportsController < ApplicationController
                  appointment.apt_type
 
              ]]
+           end
       end
       pdf.table(table_data, :header => true, :cell_style => { :inline_format => true }, \
                 :column_widths => {0 => 140, 1 => 70, 2 => 100, 3 => 100, 4 => 100, 5 => 100, 6 => 100}, \
@@ -103,6 +105,7 @@ class ReportsController < ApplicationController
         app = appointments.map
         app = app.sort_by {|u| [u.date, u.time]}
         app.each do |appointment|
+          if appointment.cancel != true
           csv << [appointment.date.to_formatted_s(:long_ordinal),
             appointment.time.strftime("%l:%M %p"),
             if not Resident.where('id = ?', appointment.resident_id).blank?
@@ -119,6 +122,7 @@ class ReportsController < ApplicationController
             appointment.apt_type,
             appointment.notes
             ]
+          end
         end
       end
       filename = "Report-#{Time.now.to_date.to_s}.csv"
