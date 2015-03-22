@@ -13,7 +13,4 @@
     <%= @reservation.note %><br><br>
   </div>
   <%= link_to "Back", cars_path %> 
-
-  <% if current_user.admin || @reservation.user == current_user %>
   | <%= link_to "Delete Reservation", destroy_reservation_path(@reservation),  method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% end %>

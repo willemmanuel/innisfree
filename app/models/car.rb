@@ -13,5 +13,5 @@
 class Car < ActiveRecord::Base
   validates :name, presence: true
   belongs_to :user
-  has_many :reservations
+  has_many :reservations, dependent: :destroy
 end

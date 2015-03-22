@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   # 
   post 'cars/manage' => 'cars#manage', as: :manage_cars
   resources :cars
-  put 'cars/:id/toggle' => 'cars#toggle',  as: :toggle_car
   put 'settings/admin/:id' => 'settings#toggle_user_permission', as: :admin_user
   put 'settings/email/:id' => 'settings#toggle_user_email_preference', as: :email_preference_user
   put 'settings/medicalcoordinator/:id' => 'settings#toggle_user_medical_coordinator', as: :medical_coordinator_user

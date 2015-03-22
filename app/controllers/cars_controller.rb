@@ -14,11 +14,6 @@ class CarsController < ApplicationController
 
   def get_reservations
     @reservations = Reservation.all
-    respond_to do |format|
-      format.html
-      format.json
-      format.js
-    end
   end
 
   def show_reservation
@@ -37,11 +32,6 @@ class CarsController < ApplicationController
     Car.all.each do |car|
       flag = true
       car.reservations.each do |reservation|
-        puts "    looking at reservation "
-        puts reservation.start
-        puts reservation.end
-        puts reservation.start.class
-        puts (reservation.start == parsed_start && reservation.end == parsed_end)
         if (parsed_start <= reservation.start && parsed_end > reservation.start) || (reservation.start <= parsed_start && reservation.end > parsed_start) || (reservation.start == parsed_start && reservation.end == parsed_end)
           flag = false
           break
@@ -134,18 +124,6 @@ class CarsController < ApplicationController
       format.html { redirect_to cars_url, notice: 'Car (' + @car.name + ') was successfully deleted.' }
       format.json { head :no_content }
     end
-  end
-
-  def toggle
-    if @car.user.nil?
-      @car.user = current_user
-      @car.for = params[:for]
-    else
-      @car.user = nil
-      @car.for = nil
-    end
-    @car.save
-    redirect_to :back, notice: 'Car status toggled'
   end
 
   private
