@@ -28,6 +28,10 @@ FactoryGirl.define do
     name 'Test'
   end
 
+  factory :house2, class: House do
+    name 'Test2'
+  end
+
   factory :resident do
     name 'John Doe'
     house

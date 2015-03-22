@@ -4,6 +4,8 @@ class ResidentsControllerTest < ActionController::TestCase
   setup do
     @resident = FactoryGirl.create(:resident)
     @user = FactoryGirl.create(:user)
+    @house = FactoryGirl.create(:house)
+    @house2 = FactoryGirl.create(:house2)
     @volunteer1 = FactoryGirl.create(:user, email: 'volunteer1@test.com', admin: false, house_id: 1)
     @volunteer2 = FactoryGirl.create(:user, email: 'volunteer2@test.com', admin: false, house_id: 2)
     sign_in(@user)
