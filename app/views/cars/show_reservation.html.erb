@@ -8,7 +8,7 @@
     <%= @reservation.start.strftime("%I:%M %p on %a %b %d %Y") %><br>
     <%= hidden_field_tag 'reservation_start', :value => @reservation.start%>
     <%= label_tag 'End time' %><br>
-    <%= @reservation.end.strftime("%I:%M %p on %a %b %d %Y") %><br>
+    <%= @reservation.finish.strftime("%I:%M %p on %a %b %d %Y") %><br>
     <%= label_tag 'Purpose' %><br>
     <%= @reservation.note %><br><br>
   </div>

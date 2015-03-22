@@ -4,12 +4,19 @@ class CarsControllerTest < ActionController::TestCase
   setup do
     @car = FactoryGirl.create(:car)
     @user = FactoryGirl.create(:user)
+    @reservation = FactoryGirl.create(:reservation)
     sign_in(@user)
   end
 
   test "should get new" do
     get :new
     assert_response :success
+  end
+
+  test "should get reservations" do 
+    get :get_reservations, :format => :json
+    assert_response :success
+    assert_not_equal Reservation.count, 0
   end
 
   test "should get manage page correctly" do
@@ -38,7 +45,6 @@ class CarsControllerTest < ActionController::TestCase
     assert_difference('Car.count', -1) do
       delete :destroy, id: @car
     end
-
     assert_redirected_to cars_path
   end
 

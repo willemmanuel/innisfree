@@ -33,6 +33,13 @@ FactoryGirl.define do
     house_id 1
   end
 
+  factory :reservation do
+    user_id 1
+    car_id 1
+    start Time.zone.now + 2.hour
+    finish Time.zone.now + 3.hour
+  end
+
   factory :doctor do
     id 1
     name 'Doctor #1'

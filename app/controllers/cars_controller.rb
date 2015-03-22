@@ -1,4 +1,5 @@
 class CarsController < ApplicationController
+  include CarsHelper
   before_filter :check_admin, only: [:edit, :update, :destroy, :new, :create, :manage]
   before_action :set_car, only: [:show, :edit, :update, :destroy, :toggle]
   before_action :set_reservation, only: [:show_reservation, :destroy_reservation]
@@ -20,24 +21,14 @@ class CarsController < ApplicationController
   end
 
   def get_availability
-    parsed_start = Time.zone.parse("#{params[:date]} #{params[:reservation_start].values.join(":")}#{Time.zone.formatted_offset.to_s.tr(':','')}")
-    parsed_end = Time.zone.parse("#{params[:date]} #{params[:reservation_end].values.join(":")}#{Time.zone.formatted_offset.to_s.tr(':','')}")
-    # I have no idea why DST is not taken into account. This should be fixed at some point
-    parsed_start = parsed_start - 1.hour if Time.now.dst?
-    parsed_end = parsed_end - 1.hour if Time.now.dst?
-    if parsed_start > parsed_end || parsed_start < Time.now
+    start = parse_time(params[:date], params[:reservation_start])
+    finish = parse_time(params[:date], params[:reservation_end])
+    if !valid_times?(start, finish)
       redirect_to new_reservation_path, notice: "Invalid reservation times"
     end
     @cars = Array.new
     Car.all.each do |car|
-      flag = true
-      car.reservations.each do |reservation|
-        if (parsed_start <= reservation.start && parsed_end > reservation.start) || (reservation.start <= parsed_start && reservation.end > parsed_start) || (reservation.start == parsed_start && reservation.end == parsed_end)
-          flag = false
-          break
-        end
-      end
-      if flag 
+      if car_available?(car, start, finish)
         @cars << car
       end
     end
@@ -45,8 +36,8 @@ class CarsController < ApplicationController
       redirect_to new_reservation_path, method: :post, notice: "No cars available at that time"
     end
     @reservation = Reservation.new
-    @reservation.start = parsed_start
-    @reservation.end = parsed_end
+    @reservation.start = start
+    @reservation.finish = finish
   end
 
   def new_reservation
@@ -71,7 +62,7 @@ class CarsController < ApplicationController
   def save_reservation
     @reservation = Reservation.new
     @reservation.start = params[:reservation_start]
-    @reservation.end = params[:reservation_end]
+    @reservation.finish = params[:reservation_end]
     @reservation.car_id = params[:car]
     @reservation.note = params[:note]
     @reservation.user = current_user
@@ -148,9 +139,4 @@ class CarsController < ApplicationController
     def check_admin
       redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
     end
-
-    def parse_calculator_time(hash)
-      Time.parse("#{hash['time1i']}-#{hash['time2i']}-#{hash['time3i']} #{hash['time4i']}:#{hash['time5i']}")
-    end
-
 end

@@ -5,8 +5,8 @@
     <%= @reservation.start.strftime("%I:%M %p on %a %b %d %Y") %><br>
     <%= hidden_field_tag 'reservation_start', :value => @reservation.start%>
     <%= label_tag 'End time' %><br>
-    <%= @reservation.end.strftime("%I:%M %p on %a %b %d %Y") %><br><br>
-    <%= hidden_field_tag 'reservation_end', :value => @reservation.end%>
+    <%= @reservation.finish.strftime("%I:%M %p on %a %b %d %Y") %><br><br>
+    <%= hidden_field_tag 'reservation_end', :value => @reservation.finish%>
   </div>
     <%= label_tag 'Choose an Available Car:' %><br>
     <%= select_tag 'car', options_from_collection_for_select(@cars, 'id', 'name') %><br><br>
