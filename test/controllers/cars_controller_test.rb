@@ -3,7 +3,7 @@ require 'test_helper'
 class CarsControllerTest < ActionController::TestCase
   setup do
     @car = FactoryGirl.create(:car)
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user, email: "test2@test2.com")
     @reservation = FactoryGirl.create(:reservation)
     sign_in(@user)
   end
@@ -52,6 +52,11 @@ class CarsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
   end
+
+  # test "should get availability" do 
+  #   post :get_availability, :reservation_start => Time.zone.now + 3.hour, :reservation_end => Time.zone.now + 4.hour, :date => Date.today
+  #   assert_response :success
+  # end
 
   test "should initially be checked in" do
     assert_nil @car.user

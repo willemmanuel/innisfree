@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   setup do
     @user_attr = FactoryGirl.attributes_for(:user)
-    @user = User.create!(@user_attr)
+    @user = User.create(@user_attr)
     @no_name_user = FactoryGirl.create(:user, name: nil, email: "noname@test.com")
     @main_user = FactoryGirl.create(:user, name: "Rick", email:"rickrick@rick.com", admin: true)
     @request.env['HTTP_REFERER'] = 'http://localhost:3000'

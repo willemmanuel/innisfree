@@ -18,8 +18,8 @@ FactoryGirl.define do
   end
 
   factory :appointment do
-    resident_id 1
-    doctor_id 1
+    resident
+    doctor
     date Date.today
     time '12:06:26'
   end
@@ -30,18 +30,17 @@ FactoryGirl.define do
 
   factory :resident do
     name 'John Doe'
-    house_id 1
+    house
   end
 
   factory :reservation do
-    user_id 1
-    car_id 1
+    user
+    car
     start Time.zone.now + 2.hour
     finish Time.zone.now + 3.hour
   end
 
   factory :doctor do
-    id 1
     name 'Doctor #1'
     address '123 University Drive'
     phone '123456'
