@@ -72,14 +72,6 @@ class User < ActiveRecord::Base
 
   attr_accessor :current_password
 
-  def active_for_authentication? 
-    super
-  end 
-
-  def inactive_message 
-    super # Use whatever other message 
-  end
-
   def name
     super || email
   end

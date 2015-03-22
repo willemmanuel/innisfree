@@ -81,7 +81,7 @@ class DoctorsController < ApplicationController
     def doctor_params
       params.require(:doctor).permit(:name, :address, :phone, :doctor_type)
     end
-      def sort_column
+    def sort_column
       Doctor.column_names.include?(params[:sort]) ? params[:sort] : "name"
       Doctor.column_names.include?(params[:sort]) ? params[:sort] : "address"
       Doctor.column_names.include?(params[:sort]) ? params[:sort] : "phone"

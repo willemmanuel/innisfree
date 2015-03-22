@@ -39,4 +39,8 @@ FactoryGirl.define do
     address '123 University Drive'
     phone '123456'
   end
+
+  factory :apt_type  do
+    apt_type 'type'
+  end
 end

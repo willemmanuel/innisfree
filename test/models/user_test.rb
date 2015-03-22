@@ -36,7 +36,7 @@ class UserTest < ActiveSupport::TestCase
      assert true
    end
    
-   test "send_recurring_reminders_test" do
+   test "send_reminders_test" do
      @res = FactoryGirl.create(:resident)
      @u = FactoryGirl.create(:user, email_pref: true)
      @doc = FactoryGirl.create(:doctor);
@@ -44,6 +44,16 @@ class UserTest < ActiveSupport::TestCase
      @recur = FactoryGirl.create(:recurring_reminder, notification_date: Date.today, appointment_id: @app.id)
      c = NotificationMailer.deliveries.count
      User.send_reminders 
+     assert(NotificationMailer.deliveries.count > c)
+   end
+
+   test "send_weekly_digest_test" do
+     @res = FactoryGirl.create(:resident)
+     @u = FactoryGirl.create(:user, email_pref: true, medical_coordinator: true)
+     @doc = FactoryGirl.create(:doctor);
+     @app = FactoryGirl.create(:appointment, user_id: @u.id, date: Date.today+3, doctor_id: @doc.id, resident_id: @res.id)
+     c = NotificationMailer.deliveries.count
+     User.send_weekly_digest 
      assert(NotificationMailer.deliveries.count > c)
    end
 end

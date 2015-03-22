@@ -6,7 +6,7 @@
 
   <p>
     <strong>Doctor:</strong>
-    <% if @appointment.doctor != nil %>	
+    <% if @appointment.doctor != nil %>
         <%= link_to @appointment.doctor.name, @appointment.doctor %>
     <% else %> None <% end %>
   </p>
@@ -48,12 +48,18 @@
       <%= link_to 'Delete', @appointment, method: :delete, data: { confirm: 'Are you sure?' } %> |
 
   <% end %>
+    <% if current_user.admin && (@appointment.cancel == nil || @appointment.cancel == false) %>
+    <%= link_to 'Cancel', appointment_path(@appointment, :appointment => {:cancel => true}), :method => :patch %> |
+  <%end%>
+  <% if current_user.admin && @appointment.cancel == true %>
+    <%= link_to 'Uncancel', appointment_path(@appointment, :appointment => {:cancel => false}), :method => :patch %> |
+  <%end%>
 
 <% if @appointment.doctor != nil %>
   <%= link_to 'Copy Appointment', new_appointment_path({:doctor_id => @appointment.doctor.id, :resident_id => @appointment.resident.id, :apt_type => @appointment.apt_type}) %> | <% end %>
   <%= link_to 'Back to Appointments', appointments_path %><br><br>
   <%= button_to 'New Appointment', new_appointment_path, method: :get %><br>
- 
+
    <div id="newFollowupModal" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -129,7 +135,3 @@
 </div>
 
 </div>
-
-
-
-
