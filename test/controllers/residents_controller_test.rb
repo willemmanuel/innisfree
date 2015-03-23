@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ResidentsControllerTest < ActionController::TestCase
   setup do
-    @resident = FactoryGirl.create(:resident)
+    @resident = FactoryGirl.create(:resident, house_id: 1)
     @user = FactoryGirl.create(:user)
     @house = FactoryGirl.create(:house)
     @house2 = FactoryGirl.create(:house2)
