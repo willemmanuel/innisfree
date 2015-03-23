@@ -1,8 +1,4 @@
 module CarsHelper
-	def parse_calculator_time(hash)
-		fix_dst(Time.parse("#{hash['time1i']}-#{hash['time2i']}-#{hash['time3i']} #{hash['time4i']}:#{hash['time5i']}"))
-	end
-
 	def valid_times?(start, finish)
 		if start > finish || start < Time.now
 			return false

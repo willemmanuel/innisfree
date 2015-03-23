@@ -22,10 +22,10 @@ class Appointment < ActiveRecord::Base
   belongs_to :doctor
   belongs_to :user
 
-  validate :doctor, presence: true
-  validate :resident, presence: true
-  validate :date, presence: true
-  validate :time, presence: true
+  validates :doctor, presence: true
+  validates :resident, presence: true
+  validates :date, presence: true
+  validates :time, presence: true
 
   def self.to_csv
     CSV.generate do |csv|

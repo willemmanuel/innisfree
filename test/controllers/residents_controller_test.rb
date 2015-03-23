@@ -20,7 +20,6 @@ class ResidentsControllerTest < ActionController::TestCase
     assert_difference('Resident.count') do
       post :create, resident: { house_id: @resident.house_id, name: @resident.name, notes: @resident.notes }
     end
-
     assert_redirected_to new_resident_path
   end
 

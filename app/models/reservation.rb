@@ -15,4 +15,9 @@
 class Reservation < ActiveRecord::Base
 	belongs_to :car
 	belongs_to :user
+
+	validates :start, presence: true
+	validates :finish, presence: true
+	validates :user_id, presence: true
+	validates :car_id, presence: true
 end

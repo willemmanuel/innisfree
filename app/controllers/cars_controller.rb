@@ -23,18 +23,12 @@ class CarsController < ApplicationController
   def get_availability
     start = parse_time(params[:date], params[:reservation_start])
     finish = parse_time(params[:date], params[:reservation_end])
-    if !valid_times?(start, finish)
-      redirect_to new_reservation_path, notice: "Invalid reservation times"
-    end
+    redirect_to new_reservation_path, notice: "Invalid reservation times" unless valid_times?(start, finish)
     @cars = Array.new
     Car.all.each do |car|
-      if car_available?(car, start, finish)
-        @cars << car
-      end
+      @cars << car if car_available?(car, start, finish)
     end
-    if @cars.empty?
-      redirect_to new_reservation_path, method: :post, notice: "No cars available at that time"
-    end
+    redirect_to new_reservation_path, method: :post, notice: "No cars available at that time" if @cars.empty?
     @reservation = Reservation.new
     @reservation.start = start
     @reservation.finish = finish
@@ -130,10 +124,6 @@ class CarsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
       params.require(:car).permit(:name, :user_id, :for)
-    end
-
-    def reservation_params
-      params.require(:reservation).permit(:start, :end, :car, :note, :date)
     end
 
     def check_admin

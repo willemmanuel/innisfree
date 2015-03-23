@@ -1,5 +1,5 @@
 require 'test_helper'
-
+include CarsHelper
 class CarsControllerTest < ActionController::TestCase
   setup do
     @car = FactoryGirl.create(:car)
@@ -53,10 +53,37 @@ class CarsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # test "should get availability" do 
-  #   post :get_availability, :reservation_start => Time.zone.now + 3.hour, :reservation_end => Time.zone.now + 4.hour, :date => Date.today
-  #   assert_response :success
-  # end
+  test "should get availability" do 
+    params = ActionController::Parameters.new(
+      reservation_start: {
+        h: (Time.zone.now + 1.hour).strftime('%H'), 
+        m: Time.zone.now.strftime('%M')
+      }, 
+      reservation_end: {
+        h: (Time.zone.now + 2.hour).strftime('%H'), 
+        m: Time.zone.now.strftime('%M')
+      }, 
+      date: Date.today + 1.day
+    )
+    post :get_availability, params
+    assert_response :success
+  end
+
+  test "should make new reservation" do 
+    get :new_reservation
+    assert_response :success
+  end
+
+  test "should create new reservation" do 
+    assert_difference 'Reservation.count' do
+      post :save_reservation, reservation_start: Time.zone.now + 2.hour, reservation_end: Time.zone.now + 3.hour, car: @car.id
+    end
+  end
+
+  test "should not create invalid reservation" do
+    post :save_reservation
+    assert_redirected_to new_reservation_path
+  end
 
   test "should initially be checked in" do
     assert_nil @car.user
@@ -67,4 +94,29 @@ class CarsControllerTest < ActionController::TestCase
       post :create, car: { for: @car.for, user_id: @car.user_id }
     end
   end
+
+  test "should load the current reservation" do
+    get :show_reservation, id: @reservation.id
+    assert_response :success
+    assert_not_nil assigns(:reservation)
+  end
+
+  test "should destroy reservations" do
+    delete :destroy_reservation, id: @reservation.id
+    assert_response :redirect
+  end
+
+  test "should not update invalid car" do 
+    patch :update, id: @car.id, car: {empty: "empty"}
+    assert_response :redirect
+  end
+
+  test "valid times works properly" do
+    assert_not valid_times?(Time.zone.now - 1.hour, Time.zone.now )
+  end
+
+# Fix this test
+  # test "car available method" do 
+  #   assert_not car_available?(@car, Time.zone.now + 2.hour, Time.zone.now + 3.hour)
+  # end
 end
