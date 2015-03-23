@@ -22,8 +22,8 @@ class Appointment < ActiveRecord::Base
   belongs_to :doctor
   belongs_to :user
 
-  validates :doctor, presence: true
-  validates :resident, presence: true
+  validates :doctor_id, presence: true
+  validates :resident_id, presence: true
   validates :date, presence: true
   validates :time, presence: true
 
