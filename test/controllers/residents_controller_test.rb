@@ -11,8 +11,19 @@ class ResidentsControllerTest < ActionController::TestCase
     sign_in(@user)
   end
 
+  test "should get index" do
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:residents)
+  end
+
   test "should get new" do
     get :new
+    assert_response :success
+  end
+
+  test "should show resident" do
+    get :show, id: @resident
     assert_response :success
   end
 

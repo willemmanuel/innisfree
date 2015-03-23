@@ -11,10 +11,12 @@ class SettingsController < ApplicationController
 		@user = User.new(user_params)
 		@user.approved = true
 		if @user.save
-          redirect_to :back, notice: 'User (' + @user.name + ') was successfully created.'
-      	else
-        	redirect_to :back, alert: 'There were errors present.'
-      end
+			redirect_to :back, notice: 'User (' + @user.name + ') was successfully created.'
+		elsif not @user.email =~ Devise::email_regexp
+			redirect_to :back, alert: "Error: Please enter a valid email!"
+		else
+			redirect_to :back, alert: "There were errors present! Please make sure that your passwords match and are at least 8 characters."
+		end
 	end
 
 	def toggle_user_permission

@@ -15,9 +15,10 @@ This is a work in progress. Currently we're working with Monika to get BlueHost 
   - ![Figure 3](https://farm8.staticflickr.com/7307/16539726066_d8bcd8999e_b.jpg)
   - Fill out application information
   - ![Figure 4](https://farm8.staticflickr.com/7287/16378275470_028f177cc7_b.jpg)
-2. Using BlueHost's FTP tools, copy zipped code to BlueHost (place it in the home directory for now)
-3. SSH to BlueHost
-  4. Change to the ```rails_app``` directory: ```cd ~/rails_app``` 
+4. Create a MySQL database for the scheduling application, and add a user to it
+2. Using BlueHost's File Manager tool, copy zipped code to BlueHost (place it in the home directory for now)
+3. SSH to BlueHost using putty or a similar tool
+  4. Change to the ```rails_apps``` directory: ```cd ~/rails_apps``` 
   1. Install Rails: ```gem install rails -v 4.1.1 --no-rdoc --no-ri```
   2. Install Rake: ```gem install rake -v '10.4.2' --no-rdoc --no-ri```
   7. Edit .bash.rc file as described in first guide
@@ -30,8 +31,8 @@ This is a work in progress. Currently we're working with Monika to get BlueHost 
     - Change the second to last line to ```SetEnv GEM_HOME /home2/voluntf8/ruby/gems```
   5. Delete the subdomain directory: ```rm -rf ~/public_html/scheduling```
   5. Link subdomain and application directory as described in first guide
-    - Create symbolic link from domain to app: ```ln -s ~/rails_app/innisfree/public ~/public_html/scheduling```
-4. Create config/database.yml from config/database.yml.template so production entry points to BlueHost SQL server:
+    - Create symbolic link from domain to app: ```ln -s ~/rails_apps/innisfree/public ~/public_html/scheduling```
+4. Create config/database.yml from config/database.yml.template (in the Rails application directory) so production entry points to BlueHost SQL server:
 
         
         production:
@@ -44,4 +45,4 @@ This is a work in progress. Currently we're working with Monika to get BlueHost 
           host: localhost
         
 5. Run ```rake db:migrate```
-6. Delete the application.css file: ```rm ~/rails_app/innisfree/app/assets/stylesheets/application.css```
+6. Delete the application.css file, if it exists: ```rm ~/rails_app/innisfree/app/assets/stylesheets/application.css```

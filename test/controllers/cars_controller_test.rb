@@ -106,17 +106,21 @@ class CarsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  test "should handle dst correctly" do 
+    assert_equal fix_dst(Time.utc(0, 0, 12, 1, 1, 2000, 1, 1, false, "-0400")).strftime('%H'), '12'
+  end
+
   test "should not update invalid car" do 
-    patch :update, id: @car.id, car: {empty: "empty"}
-    assert_response :redirect
+    patch :update, id: @car.id, car: {name: ""}
+    assert_not_nil assigns(:car).errors
   end
 
   test "valid times works properly" do
     assert_not valid_times?(Time.zone.now - 1.hour, Time.zone.now )
   end
 
-# Fix this test
-  # test "car available method" do 
-  #   assert_not car_available?(@car, Time.zone.now + 2.hour, Time.zone.now + 3.hour)
-  # end
+  test "car available method" do 
+    @car.reservations << @reservation
+    assert_not car_available?(@car, Time.zone.now + 2.hour, Time.zone.now + 3.hour)
+  end
 end
