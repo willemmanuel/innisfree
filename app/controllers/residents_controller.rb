@@ -68,31 +68,27 @@ class ResidentsController < ApplicationController
   end
 
   private
-    # Check to see if the user is an admin (staff)
-    def check_admin
-      redirect_to houses_path unless current_user.admin
-    end
-
-  def check_privileges
-    redirect_to houses_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.house_id == @resident.house_id
+  # Check to see if the user is an admin (staff)
+  def check_admin
+    redirect_to houses_path, alert: "You do not have admin privileges." unless current_user.admin
   end
 
-    # Check to see if the user is in the same house as resident or an admin
-    def check_house
-      redirect_to houses_path unless current_user.admin or current_user.house_id == @resident.house_id
-    end
+  # Check to see if the user is in the same house as resident or an admin
+  def check_house
+    redirect_to houses_path, alert: "You do not have access to this house." unless current_user.admin or current_user.house_id == @resident.house_id
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_resident
-      @resident = Resident.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_resident
+    @resident = Resident.find(params[:id])
+  end
 
   def set_most_recent
     @recent = Resident.order("created_at").last
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def resident_params
-      params.require(:resident).permit(:name, :house_id, :notes)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def resident_params
+    params.require(:resident).permit(:name, :house_id, :notes)
+  end
 end
