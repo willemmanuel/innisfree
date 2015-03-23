@@ -1,12 +1,26 @@
 <h2>Create New User</h2>
+
+<% if @user.errors.any? %>
+    <br>
+    <div id="error_explanation">
+      <h4 style="color: #ff0000"><%= pluralize(@user.errors.count, "error") %> prohibited this house from being saved:</h4>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+            <li style="color: #ff0000"><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
 <%= form_tag(create_user_path, class: "form form-horizontal", role: "form") do %>
-    <%= text_field_tag :name, nil, placeholder: "Name" %><br>
-    <%= text_field_tag :email,nil, placeholder: "Email" %><br>
+    <%= text_field_tag :name, nil, placeholder: "Name *" %><br>
+    <%= text_field_tag :email,nil, placeholder: "Email *" %><br>
     <%= text_field_tag :phone, nil, placeholder: "Phone" %><br>
     <% houses = House.all.map { |house| [house.name, house.id] } %>
     <%= select_tag(:house_id,  options_for_select(houses), { :class => 'chosen-select' }) %><br>
-    <%= password_field_tag :password, nil, placeholder: "Password" %><br>
-    <%= password_field_tag :password_confirmation, nil, placeholder: "Confirm password" %><br><br>
+    <%= password_field_tag :password, nil, placeholder: "Password *" %><br>
+    <%= password_field_tag :password_confirmation, nil, placeholder: "Confirm password *" %><br><br>
+    <p><small>* Required field</small></p>
     <%= submit_tag("Create User", class: "btn btn-success") %><br><br>
 <% end %>
 <%= link_to 'View Users', users_path %> |

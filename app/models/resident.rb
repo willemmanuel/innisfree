@@ -11,7 +11,9 @@
 #
 
 class Resident < ActiveRecord::Base
+
   belongs_to :house
+  validates :name, presence: true
   
   def self.to_csv
     CSV.generate do |csv|
@@ -23,7 +25,7 @@ class Resident < ActiveRecord::Base
   end
 
   def name 
-  	super || "No name"
+  	super || "No Name"
   end
   
 end

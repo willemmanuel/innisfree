@@ -2,14 +2,15 @@ require 'test_helper'
 
 class AppointmentsControllerTest < ActionController::TestCase
   setup do
+    @type = FactoryGirl.create(:apt_type)
     @appointment = appointments(:one)
     @user = FactoryGirl.create(:user, admin: true)
     FactoryGirl.create(:doctor, id: 1, name: "doc", address: "123 Uni Drive", phone: "123-456-7890")
     FactoryGirl.create(:resident, house_id: 1, id: 2, name: "Pocahontas")
     FactoryGirl.create(:resident, house_id: 2, id: 3, name: "John Smith")
-    FactoryGirl.create(:appointment, resident_id: 2, date: Date.today, doctor_id: 1)
-    FactoryGirl.create(:appointment, resident_id: 3, date: Date.tomorrow, doctor_id: 1)
-    FactoryGirl.create(:appointment, resident_id: 2, date: Date.yesterday, doctor_id: 1)
+    FactoryGirl.create(:appointment, resident_id: 2, date: Date.today, doctor_id: 1, apt_type: @type.id)
+    FactoryGirl.create(:appointment, resident_id: 3, date: Date.tomorrow, doctor_id: 1, apt_type: @type.id)
+    FactoryGirl.create(:appointment, resident_id: 2, date: Date.yesterday, doctor_id: 1, apt_type: @type.id)
     sign_in(@user)
   end
 
@@ -82,12 +83,6 @@ class AppointmentsControllerTest < ActionController::TestCase
     assert (@controller.residents).length == 1
     xhr :get, :update_residents, {:house_id => '', :format => 'js'}
     assert (@controller.residents).length == (Resident.all).length
-  end
-
-  test "should add appointment type" do
-    assert_difference('AptType.count', 1) do
-      xhr :get, :add_apt_type, {:apt_type => 'type'}
-    end
   end
 
   test "should not add appointment type" do

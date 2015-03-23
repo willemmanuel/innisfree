@@ -36,6 +36,9 @@ class User < ActiveRecord::Base
   has_many :reservations
   has_many :appointments
 
+  validates :name, presence: true
+  validates :email, presence: true
+
   def self.send_reminders
    # email all the admins a full schedule for the day
    if !Appointment.where('date = ?', Date.today).empty?

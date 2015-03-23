@@ -42,7 +42,7 @@
         </div>
     <% end %>
 
-    <% if current_user.admin || current_user.house.name != 'Workstation Heads' %>
+    <% if current_user.admin || current_user.house.name != ' Workstations' %>
           <%= f.label :house_id %><br>
           <% houses = House.all.map { |house| [house.name, house.id] } %>
           <%= f.select(:house_id, houses, { include_blank: false }, { :class => 'chosen-select' }) %>

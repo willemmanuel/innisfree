@@ -1,18 +1,19 @@
 <%= form_for(@resident) do |f| %>
   <% if @resident.errors.any? %>
+        <br>
     <div id="error_explanation">
-      <h2><%= pluralize(@resident.errors.count, "error") %> prohibited this resident from being saved:</h2>
+      <h4 style="color: #ff0000"><%= pluralize(@resident.errors.count, "error") %> prohibited this resident from being saved:</h4>
 
       <ul>
       <% @resident.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li style="color: #ff0000"><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name %><small> *</small><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
@@ -25,6 +26,7 @@
     <%= f.text_area :notes %>
   </div>
     <br>
+    <p><small>* Required field</small></p>
   <div class="actions">
     <%= f.submit %>
   </div>

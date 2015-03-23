@@ -26,6 +26,7 @@ class Appointment < ActiveRecord::Base
   validates :resident_id, presence: true
   validates :date, presence: true
   validates :time, presence: true
+  validates :apt_type, presence: true
 
   def self.to_csv
     CSV.generate do |csv|

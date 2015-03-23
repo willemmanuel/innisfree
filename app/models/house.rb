@@ -12,6 +12,8 @@
 class House < ActiveRecord::Base
 	has_many :users
 	has_many :residents
+
+  validates :name, presence: true
 	
 	def self.to_csv
 	  CSV.generate do |csv|

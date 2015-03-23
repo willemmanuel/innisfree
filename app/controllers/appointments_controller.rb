@@ -133,6 +133,9 @@ class AppointmentsController < ApplicationController
   # POST /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
+    @types = AptType.all
+    @residents = Resident.all
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
     respond_to do |format|
       if @appointment.save
         coordinators = User.where(medical_coordinator: true).where(email_pref: true)

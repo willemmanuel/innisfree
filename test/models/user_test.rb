@@ -37,10 +37,11 @@ class UserTest < ActiveSupport::TestCase
    end
    
    test "send_reminders_test" do
+     @type = FactoryGirl.create(:apt_type)
      @res = FactoryGirl.create(:resident)
      @u = FactoryGirl.create(:user, email_pref: true)
      @doc = FactoryGirl.create(:doctor);
-     @app = FactoryGirl.create(:appointment, user_id: @u.id, date: Date.today, doctor_id: @doc.id, resident_id: @res.id)
+     @app = FactoryGirl.create(:appointment, user_id: @u.id, date: Date.today, doctor_id: @doc.id, resident_id: @res.id, apt_type: @type.id)
      @recur = FactoryGirl.create(:recurring_reminder, notification_date: Date.today, appointment_id: @app.id)
      c = NotificationMailer.deliveries.count
      User.send_reminders 
@@ -48,10 +49,11 @@ class UserTest < ActiveSupport::TestCase
    end
 
    test "send_weekly_digest_test" do
+     @type = FactoryGirl.create(:apt_type)
      @res = FactoryGirl.create(:resident)
      @u = FactoryGirl.create(:user, email_pref: true, medical_coordinator: true)
      @doc = FactoryGirl.create(:doctor);
-     @app = FactoryGirl.create(:appointment, user_id: @u.id, date: Date.today+3, doctor_id: @doc.id, resident_id: @res.id)
+     @app = FactoryGirl.create(:appointment, user_id: @u.id, date: Date.today+3, doctor_id: @doc.id, resident_id: @res.id, apt_type: @type.id)
      c = NotificationMailer.deliveries.count
      User.send_weekly_digest 
      assert(NotificationMailer.deliveries.count > c)
