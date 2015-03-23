@@ -12,7 +12,7 @@ module CarsHelper
 	end
 
 	def fix_dst(time) 
-		if Time.now.dst?
+		if time.dst?
 			return time - 1.hour
 		else
 			return time
