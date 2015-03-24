@@ -15,4 +15,10 @@ class HouseTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+  test "csv generation" do
+    @house = FactoryGirl.create(:house)
+    generated_csv = House.to_csv
+    csv = CSV.parse(generated_csv)
+    assert_equal(["id", "name", "created_at", "updated_at", "phone"], csv.first)
+  end
 end
