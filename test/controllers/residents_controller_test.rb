@@ -34,6 +34,12 @@ class ResidentsControllerTest < ActionController::TestCase
     assert_redirected_to new_resident_path
   end
 
+  test "should not create resident" do
+    assert_no_difference('Resident.count') do
+      post :create, resident: { name: '' }
+    end
+  end
+
   test "volunteer should not create resident" do
     sign_in(@volunteer1)
 
@@ -66,6 +72,11 @@ class ResidentsControllerTest < ActionController::TestCase
   test "should update resident" do
     patch :update, id: @resident, resident: { house_id: @resident.house_id, name: @resident.name, notes: @resident.notes }
     assert_redirected_to resident_path(assigns(:resident))
+  end
+
+  test "should not update resident" do
+    patch :update, id: @resident, resident: { name: '' }
+    assert_not_equal(@resident.name, '')
   end
 
   test "volunteer should update resident" do

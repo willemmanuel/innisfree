@@ -57,11 +57,6 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get new with a notice" do
-    get :new
-    assert_response :success
-  end
-
   test "should show user" do
     get :show, id: @user
     assert_response :success

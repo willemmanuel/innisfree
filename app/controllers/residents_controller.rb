@@ -3,7 +3,7 @@ class ResidentsController < ApplicationController
   before_action :check_admin, only: [:new, :create, :index, :destroy]
   before_action :check_house, only: [:edit, :update]
   before_action :set_most_recent, ony: [:new]
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column
 
 
   def index
@@ -101,8 +101,4 @@ def sort_column
   Appointment.column_names.include?(params[:sort]) ? params[:sort] : "date"
   Appointment.column_names.include?(params[:sort]) ? params[:sort] : "time"
   Appointment.column_names.include?(params[:sort]) ? params[:sort] : "apt_type"
-end
-
-def sort_direction
-  %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
 end
