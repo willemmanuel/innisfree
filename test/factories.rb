@@ -22,6 +22,7 @@ FactoryGirl.define do
     doctor
     date Date.today
     time '12:06:26'
+    apt_type 
   end
 
   factory :house do
@@ -51,6 +52,7 @@ FactoryGirl.define do
   end
 
   factory :apt_type  do
+    id 1
     apt_type 'type'
   end
 end
