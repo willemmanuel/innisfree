@@ -14,7 +14,10 @@
 require 'test_helper'
 
 class DoctorTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "csv generation" do
+    @doctor = FactoryGirl.create(:doctor)
+    generated_csv = Doctor.to_csv
+    csv = CSV.parse(generated_csv)
+    assert_equal(["id", "name", "address", "phone", "created_at", "updated_at", "doctor_type"], csv.first)
+  end
 end
