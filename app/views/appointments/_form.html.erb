@@ -59,15 +59,15 @@
     </div>
     <div class="field">
       <%= f.label "Appointment Type" %> <small> *</small><br>
-      <% types = @types.map {|t| [t.apt_type, t.apt_type]} %>
-      <% if params.has_key?(:doctor_id) %>
+      <% types = @types.map {|t| [t.apt_type, t.id]} %>
+      <% if params.has_key?(:apt_type) %>
           <%= f.select(:apt_type, options_from_collection_for_select(types, "last", "first", params[:apt_type]), { include_blank: true }, { :class => 'chosen-select', :id => 'select_type' }) %>
       <% else %>
           <%= f.select(:apt_type, types, { include_blank: true }, { :class => 'chosen-select', :id => 'select_type' }) %>
       <% end %>
     </div>
     <% if current_user.admin %>
-      <button id="new_apt_type_button" type="button" class="button">New Appointment Type</button>
+      <button id="new_apt_type_button" type="button" class="button">Manage Appointment Types</button>
     <% end %>
 
    <div id="newEventModal" class="modal">

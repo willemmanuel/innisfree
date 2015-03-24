@@ -34,7 +34,7 @@
 
   <p>
     <strong>Type:</strong>
-    <%= @appointment.apt_type %>
+    <%= AptType.where('id = ?', @appointment.apt_type)[0].apt_type %>
   </p>
 
   <p>

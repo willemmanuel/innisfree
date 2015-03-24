@@ -29,7 +29,7 @@
         <% end %>
         <td><%= appointment.date.to_formatted_s(:long_ordinal) %></td>
         <td><%= appointment.time.strftime("%l:%M %p") %></td>
-        <td><%= appointment.apt_type %></td>
+        <td><%= AptType.where('id = ?', appointment.apt_type)[0].apt_type %></td>
         <td><%= appointment.notes %></td>
         <td>
           <%= link_to 'Details', appointment ,'data-no-turbolink' => true %>
@@ -45,7 +45,7 @@
 
         <td><strike><%= appointment.date.to_formatted_s(:long_ordinal) %></strike></td>
         <td><strike><%= appointment.time.strftime("%l:%M %p") %></strike></td>
-        <td><strike><%= appointment.apt_type %></strike></td>
+        <td><strike><%= AptType.where('id = ?', appointment.apt_type)[0].apt_type %></strike></td>
         <td><strike><%= appointment.notes %></strike></td>
         <td>
           <%= link_to 'Details', appointment ,'data-no-turbolink' => true %>

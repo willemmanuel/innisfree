@@ -1,9 +1,8 @@
 console.log("hellllllllllllllloooooooooooooo");
 $('#newEventModal').modal('hide');
-//$('#select_type_chosen').empty();
-console.log(<%=AptType.all.count%>);
+$('#select_type').empty();
 <% AptType.all.each do |typ| %>
   console.log("hi!");
-  $('#select_type_chosen').append($('<option value=' + <%= typ.apt_type %> + '><%= typ.apt_type %></option>'));
+  $('#select_type').append($('<option value=' + <%= typ.id %> + '><%= typ.apt_type %></option>'));
 <% end %>
-$('#select_type_chosen').trigger('liszt:updated');
+$('#select_type').trigger('chosen:updated');
