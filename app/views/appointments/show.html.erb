@@ -34,7 +34,11 @@
 
   <p>
     <strong>Type:</strong>
-    <%= AptType.where('id = ?', @appointment.apt_type)[0].apt_type %>
+    <% if AptType.where('id = ?', @appointment.apt_type).count != 0 %>
+      <%= AptType.where('id = ?', @appointment.apt_type)[0].apt_type %>
+    <% else %>
+      <%= @appointment.apt_type %>
+    <% end %>
   </p>
 
   <p>

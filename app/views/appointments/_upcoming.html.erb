@@ -33,7 +33,7 @@
         <% if not typ.nil? %>
           <td><%= AptType.where('id = ?', appointment.apt_type)[0].apt_type %></td>
         <% else%>
-          <td></td>
+          <td><%= appointment.apt_type %></td>
         <% end %>
         <td><%= appointment.notes %></td>
         <td>
