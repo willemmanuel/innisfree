@@ -23,7 +23,7 @@ $(document).on 'change', '.house_select', (evt) ->
       $("#upcoming").html(data); 
 
 $(document).on 'click', '#add_type', (evt) ->
- $.ajax 'add_apt_type',
+ $.ajax '/appointments/add_apt_type',
    type: 'GET',
    dataType: 'script'
    data: {
