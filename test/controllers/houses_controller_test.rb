@@ -26,6 +26,12 @@ class HousesControllerTest < ActionController::TestCase
     assert_redirected_to new_house_path
   end
 
+  test "should not create house" do
+    assert_no_difference('House.count') do
+      post :create, house: { name: "" }
+    end
+  end
+
   test "should show house" do
     get :show, id: @house
     assert_response :success
@@ -41,6 +47,11 @@ class HousesControllerTest < ActionController::TestCase
     assert_redirected_to house_path(assigns(:house))
   end
 
+  test "should not update house" do
+    patch :update, id: @house, house: { name: "" }
+    assert_response(:success)
+  end
+
   test "should destroy house" do
     assert_difference('House.count', -1) do
       delete :destroy, id: @house
@@ -48,10 +59,6 @@ class HousesControllerTest < ActionController::TestCase
     assert_redirected_to houses_path
   end
 
-=begin
-  test "should remove house association" do
 
-  end
-=end
 
 end

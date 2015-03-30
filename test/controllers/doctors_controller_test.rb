@@ -41,6 +41,11 @@ class DoctorsControllerTest < ActionController::TestCase
     assert_redirected_to doctor_path(assigns(:doctor))
   end
 
+  test "should not update doctor" do
+    patch :update, id: @doctor, doctor: { name: "" }
+    assert_response(:success)
+  end
+
   test "should not create doctor with missing name" do
     assert_no_difference('Doctor.count') do
     post :create, doctor: { address: @doctor.address, phone: @doctor.phone }
