@@ -5,4 +5,5 @@ $('#select_type').empty();
   console.log("hi!");
   $('#select_type').append($('<option value=' + <%= typ.id %> + '><%= typ.apt_type %></option>'));
 <% end %>
+$('#select_type').val(<%= AptType.all[-1].id %>);
 $('#select_type').trigger('chosen:updated');

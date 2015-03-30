@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'apt_types/destroy'
-
   get 'apt_type/destroy'
 
   # sorry these are messy routes ¯\_(ツ)_/¯ this block all for reservations
