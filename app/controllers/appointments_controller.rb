@@ -65,7 +65,7 @@ class AppointmentsController < ApplicationController
       session[:house_id] = params[:house_id]
     end
     if session.has_key?(:date) and session[:date] != ''
-      @upcoming_appointments = Appointment.where('date = ?', Time.parse(session[:date]).to_date)
+      @upcoming_appointments = Appointment.where('date = ?', Time.parse(session[:date]).to_date).paginate(:per_page => 10, :page => params[:page])
     end
     @paginate = false
     render "appointments/_upcoming", :layout => false
