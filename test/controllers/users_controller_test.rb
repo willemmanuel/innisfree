@@ -49,6 +49,9 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get pdf with prawnto" do
+    FactoryGirl.create(:user, name: "Rick2", email:"test@test.com", admin: false, phone: '7037037030')
+    FactoryGirl.create(:house, id: 1)
+    FactoryGirl.create(:user, name: "Rick3", email: "test@test2.com", admin: false, house_id: 1)
     get :index, :format => :pdf
   end
 

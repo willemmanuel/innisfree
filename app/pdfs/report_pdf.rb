@@ -32,11 +32,7 @@ class ReportPdf < Prawn::Document
     [['Name', 'Email', 'Phone', 'House']] +
         @users.map do |data|
 
-          if data.name != nil
-            @name = data.name
-          else
-            @name = ""
-          end
+          @name = data.name # required
 
           if data.phone != nil
             @phone = data.phone
@@ -44,11 +40,7 @@ class ReportPdf < Prawn::Document
             @phone = ""
           end
 
-          if data.email != nil
-            @email = data.email
-          else
-            @email = ""
-          end
+          @email = data.email # required
 
           if data.house_id != nil
             @house = House.where('id = ?', data.house_id).first.name
