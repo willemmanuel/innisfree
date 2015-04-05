@@ -1,6 +1,6 @@
 class NotificationMailer < ActionMailer::Base
   helper :application
-  default from: "noreply@volunteerinnisfree.org"
+  default :from => 'noreply <noreply@innisfreevillage.org>'
   def appointment_digest(user)
   	@user = user
   	@appointments = Appointment.where('date = ?', Date.today)
