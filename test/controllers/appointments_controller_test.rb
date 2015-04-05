@@ -140,4 +140,14 @@ class AppointmentsControllerTest < ActionController::TestCase
     assert_equal(AptType.all, assigns(:types))
   end
 
+  test "should add appointment type" do
+    assert_difference('AptType.count', 1) do
+      xhr :get, :add_apt_type, {:apt_type => 'type2', :format => 'js'}
+    end
+    assert_difference('AptType.count', 0) do
+      xhr :get, :add_apt_type, {:apt_type => 'type2', :format => 'js'}
+    end
+ 
+  end
+
 end
