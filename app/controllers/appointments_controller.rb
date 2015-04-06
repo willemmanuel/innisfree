@@ -165,6 +165,7 @@ class AppointmentsController < ApplicationController
         format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
         format.json { render :show, status: :ok, location: @appointment }
       else
+        @types = AptType.all
         format.html { render :edit }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
@@ -190,6 +191,7 @@ class AppointmentsController < ApplicationController
   end
 
   def send_house_reminder
+    debugger
     users = User.where(house: @appointment.resident.house)
     users.each do |user|
       NotificationMailer.house_reminder(@appointment, user).deliver

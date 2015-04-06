@@ -20,7 +20,7 @@ FactoryGirl.define do
   factory :appointment do
     resident
     doctor
-    date Date.today
+    date Date.tomorrow
     time '12:06:26'
     apt_type 
   end
