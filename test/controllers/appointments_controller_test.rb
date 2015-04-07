@@ -4,11 +4,12 @@ class AppointmentsControllerTest < ActionController::TestCase
   setup do
     @type = FactoryGirl.create(:apt_type)
     @user = FactoryGirl.create(:user, admin: true, medical_coordinator: true, email_pref: true)
+    @user1 = FactoryGirl.create(:otheruser, email_pref: true)
     FactoryGirl.create(:doctor, id: 1, name: "doc", address: "123 Uni Drive", phone: "123-456-7890")
     FactoryGirl.create(:resident, house_id: 1, id: 2, name: "Pocahontas")
     FactoryGirl.create(:resident, house_id: 2, id: 3, name: "John Smith")
     @appointment = FactoryGirl.create(:appointment, resident_id: 2, date: Date.today, doctor_id: 1, apt_type: @type.id, user: @user)
-    FactoryGirl.create(:appointment, resident_id: 3, date: Date.tomorrow, doctor_id: 1, apt_type: @type.id)
+    @appointment1 = FactoryGirl.create(:appointment, resident_id: 3, date: Date.tomorrow, doctor_id: 1, apt_type: @type.id, user: @user1)
     FactoryGirl.create(:appointment, resident_id: 2, date: Date.yesterday, doctor_id: 1, apt_type: @type.id)
     sign_in(@user)
   end
@@ -23,7 +24,7 @@ class AppointmentsControllerTest < ActionController::TestCase
   test "should create appointment" do
     
     assert_difference('Appointment.count', 1) do
-      post :create, appointment: { date: @appointment.date, apt_type: @appointment.apt_type, notes: @appointment.notes, doctor_id: @appointment.doctor_id, resident_id: @appointment.resident_id, time: @appointment.time }
+      post :create, appointment: { date: @appointment.date, apt_type: @appointment.apt_type, notes: @appointment.notes, doctor_id: @appointment.doctor_id, resident_id: @appointment.resident_id, time: @appointment.time , user_id: @user1.id}
     end
 
     assert_redirected_to appointment_path(assigns(:appointment))
@@ -163,6 +164,11 @@ class AppointmentsControllerTest < ActionController::TestCase
 
   test "should send appointment reminder email" do
     post :send_house_reminder, id: @appointment.id
+    assert_not ActionMailer::Base.deliveries.empty?
+  end
+
+  test "should send non-admin appointment reminder email" do
+    post :send_house_reminder, id: @appointment1.id
     assert_not ActionMailer::Base.deliveries.empty?
   end
 

@@ -191,7 +191,6 @@ class AppointmentsController < ApplicationController
   end
 
   def send_house_reminder
-    debugger
     users = User.where(house: @appointment.resident.house)
     users.each do |user|
       NotificationMailer.house_reminder(@appointment, user).deliver
