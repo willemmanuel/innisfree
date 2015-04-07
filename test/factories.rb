@@ -13,6 +13,14 @@ FactoryGirl.define do
     admin true
   end
 
+  factory :otheruser, class: User do
+    name 'Testy User'
+    email 'test1@example.com'
+    password 'please123'
+    approved true
+    admin true
+  end
+
   factory :car do
     name 'Civic'
   end
@@ -20,7 +28,7 @@ FactoryGirl.define do
   factory :appointment do
     resident
     doctor
-    date Date.today
+    date Date.tomorrow
     time '12:06:26'
     apt_type 
   end
