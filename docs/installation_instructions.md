@@ -3,7 +3,7 @@
 ##Overview
 Steps based on this [guide](https://my.bluehost.com/cgi/help/rails) and this [guide](http://www.dotkam.com/2009/02/01/deploy-rails-application-on-bluehost/).
 
-##Steps:
+##Steps (BlueHost specific):
 1. Get BlueHost credentials
 2. Create subdomain (here named scheduling)
   - Click ```Subdomain``` button in cPanel
@@ -18,7 +18,7 @@ Steps based on this [guide](https://my.bluehost.com/cgi/help/rails) and this [gu
 4. Create a MySQL database for the scheduling application, and add a user to it
 2. Using BlueHost's File Manager tool, copy zipped code to BlueHost (place it in the home directory for now)
   - Alternatively, you can skip this step and pull the code from GitHub later
-3. SSH to BlueHost using putty or a similar tool
+3. SSH to BlueHost server using putty or a similar tool
   4. Change to the ```rails_apps``` directory: ```cd ~/rails_apps``` 
   1. Install Rails: ```gem install rails -v 4.1.1 --no-rdoc --no-ri```
   2. Install Rake: ```gem install rake -v '10.4.2' --no-rdoc --no-ri```
@@ -49,6 +49,19 @@ Steps based on this [guide](https://my.bluehost.com/cgi/help/rails) and this [gu
 5. Run ```rake db:migrate```
 6. Delete the application.css file, if it exists: ```rm ~/rails_app/innisfree/app/assets/stylesheets/application.css```
 
+## Generic instructions
+1. Install Apache2
+2. Install Ruby (version 1.9.3 is what we deployed on, 2.1.5 has been tested to work)
+2. Install Rails (version 4.1.1 is what we deployed on, 4.x should work, but has not been tested)
+3. Install passenger ```gem install passenger```
+  - Passenger is an web & application server that integrates nicely with Apache and Nginx to run Rails apps
+4. Install the passenger module for apache ```passenger-install-apache2-module```
+5. You may need to enable this module ```sudo a2enmod passenger``` and restart apache ```sudo service apache2 restart```
+6. Clone the application repository from Github
+7. Follow steps 6.vi through 6.x from above (sorry about the mix of Arabic and Roman numerals...)
+8. Link the public directory of the application to the directory Apache is serving out of
+  - This is by default ```/*installdir*/apache2/htdocs/application``` where *installdir* is the directory Apache was installed to. For bitnami, this looks to be ```/opt/bitnami/apache2/htdocs```
+  - ```ln -s ./public /opt/bitnami/apache2/htdocs/scheduling```
 
 ## Sample files
 #### Sample config/database.yml
