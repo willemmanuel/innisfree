@@ -16,22 +16,20 @@ class HousesController < ApplicationController
     end
   end
 
-  # GET /houses/1
-  # GET /houses/1.json
+  # Displays an individual house page
   def show
   end
 
-  # GET /houses/new
+  # Gets a new house to be filled in
   def new
     @house = House.new
   end
 
-  # GET /houses/1/edit
+  # Opens a house for changes
   def edit
   end
 
-  # POST /houses
-  # POST /houses.json
+  # Adds the new house to the database, relating success or error to the user
   def create
     @house = House.new(house_params)
 
@@ -46,8 +44,7 @@ class HousesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /houses/1
-  # PATCH/PUT /houses/1.json
+  # Changes a house based on edits, relating success or error back to the user
   def update
     respond_to do |format|
       if @house.update(house_params)
@@ -60,8 +57,7 @@ class HousesController < ApplicationController
     end
   end
 
-  # DELETE /houses/1
-  # DELETE /houses/1.json
+  # Deletes a house from the database, notifying the user as to what was deleted
   def destroy
     @house.destroy
     respond_to do |format|
@@ -71,25 +67,26 @@ class HousesController < ApplicationController
   end
 
   private
-    # Check to see if the user is an admin (staff)
+    # Check to see if the user is an admin or if they are in a house that gives them access
     def check_privileges
       redirect_to houses_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.house == @house
     end
-
+    # Check to see if the user is an admin
     def check_admin
       redirect_to houses_path, alert: "You do not have admin privileges." unless current_user.admin
     end
 
-    # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share common setup or constraints between actions
     def set_house
       @house = House.find(params[:id])
     end
 
+    #Finds the most recently created house (for use in navigation)
   def set_most_recent
     @recent = House.order("created_at").last
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet, only allow the white list through
     def house_params
       params.require(:house).permit(:name, :phone)
     end

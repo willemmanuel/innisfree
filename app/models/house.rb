@@ -10,11 +10,15 @@
 #
 
 class House < ActiveRecord::Base
+
+  #Each house contains multiple users (the volunteers) and multiple residents (the coworkers)
 	has_many :users
 	has_many :residents
 
+  #Ensures that houses have names when they are created
   validates :name, presence: true
-	
+
+  #Defines what a CSV list of the houses will look like
 	def self.to_csv
 	  CSV.generate do |csv|
 	    csv << column_names
