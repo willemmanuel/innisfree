@@ -15,7 +15,7 @@
     <div class="field">
       <%= f.label :resident_id %><small>*</small><br>
       <% if current_user.admin %>
-          <% residents = Resident.all.map { |r| [r.name, r.id] } %>
+          <% residents = Resident.all.order(name: :asc).map { |r| [r.name, r.id] } %>
       <% else %>
           <% residents = Resident.all.select{ |r| r.house_id == current_user.house_id }.map { |r| [r.name, r.id] } %>
       <% end %>
@@ -23,16 +23,15 @@
       <% logger.debug residents[0] %>
       <% if params.has_key?(:resident_id) %>
           <%= f.select(:resident_id, options_from_collection_for_select(residents, "last", "first", params[:resident_id].to_i), { include_blank: true }, { :class => 'chosen-select' }) %>
-      <% elsif session.has_key?(:res_id) %>
-          <%= f.select(:resident_id, options_from_collection_for_select(residents, "last", "first", session[:res_id].to_i), { include_blank: true }, { :class => 'chosen-select' }) %>
-
+      <% elsif params.has_key?(:res_id) %>
+          <%= f.select(:resident_id, options_from_collection_for_select(residents, "last", "first", params[:res_id].to_i), { include_blank: true }, { :class => 'chosen-select' }) %>
       <% else %>
           <%= f.select(:resident_id, residents, { include_blank: true }, { :class => 'chosen-select' }) %>
       <% end %>
     </div>
     <div class="field">
       <%= f.label :doctor_id %> <small>*</small><br>
-      <% doctors = Doctor.all.map { |p| [p.name, p.id] } %>
+      <% doctors = Doctor.all.order(name: :asc).map { |p| [p.name, p.id] } %>
       <% if params.has_key?(:doctor_id) %>
           <%= f.select(:doctor_id, options_from_collection_for_select(doctors, "last", "first", params[:doctor_id].to_i), { include_blank: true }, { :class => 'chosen-select' }) %>
       <% else %>
@@ -43,9 +42,9 @@
     <div class="field">
       <%= f.label "Volunteer" %><br>
       <% if current_user.admin %>
-          <% users = User.all.map { |v| [v.name, v.id] } %>
+          <% users = User.all.order(name: :asc).map { |v| [v.name, v.id] } %>
       <% else %>
-          <% users = User.all.select{ |u| u.house_id == current_user.house_id }.map { |v| [v.name, v.id] } %>
+          <% users = User.all.order(name: :asc).select{ |u| u.house_id == current_user.house_id }.map { |v| [v.name, v.id] } %>
       <% end %>
       <%= f.select(:user_id, users, { include_blank: true }, { :class => 'chosen-select' }) %>
     </div>
@@ -59,7 +58,7 @@
     </div>
     <div class="field">
       <%= f.label "Appointment Type" %> <small> *</small><br>
-      <% types = @types.map {|t| [t.apt_type, t.id]} %>
+      <% types = @types.order(apt_type: :asc).map {|t| [t.apt_type, t.id]} %>
       <% if params.has_key?(:apt_type) %>
           <%= f.select(:apt_type, options_from_collection_for_select(types, "last", "first", params[:apt_type]), { include_blank: true }, { :class => 'chosen-select', :id => 'select_type' }) %>
       <% else %>

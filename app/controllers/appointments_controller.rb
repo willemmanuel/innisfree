@@ -11,7 +11,7 @@ class AppointmentsController < ApplicationController
     @residents = Resident.all
     @houses = House.all
     @past_appointments = Appointment.where('date < ?', Date.today)
-    @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate( :page => params[:page], :per_page => 10).order(sort_column + " " + sort_direction)
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today).order([:date, :time]).paginate( :page => params[:page], :per_page => 10).order(sort_column + " " + sort_direction)
     if params.has_key?(:res_id)
       session[:res_id] = params[:res_id]
     end
@@ -44,11 +44,11 @@ class AppointmentsController < ApplicationController
       session[:house_id] = params[:house_id]
     end
     if session.has_key?(:res_id) and session[:res_id] != ''
-      @upcoming_appointments = Appointment.where('resident_id = ?', session[:res_id]).where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
+      @upcoming_appointments = Appointment.where('resident_id = ?', session[:res_id]).order([:date, :time]).where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
     elsif session.has_key?(:house_id) and session[:house_id] != ''
-      @upcoming_appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id]).where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
+      @upcoming_appointments = Appointment.joins('LEFT OUTER JOIN residents ON resident_id = residents.id').where('house_id = ?', session[:house_id]).where('date >= ?', Date.today).order([:date, :time]).paginate(:per_page => 10, :page => params[:page])
     else
-      @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
+      @upcoming_appointments = Appointment.where('date >= ?', Date.today).order([:date, :time]).paginate(:per_page => 10, :page => params[:page])
     end
     @paginate = true
     render "appointments/_upcoming", :layout => false
@@ -65,7 +65,7 @@ class AppointmentsController < ApplicationController
       session[:house_id] = params[:house_id]
     end
     if session.has_key?(:date) and session[:date] != ''
-      @upcoming_appointments = Appointment.where('date = ?', Time.parse(session[:date]).to_date).paginate(:per_page => 10, :page => params[:page])
+      @upcoming_appointments = Appointment.where('date = ?', Time.parse(session[:date]).to_date).order([:date, :time]).paginate(:per_page => 10, :page => params[:page])
     end
     @paginate = false
     render "appointments/_upcoming", :layout => false
@@ -102,12 +102,12 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/new
   def new
-    @types = AptType.all
+    @types = AptType.all.order(apt_type: :asc)
     @appointment = Appointment.new
     @appointment.date = Date.today
     @appointment.time = Time.now
-    @residents = Resident.all
-    @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
+    @residents = Resident.all.order(name: :asc)
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today).order([:date, :time]).paginate(:per_page => 10, :page => params[:page])
   end
 
   def add_apt_type
@@ -133,9 +133,9 @@ class AppointmentsController < ApplicationController
   # POST /appointments.json
   def create
     @appointment = Appointment.new(appointment_params)
-    @types = AptType.all
-    @residents = Resident.all
-    @upcoming_appointments = Appointment.where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
+    @types = AptType.all.order(apt_type: :asc)
+    @residents = Resident.all.order(name: :asc)
+    @upcoming_appointments = Appointment.where('date >= ?', Date.today).order([:date, :time]).paginate(:per_page => 10, :page => params[:page])
     respond_to do |format|
       if @appointment.save
         coordinators = User.where(medical_coordinator: true).where(email_pref: true)

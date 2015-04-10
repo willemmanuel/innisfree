@@ -1,19 +1,19 @@
 <%= form_tag("reports/generate", method: "get")  %>
  <p> Houses: </p>
  <div class = "field">
- <%= collection_select nil, :house_id,  @houses, :id, :name, {:prompt => 'All' }, {:class => 'chosen-select'}%></div>
+ <%= collection_select nil, :house_id,  @houses.order(name: :asc), :id, :name, {:prompt => 'All' }, {:class => 'chosen-select'}%></div>
  <BR>
  <p> Residents: </p>
  <div class = 'field'>
- <%= collection_select nil, :resident_id, @residents, :id, :name, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
+ <%= collection_select nil, :resident_id, @residents.order(name: :asc), :id, :name, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
  <BR>
  <p> Doctors: </p>
  <div class = "field">
- <%= collection_select nil, :doctor_id, @doctors, :id, :name, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
+ <%= collection_select nil, :doctor_id, @doctors.order(name: :asc), :id, :name, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
  <BR>
  <p> Appointment type: </p>
  <div class = 'field'>
- <%= collection_select nil, :apt_type, @appointment_types, :apt_type, :apt_type, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
+ <%= collection_select nil, :apt_type, @appointment_types.order(apt_type: :asc), :apt_type, :apt_type, {:prompt => "All"}, {:class => 'chosen-select'}%></div>
  <BR>
 
  <p>From: &nbsp;<input type="text" id="datepicker" name='date'> &nbsp;&nbsp;&nbsp; To: &nbsp; <input type="text" id="datepicker2" name='date2'></p>
