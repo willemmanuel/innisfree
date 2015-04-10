@@ -59,9 +59,9 @@ Steps based on this [guide](https://my.bluehost.com/cgi/help/rails) and this [gu
 5. You may need to enable this module ```sudo a2enmod passenger``` and restart apache ```sudo service apache2 restart```
 6. Clone the application repository from Github
 7. Follow steps 6.vi through 6.x from above (sorry about the mix of Arabic and Roman numerals...)
-8. Link the public directory of the application to the directory Apache is serving out of
+8. Link the public directory of the application to the directory Apache is serving out of ```ln -s ./public /opt/bitnami/apache2/htdocs/scheduling```
   - This is by default ```/*installdir*/apache2/htdocs/application``` where *installdir* is the directory Apache was installed to. For bitnami, this looks to be ```/opt/bitnami/apache2/htdocs```
-  - ```ln -s ./public /opt/bitnami/apache2/htdocs/scheduling```
+9. Your application should now be accessible from the server's IP address (or DNS, if that's your thing)
 
 ## Sample files
 #### Sample config/database.yml
