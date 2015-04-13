@@ -189,13 +189,19 @@ One of the major issues with this system is its lack of responsiveness. Not only
 
 
 \section{Related Work}
-There are several applications that were discussed with Innisfree Village as possible solutions.  The first one discussed was mainstream online scheduling options such as Google Calendar {does this need a citation?}.  While our system was eventually modeled on the view of Google Calendars, this kind of calendar was too generic for what our customers wanted.  It doesn’t allow for the management of residents, doctors, and volunteers, there are no user levels, and they are difficult to filter.  In addition, these calendars are made to be managed by one person and viewed by many, which did not fit in with the needs of this system.
+There are several applications that were discussed with Innisfree Village as possible solutions.  The first one discussed was mainstream online scheduling options such as Google Calendar {does this need a citation?}.  While our system was eventually modeled on the view of Google Calendars, this kind of calendar was too generic for what our customers wanted.  It does not allow for the management of residents, doctors, and volunteers, there are few user levels, and they are difficult to filter.  In addition, these calendars are made to be managed by one person and viewed by many, which did not fit in with the needs of this system. Finally, these applications do not allow data to be exported in a report friendly format, something our customer required.
 	
-In addition, desktop clients, such as Outlook, also have a developed calendar.  However, programs like this don’t fit with the way volunteers would use the site, which is mostly on their cell phones and wouldn’t support car sign-out features.  As with Google Calendar, there is no way to manage user levels.
+Another scheduling option included desktop clients, such as Outlook, as these also have a developed calendar.  However, programs like this don’t fit with the way volunteers would use the site, which is mostly on their cell phones and would not support car sign-out features.  As with Google Calendar, there is no way to manage user levels.
 
 \section{System Design}
 
 \subsection{Users}
+
+\subsubsection{Users Model}
+	The user model lists all of the attributes for system users. This includes the user’s name, email, house, email preferences, and admin status, as well as the auto-generated Ruby on Rails Id, created at and updated at fields. Since we used the Devise gem {devise} for user authentication, it generated and automatically fills fields for the user's password, password reset, and login information. The user name, email and password are all required fields when a new user is created. The house field is not required, but is always filled out at account creation time. As there is a one-to-many relationship between houses and users, where each house has many users and each user has one house, when the house field of a user is changed, it is validated against the houses in the database to ensure that house actually exists.
+
+\subsubsection{Viewing, Creating, Editing, and Deleting Users}
+	The users are displayed in two places. The first is a user directory, accessible to all users, where a user can look up the house, email address, or phone number of another user. Users can also edit their own profile from this page. The second user display an administrative interface that only administrator users can access. Here, administrators can mark other users as administrators or as medical coordinators, turn user emails on and off, edit user profiles and delete users.
 
 \subsection{Appointments}
 
@@ -205,7 +211,7 @@ The appointments model contains attributes for the resident, the doctor, the dat
 In addition, the customer requested that we have a way of tracking updates to an appointment.  For this, we used the Rails gem PaperTrail. {papertrail}  This created a separate table named versions that kept track of each of these events for any model we marked as being tracked.  Namely, this table contains a copy of the object as well as the type of the object.
 
 \subsubsection{Viewing, Creating, Editing, and Deleting Appointments}
-The appointments are displayed on the landing page of the site in both a list and calendar format.  In the calendar view, we only displayed the number of appointments on that given day in an effort to reduce clutter.  However, each day has the option to click on it to see the full list of appointment on that day.  The list view on the landing page is a paginated list of the next ten appointments.
+The appointments are displayed on the landing page of the site in both a list and calendar format.  In the calendar view, displayed using the fullcalendar Rails gem {fullcalendar}, we chose to only show the number of appointments on that given day in an effort to reduce clutter.  However, each day has the option to click on it to see the full list of appointment on that day.  The list view on the landing page is a paginated list of the next ten appointments.
 
 Creating appointments can be done by both admin and volunteers.  There is a button above the appointments display to create a new appointment.  This brings up a form that has fields for all fields of the appointments model except the Rails managed fields and the canceled field.  All fields are drop-down menus except for the date, time, and notes fields.  The items in these drop-down menus are pulled straight from other tables of the database, and, as the only table volunteers can create entries into is the appointments table, are managed by the admin of the site.
 
