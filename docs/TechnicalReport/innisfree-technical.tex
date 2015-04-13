@@ -200,9 +200,16 @@ In addition, desktop clients, such as Outlook, also have a developed calendar.  
 \subsection{Appointments}
 
 \subsubsection{Appointments Model}
-The appointments model contains attributes for the resident, the doctor, the date, the time, the volunteer assigned to the appointment, the appointment type, a notes section, and the Django generated id, created at, and updated at fields.  
+The appointments model contains attributes for the resident, the doctor, the date, the time, the volunteer assigned to the appointment, the appointment type, a notes section, whether the appointment has been canceled and the Ruby on Rails generated id, created at, and updated at fields.  In order to create an appointment, the resident id (from the Resident table), the doctor id (from the Doctor table), the appointment type, the date, and the time must be specified.  The notes field user id of the volunteer assigned to the appointment defaults to NULL and the canceled field defaults to false.  Id, created at, and updated at are all purely managed by Ruby on Rails. 
 
-\subsubsection{Creating, Editing, and Deleting Appointments}
+In addition, the customer requested that we have a way of tracking updates to an appointment.  For this, we used the Rails gem PaperTrail. {papertrail}  This created a separate table named versions that kept track of each of these events for any model we marked as being tracked.  Namely, this table contains a copy of the object as well as the type of the object.
+
+\subsubsection{Viewing, Creating, Editing, and Deleting Appointments}
+The appointments are displayed on the landing page of the site in both a list and calendar format.  In the calendar view, we only displayed the number of appointments on that given day in an effort to reduce clutter.  However, each day has the option to click on it to see the full list of appointment on that day.  The list view on the landing page is a paginated list of the next ten appointments.
+
+Creating appointments can be done by both admin and volunteers.  There is a button above the appointments display to create a new appointment.  This brings up a form that has fields for all fields of the appointments model except the Rails managed fields and the canceled field.  All fields are drop-down menus except for the date, time, and notes fields.  The items in these drop-down menus are pulled straight from other tables of the database, and, as the only table volunteers can create entries into is the appointments table, are managed by the admin of the site.
+
+As the project progressed, we realized that outright deleting an appointment did not constitute the same action as canceling one.  Therefore, we added an option to cancel an appointment.  These appointments then still appeared anywhere they would've before cancellation but with a strike-through.  This allowed for better communication between the various employees of the Village and to demonstrate that an appointment had indeed been made.  Volunteers and admin can both cancel an appointment (and uncancel it if the cancellation was done in error) but only admin can outright delete an appointment.      
 
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}

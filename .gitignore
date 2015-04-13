@@ -24,3 +24,8 @@
 
 # Ignore the app/views/posts directory as it's unused and doesn't need to be tracked
 /app/views/posts
+
+# Ignore various latex files
+*.aux
+*.log
+*.synctex.gz
