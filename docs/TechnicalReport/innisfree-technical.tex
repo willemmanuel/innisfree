@@ -1,0 +1,273 @@
+% This is "sig-alternate.tex" V2.0 May 2012
+% This file should be compiled with V2.5 of "sig-alternate.cls" May 2012
+%
+% This example file demonstrates the use of the 'sig-alternate.cls'
+% V2.5 LaTeX2e document class file. It is for those submitting
+% articles to ACM Conference Proceedings WHO DO NOT WISH TO
+% STRICTLY ADHERE TO THE SIGS (PUBS-BOARD-ENDORSED) STYLE.
+% The 'sig-alternate.cls' file will produce a similar-looking,
+% albeit, 'tighter' paper resulting in, invariably, fewer pages.
+%
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V2.5) produces:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) NO page numbers
+%
+% as against the acm_proc_article-sp.cls file which
+% DOES NOT produce 1) thru' 3) above.
+%
+% Using 'sig-alternate.cls' you have control, however, from within
+% the source .tex file, over both the CopyrightYear
+% (defaulted to 200X) and the ACM Copyright Data
+% (defaulted to X-XXXXX-XX-X/XX/XX).
+% e.g.
+% \CopyrightYear{2007} will cause 2007 to appear in the copyright line.
+% \crdata{0-12345-67-8/90/12} will cause 0-12345-67-8/90/12 to appear in the copyright line.
+%
+% ---------------------------------------------------------------------------------------------------------------
+% This .tex source is an example which *does* use
+% the .bib file (from which the .bbl file % is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission, you *NEED* to 'insert'
+% your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% ================= IF YOU HAVE QUESTIONS =======================
+% Questions regarding the SIGS styles, SIGS policies and
+% procedures, Conferences etc. should be sent to
+% Adrienne Griscti (griscti@acm.org)
+%
+% Technical questions _only_ to
+% Gerald Murray (murray@hq.acm.org)
+% ===============================================================
+%
+% For tracking purposes - this is V2.0 - May 2012
+
+\documentclass{sig-alternate}
+
+\begin{document}
+%
+% --- Author Metadata here ---
+\conferenceinfo{WOODSTOCK}{'97 El Paso, Texas USA}
+%\CopyrightYear{2007} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
+%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
+
+\title{Alternate {\ttlit ACM} SIG Proceedings Paper in LaTeX
+Format\titlenote{(Produces the permission block, and
+copyright information). For use with
+SIG-ALTERNATE.CLS. Supported by ACM.}}
+\subtitle{[Extended Abstract]
+\titlenote{A full version of this paper is available as
+\textit{Author's Guide to Preparing ACM SIG Proceedings Using
+\LaTeX$2_\epsilon$\ and BibTeX} at
+\texttt{www.acm.org/eaddress.htm}}}
+%
+% You need the command \numberofauthors to handle the 'placement
+% and alignment' of the authors beneath the title.
+%
+% For aesthetic reasons, we recommend 'three authors at a time'
+% i.e. three 'name/affiliation blocks' be placed beneath the title.
+%
+% NOTE: You are NOT restricted in how many 'rows' of
+% "name/affiliations" may appear. We just ask that you restrict
+% the number of 'columns' to three.
+%
+% Because of the available 'opening page real-estate'
+% we ask you to refrain from putting more than six authors
+% (two rows with three columns) beneath the article title.
+% More than six makes the first-page appear very cluttered indeed.
+%
+% Use the \alignauthor commands to handle the names
+% and affiliations for an 'aesthetic maximum' of six authors.
+% Add names, affiliations, addresses for
+% the seventh etc. author(s) as the argument for the
+% \additionalauthors command.
+% These 'additional authors' will be output/set for you
+% without further effort on your part as the last section in
+% the body of your article BEFORE References or any Appendices.
+
+\numberofauthors{6} %  in this sample file, there are a *total*
+% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+% reasons) and the remaining two appear in the \additionalauthors section.
+%
+\author{
+% You can go ahead and credit any number of authors here,
+% e.g. one 'row of three' or two rows (consisting of one row of three
+% and a second row of one, two or three).
+%
+% The command \alignauthor (no curly braces needed) should
+% precede each author name, affiliation/snail-mail address and
+% e-mail address. Additionally, tag each line of
+% affiliation/address with \affaddr, and tag the
+% e-mail address with \email.
+%
+% 1st. author
+\alignauthor
+Bethany Connor\\
+       \affaddr{University of Virginia}\\
+       \email{bac5rc@virginia.edu}
+% 2nd. author
+\alignauthor
+Bethany Connor\\
+       \affaddr{University of Virginia}\\
+       \email{bac5rc@virginia.edu}
+% 3rd. author
+\alignauthor
+Bethany Connor\\
+       \affaddr{University of Virginia}\\
+       \email{bac5rc@virginia.edu}
+\and  % use '\and' if you need 'another row' of author names
+% 4th. author
+\alignauthor
+Bethany Connor\\
+       \affaddr{University of Virginia}\\
+       \email{bac5rc@virginia.edu}
+% 5th. author
+\alignauthor
+Bethany Connor\\
+       \affaddr{University of Virginia}\\
+       \email{bac5rc@virginia.edu}
+% 6th. author
+\alignauthor
+Bethany Connor\\
+       \affaddr{University of Virginia}\\
+       \email{bac5rc@virginia.edu}
+}
+% There's nothing stopping you putting the seventh, eighth, etc.
+% author on the opening page (as the 'third row') but we ask,
+% for aesthetic reasons that you place these 'additional authors'
+% in the \additional authors block, viz.
+
+% Just remember to make sure that the TOTAL number of authors
+% is the number that will appear on the first page PLUS the
+% number that will appear in the \additionalauthors section.
+
+\maketitle
+\begin{abstract}
+This paper provides a sample of a \LaTeX\ document which conforms,
+somewhat loosely, to the formatting guidelines for
+ACM SIG Proceedings. It is an {\em alternate} style which produces
+a {\em tighter-looking} paper and was designed in response to
+concerns expressed, by authors, over page-budgets.
+It complements the document \textit{Author's (Alternate) Guide to
+Preparing ACM SIG Proceedings Using \LaTeX$2_\epsilon$\ and Bib\TeX}.
+This source file has been written with the intention of being
+compiled under \LaTeX$2_\epsilon$\ and BibTeX.
+
+The developers have tried to include every imaginable sort
+of ``bells and whistles", such as a subtitle, footnotes on
+title, subtitle and authors, as well as in the text, and
+every optional component (e.g. Acknowledgments, Additional
+Authors, Appendices), not to mention examples of
+equations, theorems, tables and figures.
+
+To make best use of this sample document, run it through \LaTeX\
+and BibTeX, and compare this source code with the printed
+output produced by the dvi file. A compiled PDF version
+is available on the web page to help you with the
+`look and feel'.
+\end{abstract}
+
+% A category with the (minimum) three required fields
+\category{H.4}{Information Systems Applications}{Miscellaneous}
+%A category including the fourth, optional field follows...
+\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+
+\terms{Theory}
+
+\keywords{ACM proceedings, \LaTeX, text tagging}
+
+\section{Introduction}
+Innisfree Village is a non-profit organization located in Crozet, Virginia dedicated to providing a lifesharing community for adults with disabilities (Innisfree Village). In this community, about 40 adults, known as co-workers, live and work alongside 20 long-term volunteer caregivers in houses of 4 co-workers and 2 caregivers. In addition to these full-time volunteers, there are around a dozen part-time volunteers and a dozen staff members providing more specialized knowledge and care. Throughout the day, residents participate in a variety of activities to contribute to the community, including cooking, gardening, woodworking, and weaving. Volunteers, who have committed to serving at the village for a year and a half, spend much of their time working together with their co-workers and helping meet their needs. Meanwhile, staff members are responsible for much of the administrative and maintenance work necessary to keep the community thriving.
+
+As a full-time residential community, Innisfree Village is also responsible for scheduling medical appointments and ensuring co-workers can make these appointments. This is one of the main tasks for the staff, requiring one staff position, the medical coordinator, to be fully devoted to co-worker medical care, while also involving many others. Given that the 40 co-workers of Innisfree Village have varying disabilities and medical needs, ensuring all the necessary appointments have been made and can be attended is vital. Our work for them will focus on overhauling this scheduling system. The current system used for this is primarily pen and paper. When an appointment is made, the medical coordinator writes it on a large calendar in the main office, before recording it in Excel for reporting purposes. When a co-worker has an appointment, that co-worker’s volunteer caregiver is responsible for taking them to the appointment.
+
+One of the major issues with this system is its lack of responsiveness. Not only is it exceedingly slow, as it requires several steps to simply record an appointment, but caregivers are rarely able to make follow-up appointments in the doctor’s office, as it also requires several phone calls between the medical coordinator and the doctor to schedule an appointment. The current system also requires appointments to be entered twice, increasing the secretarial load required, and increasing the possibilities of errors. It also makes it hard to generate reports for specific houses or residents, as Excel doesn’t provide the same features as a full database system. Finally, it is not simple for the medical coordinator to remind caregivers about upcoming appointments. Since all appointments are recorded on the calendar, the medical coordinator writes paper reminders for each caregiver, and has to hope the caregiver will check their mailbox in time.
+
+
+\section{Related Work}
+There are several applications that were discussed with Innisfree Village as possible solutions.  The first one discussed was mainstream online scheduling options such as Google Calendar {does this need a citation?}.  While our system was eventually modeled on the view of Google Calendars, this kind of calendar was too generic for what our customers wanted.  It doesn’t allow for the management of residents, doctors, and volunteers, there are no user levels, and they are difficult to filter.  In addition, these calendars are made to be managed by one person and viewed by many, which did not fit in with the needs of this system.
+	
+In addition, desktop clients, such as Outlook, also have a developed calendar.  However, programs like this don’t fit with the way volunteers would use the site, which is mostly on their cell phones and wouldn’t support car sign-out features.  As with Google Calendar, there is no way to manage user levels.
+
+\section{System Design}
+
+\subsection{Users}
+
+\subsection{Appointments}
+
+\subsubsection{Appointments Model}
+The appointments model contains attributes for the resident, the doctor, the date, the time, the volunteer assigned to the appointment, the appointment type, a notes section, and the Django generated id, created at, and updated at fields.  
+
+\subsubsection{Creating, Editing, and Deleting Appointments}
+
+%ACKNOWLEDGMENTS are optional
+\section{Acknowledgments}
+This section is optional; it is a location for you
+to acknowledge grants, funding, editing assistance and
+what have you.  In the present case, for example, the
+authors would like to thank Gerald Murray of ACM for
+his help in codifying this \textit{Author's Guide}
+and the \textbf{.cls} and \textbf{.tex} files that it describes.
+
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+% ACM needs 'a single self-contained file'!
+%
+%APPENDICES are optional
+%\balancecolumns
+\appendix
+%Appendix A
+\section{Headings in Appendices}
+The rules about hierarchical headings discussed above for
+the body of the article are different in the appendices.
+In the \textbf{appendix} environment, the command
+\textbf{section} is used to
+indicate the start of each Appendix, with alphabetic order
+designation (i.e. the first is A, the second B, etc.) and
+a title (if you include one).  So, if you need
+hierarchical structure
+\textit{within} an Appendix, start with \textbf{subsection} as the
+highest level. Here is an outline of the body of this
+document in Appendix-appropriate form:
+\subsection{Introduction}
+\subsection{The Body of the Paper}
+\subsubsection{Type Changes and  Special Characters}
+\subsubsection{Math Equations}
+\paragraph{Inline (In-text) Equations}
+\paragraph{Display Equations}
+\subsubsection{Citations}
+\subsubsection{Tables}
+\subsubsection{Figures}
+\subsubsection{Theorem-like Constructs}
+\subsubsection*{A Caveat for the \TeX\ Expert}
+\subsection{Conclusions}
+\subsection{Acknowledgments}
+\subsection{References}
+Generated by bibtex from your ~.bib file.  Run latex,
+then bibtex, then latex twice (to resolve references)
+to create the ~.bbl file.  Insert that ~.bbl file into
+the .tex source file and comment out
+the command \texttt{{\char'134}thebibliography}.
+% This next section command marks the start of
+% Appendix B, and does not continue the present hierarchy
+\section{More Help for the Hardy}
+The sig-alternate.cls file itself is chock-full of succinct
+and helpful comments.  If you consider yourself a moderately
+experienced to expert user of \LaTeX, you may find reading
+it useful but please remember not to change it.
+%\balancecolumns % GM June 2007
+% That's all folks!
+\end{document}
