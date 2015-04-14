@@ -235,6 +235,14 @@ At the beginning of development, e-mail notifications were limited to simply e-m
 
 In order to send e-mails, we used ActionMailer, which comes with Rails.  For each type of e-mail we sent, we wrote a new function in NotificationMailer, which was our extension of ActionMailer.  Then, in our User model, we defined who these functions were sent to.  For example, we have a method called send\_weekly\_digest.   This iterates through the users, selects the ones that are medical coordinators (only medical coordinators get the weekly digest), then calls the weekly\_digest method in NotificationMailer.  A schedule defined in config/schedule.rb defines how often to call certain functions; for example in the case of the weekly digest, it is sent at 6am on every Sunday.  Other types of notifications are triggered by an action on the site and are therefore not scheduled in schedule.rb. 
 
+\section{Results}
+% 27 appointments in March 2015
+At the end of our initial development cycle, the customer began using the scheduling system.  This included them putting in real data.  For the next ten weeks, development occurred alongside the customer using the system, so bugs were found quickly and the customer quickly learned new features of the system.  Then a six week transition period began where development halted and the customers continued to use the system.
+
+In March of 2015, the last full month prior to this writing, 27 appointments were entered for the month.  Similarly, 24 were scheduled in February, with the maximum number of appointments per day hitting five.  Assuming that the number of appointments did not change with the introduction of this system, the staff at Innisfree Village had to keep track of over 20 appointments on a paper calendar.  This included appointments that might move or be canceled.  In contrast, these appointments are now all in one place, in a system that is more scalable as the non-profit grows, changes can be made easily, and communication between the volunteers and the administration is more streamlined.
+
+Based on the high use of this system by the customer, we believe that this project was a success.  We achieved all of our requirements laid out for us at the beginning of the project and were adaptable to changes in these requirements.
+
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
 This section is optional; it is a location for you
