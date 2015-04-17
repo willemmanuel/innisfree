@@ -234,7 +234,7 @@ class AppointmentsController < ApplicationController
   # check_workstation_head - Check to see if the user is a workstation head
   # This is done because workstation heads are not allowed to modify appointments, unless they are also admin users
   def check_workstation_head
-    redirect_to appointments_path, alert: "Workstation heads may not modify appointments." unless current_user.admin || current_user.house.name != 'Workstation Heads'
+    redirect_to appointments_path, alert: "Workstation heads may not modify appointments." unless current_user.admin || current_user.house.name != 'Workstations'
   end
 
   # set_appointment - gets the current appointment based on id
