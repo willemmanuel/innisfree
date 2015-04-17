@@ -29,7 +29,11 @@ This provides a listing of all Innisfree houses, along with the house's phone nu
 Clicking on the name of a co-worker on this page will take you to their upcoming appointments. To see the contact information for a staff member or volunteer, simply click on their name.
 
 #### Doctors
+This page provides a listing of all of the medical coordinator approved doctors. This list can be sorted by doctor name, type, address and phone number, by clicking on the heading of each column.
+
 #### Users
+This page provides a listing of all the scheduling system users. To sort this list by name, simply click on the column heading "Name." This list can also be sorted by house, email address, phone number, and role.
+
 #### My Profile
 
 
