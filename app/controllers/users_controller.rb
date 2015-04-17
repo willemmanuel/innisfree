@@ -107,6 +107,7 @@ class UsersController < ApplicationController
   end
 
   def check_admin
+    @user = User.find(params[:id])
     redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.id == @user.id
   end
 
