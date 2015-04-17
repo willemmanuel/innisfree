@@ -35,7 +35,7 @@ This page provides a listing of all of the medical coordinator approved doctors.
 This page provides a listing of all the scheduling system users. To sort this list by name, simply click on the column heading "Name." This list can also be sorted by house, email address, phone number, and role.
 
 #### My Profile
-
+This page shows information about the currently logged in user. To change your name, phone number, email address, email preferences, or password, simply navigate to this page and click the "Edit My Profile" link. Then, fill in the requried field and click the "Update User" button.
 
 ## Volunteer Role
 
