@@ -23,6 +23,16 @@ This homepage allows for viewing appointments. Ten upcoming appointments, sorted
 
 Just above the list of upcoming appointments are two dropdown boxes. These dropdowns are used to filter the list of upcoming appointments and the calendar view. The house dropdown \todo{4} allows you to only see appointments for the selected house, while the resident dropdown \todo{5} shows only the appointments for the selected co-worker.
 
+#### Houses
+This provides a listing of all Innisfree houses, along with the house's phone number and the volunteers and co-workers living there. Full-time staff members are in the "Office Staff" house, while workstation volunteers are in the "Workstations" house.
+
+Clicking on the name of a co-worker on this page will take you to their upcoming appointments. To see the contact information for a staff member or volunteer, simply click on their name.
+
+#### Doctors
+#### Users
+#### My Profile
+
+
 ## Volunteer Role
 
 ## Administrator Role
