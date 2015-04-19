@@ -23,13 +23,15 @@ This homepage allows for viewing appointments. Ten upcoming appointments, sorted
 
 Just above the list of upcoming appointments are two dropdown boxes. These dropdowns are used to filter the list of upcoming appointments and the calendar view. The house dropdown \todo{4} allows you to only see appointments for the selected house, while the resident dropdown \todo{5} shows only the appointments for the selected co-worker.
 
+To view a single appointment, you can click the "details" link for that appointment from the list of appointments. You can also click on a calendar day, and then click the "details" link for the desired appointment. This single appointment view shows the same information as the list of upcoming appointments, but also provides a Google Map window to show where the doctor is located.
+
 #### Houses
 This provides a listing of all Innisfree houses, along with the house's phone number and the volunteers and co-workers living there. Full-time staff members are in the "Office Staff" house, while workstation volunteers are in the "Workstations" house.
 
 Clicking on the name of a co-worker on this page will take you to their upcoming appointments. To see the contact information for a staff member or volunteer, simply click on their name.
 
 #### Doctors
-This page provides a listing of all of the medical coordinator approved doctors. This list can be sorted by doctor name, type, address and phone number, by clicking on the heading of each column.
+This page provides a listing of all of the medical coordinator approved doctors. This list can be sorted by doctor name, type, address and phone number, by clicking on the heading of each column. Clicking on the address of a doctor will bring that location up in Google Maps.
 
 #### Users
 This page provides a listing of all the scheduling system users. To sort this list by name, simply click on the column heading "Name." This list can also be sorted by house, email address, phone number, and role.
@@ -38,5 +40,23 @@ This page provides a listing of all the scheduling system users. To sort this li
 This page shows information about the currently logged in user. To change your name, phone number, email address, email preferences, or password, simply navigate to this page and click the "Edit My Profile" link. Then, fill in the requried field and click the "Update User" button.
 
 ## Volunteer Role
+#### Appointments
+In addition to viewing appointments (as shown in the Appointments section for [Workstation Heads](#appointments)), volunteers can also create or edit appointments for co-workers in their house.
+
+##### Creating a New Appointment
+To create a new appointment, click the "New Appointment" button on the appointments page. Use the drop-down boxes to fill in the form, and then click the "Create Appointment" button. The "Resident", "Doctor", and "Appointment type" fields must be filled out before an appointment can be created.
+
+The Resident and Volunteer drop-down boxes only show Residents and Volunteers in the same house as the user creating the appointments. This page also contains the paginated list of upcoming appointments, so volunteers can coordinate appointments if possible.
+
+Once the appointment is created, the user is taken to the individual appointment page for that appointment. You can edit an appointment by clicking the "Edit" link under the appointment information, or go back the the main appointments page by clicking the "Back to Appointments" link. You can also continue creating appointments by using the "New Appointment" button, or set a reminder to schedule an additional appointment by using the "Set Reminder to Schedule Follow-Up Appointment" button.
+
+##### Editing an Existing Appointment
+To edit an appointment, you must go to the individual appointment page for that appointment and then click the "Edit" link. This will allow you to update the resident, doctor, volunteer, date, time, appointment type and notes for that appointment. Once you have changed the desired fields, you simply need to click the "Update Appointment" button for your changes to be submitted.
+
+The drop-down boxes on this page have the same restrictions as on the new appointment page, and the "Resident", "Doctor", and "Appointment type" fields must be filled out before the appointment can be updated.
+
+#### Houses, Doctors, Users, My Profile, Cars
+See these entries under the [Workstation Head Role](#workstation-head-role)
+
 
 ## Administrator Role
