@@ -14,10 +14,11 @@
 include ActionView::Helpers::NumberHelper
 
 class Doctor < ActiveRecord::Base
+	# each doctor can have multiple appointments 
 	has_many :appointments
 
   validates :name, presence: true
-	
+	# defines what a CSV list of doctors will look like 
 	def self.to_csv
 	  CSV.generate do |csv|
 	    csv << column_names
