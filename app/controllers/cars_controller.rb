@@ -40,7 +40,8 @@ class CarsController < ApplicationController
     @reservation = Reservation.new
     @reservation.start = start
     @reservation.finish = finish
-    @reservation.user = User.find(params[:user_id])
+    user_id = params[:user_id] || current_user
+    @reservation.user = User.find(user_id)
   end
 
   # post 'reservation/new'
@@ -70,7 +71,8 @@ class CarsController < ApplicationController
     @reservation.finish = params[:reservation_end]
     @reservation.car_id = params[:car]
     @reservation.note = params[:note]
-    @reservation.user = User.find(params[:user_id])
+    user_id = params[:user_id] || current_user
+    @reservation.user = User.find(user_id)
     if @reservation.save
       redirect_to action: "index", notice: "Reservation created"
     else
