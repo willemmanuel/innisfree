@@ -9,31 +9,40 @@ class CarsController < ApplicationController
   def index
   end
 
+  # post 'cars/manage'
   def manage
     @cars = Car.all
   end
 
+  # get 'reservations'
   def get_reservations
     @reservations = Reservation.all
   end
 
+  # get 'reservations/:id'
   def show_reservation
   end
 
+  # post 'reservation/availability'
+  # given a start and end date, find all available cars in that range
   def get_availability
     start = parse_time(params[:date], params[:reservation_start])
     finish = parse_time(params[:date], params[:reservation_end])
+    # redirect if the times aren't valid (in the past, end before finish, etc)
     redirect_to new_reservation_path, notice: "Invalid reservation times" unless valid_times?(start, finish)
     @cars = Array.new
+    # for each car, check if it is available. save it if so
     Car.all.each do |car|
       @cars << car if car_available?(car, start, finish)
     end
+    # if no cars are available, redirect back to the new reservation
     redirect_to new_reservation_path, method: :post, notice: "No cars available at that time" if @cars.empty?
     @reservation = Reservation.new
     @reservation.start = start
     @reservation.finish = finish
   end
 
+  # post 'reservation/new'
   def new_reservation
     @reservation = Reservation.new
     @cars = Car.all
@@ -53,6 +62,7 @@ class CarsController < ApplicationController
   def edit
   end
 
+  # post 'reservation'
   def save_reservation
     @reservation = Reservation.new
     @reservation.start = params[:reservation_start]
@@ -67,6 +77,7 @@ class CarsController < ApplicationController
     end
   end
 
+  # delete 'reservations/:id'
   def destroy_reservation
     @reservation.destroy
     redirect_to cars_url, notice: 'Reservation was deleted.' 

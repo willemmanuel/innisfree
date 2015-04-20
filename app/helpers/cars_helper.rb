@@ -8,7 +8,7 @@ module CarsHelper
 		end
 	end
 
-  #Converts time into a readable formal
+  #Converts time into a readable format
 	def parse_time(date, time)
 		fix_dst(Time.zone.parse("#{date} #{time.values.join(":")}#{Time.zone.formatted_offset.to_s.tr(':','')}"))
 	end
