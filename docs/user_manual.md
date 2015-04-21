@@ -26,19 +26,20 @@
 
 ## Basic Information
 #### Navigation
-Navigating the system is done by clicking internal links shown in navigation bar at the top of each page, as show in the screenshot below. \todo{insert screenshot}. This navigation bar contains links to home page that shows appointments, as well as to the house list, the doctor list, the car reservation system and the list of system users. On smaller screens, this navigation bar will collapse to a single button that can be clicked to reveal the entire bar.
+Navigating the system is done by clicking internal links shown in navigation bar at the top of each page, as show in the screenshot below. ![Navigation Bar](https://farm8.staticflickr.com/7620/17031754770_94f36671b7_b.jpg) This navigation bar contains links to home page that shows appointments, as well as to the house list, the doctor list, the car reservation system and the list of system users. On smaller screens, this navigation bar will collapse to a single button that can be clicked to reveal the entire bar.
 
-In addition to using this navigation bar, there are number of links on each page. For instance, on the home page, users are shown a list of the upcoming appointments. Each line of this list contains several links, as shown below. \todo{insert screenshot}. The first few links take you to a brief profile for that co-worker, doctor or volunteer. The fourth link "Details" will take you to the appointment details page, allowing for simple navigation to each appointment.
+In addition to using this navigation bar, there are number of links on each page. For instance, on the home page, users are shown a list of the upcoming appointments. Each line of this list contains several links, as shown below. ![Upcoming Appointment List](https://farm8.staticflickr.com/7706/17031572338_b0b42bdfc2.jpg) The first few links take you to a brief profile for that co-worker, doctor or volunteer. The fourth link "Details" will take you to the appointment details page, allowing for simple navigation to each appointment.
 
 #### Roles
 There are 3 basic roles in this system; the workstation head role, the volunteer role and the administrator role. The workstation head role has the least privileges, and can only see the appointment schedule to determine if a co-worker is not present due to an appointment. Volunteers more power, able to view all appointments and create, edit, and cancel appointments for residents in their house. Administrators have the most priviledges, as they are able to view, create, edit, cancel, and delete all appointments. Admin users are also able to create and edit residents, houses, doctors, and users and run reports.
 
 ## Workstation Head Role
 #### Appointments (Home screen)
-\todo{screenshot of home page - upcoming:1, monthly:2, weekly:3, house:4, resident: 5}
-This homepage allows for viewing appointments. Ten upcoming appointments, sorted by date, are displayed in a list \todo{1} above a calendar that provides a monthly \todo{2} or weekly view \todo{3} for appointments. This list of 10 appointments is paginated, so you can click the buttons at the bottom of the list to see future appointments.
+![Homepage](https://farm9.staticflickr.com/8797/17033172399_1f5330d152_c.jpg)
 
-Just above the list of upcoming appointments are two dropdown boxes. These dropdowns are used to filter the list of upcoming appointments and the calendar view. The house dropdown \todo{4} allows you to only see appointments for the selected house, while the resident dropdown \todo{5} shows only the appointments for the selected co-worker.
+This homepage allows for viewing appointments. Ten upcoming appointments, sorted by date, are displayed in a list(1) above a calendar that provides a monthly(2) or weekly view(3) for appointments. This list of 10 appointments is paginated, so you can click the buttons at the bottom of the list to see future appointments.
+
+Just above the list of upcoming appointments are two dropdown boxes. These dropdowns are used to filter the list of upcoming appointments and the calendar view. The house dropdown(4) allows you to only see appointments for the selected house, while the resident dropdown(5) shows only the appointments for the selected co-worker.
 
 To view a single appointment, you can click the "details" link for that appointment from the list of appointments. You can also click on a calendar day, and then click the "details" link for the desired appointment. This single appointment view shows the same information as the list of upcoming appointments, but also provides a Google Map window to show where the doctor is located.
 
@@ -156,4 +157,4 @@ The reports page allows to admin users to download reports on appointments. User
 In addition to the main reports page, the pages listing appointments, houses, doctors, and users contain links to download all of these lists as CSV files.
 
 #### Admin Page
-
+The admin page contains similar functionality to the Users page, in that it allows Administator users to create, edit and delete users. It also allows admins to mark other users as administrators by clicking the box under admin until it is green with a "Y" inside, or to turn on email notifications for users, again by clicking the box so it turns green and contains a "Y." This page also allows adminstrators to designate users as the medical coordinator. The medical coordinators receieve an additional email digests informing them of all the appointments happening each day, as well as a Friday reminder email about all the appointments in the upcoming week.
