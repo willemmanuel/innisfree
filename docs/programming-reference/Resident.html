@@ -132,17 +132,17 @@ updated_at :datetime</pre>
 
         <div class="method-description">
           
-          
+          <p>Specifies what the generated CSV list of residents will look like</p>
           
           
 
           
           <div class="method-source-code" id="to_csv-source">
-            <pre><span class="ruby-comment"># File models/resident.rb, line 18</span>
+            <pre><span class="ruby-comment"># File models/resident.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_csv</span>
   <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">column_names</span>
-    <span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">residents</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">column_names</span> <span class="ruby-comment"># headers for the CSV report</span>
+    <span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">residents</span><span class="ruby-operator">|</span> <span class="ruby-comment"># for each resident, populate the fields specified in column_names</span>
       <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">residents</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">column_names</span>)
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -189,7 +189,7 @@ updated_at :datetime</pre>
 
           
           <div class="method-source-code" id="name-source">
-            <pre><span class="ruby-comment"># File models/resident.rb, line 27</span>
+            <pre><span class="ruby-comment"># File models/resident.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span> 
       <span class="ruby-keyword">super</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;No Name&quot;</span>
 <span class="ruby-keyword">end</span></pre>

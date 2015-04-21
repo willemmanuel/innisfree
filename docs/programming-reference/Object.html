@@ -130,13 +130,14 @@
 
         <div class="method-description">
           
-          
+          <p><a href="Object.html#method-i-sort_column">#sort_column</a> - defines how
+the columns for upcoming appointments are sorted</p>
           
           
 
           
           <div class="method-source-code" id="sort_column-source">
-            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 97</span>
+            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sort_column</span>
   <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">column_names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sort</span>]) <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:sort</span>] <span class="ruby-operator">:</span> <span class="ruby-string">&quot;resident_id&quot;</span>
   <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">column_names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:sort</span>]) <span class="ruby-operator">?</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:sort</span>] <span class="ruby-operator">:</span> <span class="ruby-string">&quot;doctor_id&quot;</span>

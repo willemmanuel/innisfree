@@ -97,6 +97,9 @@
 
   <section class="description">
     
+<p>Doctors Controller controls all the manipulation of doctors, it allows you
+to view, create, edit and delete doctors.</p>
+
   </section>
 
   
@@ -131,21 +134,22 @@
 
         <div class="method-description">
           
-          <p>POST /doctors POST /doctors.json</p>
+          <p>POST /doctors POST /doctors.json allows you to create a new doctor after
+you fill out fields for new doctors</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-ivar">@doctor</span> = <span class="ruby-constant">Doctor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">doctor_params</span>)
+  <span class="ruby-ivar">@doctor</span> = <span class="ruby-constant">Doctor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">doctor_params</span>) <span class="ruby-comment"># use fields of </span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">save</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">new_doctor_path</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Doctor (&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;) was successfully created.&#39;</span> }
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">save</span> <span class="ruby-comment"># if there are no errors in the doctor data</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">new_doctor_path</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Doctor (&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;) was successfully created.&#39;</span> } <span class="ruby-comment"># redirect browser to that specific doctor&#39;s page and show &quot;sucessful&quot; message</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@doctor</span> }
-    <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">else</span> <span class="ruby-comment"># if there are errors when creading the doctor</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>
@@ -174,17 +178,18 @@
 
         <div class="method-description">
           
-          <p>DELETE /doctors/1 DELETE /doctors/1.json</p>
+          <p>DELETE /doctors/1 DELETE /doctors/1.json delete the doctor and redirect
+user to main doctor page after each deletion</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 62</span>
+            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">doctors_url</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Doctor (&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;) was successfully deleted.&#39;</span> }
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">doctors_url</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Doctor (&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;) was successfully deleted.&#39;</span> } <span class="ruby-comment"># redirect browser to main doctor page and show &quot;successful&quot; message</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -211,13 +216,13 @@
 
         <div class="method-description">
           
-          <p>GET /doctors/1/edit</p>
+          <p>GET /doctors/1/edit allows you to edit each doctor&#39;s information</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 27</span>
+            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -243,18 +248,19 @@
 
         <div class="method-description">
           
-          
+          <p>GET /doctors GET /doctors.json Index page displays the list of all doctors
+and their corresponding information</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 8</span>
+            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@doctors</span> = <span class="ruby-constant">Doctor</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">sort_column</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sort_direction</span>)
+  <span class="ruby-ivar">@doctors</span> = <span class="ruby-constant">Doctor</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">sort_column</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sort_direction</span>) <span class="ruby-comment"># allows the sorting of doctors by name, address, phone, or doctor type</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">csv</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@doctors</span>.<span class="ruby-identifier">to_csv</span> }
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment"># returns the html of that page</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">csv</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@doctors</span>.<span class="ruby-identifier">to_csv</span> } <span class="ruby-comment"># allows doctors to be downloaded as a CSV file</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -280,15 +286,15 @@
 
         <div class="method-description">
           
-          <p>GET /doctors/new</p>
+          <p>GET /doctors/new populate each field for the creation of a new doctor</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 22</span>
+            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@doctor</span> = <span class="ruby-constant">Doctor</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@doctor</span> = <span class="ruby-constant">Doctor</span>.<span class="ruby-identifier">new</span> <span class="ruby-comment">#create a new doctor</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -313,13 +319,14 @@
 
         <div class="method-description">
           
-          <p>GET /doctors/1 GET /doctors/1.json</p>
+          <p>GET /doctors/1 GET /doctors/1.json shows the information with regard to
+specific doctor</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 18</span>
+            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -345,19 +352,20 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /doctors/1 PATCH/PUT /doctors/1.json</p>
+          <p>PATCH/PUT /doctors/1 PATCH/PUT /doctors/1.json update the information with
+regard to each doctor</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 48</span>
+            <pre><span class="ruby-comment"># File controllers/doctors_controller.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">doctor_params</span>)
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@doctor</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Doctor (&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;) was successfully updated.&#39;</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@doctor</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Doctor (&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;) was successfully updated.&#39;</span> } <span class="ruby-comment"># redirect browser to that doctor&#39;s page and show &quot;successful&quot; message</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@doctor</span> }
-    <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">else</span> <span class="ruby-comment"># if there are errors when editing the doctors, tell the user where is wrong</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@doctor</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>

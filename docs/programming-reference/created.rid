@@ -1,5 +1,5 @@
-Mon, 20 Apr 2015 20:25:04 -0400
-./helpers/cars_helper.rb	Tue, 14 Apr 2015 23:12:52 -0400
+Tue, 21 Apr 2015 10:27:06 -0400
+./helpers/cars_helper.rb	Tue, 21 Apr 2015 10:26:47 -0400
 ./helpers/doctors_helper.rb	Tue, 14 Apr 2015 23:12:52 -0400
 ./helpers/residents_helper.rb	Mon, 23 Mar 2015 23:44:01 -0400
 ./helpers/appointments_helper.rb	Mon, 23 Mar 2015 23:44:01 -0400
@@ -11,13 +11,13 @@ Mon, 20 Apr 2015 20:25:04 -0400
 ./helpers/users_helper.rb	Mon, 23 Mar 2015 23:44:01 -0400
 ./models/house.rb	Tue, 14 Apr 2015 23:12:52 -0400
 ./models/post.rb	Mon, 23 Mar 2015 23:44:01 -0400
-./models/doctor.rb	Mon, 23 Mar 2015 23:44:01 -0400
+./models/doctor.rb	Tue, 21 Apr 2015 10:26:47 -0400
 ./models/car.rb	Mon, 23 Mar 2015 23:44:01 -0400
 ./models/user.rb	Mon, 20 Apr 2015 20:18:12 -0400
 ./models/recurring_reminder.rb	Mon, 23 Mar 2015 23:44:01 -0400
-./models/resident.rb	Mon, 23 Mar 2015 23:44:01 -0400
+./models/resident.rb	Tue, 21 Apr 2015 10:26:47 -0400
 ./models/reservation.rb	Mon, 23 Mar 2015 23:44:01 -0400
-./models/report.rb	Mon, 23 Mar 2015 23:44:01 -0400
+./models/report.rb	Tue, 21 Apr 2015 10:26:47 -0400
 ./models/apt_type.rb	Mon, 23 Mar 2015 23:44:01 -0400
 ./models/appointment.rb	Tue, 14 Apr 2015 23:12:52 -0400
 ./mailers/notification_mailer.rb	Mon, 20 Apr 2015 20:23:25 -0400
@@ -33,10 +33,10 @@ Mon, 20 Apr 2015 20:25:04 -0400
 ./views/settings/index.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/cars/index.json.jbuilder	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/cars/get_reservations.json.jbuilder	Mon, 23 Mar 2015 23:44:01 -0400
-./views/cars/_reservation_form.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
+./views/cars/_reservation_form.html.erb	Tue, 21 Apr 2015 10:26:47 -0400
 ./views/cars/show.json.jbuilder	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/cars/index.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
-./views/cars/get_availability.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
+./views/cars/get_availability.html.erb	Tue, 21 Apr 2015 10:26:47 -0400
 ./views/cars/manage.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/cars/show.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/cars/show_reservation.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
@@ -94,7 +94,7 @@ Mon, 20 Apr 2015 20:25:04 -0400
 ./views/doctors/new.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/doctors/edit.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/doctors/_form.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
-./views/devise/mailer/reset_password_instructions.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
+./views/devise/mailer/reset_password_instructions.html.erb	Tue, 21 Apr 2015 10:26:47 -0400
 ./views/devise/mailer/unlock_instructions.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/devise/mailer/confirmation_instructions.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/devise/registrations/new.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
@@ -105,17 +105,17 @@ Mon, 20 Apr 2015 20:25:04 -0400
 ./views/devise/passwords/edit.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/devise/sessions/new.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
 ./views/devise/confirmations/new.html.erb	Mon, 23 Mar 2015 23:44:01 -0400
-./controllers/appointments_controller.rb	Tue, 14 Apr 2015 23:12:52 -0400
-./controllers/users_controller.rb	Mon, 20 Apr 2015 20:11:33 -0400
+./controllers/appointments_controller.rb	Tue, 21 Apr 2015 10:26:47 -0400
+./controllers/users_controller.rb	Tue, 21 Apr 2015 10:26:47 -0400
 ./controllers/apt_types_controller.rb	Sun, 05 Apr 2015 12:33:56 -0400
-./controllers/reports_controller.rb	Mon, 23 Mar 2015 23:44:01 -0400
-./controllers/residents_controller.rb	Wed, 25 Mar 2015 18:24:54 -0400
-./controllers/doctors_controller.rb	Mon, 23 Mar 2015 23:44:01 -0400
+./controllers/reports_controller.rb	Tue, 21 Apr 2015 10:26:47 -0400
+./controllers/residents_controller.rb	Tue, 21 Apr 2015 10:26:47 -0400
+./controllers/doctors_controller.rb	Tue, 21 Apr 2015 10:26:47 -0400
 ./controllers/users/registrations_controller.rb	Mon, 20 Apr 2015 20:24:56 -0400
 ./controllers/settings_controller.rb	Mon, 23 Mar 2015 23:44:01 -0400
 ./controllers/houses_controller.rb	Tue, 14 Apr 2015 23:12:52 -0400
 ./controllers/application_controller.rb	Mon, 23 Mar 2015 23:44:01 -0400
-./controllers/cars_controller.rb	Mon, 23 Mar 2015 23:44:01 -0400
+./controllers/cars_controller.rb	Tue, 21 Apr 2015 10:26:47 -0400
 ./assets/stylesheets/settings.css.scss	Mon, 23 Mar 2015 23:44:01 -0400
 ./assets/stylesheets/bootswatch.css	Mon, 23 Mar 2015 23:44:01 -0400
 ./assets/stylesheets/users.css.scss	Mon, 23 Mar 2015 23:44:01 -0400

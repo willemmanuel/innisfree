@@ -123,13 +123,13 @@
 
         <div class="method-description">
           
-          
+          <p>POST /reports POST /reports.json allow users to create new reports</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File controllers/reports_controller.rb, line 48</span>
+            <pre><span class="ruby-comment"># File controllers/reports_controller.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -155,42 +155,42 @@
 
         <div class="method-description">
           
-          
+          <p>generate the report according to usres&#39; preferences</p>
           
           
 
           
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File controllers/reports_controller.rb, line 16</span>
+            <pre><span class="ruby-comment"># File controllers/reports_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">generate</span>
   <span class="ruby-ivar">@appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">all</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:doctor_id</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;doctor_id = ?&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:doctor_id</span>])
+    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;doctor_id = ?&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:doctor_id</span>]) <span class="ruby-comment"># generate report with regard to specific doctor</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:resident_id</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;resident_id = ?&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:resident_id</span>])
+    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;resident_id = ?&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:resident_id</span>]) <span class="ruby-comment"># generate the report with regard to specific resident</span>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:house_id</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-string">&#39;LEFT OUTER JOIN residents ON resident_id = residents.id&#39;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;house_id = ?&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:house_id</span>])
+    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-string">&#39;LEFT OUTER JOIN residents ON resident_id = residents.id&#39;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;house_id = ?&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:house_id</span>]) <span class="ruby-comment"># generate the report with regard to specific house</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &gt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">strptime</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>], <span class="ruby-string">&quot;%m/%d/%Y&quot;</span>))
+    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &gt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">strptime</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>], <span class="ruby-string">&quot;%m/%d/%Y&quot;</span>)) <span class="ruby-comment"># select a starting date</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:date2</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &lt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">strptime</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:date2</span>], <span class="ruby-string">&quot;%m/%d/%Y&quot;</span>))
+    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &lt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">strptime</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:date2</span>], <span class="ruby-string">&quot;%m/%d/%Y&quot;</span>)) <span class="ruby-comment"># select an ending date</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:apt_type</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;apt_type = ?&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:apt_type</span>])
+    <span class="ruby-ivar">@appointments</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;apt_type = ?&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:apt_type</span>]) <span class="ruby-comment"># generate the report with regard to specific appointment type</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:format</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;PDF&#39;</span>
-    <span class="ruby-identifier">pdf</span> = <span class="ruby-constant">Prawn</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:page_layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:landscape</span>)
-    <span class="ruby-identifier">pdf</span>.<span class="ruby-identifier">image</span> <span class="ruby-node">&quot;#{Rails.root}/app/assets/images/pdf_header.png&quot;</span>, <span class="ruby-identifier">width</span><span class="ruby-operator">:</span> <span class="ruby-value">400</span>, <span class="ruby-identifier">height</span><span class="ruby-operator">:</span> <span class="ruby-value">110</span>, <span class="ruby-value">:position</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:center</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:format</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;PDF&#39;</span> <span class="ruby-comment"># if the user choose to generate a PDF report</span>
+    <span class="ruby-identifier">pdf</span> = <span class="ruby-constant">Prawn</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:page_layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:landscape</span>) <span class="ruby-comment"># create a new pdf with predefined layout</span>
+    <span class="ruby-identifier">pdf</span>.<span class="ruby-identifier">image</span> <span class="ruby-node">&quot;#{Rails.root}/app/assets/images/pdf_header.png&quot;</span>, <span class="ruby-identifier">width</span><span class="ruby-operator">:</span> <span class="ruby-value">400</span>, <span class="ruby-identifier">height</span><span class="ruby-operator">:</span> <span class="ruby-value">110</span>, <span class="ruby-value">:position</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:center</span> <span class="ruby-comment"># insert InnIsfree header image</span>
     <span class="ruby-identifier">pdf</span>.<span class="ruby-identifier">move_down</span> <span class="ruby-value">25</span>
     <span class="ruby-identifier">printTable</span>(<span class="ruby-identifier">pdf</span>, <span class="ruby-ivar">@appointments</span>)
-    <span class="ruby-identifier">send_data</span> <span class="ruby-identifier">pdf</span>.<span class="ruby-identifier">render</span>, <span class="ruby-identifier">filename</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Report-&#39;</span><span class="ruby-operator">+</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;%m/%d/%Y&quot;</span>) <span class="ruby-operator">+</span><span class="ruby-string">&#39;.pdf&#39;</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;application/pdf&#39;</span>
+    <span class="ruby-identifier">send_data</span> <span class="ruby-identifier">pdf</span>.<span class="ruby-identifier">render</span>, <span class="ruby-identifier">filename</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Report-&#39;</span><span class="ruby-operator">+</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;%m/%d/%Y&quot;</span>) <span class="ruby-operator">+</span><span class="ruby-string">&#39;.pdf&#39;</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;application/pdf&#39;</span> <span class="ruby-comment"># define the name of the pdf file</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-constant">Gen_CSV</span>(<span class="ruby-ivar">@appointments</span>)
+    <span class="ruby-constant">Gen_CSV</span>(<span class="ruby-ivar">@appointments</span>) <span class="ruby-comment"># if the user choose to generate s CSV report</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -216,7 +216,8 @@
 
         <div class="method-description">
           
-          <p>GET /appointments GET /appointments.json</p>
+          <p>GET /appointments GET /appointments.json index page shows all the fields
+where users can customize their report</p>
           
           
 

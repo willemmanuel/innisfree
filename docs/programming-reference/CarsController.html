@@ -162,7 +162,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 77</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@car</span> = <span class="ruby-constant">Car</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">car_params</span>)
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -204,7 +204,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 106</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@car</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -235,13 +235,13 @@
 
         <div class="method-description">
           
-          
+          <p>delete &#39;reservations/:id&#39;</p>
           
           
 
           
           <div class="method-source-code" id="destroy_reservation-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 70</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy_reservation</span>
   <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">cars_url</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Reservation was deleted.&#39;</span> 
@@ -275,7 +275,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 53</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -301,25 +301,31 @@
 
         <div class="method-description">
           
-          
+          <p>post &#39;reservation/availability&#39; given a start and end date, find
+all available cars in that range</p>
           
           
 
           
           <div class="method-source-code" id="get_availability-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 23</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_availability</span>
   <span class="ruby-identifier">start</span> = <span class="ruby-identifier">parse_time</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:reservation_start</span>])
   <span class="ruby-identifier">finish</span> = <span class="ruby-identifier">parse_time</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:reservation_end</span>])
+  <span class="ruby-comment"># redirect if the times aren&#39;t valid (in the past, end before finish, etc)</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">new_reservation_path</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Invalid reservation times&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">valid_times?</span>(<span class="ruby-identifier">start</span>, <span class="ruby-identifier">finish</span>)
   <span class="ruby-ivar">@cars</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-comment"># for each car, check if it is available. save it if so</span>
   <span class="ruby-constant">Car</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">car</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@cars</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">car</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">car_available?</span>(<span class="ruby-identifier">car</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">finish</span>)
   <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># if no cars are available, redirect back to the new reservation</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">new_reservation_path</span>, <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-value">:post</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;No cars available at that time&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@cars</span>.<span class="ruby-identifier">empty?</span>
   <span class="ruby-ivar">@reservation</span> = <span class="ruby-constant">Reservation</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">start</span>
   <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">finish</span> = <span class="ruby-identifier">finish</span>
+  <span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">current_user</span>
+  <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">user_id</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -344,13 +350,13 @@
 
         <div class="method-description">
           
-          
+          <p>get &#39;reservations&#39;</p>
           
           
 
           
           <div class="method-source-code" id="get_reservations-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 16</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_reservations</span>
   <span class="ruby-ivar">@reservations</span> = <span class="ruby-constant">Reservation</span>.<span class="ruby-identifier">all</span>
 <span class="ruby-keyword">end</span></pre>
@@ -409,13 +415,13 @@
 
         <div class="method-description">
           
-          
+          <p>post &#39;cars/manage&#39;</p>
           
           
 
           
           <div class="method-source-code" id="manage-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 12</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">manage</span>
   <span class="ruby-ivar">@cars</span> = <span class="ruby-constant">Car</span>.<span class="ruby-identifier">all</span>
 <span class="ruby-keyword">end</span></pre>
@@ -448,7 +454,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 48</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@car</span> = <span class="ruby-constant">Car</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -475,13 +481,13 @@
 
         <div class="method-description">
           
-          
+          <p>post &#39;reservation/new&#39;</p>
           
           
 
           
           <div class="method-source-code" id="new_reservation-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 37</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new_reservation</span>
   <span class="ruby-ivar">@reservation</span> = <span class="ruby-constant">Reservation</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@cars</span> = <span class="ruby-constant">Car</span>.<span class="ruby-identifier">all</span>
@@ -509,20 +515,21 @@
 
         <div class="method-description">
           
-          
+          <p>post &#39;reservation&#39;</p>
           
           
 
           
           <div class="method-source-code" id="save_reservation-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 56</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save_reservation</span>
   <span class="ruby-ivar">@reservation</span> = <span class="ruby-constant">Reservation</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:reservation_start</span>]
   <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">finish</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:reservation_end</span>]
   <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">car_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:car</span>]
   <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">note</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:note</span>]
-  <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">user</span> = <span class="ruby-identifier">current_user</span>
+  <span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">current_user</span>
+  <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">user_id</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@reservation</span>.<span class="ruby-identifier">save</span>
     <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;index&quot;</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Reservation created&quot;</span>
   <span class="ruby-keyword">else</span>
@@ -558,7 +565,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 44</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -584,13 +591,13 @@
 
         <div class="method-description">
           
-          
+          <p>get &#39;reservations/:id&#39;</p>
           
           
 
           
           <div class="method-source-code" id="show_reservation-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 20</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show_reservation</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -622,7 +629,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 92</span>
+            <pre><span class="ruby-comment"># File controllers/cars_controller.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@car</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">car_params</span>)

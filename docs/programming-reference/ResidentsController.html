@@ -97,6 +97,10 @@
 
   <section class="description">
     
+<p>The resident controller manages resident data, and serves as the controller
+to both access and modify data regarding residents. It also verifies
+privileges for each call when appropriate.</p>
+
   </section>
 
   
@@ -131,13 +135,14 @@
 
         <div class="method-description">
           
-          <p>POST /residents POST /residents.json</p>
+          <p>POST /residents POST /residents.json create - saves the new resident to
+database, and shows resident page, or an error if unsuccessful</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 34</span>
+            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@resident</span> = <span class="ruby-constant">Resident</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">resident_params</span>)
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -173,13 +178,14 @@
 
         <div class="method-description">
           
-          <p>DELETE /residents/1 DELETE /residents/1.json</p>
+          <p>DELETE /residents/1 DELETE /residents/1.json destroy - removes the resident
+from database, and shows a success message</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 63</span>
+            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@resident</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -210,13 +216,13 @@
 
         <div class="method-description">
           
-          <p>GET /residents/1/edit</p>
+          <p>GET /residents/1/edit edit - opens a resident for changes</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 29</span>
+            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -242,13 +248,15 @@
 
         <div class="method-description">
           
-          
+          <p>GET /residents GET /residents.json index - the main page for resident
+management for admins, lists all the resident and shows links for details,
+edit, and delete</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 9</span>
+            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@residents</span> = <span class="ruby-constant">Resident</span>.<span class="ruby-identifier">all</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
@@ -279,13 +287,13 @@
 
         <div class="method-description">
           
-          <p>GET /residents/new</p>
+          <p>GET /residents/new new - creates a new resident object</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 24</span>
+            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@resident</span> = <span class="ruby-constant">Resident</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -312,13 +320,14 @@
 
         <div class="method-description">
           
-          <p>GET /residents/1 GET /residents/1.json</p>
+          <p>GET /residents/1 GET /residents/1.json show - shows the resident and
+upcoming appointments for resident</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 19</span>
+            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-ivar">@upcoming_appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;resident_id = ?&#39;</span>, <span class="ruby-ivar">@resident</span>.<span class="ruby-identifier">id</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -345,13 +354,15 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /residents/1 PATCH/PUT /residents/1.json</p>
+          <p>PATCH/PUT /residents/1 PATCH/PUT /residents/1.json update - saves the
+edited resident data to database, and shows resident page, or an error if
+unsuccessful</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 49</span>
+            <pre><span class="ruby-comment"># File controllers/residents_controller.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@resident</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">resident_params</span>)
