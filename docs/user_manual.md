@@ -4,8 +4,25 @@
   - Navigation
   - Roles
 - Workstation Head Role
+  - Appointments
+  - Houses
+  - Doctors
+  - Users
+  - My Profile
+  - Cars
 - Volunteer Role
+  - Appointments
+  - Houses, Doctors, Users, My Profile, Cars 
 - Administrator Role
+  - Appointments
+  - Houses
+  - Doctors
+  - Users
+  - My Profile
+  - Cars
+  - Reports
+  - Admin Page
+
 
 ## Basic Information
 #### Navigation
@@ -83,7 +100,7 @@ Deleting an appointment removes all traces of that appointment from the system. 
 Appointment types are useful for identying what type of doctor a co-worker is visiting. To create a new appointment type you should go to the new appointment page. From this page, you click the "Manage Appointment Types" button, enter the name of the new appointment type to add, and click "Save." Currently trying this from the edit appointment page will not work.
 
 #### Houses
-Similar to appointments, administrator users can create, edit and delete houses. Administrators can also create new residents from this page.
+Similar to appointments, administrator users can create, edit and delete houses. Administrators can also create new residents from this page. See this entry under the [Workstation Head Role](#workstation-head-role) for more information on viewing houses.
 
 ##### Creating a New House
 Click the "New House" button from the Houses page, enter the house name and phone number, and then click "Create House." The name field is required, while a phone number is quite handy.
@@ -95,8 +112,18 @@ Click the "Edit" link next to the house name, update the house name and phone nu
 Click the "Delete" link next to the house name, and then click "Ok" in the pop-up box. This will remove the house from the system, but not its volunteers or co-workers.
 
 #### Doctors
+See this entry under the [Workstation Head Role](#workstation-head-role) to create and delete reservations
 
 #### Users
+See this entry under the [Workstation Head Role](#workstation-head-role) to view a list of users. Admin users are also able to create, edit and delete existing users.
+
+##### Creating a New User
+Click the "New User" button on the Users page, fill out the fields and then click "Create User." The user's name, email, house and password are all required.
+
+##### Editing an Existing User
+Click the "Edit" link in the same row as that user's name and fill in the fields you wish to change. If you want to change the password, you must also enter the current password as authorization. To enable email reminders, make sure to check the checkbox stating this. Once you've made the desired changes click the "Update User" button to save them.
+
+#####
 
 #### Cars
 See this entry under the [Workstation Head Role](#workstation-head-role) to create and delete reservations
@@ -114,6 +141,8 @@ To remove a car from the system, click the "delete car" link on the Manage Cars 
 
 #### Reports
 The reports page allows to admin users to download reports on appointments. Users can select the house, resident, doctor and appointment type to see appointments for. They can also select the date range to see appointments between. Finally, users can select either the CSV or PDF radio button to generate either a CSV or PDF report. Click the "Generate Report" button and boom! you've got a report!
+
+In addition to the main reports page, the pages listing appointments, houses, doctors, and users contain links to download all of these lists as CSV files.
 
 #### Admin Page
 
