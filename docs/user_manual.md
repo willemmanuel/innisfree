@@ -112,7 +112,17 @@ Click the "Edit" link next to the house name, update the house name and phone nu
 Click the "Delete" link next to the house name, and then click "Ok" in the pop-up box. This will remove the house from the system, but not its volunteers or co-workers.
 
 #### Doctors
-See this entry under the [Workstation Head Role](#workstation-head-role) to create and delete reservations
+See this entry under the [Workstation Head Role](#workstation-head-role) to view doctors. Administrator users also have the ability to create, edit and delete doctors.
+
+##### Creating a New Doctor
+Click the "New Doctor" button, fill out the fields, and then click "Create Doctor." The doctor name must be filled out to save the doctor.
+
+##### Editing an Existing Doctor
+Click the "Edit" link in the same row as that doctor, update the field you want to edit, and then click the "Update Doctor" button to save your changes.
+
+##### Deleting an Existing Doctor
+Click the "Delete" link in the same row as that doctor, and select "Ok" from the pop-up window. Deleting a doctor will cause that doctor to be removed from the system and set all appointments that previously had that doctor to having no doctor.
+
 
 #### Users
 See this entry under the [Workstation Head Role](#workstation-head-role) to view a list of users. Admin users are also able to create, edit and delete existing users.
@@ -123,7 +133,8 @@ Click the "New User" button on the Users page, fill out the fields and then clic
 ##### Editing an Existing User
 Click the "Edit" link in the same row as that user's name and fill in the fields you wish to change. If you want to change the password, you must also enter the current password as authorization. To enable email reminders, make sure to check the checkbox stating this. Once you've made the desired changes click the "Update User" button to save them.
 
-#####
+##### Deleting an Existing User
+Click the "Delete" link in the same row as that user's name and click "OK" in the pop-up box. This will delete the user from the system and prevent them from logging in again.
 
 #### Cars
 See this entry under the [Workstation Head Role](#workstation-head-role) to create and delete reservations
