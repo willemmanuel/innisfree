@@ -46,6 +46,7 @@
 % For tracking purposes - this is V2.0 - May 2012
 
 \documentclass{sig-alternate}
+\usepackage[utf8]{inputenc}
 
 \begin{document}
 %
@@ -199,7 +200,7 @@ Houses are fairly simple part of our application. Each house has a name that mus
 The doctors model contains attributes for each doctor’s name, address, phone number and doctor type. All doctors must at least have values for their names. 
 
 \subsubsection{Creating, Viewing, Editing and Deleting Doctors}
-Only admins can create, edit and delete doctors. In order to create a new doctor, the user must enter the name of that doctor. Users can view the information about each doctor by clicking on their names. Users can also click on each doctor’s address and they will be redirected to location of that address on google map. 
+Only admins can create, edit and delete doctors. In order to create a new doctor, the user must enter the name of that doctor. Users can view the information about each doctor by clicking on their names. Users can also click on each doctor’s address and they will be redirected to location of that address on Google maps. 
 
 \subsection{Cars}
 On the cars page, each car has a name. Only admins can edit car names and create or delete cars. All users can make new reservations for cars. After users enter the date and time range for their reservation, they can click on “See Available Cars” to see if there are any cars available. The system will prompt users with warning messages if the time range is invalid or no cars are available. Otherwise, the user can choose one of the available cars, enter the purpose of car reservation in a text box and successfully create a new reservation. All the existing car reservations will be shown in a calendar. Users can click on that reservation on the calendar, see details about that reservation and delete the reservation if they desire. 

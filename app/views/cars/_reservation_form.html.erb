@@ -11,12 +11,14 @@
     </div>
   <% end %>
   <div class="field">
+    <%= label_tag 'User' %>
+    <%= select_tag('user_id', options_from_collection_for_select(User.all, :id, :name, current_user.id), {}) %> <br> <br>
     <%= label_tag 'Reservation Date' %>
     <%= date_field_tag 'date', Date.today %><br>  <br>
     <%= label_tag 'Start time' %>
     <%= time_select 'reservation_start', Time.now, {:ampm => true, :minute_step=>15, :ignore_date=>true} %><br> <br>
     <%= label_tag 'End time' %>
-    <%= time_select 'reservation_end', Time.now, {:ampm => true, :minute_step=>15, :ignore_date=>true} %><br> <br>
+    <%= time_select 'reservation_end', Time.now, {:ampm => true, :minute_step=>15, :ignore_date=>true} %>
   </div>
   <br>
   <div class="actions">

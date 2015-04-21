@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_filter :check_admin, only: [:edit, :update, :destroy, :new, :create]
+  before_filter :check_admin, only: [:destroy, :new, :create]
+  before_filter :check_admin_or_self, only:[:edit, :update]
 	before_action :set_user, only: [:show, :edit, :update, :destroy, :test_email]
   before_action :set_most_recent, ony: [:new]
   helper_method :sort_column, :sort_direction
@@ -124,6 +125,11 @@ class UsersController < ApplicationController
   # Checks whether the current user is an admin.  If they are not, redirects to where they came from
   def check_admin
     redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
+  end
+
+  def check_admin_or_self
+    @user = User.find(params[:id])
+    redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin || current_user.id == @user.id
   end
 
 end
