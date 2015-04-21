@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class NotificationMailer - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">ActionMailer::Base
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-appointment_assignment_notification">#appointment_assignment_notification</a>
+    
+    <li ><a href="#method-i-appointment_digest">#appointment_digest</a>
+    
+    <li ><a href="#method-i-appointment_reminder">#appointment_reminder</a>
+    
+    <li ><a href="#method-i-house_reminder">#house_reminder</a>
+    
+    <li ><a href="#method-i-new_appointment_notification">#new_appointment_notification</a>
+    
+    <li ><a href="#method-i-recurring_appointment_reminder">#recurring_appointment_reminder</a>
+    
+    <li ><a href="#method-i-weekly_digest">#weekly_digest</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-NotificationMailer">
+  <h1 id="class-NotificationMailer" class="class">
+    class NotificationMailer
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-appointment_assignment_notification" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appointment_assignment_notification</span><span
+            class="method-args">(appointment)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parameter: appointment to send a reminder about
+appointment_assignment-reminder - sends an email to the appointment&#39;s
+volunteer that they have been assigned to an appointment</p>
+          
+          
+
+          
+          <div class="method-source-code" id="appointment_assignment_notification-source">
+            <pre><span class="ruby-comment"># File mailers/notification_mailer.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appointment_assignment_notification</span>(<span class="ruby-identifier">appointment</span>)
+  <span class="ruby-ivar">@appointment</span> = <span class="ruby-identifier">appointment</span>
+  <span class="ruby-identifier">mail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Appointment Assignment Notification&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-appointment_digest" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appointment_digest</span><span
+            class="method-args">(user)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parameter: user to send email to <a
+href="NotificationMailer.html#method-i-appointment_digest">#appointment_digest</a>
+- sends a digest of the day&#39;s appointments to the specified user</p>
+          
+          
+
+          
+          <div class="method-source-code" id="appointment_digest-source">
+            <pre><span class="ruby-comment"># File mailers/notification_mailer.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appointment_digest</span>(<span class="ruby-identifier">user</span>)
+      <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
+      <span class="ruby-ivar">@appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date = ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>)
+  <span class="ruby-identifier">mail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Today\s Innisfree Appointments&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-appointment_reminder" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appointment_reminder</span><span
+            class="method-args">(appointment)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parameter: appointment to send a reminder about <a
+href="NotificationMailer.html#method-i-appointment_reminder">#appointment_reminder</a>
+- sends a reminder to the assigned volunteer about the specified
+appointment</p>
+          
+          
+
+          
+          <div class="method-source-code" id="appointment_reminder-source">
+            <pre><span class="ruby-comment"># File mailers/notification_mailer.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appointment_reminder</span>(<span class="ruby-identifier">appointment</span>)
+      <span class="ruby-ivar">@appointment</span> = <span class="ruby-identifier">appointment</span>
+      <span class="ruby-identifier">mail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Upcoming appointment today&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-house_reminder" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">house_reminder</span><span
+            class="method-args">(appointment, user)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parameter: appointment to send a reminder about Parameter: user to send a
+reminder to <a
+href="NotificationMailer.html#method-i-house_reminder">#house_reminder</a>
+- sends an email to the house to remind them of an appointment</p>
+          
+          
+
+          
+          <div class="method-source-code" id="house_reminder-source">
+            <pre><span class="ruby-comment"># File mailers/notification_mailer.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">house_reminder</span>(<span class="ruby-identifier">appointment</span>, <span class="ruby-identifier">user</span>)
+  <span class="ruby-ivar">@appointment</span> = <span class="ruby-identifier">appointment</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
+  <span class="ruby-identifier">mail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Appointment Reminder&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-new_appointment_notification" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new_appointment_notification</span><span
+            class="method-args">(appointment, user)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parameter: appointment to send a reminder about Parameter: user to send a
+reminder to <a
+href="NotificationMailer.html#method-i-new_appointment_notification">#new_appointment_notification</a>
+- sends an email notifying the given user they have been assigned an
+appointment</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new_appointment_notification-source">
+            <pre><span class="ruby-comment"># File mailers/notification_mailer.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_appointment_notification</span>(<span class="ruby-identifier">appointment</span>, <span class="ruby-identifier">user</span>)
+  <span class="ruby-ivar">@appointment</span> = <span class="ruby-identifier">appointment</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
+  <span class="ruby-identifier">mail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;New Appointment Scheduled&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-recurring_appointment_reminder" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">recurring_appointment_reminder</span><span
+            class="method-args">(appointment)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parameter: appointment to send a reminder about <a
+href="NotificationMailer.html#method-i-recurring_appointment_reminder">#recurring_appointment_reminder</a>
+- sends a reminder to schedule a follow up appointment to the given
+appointment</p>
+          
+          
+
+          
+          <div class="method-source-code" id="recurring_appointment_reminder-source">
+            <pre><span class="ruby-comment"># File mailers/notification_mailer.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">recurring_appointment_reminder</span>(<span class="ruby-identifier">appointment</span>)
+      <span class="ruby-ivar">@appointment</span> = <span class="ruby-identifier">appointment</span>
+  <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;id = ?&#39;</span>, <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">user_id</span>)[<span class="ruby-value">0</span>];
+      <span class="ruby-identifier">mail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Schedule Follow-up Appointment&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-weekly_digest" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">weekly_digest</span><span
+            class="method-args">(user)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parameter: user to send email to <a
+href="NotificationMailer.html#method-i-weekly_digest">#weekly_digest</a> -
+sends a digest of the next week&#39;s appointments to the specified user</p>
+          
+          
+
+          
+          <div class="method-source-code" id="weekly_digest-source">
+            <pre><span class="ruby-comment"># File mailers/notification_mailer.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">weekly_digest</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
+  <span class="ruby-ivar">@appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &gt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">tomorrow</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &lt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">tomorrow</span><span class="ruby-operator">+</span><span class="ruby-value">7</span>)
+  <span class="ruby-identifier">mail</span>(<span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;This week\s Innisfree Appointments&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

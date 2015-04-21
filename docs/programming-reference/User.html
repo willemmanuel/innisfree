@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class User - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">ActiveRecord::Base
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-send_reminders">::send_reminders</a>
+    
+    <li ><a href="#method-c-send_weekly_digest">::send_weekly_digest</a>
+    
+    <li class="calls-super" ><a href="#method-i-name">#name</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-User">
+  <h1 id="class-User" class="class">
+    class User
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-User-label-Schema+Information">Schema Information<span><a href="#class-User-label-Schema+Information">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Table name: users</p>
+
+<pre>id                     :integer          not null, primary key
+email                  :string(255)      default(&quot;&quot;), not null
+encrypted_password     :string(255)      default(&quot;&quot;), not null
+reset_password_token   :string(255)
+reset_password_sent_at :datetime
+remember_created_at    :datetime
+sign_in_count          :integer          default(0), not null
+current_sign_in_at     :datetime
+last_sign_in_at        :datetime
+current_sign_in_ip     :string(255)
+last_sign_in_ip        :string(255)
+created_at             :datetime
+updated_at             :datetime
+admin                  :boolean          default(FALSE)
+volunteer_id           :integer
+approved               :boolean
+phone                  :string(255)
+house_id               :integer
+name                   :string(255)
+email_pref             :boolean          default(FALSE)
+medical_coordinator    :boolean          default(FALSE)</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-current_password" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">current_password</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-send_reminders" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">send_reminders</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sends emails to remind users of the schedule for the day and any reminders
+set for recurring appointments If the user is an admin, then they receive
+all the appointments If the user is a volunteer, they only receive
+reminders for the appointments they were assigned</p>
+          
+          
+
+          
+          <div class="method-source-code" id="send_reminders-source">
+            <pre><span class="ruby-comment"># File models/user.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">send_reminders</span>
+ <span class="ruby-comment"># email all the admins a full schedule for the day</span>
+ <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date = ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>).<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">admins</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">admin</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">email_pref</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">admins</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">admin</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">NotificationMailer</span>.<span class="ruby-identifier">appointment_digest</span>(<span class="ruby-identifier">admin</span>).<span class="ruby-identifier">deliver</span>
+  <span class="ruby-keyword">end</span>
+ <span class="ruby-keyword">end</span>
+ <span class="ruby-comment"># email all volunteers a reminder</span>
+ <span class="ruby-identifier">todays_appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date = ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>)
+ <span class="ruby-identifier">todays_appointments</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">appointment</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">appointment</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">appointment</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">email_pref</span>
+       <span class="ruby-constant">NotificationMailer</span>.<span class="ruby-identifier">appointment_reminder</span>(<span class="ruby-identifier">appointment</span>).<span class="ruby-identifier">deliver</span>
+    <span class="ruby-keyword">end</span>
+ <span class="ruby-keyword">end</span>
+ <span class="ruby-identifier">todays_reminders</span> = <span class="ruby-constant">RecurringReminder</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;notification_date = ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>)
+ <span class="ruby-identifier">todays_reminders</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">recur</span><span class="ruby-operator">|</span>
+   <span class="ruby-identifier">original_apt</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;id = ?&#39;</span>, <span class="ruby-identifier">recur</span>.<span class="ruby-identifier">appointment_id</span>)[<span class="ruby-value">0</span>]
+   <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;id = ?&#39;</span>, <span class="ruby-identifier">original_apt</span>.<span class="ruby-identifier">user_id</span>)[<span class="ruby-value">0</span>]
+   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email_pref</span>
+     <span class="ruby-constant">NotificationMailer</span>.<span class="ruby-identifier">recurring_appointment_reminder</span>(<span class="ruby-identifier">original_apt</span>).<span class="ruby-identifier">deliver</span>
+   <span class="ruby-keyword">end</span> 
+ <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-send_weekly_digest" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">send_weekly_digest</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sends a reminder of the week&#39;s appointments to the medical coordinator</p>
+          
+          
+
+          
+          <div class="method-source-code" id="send_weekly_digest-source">
+            <pre><span class="ruby-comment"># File models/user.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">send_weekly_digest</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &gt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">tomorrow</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &lt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">tomorrow</span><span class="ruby-operator">+</span><span class="ruby-value">7</span>).<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">coordinators</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">medical_coordinator</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">email_pref</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+    <span class="ruby-identifier">coordinators</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">coordinator</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">NotificationMailer</span>.<span class="ruby-identifier">weekly_digest</span>(<span class="ruby-identifier">coordinator</span>).<span class="ruby-identifier">deliver</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If the user does not have a name, provide the email in case</p>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+          
+
+          
+          <div class="method-source-code" id="name-source">
+            <pre><span class="ruby-comment"># File models/user.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">super</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">email</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

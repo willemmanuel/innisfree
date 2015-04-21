@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class AppointmentsController - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-add_apt_type">#add_apt_type</a>
+    
+    <li ><a href="#method-i-appointments">#appointments</a>
+    
+    <li ><a href="#method-i-appointments_for_day">#appointments_for_day</a>
+    
+    <li ><a href="#method-i-create">#create</a>
+    
+    <li ><a href="#method-i-destroy">#destroy</a>
+    
+    <li ><a href="#method-i-edit">#edit</a>
+    
+    <li ><a href="#method-i-index">#index</a>
+    
+    <li ><a href="#method-i-new">#new</a>
+    
+    <li ><a href="#method-i-residents">#residents</a>
+    
+    <li ><a href="#method-i-send_house_reminder">#send_house_reminder</a>
+    
+    <li ><a href="#method-i-set_recurring_reminder">#set_recurring_reminder</a>
+    
+    <li ><a href="#method-i-show">#show</a>
+    
+    <li ><a href="#method-i-upcoming">#upcoming</a>
+    
+    <li ><a href="#method-i-update">#update</a>
+    
+    <li ><a href="#method-i-update_residents">#update_residents</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-AppointmentsController">
+  <h1 id="class-AppointmentsController" class="class">
+    class AppointmentsController
+  </h1>
+
+  <section class="description">
+    
+<p>The Appointments Controller controls appointments. It is responsible for
+creating, viewing, editing, canceling and deleting appointments and telling
+the Mailer to send appointment reminder emails.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add_apt_type" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_apt_type</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /appointments/add_apt_type <a
+href="AppointmentsController.html#method-i-add_apt_type">#add_apt_type</a>
+- allows for adding a new appointment type and then updates the displayed
+list of appointment types</p>
+          
+          
+
+          
+          <div class="method-source-code" id="add_apt_type-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_apt_type</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">AptType</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;apt_type = ?&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:apt_type</span>]).<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:apt_type</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-ivar">@type</span> = <span class="ruby-constant">AptType</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@type</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:apt_type</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:apt_type</span>])
+    <span class="ruby-ivar">@type</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@types</span> = <span class="ruby-constant">AptType</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-appointments" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appointments</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="appointments-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 212</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appointments</span>
+  <span class="ruby-ivar">@appointments</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-appointments_for_day" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appointments_for_day</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET appointments/appointments_for_day - usually called from other
+page/method <a
+href="AppointmentsController.html#method-i-appointments_for_day">#appointments_for_day</a>
+- provides a list of that day&#39;s appointments, for daily email
+reminders, in a table view</p>
+          
+          
+
+          
+          <div class="method-source-code" id="appointments_for_day-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appointments_for_day</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:date</span>) <span class="ruby-comment"># allows for filtering by date</span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-value">:date</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:res_id</span>) <span class="ruby-comment"># allows for filtering by resident</span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-value">:res_id</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:res_id</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:house_id</span>) <span class="ruby-comment"># allows for filtering by house</span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-value">:house_id</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:house_id</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:date</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:date</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># gets the appointments filtered by above parameters</span>
+    <span class="ruby-ivar">@upcoming_appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date = ?&#39;</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:date</span>]).<span class="ruby-identifier">to_date</span>).<span class="ruby-identifier">order</span>([<span class="ruby-value">:date</span>, <span class="ruby-value">:time</span>]).<span class="ruby-identifier">paginate</span>(<span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>, <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@paginate</span> = <span class="ruby-keyword">false</span> <span class="ruby-comment"># Display these as a single page, with as many appointments in the table as are happening</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-string">&quot;appointments/_upcoming&quot;</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span> <span class="ruby-comment"># _upcoming is a partial used to format the appointment list as a table of upcoming appointments</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>POST /appointments POST /appointments.json create - POSTed to when the
+“Create Appointment” button is clicked after filling out a new appointment
+Saves appointment data, where it is validated in the model, and sends email
+notifications to associated users and medical coordinators Also populates
+fields needed for main page (where we are routed if appointment is saved
+correctly) On failure, it will remain on the new page and tell the user
+what errors are present</p>
+          
+          
+
+          
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@appointment</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">appointment_params</span>)
+  <span class="ruby-ivar">@types</span> = <span class="ruby-constant">AptType</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">apt_type</span><span class="ruby-operator">:</span> <span class="ruby-value">:asc</span>)
+  <span class="ruby-ivar">@residents</span> = <span class="ruby-constant">Resident</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-value">:asc</span>)
+  <span class="ruby-ivar">@upcoming_appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &gt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>).<span class="ruby-identifier">order</span>([<span class="ruby-value">:date</span>, <span class="ruby-value">:time</span>]).<span class="ruby-identifier">paginate</span>(<span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>, <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">save</span> <span class="ruby-comment"># if there are no errors in the appointment data</span>
+      <span class="ruby-identifier">coordinators</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">medical_coordinator</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">email_pref</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># get a list of medical coordinators...</span>
+      <span class="ruby-identifier">coordinators</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">coordinator</span><span class="ruby-operator">|</span>
+        <span class="ruby-constant">NotificationMailer</span>.<span class="ruby-identifier">new_appointment_notification</span>(<span class="ruby-ivar">@appointment</span>, <span class="ruby-identifier">coordinator</span>).<span class="ruby-identifier">deliver</span> <span class="ruby-comment"># ... and email all of them!</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-comment"># if a user was associated with the appointment, email them as well</span>
+        <span class="ruby-constant">NotificationMailer</span>.<span class="ruby-identifier">appointment_assignment_notification</span>(<span class="ruby-ivar">@appointment</span>).<span class="ruby-identifier">deliver</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@appointment</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Appointment was successfully created.&#39;</span> } <span class="ruby-comment"># redirects browser to main appointments page, and notifies them the appointment was created successfully</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@appointment</span> }
+    <span class="ruby-keyword">else</span> <span class="ruby-comment"># if there are errors in the appointment data tell the user what errors are present</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-destroy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">destroy</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>DELETE /appointments/1 DELETE /appointments/1.json destroy - used to delete
+an appointment. Redirects to main appointment page and shows the user a
+success message</p>
+          
+          
+
+          
+          <div class="method-source-code" id="destroy-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">destroy</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">appointments_url</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Appointment was successfully deleted.&#39;</span> }
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-edit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">edit</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /appointments/1/edit edit - populates data fields needed to edit an
+appointment</p>
+          
+          
+
+          
+          <div class="method-source-code" id="edit-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+  <span class="ruby-ivar">@types</span> = <span class="ruby-constant">AptType</span>.<span class="ruby-identifier">all</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /appointments GET /appointments.json index - the main page of our web
+application Checks the request parameters first for certain page
+parameters, then populates fields on the view with those params if present
+These params are also used to filter the appointments displayed on the
+calendar</p>
+          
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@residents</span> = <span class="ruby-constant">Resident</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@houses</span> = <span class="ruby-constant">House</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@past_appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &lt; ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>)
+  <span class="ruby-ivar">@upcoming_appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &gt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>).<span class="ruby-identifier">order</span>([<span class="ruby-value">:date</span>, <span class="ruby-value">:time</span>]).<span class="ruby-identifier">paginate</span>( <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>], <span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>).<span class="ruby-identifier">order</span>(<span class="ruby-identifier">sort_column</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sort_direction</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:res_id</span>) <span class="ruby-comment"># Retrieves the resident_id to filter appointments with, if a resident_id is present</span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-value">:res_id</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:res_id</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:house_id</span>) <span class="ruby-comment"># Retrieves the house_id to filter appointments with, if a house_id is present</span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-value">:house_id</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:house_id</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:res_id</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:res_id</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># Filters the list of appoinments based on the resident selected by the dropdown selector, if resident is not blank</span>
+    <span class="ruby-ivar">@appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;resident_id = ?&#39;</span>, <span class="ruby-identifier">session</span>[<span class="ruby-value">:res_id</span>]) 
+    <span class="ruby-ivar">@appointments_counts</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">group</span>(<span class="ruby-string">&quot;date&quot;</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:house_id</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:house_id</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># Filters list of appointments based on selected house, if house is not blank</span>
+    <span class="ruby-ivar">@appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-string">&#39;LEFT OUTER JOIN residents ON resident_id = residents.id&#39;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;house_id = ?&#39;</span>, <span class="ruby-identifier">session</span>[<span class="ruby-value">:house_id</span>])
+    <span class="ruby-ivar">@appointments_counts</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">group</span>(<span class="ruby-string">&quot;date&quot;</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">else</span> <span class="ruby-comment"># Return all appointments if no resident or house was selected</span>
+    <span class="ruby-ivar">@appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-ivar">@appointments_counts</span> = <span class="ruby-ivar">@appointments</span>.<span class="ruby-identifier">group</span>(<span class="ruby-string">&#39;date&#39;</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment"># Returns the html for the page</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> <span class="ruby-comment"># Format selected appointments as a json file containing appointments to populate calendar</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> <span class="ruby-comment"># Returns the page javascript</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">csv</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-value">:@appointments</span>.<span class="ruby-identifier">to_csv</span> } <span class="ruby-comment"># Allows appointments to be downloaded as a CSV file</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /appointments/new new - populates data fields needed to create a new
+appointment</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@types</span> = <span class="ruby-constant">AptType</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">apt_type</span><span class="ruby-operator">:</span> <span class="ruby-value">:asc</span>) 
+  <span class="ruby-ivar">@appointment</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">date</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>
+  <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-ivar">@residents</span> = <span class="ruby-constant">Resident</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-value">:asc</span>)
+  <span class="ruby-ivar">@upcoming_appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &gt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>).<span class="ruby-identifier">order</span>([<span class="ruby-value">:date</span>, <span class="ruby-value">:time</span>]).<span class="ruby-identifier">paginate</span>(<span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>, <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-residents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">residents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="residents-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 216</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">residents</span>
+  <span class="ruby-ivar">@residents</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-send_house_reminder" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">send_house_reminder</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>POST /appointments/:id/send_house_reminder <a
+href="AppointmentsController.html#method-i-send_house_reminder">#send_house_reminder</a>
+- used to send an appointment reminder to the users whose resident has an
+appointment</p>
+          
+          
+
+          
+          <div class="method-source-code" id="send_house_reminder-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 222</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_house_reminder</span>
+  <span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">house</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">resident</span>.<span class="ruby-identifier">house</span>) <span class="ruby-comment"># gets the users in the same house as the resident</span>
+  <span class="ruby-identifier">users</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span> <span class="ruby-comment"># sends an email reminder for each user in that house</span>
+    <span class="ruby-constant">NotificationMailer</span>.<span class="ruby-identifier">house_reminder</span>(<span class="ruby-ivar">@appointment</span>, <span class="ruby-identifier">user</span>).<span class="ruby-identifier">deliver</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-comment"># sends an additional reminder to the user associated with the appointment</span>
+    <span class="ruby-constant">NotificationMailer</span>.<span class="ruby-identifier">house_reminder</span>(<span class="ruby-ivar">@appointment</span>, <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">user</span>).<span class="ruby-identifier">deliver</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@appointment</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Emails sent&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_recurring_reminder" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_recurring_reminder</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /appointments <a
+href="AppointmentsController.html#method-i-set_recurring_reminder">#set_recurring_reminder</a>
+- used to set a reminder that an appointment is recurring and will need to
+be scheduled again in the future</p>
+          
+          
+
+          
+          <div class="method-source-code" id="set_recurring_reminder-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_recurring_reminder</span>
+ <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:reminder_date</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:appointment_id</span>)
+   <span class="ruby-ivar">@reminder</span> = <span class="ruby-constant">RecurringReminder</span>.<span class="ruby-identifier">new</span>
+   <span class="ruby-ivar">@reminder</span>.<span class="ruby-identifier">notification_date</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:reminder_date</span>] <span class="ruby-comment"># date when a reminder will be sent</span>
+   <span class="ruby-ivar">@reminder</span>.<span class="ruby-identifier">appointment_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:appointment_id</span>] <span class="ruby-comment"># appointment that reminder is set for</span>
+   <span class="ruby-ivar">@reminder</span>.<span class="ruby-identifier">save</span> <span class="ruby-comment"># saves the reminder in the database</span>
+ <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-show" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /appointments/1 GET /appointments/1.json show - shows an individual
+appointment</p>
+          
+          
+
+          
+          <div class="method-source-code" id="show-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-upcoming" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">upcoming</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET appointments/upcoming - usually called from other page/method upcoming
+- used to render a table of the upcoming appointments, ordered by
+appointment date Checks the request parameters first for certain page
+parameters, then filters the list of upcoming appointments with those
+params if present</p>
+          
+          
+
+          
+          <div class="method-source-code" id="upcoming-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">upcoming</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:res_id</span>) <span class="ruby-comment"># Checks to see if a resident is specified in the request</span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-value">:res_id</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:res_id</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:house_id</span>) <span class="ruby-comment"># Checks to see if a house is specified in the request</span>
+    <span class="ruby-identifier">session</span>[<span class="ruby-value">:house_id</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:house_id</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:res_id</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:res_id</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># Selects upcoming appointments based on specified resident and orders them by date</span>
+    <span class="ruby-ivar">@upcoming_appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;resident_id = ?&#39;</span>, <span class="ruby-identifier">session</span>[<span class="ruby-value">:res_id</span>]).<span class="ruby-identifier">order</span>([<span class="ruby-value">:date</span>, <span class="ruby-value">:time</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &gt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>).<span class="ruby-identifier">paginate</span>(<span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>, <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:house_id</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:house_id</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># Selects upcoming appointments based on specified house and orders them by date</span>
+    <span class="ruby-ivar">@upcoming_appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-string">&#39;LEFT OUTER JOIN residents ON resident_id = residents.id&#39;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;house_id = ?&#39;</span>, <span class="ruby-identifier">session</span>[<span class="ruby-value">:house_id</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &gt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>).<span class="ruby-identifier">order</span>([<span class="ruby-value">:date</span>, <span class="ruby-value">:time</span>]).<span class="ruby-identifier">paginate</span>(<span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>, <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+  <span class="ruby-keyword">else</span> <span class="ruby-comment"># Selects all upcoming appointments and orders them by date</span>
+    <span class="ruby-ivar">@upcoming_appointments</span> = <span class="ruby-constant">Appointment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;date &gt;= ?&#39;</span>, <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>).<span class="ruby-identifier">order</span>([<span class="ruby-value">:date</span>, <span class="ruby-value">:time</span>]).<span class="ruby-identifier">paginate</span>(<span class="ruby-value">:per_page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>, <span class="ruby-value">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@paginate</span> = <span class="ruby-keyword">true</span> <span class="ruby-comment">#paginate variable is used in view to determine whether the table used to display appointments is one page with all appointments, or many pages, each with 10 appointments</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-string">&quot;appointments/_upcoming&quot;</span>, <span class="ruby-value">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span> <span class="ruby-comment"># _upcoming is a partial used to format the appointment list as a table of upcoming appointments</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PATCH/PUT /appointments/1 PATCH/PUT /appointments/1.json update -
+PATCH/PUTed to when the “Update Appointment” button is clicked on the
+appointment edit page Saves appointment data, where it is validated in the
+model, and sends email notifications to associated users Also populates
+fields needed for main page (where we are routed if appointment is updated
+correctly) On failure, it will remain on the edit page and tell the user
+what errors are present</p>
+          
+          
+
+          
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">appointment_params</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-comment"># emails associated users to let them know that the appointment was updated</span>
+        <span class="ruby-constant">NotificationMailer</span>.<span class="ruby-identifier">appointment_assignment_notification</span>(<span class="ruby-ivar">@appointment</span>).<span class="ruby-identifier">deliver</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@appointment</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Appointment was successfully updated.&#39;</span> } <span class="ruby-comment"># redirects browser to main appointments page, and notifies them the appointment was created successfully</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@appointment</span> }
+    <span class="ruby-keyword">else</span> <span class="ruby-comment"># if there are errors in the appointment data tell the user what errors are present</span>
+      <span class="ruby-ivar">@types</span> = <span class="ruby-constant">AptType</span>.<span class="ruby-identifier">all</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@appointment</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update_residents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_residents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /appointments GET /appointments.json <a
+href="AppointmentsController.html#method-i-update_residents">#update_residents</a>
+- updates the residents available in the resident dropdown menu when the
+house dropdown value is changed Not a URL called directly, as it depends on
+being called asynchronously from the main appointments page</p>
+          
+          
+
+          
+          <div class="method-source-code" id="update_residents-source">
+            <pre><span class="ruby-comment"># File controllers/appointments_controller.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_residents</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">params</span>[<span class="ruby-value">:house_id</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-ivar">@residents</span> = <span class="ruby-constant">Resident</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;house_id = ?&quot;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:house_id</span>]) <span class="ruby-comment"># selects the residents in that house</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@residents</span> = <span class="ruby-constant">Resident</span>.<span class="ruby-identifier">all</span> <span class="ruby-comment"># selects all residents if no house is selected</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
 
+
+  # Sends emails to remind users of the schedule for the day and any reminders set for recurring appointments
+  # If the user is an admin, then they receive all the appointments
+  # If the user is a volunteer, they only receive reminders for the appointments they were assigned
   def self.send_reminders
    # email all the admins a full schedule for the day
    if !Appointment.where('date = ?', Date.today).empty?
@@ -64,6 +68,7 @@ class User < ActiveRecord::Base
    end
   end
 
+  # Sends a reminder of the week's appointments to the medical coordinator
   def self.send_weekly_digest
     if !Appointment.where('date >= ?', Date.tomorrow).where('date <= ?', Date.tomorrow+7).empty?
       coordinators = User.where(medical_coordinator: true).where(email_pref: true)
@@ -74,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   attr_accessor :current_password
-
+  # If the user does not have a name, provide the email in case
   def name
     super || email
   end

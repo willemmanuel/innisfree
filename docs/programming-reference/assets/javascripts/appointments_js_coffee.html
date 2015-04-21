@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>appointments.js.coffee - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../assets/javascripts/FullCalendar/ListMonth_js.html">ListMonth.js</a>
+  
+    <li><a href="../../assets/javascripts/application_js.html">application.js</a>
+  
+    <li><a href="../../assets/javascripts/appointments_js_coffee.html">appointments.js.coffee</a>
+  
+    <li><a href="../../assets/javascripts/cars_js_coffee.html">cars.js.coffee</a>
+  
+    <li><a href="../../assets/javascripts/houses_js_coffee.html">houses.js.coffee</a>
+  
+    <li><a href="../../assets/javascripts/physicians_js_coffee.html">physicians.js.coffee</a>
+  
+    <li><a href="../../assets/javascripts/reports_js_coffee.html">reports.js.coffee</a>
+  
+    <li><a href="../../assets/javascripts/residents_js_coffee.html">residents.js.coffee</a>
+  
+    <li><a href="../../assets/javascripts/settings_js_coffee.html">settings.js.coffee</a>
+  
+    <li><a href="../../assets/javascripts/test_js_coffee.html">test.js.coffee</a>
+  
+    <li><a href="../../assets/javascripts/users_js_coffee.html">users.js.coffee</a>
+  
+    <li><a href="../../assets/stylesheets/application_css_sass.html">application.css.sass</a>
+  
+    <li><a href="../../assets/stylesheets/bootswatch_css.html">bootswatch.css</a>
+  
+    <li><a href="../../assets/stylesheets/list_css.html">list.css</a>
+  
+    <li><a href="../../assets/stylesheets/mobile_css.html">mobile.css</a>
+  
+    <li><a href="../../assets/stylesheets/reports_css_scss.html">reports.css.scss</a>
+  
+    <li><a href="../../assets/stylesheets/settings_css_scss.html">settings.css.scss</a>
+  
+    <li><a href="../../assets/stylesheets/users_css_scss.html">users.css.scss</a>
+  
+    <li><a href="../../views/appointments/index_json_jbuilder.html">index.json.jbuilder</a>
+  
+    <li><a href="../../views/appointments/show_json_jbuilder.html">show.json.jbuilder</a>
+  
+    <li><a href="../../views/cars/get_reservations_json_jbuilder.html">get_reservations.json.jbuilder</a>
+  
+    <li><a href="../../views/cars/index_json_jbuilder.html">index.json.jbuilder</a>
+  
+    <li><a href="../../views/cars/show_json_jbuilder.html">show.json.jbuilder</a>
+  
+    <li><a href="../../views/doctors/index_json_jbuilder.html">index.json.jbuilder</a>
+  
+    <li><a href="../../views/doctors/show_json_jbuilder.html">show.json.jbuilder</a>
+  
+    <li><a href="../../views/houses/index_json_jbuilder.html">index.json.jbuilder</a>
+  
+    <li><a href="../../views/houses/show_json_jbuilder.html">show.json.jbuilder</a>
+  
+    <li><a href="../../views/reports/index_json_jbuilder.html">index.json.jbuilder</a>
+  
+    <li><a href="../../views/residents/show_json_jbuilder.html">show.json.jbuilder</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page assets/javascripts/appointments.js.coffee">
+
+<p>-&gt; $(document).on &#39;change&#39;, &#39;.house_select&#39;, (evt) -&gt;</p>
+
+<pre>$.ajax &#39;/appointments/update_residents&#39;,
+  type: &#39;GET&#39;
+  dataType: &#39;script&#39;
+  data: {
+    house_id: $(&quot;.house_select option:selected&quot;).val()
+  }
+$.ajax &#39;/appointments&#39;,
+  type: &#39;GET&#39;
+  dataType: &#39;script&#39;
+  data: {
+    res_id: &#39;&#39;
+    house_id: $(&#39;.house_select option:selected&#39;).val()
+  }
+$.ajax &#39;/appointments/upcoming&#39;,
+  type: &#39;GET&#39;, 
+  data: {
+    res_id: &#39;&#39;
+    house_id: $(&#39;.house_select option:selected&#39;).val()
+  }
+  success: (data, textStatus, jqCHR) -&gt;
+    $(&quot;#upcoming&quot;).html(data);</pre>
+
+<p>$(document).on &#39;click&#39;, &#39;#add_type&#39;, (evt) -&gt;</p>
+
+<pre>$.ajax &#39;add_apt_type&#39;,
+  type: &#39;GET&#39;,
+  dataType: &#39;script&#39;
+  data: {
+    apt_type: $(&#39;#new_apt_type&#39;).val()
+  }</pre>
+
+<p>$(document).on &#39;click&#39;, &#39;#new_apt_type_button&#39;, (evt) -&gt;</p>
+
+<pre>$(&#39;#newEventModal&#39;).modal();
+$(&#39;.modal-backdrop&#39;).css({&quot;z-index&quot;:&quot;0&quot;}); # hacky, but it works for now</pre>
+
+<p>$(document).on &#39;click&#39;, &#39;#recurring_button&#39;, (evt) -&gt;</p>
+
+<pre>$(&#39;#newFollowupModal&#39;).modal(&#39;show&#39;);
+$(&#39;.modal-backdrop&#39;).css({&quot;z-index&quot;:&quot;0&quot;}); # hacky, but it works for now</pre>
+
+<p>$(document).on &#39;click&#39;, &#39;#set_recurring_reminder&#39;, (evt)
+-&gt;</p>
+
+<pre>$.ajax &#39;set_recurring_reminder&#39;,
+  type: &#39;GET&#39;,
+  dataType: &#39;script&#39;
+  data: {
+    reminder_date: $(&#39;#reminder_date&#39;).val()
+    appointment_id: (document.URL).substr((document.URL).lastIndexOf(&quot;/&quot;)+1)
+  }</pre>
+
+<p>$(document).on &#39;change&#39;, &#39;.residents_select&#39;, (evt) -&gt;</p>
+
+<pre>$.ajax &#39;/appointments&#39;,
+  type: &#39;GET&#39;
+  dataType: &#39;script&#39;
+  data: {
+    res_id: $(&quot;.residents_select option:selected&quot;).val()
+    house_id: $(&#39;.house_select option:selected&#39;).val()
+  }
+$.ajax &#39;/appointments/upcoming&#39;,
+  type: &#39;GET&#39;, 
+  data: {
+    res_id: $(&quot;.residents_select option:selected&quot;).val()
+    house_id: $(&#39;.house_select option:selected&#39;).val()
+  }
+  success: (data, textStatus, jqCHR) -&gt;
+    $(&quot;#upcoming&quot;).html(data);</pre>
+
+<p>$(document).on &#39;ready page:load&#39;, -&gt;</p>
+
+<pre>calView = &#39;month&#39;
+calView = &#39;listMonth&#39; if $(window).innerWidth() &lt; 981 #for iPhone
+
+$.ajax &#39;/appointments&#39;,
+  type: &#39;GET&#39;
+  dataType: &#39;script&#39;
+  data: {
+    res_id: $(&quot;.residents_select option:selected&quot;).val()
+    house_id: $(&#39;.house_select option:selected&#39;).val()
+  }
+
+$(&#39;#fullCalendar&#39;).fullCalendar({
+  header: { left: &#39;title&#39;, right: &quot;listWeek,#{calView} prev,next&quot;},
+  views: {
+      listWeek: {
+          type: &#39;listMonth&#39;,
+          duration: { weeks: 1 },
+          buttonText: &#39;week&#39;
+      }
+  }
+  defaultView: calView,
+  events: &#39;appointments.json&#39;,
+  eventClick: (calEvent, jsEvent, view) -&gt;
+      console.log(calEvent)
+      console.log(jsEvent)
+      $.ajax &#39;appointments/appointments_for_day&#39;,
+        type: &#39;GET&#39;, 
+        data: {
+          date: calEvent.start.toJSON()
+        }
+        success: (data, textStatus, jqCHR) -&gt;
+          $(&quot;#modalBody&quot;).html(data); 
+
+      $(&#39;#modalTitle&#39;).html(&#39;Appointments on &#39; + calEvent.start.format(&quot;ddd, MMM Do YYYY&quot;););
+      $(&#39;#modalBody&#39;).html(calEvent.description);
+      $(&#39;#eventUrl&#39;).attr(&#39;href&#39;,calEvent.url);
+      $(&#39;#fullCalModal&#39;).appendTo(&quot;body&quot;).modal(&#39;show&#39;);
+      $(&#39;.modal-backdrop&#39;).css({&quot;z-index&quot;:&quot;0&quot;}); # hacky, but it works for now</pre>
+
+<p>}); $ -&gt;</p>
+
+<pre># enable chosen js
+$(&#39;.chosen-select&#39;).chosen
+  allow_single_deselect: true
+  no_results_text: &#39;No results matched&#39;
+  width: &#39;200px&#39;</pre>
+
+<p>$(window).resize -&gt;</p>
+
+<pre>calView = &#39;month&#39;
+calView = &#39;listMonth&#39; if $(window).innerWidth() &lt; 981 #based on iPhone
+
+$(&#39;#fullCalendar&#39;).fullCalendar( &#39;changeView&#39;, calView);</pre>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

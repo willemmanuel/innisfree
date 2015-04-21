@@ -7,6 +7,8 @@ class UsersController < ApplicationController
 
   # GET /houses
   # GET /houses.json
+  # index - the list view of all users when formatted in html
+  # In addition, this function is called when a report or csv of users is generated
   def index
     @user = current_user.id
     @users = User.order(sort_column + " " + sort_direction)
@@ -20,20 +22,26 @@ class UsersController < ApplicationController
     end
   end
 
+  # Makes a call to the send_reminders method in the User model
   def send_reminders
    User.send_reminders
    redirect_to :back, notice: "Email reminders sent."
   end
 
+  # Sets a houses variable to equal all houses currently stored in the database
 	def show
     @houses = House.all
   end
 
+  # Sets a houses variable to equal all houses currently stored in the database
+  # Sets a user variable to the current user being edited
   def edit
     @user = User.find(params[:id])
     @houses = House.all
   end
 
+  # Sets a user variable to a new User which will be created if create is called
+  # Sets a houses variable to equal all houses currently stored in the database
   def new
     @user = User.new
     @houses = House.all
@@ -44,7 +52,8 @@ class UsersController < ApplicationController
 
   end
 
-
+  # Updates the user set in the edit method
+  # Calls an update method in the User model based on whether a password was provided and whether the user being updated is the current user
   def update
     @houses = House.all
 
@@ -71,6 +80,7 @@ class UsersController < ApplicationController
 
   end
 
+  # Destroys a user entry from the database
   def destroy
     @user.destroy
     respond_to do |format|
@@ -80,19 +90,23 @@ class UsersController < ApplicationController
   end
 
 	private
-
+    # Sets a user variable based on the given id
     def set_user
       @user = User.find(params[:id])
     end
 
+  # Sets a recent variable to be the most recently created user
   def set_most_recent
     @recent = User.order("created_at").last
   end
 
+  # Defines what parameters can be passed when created a new user
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :house_id, :phone, :email_pref, :admin)
   end
 
+  # The next two method define sorting
+  # Sort_column defines which column to sort by
   def sort_column
     @houses = 
     User.column_names.include?(params[:sort]) ? params[:sort] : "name"
@@ -102,10 +116,12 @@ class UsersController < ApplicationController
     User.column_names.include?(params[:sort]) ? params[:sort] : "NOT(admin)"
   end
 
+  # Sort_direction defines which direction to sort by
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
+  # Checks whether the current user is an admin.  If they are not, redirects to where they came from
   def check_admin
     redirect_to root_path, alert: "You do not have admin privileges." unless current_user.admin
   end
