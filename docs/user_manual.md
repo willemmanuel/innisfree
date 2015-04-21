@@ -54,7 +54,7 @@ To delete a reservation, click on it in the calendar. This will take you to the 
 In addition to viewing appointments (as shown in the Appointments section for [Workstation Heads](#appointments)), volunteers can also create or edit appointments for co-workers in their house.
 
 ##### Creating a New Appointment
-To create a new appointment, click the "New Appointment" button on the appointments page. Use the drop-down boxes to fill in the form, and then click the "Create Appointment" button. The "Resident", "Doctor", and "Appointment type" fields must be filled out before an appointment can be created.
+To create a new appointment, click the "New Appointment" button on the appointments page. Use the drop-down boxes to fill in the form, and then click the "Create Appointment" button. The "Resident," "Doctor," and "Appointment type" fields must be filled out before an appointment can be created.
 
 The Resident and Volunteer drop-down boxes only show Residents and Volunteers in the same house as the user creating the appointments. This page also contains the paginated list of upcoming appointments, so volunteers can coordinate appointments if possible.
 
@@ -63,15 +63,43 @@ Once the appointment is created, the user is taken to the individual appointment
 ##### Editing an Existing Appointment
 To edit an appointment, you must go to the individual appointment page for that appointment and then click the "Edit" link. This will allow you to update the resident, doctor, volunteer, date, time, appointment type and notes for that appointment. Once you have changed the desired fields, you simply need to click the "Update Appointment" button for your changes to be submitted.
 
-The drop-down boxes on this page have the same restrictions as on the new appointment page, and the "Resident", "Doctor", and "Appointment type" fields must be filled out before the appointment can be updated.
+The drop-down boxes on this page have the same restrictions as on the new appointment page, and the "Resident," "Doctor," and "Appointment type" fields must be filled out before the appointment can be updated.
 
 #### Houses, Doctors, Users, My Profile, Cars
 See these entries under the [Workstation Head Role](#workstation-head-role)
 
 ## Administrator Role
 
+#### Appointments
+To view, create, update or cancel appointments, see this entry under the [Workstation Head Role](#workstation-head-role) and the [Volunteer Role](#volunteer-role). The main difference between Administrator users and Volunteer users is that administrators can create appointments for any co-worker. Administrator users are also able to create new appointment types, cancel, and delete appointments.
+
+##### Cancelling an Existing Appointment
+Cancelling an appointment makes it clear the appointment is not happening, by crossing out every field when viewed in the upcoming list or in the calendar, but does not delete the appointment and all of its associated data. To cancel an appointment, click the "Details" link for that appointment, and then click on the "Cancel" link that appears under the appointment notes.
+
+##### Deleting an Existing Appointment
+Deleting an appointment removes all traces of that appointment from the system. To delete an appointment, click the "Details" link for that appointment, and then click on the "Delete" link that appears under the appointment notes.
+
+##### Creating a New Appointment Type
+Appointment types are useful for identying what type of doctor a co-worker is visiting. To create a new appointment type you should go to the new appointment page. From this page, you click the "Manage Appointment Types" button, enter the name of the new appointment type to add, and click "Save." Currently trying this from the edit appointment page will not work.
+
+#### Houses
+Similar to appointments, administrator users can create, edit and delete houses. Administrators can also create new residents from this page.
+
+##### Creating a New House
+Click the "New House" button from the Houses page, enter the house name and phone number, and then click "Create House." The name field is required, while a phone number is quite handy.
+
+##### Editing an Existing House
+Click the "Edit" link next to the house name, update the house name and phone number, and then click "Update House." The name field is required, while a phone number is quite handy.
+
+##### Deleting an Existing House
+Click the "Delete" link next to the house name, and then click "Ok" in the pop-up box. This will remove the house from the system, but not its volunteers or co-workers.
+
+#### Doctors
+
+#### Users
+
 #### Cars
-See this entry under the [Workstation Head Role](#workstation-head-role-cars) to create and delete reservations
+See this entry under the [Workstation Head Role](#workstation-head-role) to create and delete reservations
 
 In addition to creating and deleting car reservations, administrator users can manage cars by clicking the "Manage Cars" link next to the title of the "Car Reservations" page.
 
@@ -83,4 +111,9 @@ To change the name of an existing car, click the "Edit car" link on the Manage C
 
 ##### Deleting a Car
 To remove a car from the system, click the "delete car" link on the Manage Cars page for the car you want to delete. The car will then be deleted.
+
+#### Reports
+The reports page allows to admin users to download reports on appointments. Users can select the house, resident, doctor and appointment type to see appointments for. They can also select the date range to see appointments between. Finally, users can select either the CSV or PDF radio button to generate either a CSV or PDF report. Click the "Generate Report" button and boom! you've got a report!
+
+#### Admin Page
 
