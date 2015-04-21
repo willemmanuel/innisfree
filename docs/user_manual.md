@@ -71,7 +71,7 @@ See these entries under the [Workstation Head Role](#workstation-head-role)
 ## Administrator Role
 
 #### Cars
-See this entry under the [Workstation Head Role](#workstation-head-role#cars) to create and delete reservations
+See this entry under the [Workstation Head Role](#workstation-head-role-cars) to create and delete reservations
 
 In addition to creating and deleting car reservations, administrator users can manage cars by clicking the "Manage Cars" link next to the title of the "Car Reservations" page.
 
