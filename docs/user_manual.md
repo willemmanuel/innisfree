@@ -69,7 +69,7 @@ To delete a reservation, click on it in the calendar. This will take you to the 
 
 ## Volunteer Role
 #### Appointments
-In addition to viewing appointments (as shown in the Appointments section for [Workstation Heads](#appointments)), volunteers can also create or edit appointments for co-workers in their house.
+In addition to viewing appointments (as shown in the Appointments section for [Workstation Heads](#workstation-head-role)), volunteers can also create or edit appointments for co-workers in their house.
 
 ##### Creating a New Appointment
 To create a new appointment, click the "New Appointment" button on the appointments page. Use the drop-down boxes to fill in the form, and then click the "Create Appointment" button. The "Resident," "Doctor," and "Appointment type" fields must be filled out before an appointment can be created.
