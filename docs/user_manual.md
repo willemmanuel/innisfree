@@ -39,6 +39,16 @@ This page provides a listing of all the scheduling system users. To sort this li
 #### My Profile
 This page shows information about the currently logged in user. To change your name, phone number, email address, email preferences, or password, simply navigate to this page and click the "Edit My Profile" link. Then, fill in the requried field and click the "Update User" button.
 
+#### Cars
+This page shows car reservations.
+
+##### Making a Car Reservation
+To make a new reservation, click the "New Reservation" button. Then, use the user drop-down to select the user who is reserving this car, use date picker to select the date for your reservation, and use the time drop-downs to select start and end times. Once you've done this, click the "See Available Cars" button. This will take you to page that shows you your reservation details. This page also has a drop-down menu that lets you select which car you would like to reserve, and a text field where you can put the purpose for your reservation. This allows other volunteers to ride with you if possible. Once you've filled out the fields on this page, click the "Save Reservation" button. This will save your reservation and take you back to the calendar to view it.
+
+##### Deleting a Car Reservation
+To delete a reservation, click on it in the calendar. This will take you to the individual reservation page. On this page, click the "Delete Reservation" link and click "OK" on the pop-up window. Your reservation will be deleted and the reservation calendar will no longer show it.
+
+
 ## Volunteer Role
 #### Appointments
 In addition to viewing appointments (as shown in the Appointments section for [Workstation Heads](#appointments)), volunteers can also create or edit appointments for co-workers in their house.
@@ -58,5 +68,19 @@ The drop-down boxes on this page have the same restrictions as on the new appoin
 #### Houses, Doctors, Users, My Profile, Cars
 See these entries under the [Workstation Head Role](#workstation-head-role)
 
-
 ## Administrator Role
+
+#### Cars
+See these entry under the [Workstation Head Role](#workstation-head-role) to create and delete reservations
+
+In addition to creating and deleting car reservations, administrator users can manage cars by clicking the "Manage Cars" link next to the title of the "Car Reservations" page.
+
+##### Creating a New Car
+To create a new car, click the "New Car" button on the Manage Cars page, then enter the car name and click "Create Car."
+
+##### Editing a Car
+To change the name of an existing car, click the "Edit car" link on the Manage Cars page for the car you want to edit. Then, type the new car name in the name field and click "Update Car."
+
+##### Deleting a Car
+To remove a car from the system, click the "delete car" link on the Manage Cars page for the car you want to delete. The car will then be deleted.
+
