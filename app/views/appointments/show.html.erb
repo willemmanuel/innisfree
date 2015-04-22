@@ -64,6 +64,7 @@
   <%= link_to 'Back to Appointments', appointments_path %><br><br>
   <%= button_to 'New Appointment', new_appointment_path, method: :get %><br>
 
+  <% if current_user.admin || current_user.house == @appointment.resident.house %>
    <div id="newFollowupModal" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -75,7 +76,8 @@
         </div>
         </div>
     </div>
-  </div>
+   </div>
+  <% end %>
 
   <button id="recurring_button" type="button" class="button">Set Reminder to Schedule Follow-up Appointment</button><br><br>
   <% if current_user.admin %>
