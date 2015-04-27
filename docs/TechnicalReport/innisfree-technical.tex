@@ -209,7 +209,7 @@ As the project progressed, we realized that outright deleting an appointment did
 The residents model contains attributes for each resident's name, house, a notes field, and created and last updated timestamps. Each resident is required to have a name upon creation. Residents belong to the house in which they live. Each resident may only be assigned to one house, while any given house will have many residents.
 
 \subsubsection(Viewing, Creating, Editing, and Deleting Residents)
-
+Although all users can view residents through the houses page, only admins can create and delete residents. Admins can edit all residents as well, while volunteers can only edit residents within their house. Admins can view the resident management page, which shows the name, house, notes, as well as links to show, edit, and delete for each resident. 
 
 \subsection{Houses}
 Houses are fairly simple part of our application. Each house has a name that must be given when it is created, as well as an optional phone number that can be used to reach that house. Each house also has several residents and users, and is used to validate entered values in those models. Houses serve as a way to control user access to residents and appointments, as non-admin users can only edit residents and appointments in their associated house. Administrative users are exempt from these controls and are also the only users able to create and delete houses.
