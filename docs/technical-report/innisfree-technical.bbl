@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{actionmailer}
+{ActionMailer}.
+\newblock \url{http://api.rubyonrails.org/classes/ActionMailer/Base.html}, Mar.
+  2015.
+
+\bibitem{devise}
+devise.
+\newblock \url{https://github.com/plataformatec/devise}, Apr. 2015.
+
+\bibitem{fullcalendar}
+{FullCalendar}.
+\newblock \url{http://www.fullcalendar.io/}, Mar. 2015.
+
+\bibitem{innisfree}
+{Innisfree Village}.
+\newblock \url{http://www.innisfreevillage.org/}, Apr. 2015.
+
+\bibitem{papertrail}
+{PaperTrail}.
+\newblock \url{https://github.com/airblade/paper_trail}, Apr. 2015.
+
+\end{thebibliography}
