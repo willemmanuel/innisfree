@@ -1,19 +1,19 @@
 # Innisfree Village Scheduling User Manual
 ## Table of Contents
-- Basic Information
+- [Basic Information](#basic-information)
   - Navigation
   - Roles
-- Workstation Head Role
+- [Workstation Head Role](#workstation-head-role)
   - Appointments
   - Houses
   - Doctors
   - Users
   - My Profile
   - Cars
-- Volunteer Role
+- [Volunteer Role](#volunteer-role)
   - Appointments
   - Houses, Doctors, Users, My Profile, Cars 
-- Administrator Role
+- [Administrator Role](#administrator-role)
   - Appointments
   - Houses
   - Doctors
