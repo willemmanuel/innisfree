@@ -200,10 +200,11 @@ Creating appointments can be done by both administrators and volunteers. There i
 As the project progressed, we realized that outright deleting an appointment did not constitute the same action as canceling one. Therefore, we added an option to cancel an appointment. These appointments then still appeared anywhere they would have before cancellation but with a strike-through. This allowed for better communication between the various employees of the Village and to demonstrate that an appointment had indeed been made. Volunteers and admin can both cancel an appointment (and un-cancel it if the cancellation was done in error) but only administrators can outright delete an appointment.   
 
 \subsection{Residents}
-\subsubsection(Residents Model)
+
+\subsubsection{Residents Model}
 The residents model contains attributes for each resident's name, house, a notes field, and created and last updated timestamps. Each resident is required to have a name upon creation. Residents belong to the house in which they live. Each resident may only be assigned to one house, while any given house will have many residents.
 
-\subsubsection(Viewing, Creating, Editing, and Deleting Residents)
+\subsubsection{Viewing, Creating, Editing, and Deleting Residents}
 Although all users can view residents through the houses page, only admins can create and delete residents. Admins can edit all residents as well, while volunteers can only edit residents within their house. Admins can view the resident management page, which shows the name, house, notes, as well as links to show, edit, and delete for each resident. 
 
 \begin{figure}
@@ -219,8 +220,8 @@ Houses are a fairly simple part of our application. Each house has a name that m
 \subsubsection{Doctors Model}
 The doctors model contains attributes for each doctor’s name, address, phone number and doctor type. All doctors must at least have values for their names. 
 
-\subsubsection{Creating, Viewing, Editing and Deleting Doctors}
-Only admins can create, edit and delete doctors. In order to create a new doctor, the user must enter the name of that doctor. Users can view the information about each doctor by clicking on their names. Users can also click on each doctor’s address and they will be redirected to location of that address on Google maps. 
+\subsubsection{Viewing, Creating, Editing and Deleting Doctors}
+All users can view the information about each doctor by clicking on their names. Users can also click on each doctor’s address and to be shown a map of that address on Google Maps.Only admins can create, edit and delete doctors. In order to create a new doctor, the user must enter the name of that doctor. 
 
 \begin{figure}
 \includegraphics[scale=0.4]{Cars}
@@ -252,9 +253,9 @@ One of the final customer requirements for our project was a mobile interface fo
 Each of the different roles interacts with the system in a slightly different manner, due to the different use cases for the system.
 
 \subsection{Workstation Head}
-Workstation heads are part-time volunteers skilled in a specifc trade. These individuals run the daily activities co-workers participate in, from baking to woodworking, and everything in between. Since they are not directly responsible for scheduling or being at any co-worker appointments, they only need to know if a co-worker is missing from their station because of an appointment. Thus, workstation heads only need to be able to view a list of all appointments; they should not be able to add appointments, houses, residents or doctors.
+Workstation heads are part-time volunteers skilled in a specific trade. These individuals run the daily activities co-workers participate in, from baking to woodworking, and everything in between. Since they are not directly responsible for scheduling or being at any co-worker appointments, they only need to know if a co-worker is missing from their station because of an appointment. Thus, workstation heads only need to be able to view a list of all appointments; they should not be able to add appointments, houses, residents or doctors.
 
-To use the system, workstation heads log in with their credentials, where they are presented with a list of upcoming appointments and the appointment calendar from Figure 1. From the calendar, a workstation head can click on any day to see a list of appointments for that day. The upcoming appointment lists contain 10 rows per page with the name of the co-worker, the doctor they're visiting and the appointment time. These appointment entries also includes a link to the details page for that appointment. The appointment page contains a map of where the appoinment is, as well as any notes for the appointment or co-worker. This allows the workstation head to determine if a resident is missing from class because they are in an appointment, or if something has gone wrong. If something has gone wrong, workstation heads can look up the email addresses and phone numbers of other volunteers or staff members through the user page, a sortable list of users, phone numbers, email addresses and roles.
+To use the system, workstation heads log in with their credentials, where they are presented with a list of upcoming appointments and the appointment calendar from Figure 1. From the calendar, a workstation head can click on any day to see a list of appointments for that day. The upcoming appointment lists contain 10 rows per page with the name of the co-worker, the doctor they're visiting and the appointment time. These appointment entries also includes a link to the details page for that appointment. The appointment page contains a map of where the appointment is, as well as any notes for the appointment or co-worker. This allows the workstation head to determine if a resident is missing from class because they are in an appointment, or if something has gone wrong. If something has gone wrong, workstation heads can look up the email addresses and phone numbers of other volunteers or staff members through the user page, a sortable list of users, phone numbers, email addresses and roles.
 
 \subsection{Volunteer Caregiver}
 Volunteer caregivers have more power than Workstation Heads. Since they live on the property alongside co-workers, caregivers are responsible for scheduling appointments for the co-workers in their house and for transporting co-workers to each appointment. This means they use the calendar functionality similar to Workstation Heads above but can also create, update, cancel and delete appointments, Volunteers also need to be able to reserve cars.
@@ -263,10 +264,10 @@ Like the Workstation Head role, these users need to be able to view appointments
 
 Because appointments are so important, volunteers will be sent emails from the system reminding them when their co-workers have appointments. This ensures volunteers will never forget or miss appointments.
 
-\subsection{Administrators}
+\subsection{Administrator}
 The administrative users frequently do many of the same tasks as the volunteers above. Unlike volunteer caregivers, administrators can create or edit appointments for co-workers in any house. They can also cancel or delete appointments by going to the appointment details page and clicking the desired link.
 
-Administrative users are also reponsible for adding, updating and deleting residents, houses, doctors, users and cars. These tasks can be done on the first four types simply be added by going to their respective page. From this page, a user can click the add button to add a new instance of that model or click the edit or delete links to modify the existing instance. To add, edit, or delete a car, you first click the "Manage Cars" link on the cars page, and then you have the same options as the other models.
+Administrative users are also responsible for adding, updating and deleting residents, houses, doctors, users and cars. These tasks can be done on the first four types simply be added by going to their respective page. From this page, a user can click the add button to add a new instance of that model or click the edit or delete links to modify the existing instance. To add, edit, or delete a car, you first click the "Manage Cars" link on the cars page, and then you have the same options as the other models.
 
 Finally, administrators can generate reports through the system. These actions are described above in the Reports section, but it is as simple as going to the reports page, filling out the form and clicking "Generate Report".
 
@@ -276,7 +277,7 @@ At the end of our initial development cycle, the customer began using the schedu
 
 In April of 2015, the last full month prior to this writing, 18 appointments were entered. Similarly, 27 were scheduled for March and 24 were scheduled in February, with the maximum number of appointments per day hitting five. Assuming that the number of appointments did not change with the introduction of this system, the staff at Innisfree Village had to keep track of over 20 appointments on a paper calendar. This included appointments that might move or be canceled. In contrast, these appointments are now all in one place. In addition, communication between the volunteers and the administration is more streamlined. The system is more scalable, so changes can be made easily as the non-profit grows. 
 
-According to our customer, this new system takes half the time of their previous pen-and-paper system. Using the number of appointments scheduled above, our system averages around 23 appointments per month. Let's say, just for simplicity, each appointment took two minutes to schedule and now takes one minute. Based on our user testing data, this is an approriate estimate.. This means that 4.6 hours are saved each year from simply entering appointments into the calendar. These are hours that could instead be used to work with the residents or work to expand the village.
+According to our customer, this new system takes half the time of their previous pen-and-paper system. Using the number of appointments scheduled above, our system averages around 23 appointments per month. Let's say, just for simplicity, each appointment took two minutes to schedule and now takes one minute. Based on our user testing data, this is an appropriate estimate.. This means that 4.6 hours are saved each year from simply entering appointments into the calendar. These are hours that could instead be used to work with the residents or work to expand the village.
 
 In addition, our customer needed to create reports from an Excel spreadsheet. All the appointments were documented in this spreadsheet and when reports need to be generated, it required finding the relevant information and compiling it into a document. Now this is almost completely eliminated. The data entry is the same as recording the appointments and report generation takes less than a minute, whereas it might have taken several minutes before. If it even saves four minutes per resident, over forty residents, this will have 2 hours and 40 minutes over the course of the year (reports aren't generated much more than once per year).
 
