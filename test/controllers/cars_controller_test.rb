@@ -60,7 +60,7 @@ class CarsControllerTest < ActionController::TestCase
         m: Time.zone.now.strftime('%M')
       }, 
       reservation_end: {
-        h: (Time.zone.now + 2.hour).strftime('%H'), 
+        h: (Time.zone.now + 1.hour + 1.minute).strftime('%H'),
         m: Time.zone.now.strftime('%M')
       }, 
       date: Date.today + 1.day
@@ -115,8 +115,12 @@ class CarsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:car).errors
   end
 
-  test "valid times works properly" do
+  test "valid times works properly - should be false" do
     assert_not valid_times?(Time.zone.now - 1.hour, Time.zone.now )
+  end
+
+  test "valid times works properly - should be true" do
+    assert valid_times?(Time.zone.now + 1.hour, Time.zone.now  + 2.hours)
   end
 
   test "car available method" do 
