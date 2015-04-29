@@ -839,7 +839,7 @@
 \newtoks\copyrightnotice
 \def\ftype@copyrightbox{8}
 \def\@copyrightspace{
-\@float{copyrightbox}[b]
+\@float{copyrightbox}
 \end@float}
 
 \def\@toappear{} % Default setting blank - commands below change this.

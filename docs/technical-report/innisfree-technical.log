@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.4.28)  28 APR 2015 16:47
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.4.28)  28 APR 2015 20:23
 entering extended mode
 **innisfree-technical.tex
 
@@ -457,22 +457,13 @@ LaTeX Font Info:    Try loading font information for U+lasy on input line 143.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-
-LaTeX Warning: Citation `innisfree' on page \thepage  undefined on input line 1
-58.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
-
-LaTeX Warning: Citation `devise' on page \thepage  undefined on input line 178.
-
-
-<Calendar.png, id=10, 646.0938pt x 273.1806pt>
+<Calendar.png, id=9, 646.0938pt x 273.1806pt>
 File: Calendar.png Graphic file (type png)
  <use Calendar.png>
 Package pdftex.def Info: Calendar.png used on input line 184.
@@ -481,14 +472,6 @@ Package pdftex.def Info: Calendar.png used on input line 184.
 Overfull \hbox (18.43294pt too wide) in paragraph at lines 184--185
 [][] 
  []
-
-
-LaTeX Warning: Citation `papertrail' on page \thepage  undefined on input line 
-193.
-
-
-LaTeX Warning: Citation `fullcalendar' on page \thepage  undefined on input lin
-e 196.
 
 [2 <C:/Users/bert/Documents/GitHub/innisfree/docs/technical-report/Calendar.png
 >] <Houses.png, id=17, 1166.3575pt x 435.6275pt>
@@ -520,40 +503,127 @@ Overfull \hbox (1.29723pt too wide) in paragraph at lines 235--236
 
 [3 <C:/Users/bert/Documents/GitHub/innisfree/docs/technical-report/Houses.png> 
 <C:/Users/bert/Documents/GitHub/innisfree/docs/technical-report/Cars.png>]
-
-LaTeX Warning: Citation `actionmailer' on page \thepage  undefined on input lin
-e 247.
-
-
+[4 <C:/Users/bert/Documents/GitHub/innisfree/docs/technical-report/ReportGenera
+tion.png>]
 Overfull \hbox (2.88725pt too wide) in paragraph at lines 268--269
 \T1/aer/m/n/9 ad-min-is-tra-tors can cre-ate or edit ap-point-ments for co-work
 ers
  []
 
-[4 <C:/Users/bert/Documents/GitHub/innisfree/docs/technical-report/ReportGenera
-tion.png>]
-No file innisfree-technical.bbl.
-[5]
+
+(C:\Users\bert\Documents\GitHub\innisfree\docs\technical-report\innisfree-techn
+ical.bbl [5]
+! Undefined control sequence.
+l.5 \newblock \url
+                  {http://api.rubyonrails.org/classes/ActionMailer/Base.html...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (14.38904pt too wide) in paragraph at lines 4--7
+\T1/aer/m/n/9 http://api.rubyonrails.org/classes/ActionMailer/Base.html, 
+ []
+
+! Undefined control sequence.
+l.10 \newblock \url
+                   {https://github.com/plataformatec/devise}, Apr. 2015.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.14 \newblock \url
+                   {http://www.fullcalendar.io/}, Mar. 2015.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.18 \newblock \url
+                   {http://www.innisfreevillage.org/}, Apr. 2015.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.22 \newblock \url
+                   {https://github.com/airblade/paper_trail}, Apr. 2015.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.22 ...ck \url{https://github.com/airblade/paper_
+                                                  trail}, Apr. 2015.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.22 ...l{https://github.com/airblade/paper_trail}
+                                                  , Apr. 2015.
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.23 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.23 
+     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+) [6
+
+]
 (C:\Users\bert\Documents\GitHub\innisfree\docs\technical-report\innisfree-techn
 ical.aux) ) 
 Here is how much of TeX's memory you used:
- 2639 strings out of 493921
- 31356 string characters out of 3144879
- 90248 words of memory out of 3000000
- 5883 multiletter control sequences out of 15000+200000
+ 2643 strings out of 493921
+ 31562 string characters out of 3144879
+ 90260 words of memory out of 3000000
+ 5885 multiletter control sequences out of 15000+200000
  45968 words of font info for 62 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  41i,10n,28p,1134b,252s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<
 C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program File
-s (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files (x86)/
-MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/urw/times/utmri8a.pfb>
-Output written on innisfree-technical.pdf (5 pages, 247584 bytes).
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Fi
+les (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86
+)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files (x86)/MiKTeX
+ 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/urw/times/utmri8a.pfb>
+Output written on innisfree-technical.pdf (6 pages, 265372 bytes).
 PDF statistics:
- 49 PDF objects out of 1000 (max. 8388607)
+ 60 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
