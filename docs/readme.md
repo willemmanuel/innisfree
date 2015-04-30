@@ -1,7 +1,7 @@
 # Documentation Readme
 
 ### General
-This directory contains much of the documentation for the Innisfree Scheduling system.
+This directory contains much of the documentation for the Innisfree Scheduling system. The final presentation was created with Google Docs, then exported to pptx and pdf formats.
 
 ### Technical Report
 The LaTeX source code for the technical report can be found in the technical-report directory.
