@@ -19,6 +19,6 @@ devise.
 
 \bibitem{papertrail}
 {PaperTrail}.
-\newblock \url{https://github.com/airblade/paper_trail}, Apr. 2015.
+\newblock \url{https://github.com/airblade/paper\_trail}, Apr. 2015.
 
 \end{thebibliography}
