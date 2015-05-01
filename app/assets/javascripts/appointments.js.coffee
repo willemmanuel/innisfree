@@ -76,6 +76,14 @@ $(document).on 'ready page:load', ->
       res_id: $(".residents_select option:selected").val()
       house_id: $('.house_select option:selected').val()
     }
+    
+    $.ajax '/appointments/upcoming',
+    type: 'GET'
+    dataType: 'script'
+    data: {
+      res_id: $(".residents_select option:selected").val()
+      house_id: $('.house_select option:selected').val()
+    }
 
   $('#fullCalendar').fullCalendar({
     header: { left: 'title', right: "listWeek,#{calView} prev,next"},
