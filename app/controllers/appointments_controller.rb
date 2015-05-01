@@ -22,7 +22,13 @@ class AppointmentsController < ApplicationController
     end
     if params.has_key?(:house_id) # Retrieves the house_id to filter appointments with, if a house_id is present
       session[:house_id] = params[:house_id]
+      @house = House.find(session[:house_id])
     end
+    
+    if @house != nil && (@house.name == "Workstations" || @house.name == "Office Staff")
+      session[:house_id] = ''
+    end
+    
     if session.has_key?(:res_id) and session[:res_id] != '' # Filters the list of appoinments based on the resident selected by the dropdown selector, if resident is not blank
       @appointments = Appointment.where('resident_id = ?', session[:res_id]) 
       @appointments_counts = @appointments.group("date").count
@@ -50,7 +56,13 @@ class AppointmentsController < ApplicationController
     end
     if params.has_key?(:house_id) # Checks to see if a house is specified in the request
       session[:house_id] = params[:house_id]
+      @house = House.find(session[:house_id])
     end
+    
+    if @house != nil && (@house.name == "Workstations" || @house.name == "Office Staff")
+      session[:house_id] = ''
+    end
+    
     if session.has_key?(:res_id) and session[:res_id] != '' # Selects upcoming appointments based on specified resident and orders them by date
       @upcoming_appointments = Appointment.where('resident_id = ?', session[:res_id]).order([:date, :time]).where('date >= ?', Date.today).paginate(:per_page => 10, :page => params[:page])
     elsif session.has_key?(:house_id) and session[:house_id] != '' # Selects upcoming appointments based on specified house and orders them by date
