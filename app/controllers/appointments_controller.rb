@@ -22,10 +22,14 @@ class AppointmentsController < ApplicationController
     end
     if params.has_key?(:house_id) # Retrieves the house_id to filter appointments with, if a house_id is present
       session[:house_id] = params[:house_id]
-      @house = House.find(session[:house_id])
+      begin
+        @house = House.find(session[:house_id])
+      rescue
+        @house = nil
+      end
     end
     
-    if @house != nil && (@house.name == "Workstations" || @house.name == "Office Staff")
+    if (@house != nil and @house.name == "Workstations") or (@house != nil and @house.name == "Office Staff")
       session[:house_id] = ''
     end
     
@@ -56,10 +60,14 @@ class AppointmentsController < ApplicationController
     end
     if params.has_key?(:house_id) # Checks to see if a house is specified in the request
       session[:house_id] = params[:house_id]
-      @house = House.find(session[:house_id])
+        begin
+        @house = House.find(session[:house_id])
+      rescue
+        @house = nil
+      end
     end
     
-    if @house != nil && (@house.name == "Workstations" || @house.name == "Office Staff")
+    if (@house != nil and @house.name == "Workstations") or (@house != nil and @house.name == "Office Staff")
       session[:house_id] = ''
     end
     
