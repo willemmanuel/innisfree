@@ -3,7 +3,8 @@ require 'test_helper'
 class AppointmentsControllerTest < ActionController::TestCase
   setup do
     @type = FactoryGirl.create(:apt_type)
-    @user = FactoryGirl.create(:user, admin: true, medical_coordinator: true, email_pref: true)
+    @house = FactoryGirl.create(:house)
+    @user = FactoryGirl.create(:user, admin: true, medical_coordinator: true, email_pref: true, house_id: 1)
     @user1 = FactoryGirl.create(:otheruser, email_pref: true)
     FactoryGirl.create(:doctor, id: 1, name: "doc", address: "123 Uni Drive", phone: "123-456-7890")
     FactoryGirl.create(:resident, house_id: 1, id: 2, name: "Pocahontas")
@@ -17,6 +18,13 @@ class AppointmentsControllerTest < ActionController::TestCase
   test "should get index" do
     
     get :index
+    assert_response :success
+    assert_not_nil assigns(:appointments)
+  end
+  
+  test "should get index for office staff house" do
+    get :index, {house_id: 1, res_id: ''}
+    puts @house.name
     assert_response :success
     assert_not_nil assigns(:appointments)
   end
@@ -75,7 +83,7 @@ class AppointmentsControllerTest < ActionController::TestCase
     
     get :index
     old_count = (@controller.appointments).length
-    get :index, {house_id: 1, res_id: ''}
+    get :index, {house_id: 2, res_id: ''}
     new_count = (@controller.appointments).length
     assert new_count < old_count, 'old count was ' + old_count.to_s + ' new count is ' + (new_count).to_s
   end
@@ -134,7 +142,7 @@ class AppointmentsControllerTest < ActionController::TestCase
   end
 
   test "should check upcoming appointments without specifying resident" do
-    get :upcoming, {date: Date.tomorrow, house_id: 1}
+    get :upcoming, {date: Date.tomorrow, house_id: 2}
     assert_equal(true, assigns(:paginate))
     assert_equal(1, assigns(:upcoming_appointments).count)
     assert_not_nil assigns(:upcoming_appointments)

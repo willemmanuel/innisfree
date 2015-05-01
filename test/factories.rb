@@ -5,6 +5,26 @@ FactoryGirl.define do
     notification_date "2015-02-09"
   end
 
+  factory :car do
+    name 'Civic'
+  end
+
+  factory :appointment do
+    resident
+    doctor
+    date Date.tomorrow
+    time '12:06:26'
+    apt_type 
+  end
+
+  factory :house do
+    name 'Workstations'
+  end
+
+  factory :house2, class: House do
+    name 'Workstations'
+  end
+  
   factory :user do
     name 'Test User'
     email 'test@example.com'
@@ -19,26 +39,6 @@ FactoryGirl.define do
     password 'please123'
     approved true
     admin true
-  end
-
-  factory :car do
-    name 'Civic'
-  end
-
-  factory :appointment do
-    resident
-    doctor
-    date Date.tomorrow
-    time '12:06:26'
-    apt_type 
-  end
-
-  factory :house do
-    name 'Test'
-  end
-
-  factory :house2, class: House do
-    name 'Test2'
   end
 
   factory :resident do

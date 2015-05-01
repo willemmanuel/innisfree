@@ -60,7 +60,7 @@ class AppointmentsController < ApplicationController
     end
     if params.has_key?(:house_id) # Checks to see if a house is specified in the request
       session[:house_id] = params[:house_id]
-        begin
+      begin
         @house = House.find(session[:house_id])
       rescue
         @house = nil
