@@ -53,15 +53,24 @@ Steps based on this [guide](https://my.bluehost.com/cgi/help/rails) and this [gu
 1. Install Apache2
 2. Install Ruby (version 1.9.3 is what we deployed on, 2.1.5 has been tested to work)
 2. Install Rails (version 4.1.1 is what we deployed on, 4.x should work, but has not been tested)
-3. Install passenger ```gem install passenger```
+3. Install passenger: ```gem install passenger```
   - Passenger is an web & application server that integrates nicely with Apache and Nginx to run Rails apps
-4. Install the passenger module for apache ```passenger-install-apache2-module```
+4. Install the passenger module for apache: ```passenger-install-apache2-module```
 5. You may need to enable this module ```sudo a2enmod passenger``` and restart apache ```sudo service apache2 restart```
 6. Clone the application repository from Github
 7. Follow steps 6.vi through 6.x from above (sorry about the mix of Arabic and Roman numerals...)
-8. Link the public directory of the application to the directory Apache is serving out of ```ln -s ./public /opt/bitnami/apache2/htdocs/scheduling```
+8. Link the public directory of the application to the directory Apache is serving out of: ```ln -s ./public /opt/bitnami/apache2/htdocs/scheduling```
   - This is by default ```/*installdir*/apache2/htdocs/application``` where *installdir* is the directory Apache was installed to. For bitnami, this looks to be ```/opt/bitnami/apache2/htdocs```
 9. Your application should now be accessible from the server's IP address (or DNS, if that's your thing)
+10. 
+
+## Updating your installation
+Once you've got your code up and running, you may make some changes and want to updated your deployed code.
+1. SSH to the server using putty or a similar tool
+2. Change to the innisfree application directory: ```cd ~/rails_apps/innisfree```
+3. Pull from the GitHub hosted repository: '''git pull'''
+  - This will prompt you for your GitHub username and password. Once you enter that it'll copy all the updates to your server
+4. Run the following command to restart Passenger and update the code: "touch tmp/restart.txt"
 
 ## Sample files
 #### Sample config/database.yml
