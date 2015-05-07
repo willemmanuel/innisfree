@@ -83,7 +83,7 @@ class AppointmentsControllerTest < ActionController::TestCase
     
     get :index
     old_count = (@controller.appointments).length
-    get :index, {house_id: 2, res_id: ''}
+    get :index, {house_id: 3, res_id: ''}
     new_count = (@controller.appointments).length
     assert new_count < old_count, 'old count was ' + old_count.to_s + ' new count is ' + (new_count).to_s
   end
