@@ -1,18 +1,15 @@
-class Users::RegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController 
 
   def new
-  	@houses = House.all
-  	super
+    @houses = House.all
   end
 
   def update
     @houses = House.all
-    super
   end
 
   def edit
     @houses = House.all
-    super
   end
 
   private

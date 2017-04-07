@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.2.6'
 # for email notifications daily
 gem 'whenever'
 # Use sqlite3 as the database for Active Record
@@ -38,7 +38,13 @@ gem 'bootstrap-sass'
 # for chosen-js
 gem 'chosen-rails'
 
-gem 'devise'
+#gem 'devise'
+
+#color picker
+gem 'jquery-minicolors-rails'
+
+#google oauth
+gem "omniauth-google-oauth2"
 
 # required by fullcalendar
 gem 'momentjs-rails'
@@ -69,5 +75,9 @@ gem 'factory_girl_rails'
 gem 'prawn'
 gem 'prawnto'
 gem 'prawn-table'
+
+#added as part of the update to rails 4.2
+gem 'web-console', '~> 2.0', :group => :development
+gem 'responders', '~> 2.0' 
 
 gem 'simplecov', :require => false, :group => :test

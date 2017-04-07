@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   # Sets a houses variable to equal all houses currently stored in the database
-	def show
+    def show
     @houses = House.all
   end
 

@@ -19,3 +19,4 @@
 //= require fullcalendar
 //= require chosen-jquery
 //= require_tree .
+//= require jquery.minicolors
