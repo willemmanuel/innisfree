@@ -29,3 +29,6 @@
 *.aux
 *.log
 *.synctex.gz
+
+#ignore google oauth because server version is different
+/config/initializers/omniauth.rb
